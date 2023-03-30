@@ -2,7 +2,7 @@
 
 ## Idea
 
-Inspired by [this tutorial][https://www.atlassian.com/git/tutorials/dotfiles]
+Inspired by [this tutorial](https://www.atlassian.com/git/tutorials/dotfiles).
 
 ## Quick setup
 
