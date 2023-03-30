@@ -1,3 +1,6 @@
 [submodule ".emacs.d"]
 	path = .emacs.d
 	url = https://github.com/syl20bnr/spacemacs
+[submodule "org"]
+	path = org
+	url = git@github.com:locutus3009/org.git
