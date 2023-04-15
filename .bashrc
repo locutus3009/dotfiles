@@ -126,18 +126,5 @@ if ! shopt -oq posix; then
 fi
 export GPG_TTY=$(tty)
 
-# export PATH="$PATH:$HOME/development/bazel/bin"
-# source $HOME/development/bazel/lib/bazel/bin/bazel-complete.bash
-# export PATH="$PATH:/usr/local/lib"
-export PATH="$PATH:$HOME/vm_shared/teegris_sdk/toolchains/aarch64-secureos-gnueabi-gcc_6_3-linux-x86/bin/"
-export PATH="$PATH:$HOME/apps/etc/"
-export PATH="$PATH:$HOME/apps/p4v/bin/"
-export PATH="$PATH:$HOME/.opam/default/bin/"
-export PATH="$PATH:$HOME/.cabal/bin"
-
-export P4USER=n.nerovny
-export P4CLIENT=SRR_AI_Nerovny_TEEGRIS_tzslandkernel
-export P4PORT=106.109.129.191:1716
-export QT_QPA_PLATFORMTHEME=qt5ct
 . "$HOME/.cargo/env"
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME/'
