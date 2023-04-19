@@ -1,0 +1,7 @@
+* Tasks
+* DONE tee_test_stdio broken on some targets
+CLOSED: [2023-03-30 Чт 15:46]
+:LOGBOOK:
+CLOCK: [2022-10-06 Чт 18:00]--[2022-10-06 Чт 18:00] =>  0:00
+:END:
+[2022-10-06 Чт]

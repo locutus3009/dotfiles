@@ -1,0 +1,10 @@
+#-*- mode: org -*-
+#+STARTUP: showall
+
+* Tasks
+** DONE Build Duck
+CLOSED: [2023-04-18 Tue 15:46] SCHEDULED: <2023-04-18 Tue>
+:LOGBOOK:
+CLOCK: [2023-04-17 Mon 18:51]--[2023-04-17 Mon 18:51] =>  0:00
+:END:
+[2023-04-17 Mon]
