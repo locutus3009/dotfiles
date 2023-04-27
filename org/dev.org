@@ -14,4 +14,74 @@ CLOSED: [2023-04-19 Wed 16:31] SCHEDULED: <2023-04-21 Fri>
 CLOCK: [2023-04-19 Wed 10:26]--[2023-04-19 Wed 10:27] =>  0:01
 :END:
 [2023-04-19 Wed]
+** IN_REVIEW Integration of Raspberry PI into Duck CI
 После этого можно перейти к обсуждению большого задания на probation period.
+SCHEDULED: <2023-04-26 Wed>
+:LOGBOOK:
+CLOCK: [2023-04-20 Thu 11:24]--[2023-04-20 Thu 11:26] =>  0:02
+:END:
+[2023-04-20 Thu]
+*** DONE Add Cleware invocation to CI
+CLOSED: [2023-04-24 Mon 16:00]
+:LOGBOOK:
+CLOCK: [2023-04-20 Thu 11:28]--[2023-04-20 Thu 11:28] =>  0:00
+:END:
+[2023-04-20 Thu]
+[[file:~/org/dev.org::*Integration of Raspberry PI into Duck CI][Integration of Raspberry PI into Duck CI]]
+*** DONE Test on separate computer all of the scripts
+CLOSED: [2023-04-27 Thu 11:30]
+:LOGBOOK:
+CLOCK: [2023-04-20 Thu 11:29]--[2023-04-20 Thu 11:29] =>  0:00
+:END:
+[2023-04-20 Thu]
+[[file:~/org/dev.org::*Integration of Raspberry PI into Duck CI][Integration of Raspberry PI into Duck CI]]
+*** NEXT Install hardware in the server room
+:LOGBOOK:
+CLOCK: [2023-04-20 Thu 11:29]--[2023-04-20 Thu 11:29] =>  0:00
+:END:
+[2023-04-20 Thu]
+[[file:~/org/dev.org::*Integration of Raspberry PI into Duck CI][Integration of Raspberry PI into Duck CI]]
+*** Repository and commands                                         :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-04-20 Thu 11:30]--[2023-04-20 Thu 11:35] =>  0:05
+:END:
+<2023-04-20 Thu>
+[2023-04-20 Thu 11:30]
+
+[[file:~/org/dev.org::*Add Cleware invocation to CI][Add Cleware invocation to CI]]
+
+Repository address:
+[[https://rnd-gitlab-eu-c.huawei.com/germany-research-center/dresden-lab/ententeich/cleware-tools][GitLab]]
+
+*** sw10098 pinout                                                  :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-04-20 Thu 11:42]--[2023-04-20 Thu 11:42] =>  0:00
+:END:
+<2023-04-20 Thu>
+[2023-04-20 Thu 11:42]
+
+[[file:~/org/dev.org::*Add Cleware invocation to CI][Add Cleware invocation to CI]]
+red power, black ground, white RX into USB port, and green TX out of the USB port
+
+*** For some reason this does not work, need to investigate         :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-04-26 Wed 10:02]--[2023-04-26 Wed 10:05] =>  0:03
+:END:
+<2023-04-26 Wed>
+[2023-04-26 Wed 10:01]
+
+[[file:~/dev/duck/scripts/cmake/ententeich.cmake::COMMAND mkdir -p ${CLEWARE_USB_SWITCH_SRCDIR}/build && cd ${CLEWARE_USB_SWITCH_SRCDIR} cmake -G Ninja ../ && ninja tools/USBswitchCMD]]
+
+The point is to make a separate rule that is invoked only once (build of USBswitcherCMD application).
+Jonathan said that I may use add_custom_command() together with add_custom_target().
+Let's try.
+*** Merge request link                                              :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-04-27 Thu 16:37]--[2023-04-27 Thu 16:37] =>  0:00
+:END:
+<2023-04-27 Thu>
+[2023-04-27 Thu 16:37]
+
+[[file:~/org/dev.org::*Integration of Raspberry PI into Duck CI][Integration of Raspberry PI into Duck CI]]
+
+[[https://rnd-gitlab-eu-c.huawei.com/germany-research-center/dresden-lab/ententeich/duck/-/merge_requests/985]]
