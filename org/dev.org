@@ -35,7 +35,9 @@ CLOCK: [2023-04-20 Thu 11:29]--[2023-04-20 Thu 11:29] =>  0:00
 :END:
 [2023-04-20 Thu]
 [[file:~/org/dev.org::*Integration of Raspberry PI into Duck CI][Integration of Raspberry PI into Duck CI]]
-*** NEXT Install hardware in the server room
+*** HOLD Install hardware in the server room                           :HOLD:
+- State "HOLD"       from "NEXT"       [2023-04-28 Fri 13:53] \\
+  Waiting for static IP approval, after this we may state a migration
 :LOGBOOK:
 CLOCK: [2023-04-20 Thu 11:29]--[2023-04-20 Thu 11:29] =>  0:00
 :END:
@@ -85,3 +87,45 @@ CLOCK: [2023-04-27 Thu 16:37]--[2023-04-27 Thu 16:37] =>  0:00
 [[file:~/org/dev.org::*Integration of Raspberry PI into Duck CI][Integration of Raspberry PI into Duck CI]]
 
 [[https://rnd-gitlab-eu-c.huawei.com/germany-research-center/dresden-lab/ententeich/duck/-/merge_requests/985]]
+*** Requisites of intel NUC device that is connected to RPI4b       :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-04-28 Fri 12:12]--[2023-04-28 Fri 12:16] =>  0:04
+:END:
+<2023-04-28 Fri>
+[2023-04-28 Fri 12:12]
+
+[[file:~/org/dev.org::*Integration of Raspberry PI into Duck CI][Integration of Raspberry PI into Duck CI]]
+
+IP address: 10.206.133.78
+Login: duck
+Password: drc-NUC-ententeich
+
+Do not forget to call:
+#+BEGIN_SRC shell
+ssh-add
+#+END_SRC
+
+It is advised to ssh using `ssh -A` command.
+It sill forward all known identities that may be useful
+while interacting with git etc.
+*** IP address of RPI4b device                                      :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-04-28 Fri 13:34]--[2023-04-28 Fri 13:35] =>  0:01
+:END:
+<2023-04-28 Fri>
+[2023-04-28 Fri 13:34]
+
+[[file:~/org/dev.org::*Integration of Raspberry PI into Duck CI][Integration of Raspberry PI into Duck CI]]
+
+Address: 10.206.133.88
+Netmask: 255.255.255.0
+MAC: d8:3a:dd:06:b4:ff
+*** TODO Contact some guy regarding a static IP for RPI4b
+SCHEDULED: <2023-05-02 Tue>
+:LOGBOOK:
+CLOCK: [2023-04-28 Fri 13:36]--[2023-04-28 Fri 13:38] =>  0:02
+:END:
+[2023-04-28 Fri]
+[[file:~/org/dev.org::*Integration of Raspberry PI into Duck CI][Integration of Raspberry PI into Duck CI]]
+
+Huawei ID of this guy: jwx1115079 (Jiayi Wei)

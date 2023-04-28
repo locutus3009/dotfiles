@@ -78,6 +78,7 @@ CLOCK: [2023-03-30 Чт 15:54]--[2023-03-30 Чт 15:55] =>  0:01
 *** 2023-04-20 Thursday
 *** 2023-04-26 Wednesday
 *** 2023-04-27 Thursday
+*** 2023-04-28 Friday
 * Turn on device
 #+BEGIN_SRC bash
 ./USBswitchCmd 1

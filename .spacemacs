@@ -619,6 +619,7 @@ before packages are loaded."
 (setq calendar-week-start-day 1)
 (require 'epa-file)
 (epa-file-enable)
+(require 'org-tempo)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
