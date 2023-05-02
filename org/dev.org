@@ -120,7 +120,7 @@ CLOCK: [2023-04-28 Fri 13:34]--[2023-04-28 Fri 13:35] =>  0:01
 Address: 10.206.133.88
 Netmask: 255.255.255.0
 MAC: d8:3a:dd:06:b4:ff
-*** TODO Contact some guy regarding a static IP for RPI4b
+*** IN_REVIEW Contact some guy regarding a static IP for RPI4b
 SCHEDULED: <2023-05-02 Tue>
 :LOGBOOK:
 CLOCK: [2023-04-28 Fri 13:36]--[2023-04-28 Fri 13:38] =>  0:02
@@ -129,3 +129,218 @@ CLOCK: [2023-04-28 Fri 13:36]--[2023-04-28 Fri 13:38] =>  0:02
 [[file:~/org/dev.org::*Integration of Raspberry PI into Duck CI][Integration of Raspberry PI into Duck CI]]
 
 Huawei ID of this guy: jwx1115079 (Jiayi Wei)
+** NEXT Support LOTTO for el2
+SCHEDULED: <2023-05-31 Wed>
+:LOGBOOK:
+CLOCK: [2023-05-02 Tue 11:25]--[2023-05-02 Tue 11:25] =>  0:00
+:END:
+[2023-05-02 Tue]
+*** DONE Why do we need this array?
+CLOSED: [2023-05-02 Tue 16:17]
+:LOGBOOK:
+CLOCK: [2023-05-02 Tue 11:27]--[2023-05-02 Tue 11:27] =>  0:00
+:END:
+[2023-05-02 Tue]
+[[file:~/dev/lotto/src/engine/scheduler/scheduler.c::static scheduler_interface_t schedulers\[N_SCHEDULERS\];]]
+*** DONE Why not use dynamic list?
+CLOSED: [2023-05-02 Tue 16:17]
+:LOGBOOK:
+CLOCK: [2023-05-02 Tue 11:27]--[2023-05-02 Tue 11:27] =>  0:00
+:END:
+[2023-05-02 Tue]
+[[file:~/dev/lotto/src/engine/scheduler/scheduler.c::define N_SCHEDULERS 10]]
+*** DONE Why 7 not 10 not 20? Why do we need several handlers?
+CLOSED: [2023-05-02 Tue 15:24]
+:LOGBOOK:
+CLOCK: [2023-05-02 Tue 11:28]--[2023-05-02 Tue 11:28] =>  0:00
+:END:
+[2023-05-02 Tue]
+[[file:~/dev/lotto/src/engine/scheduler/scheduler.c::define N_HANDLERS 7]]
+**** Handlers are just filters                                      :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-05-02 Tue 15:23]--[2023-05-02 Tue 15:23] =>  0:00
+:END:
+<2023-05-02 Tue>
+[2023-05-02 Tue 15:23]
+
+[[file:~/org/dev.org::*Why 7 not 10 not 20? Why do we need several handlers?][Why 7 not 10 not 20? Why do we need several handlers?]]
+*** DONE What is selectors?
+CLOSED: [2023-05-02 Tue 15:24]
+:LOGBOOK:
+CLOCK: [2023-05-02 Tue 11:37]--[2023-05-02 Tue 11:37] =>  0:00
+:END:
+[2023-05-02 Tue]
+[[file:~/dev/lotto/src/engine/scheduler/scheduler.c::selectors\[N_STRAT\]; // no extensions planned at the moment]]
+**** Selectors are handlers capable for final decision              :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-05-02 Tue 15:23]--[2023-05-02 Tue 15:24] =>  0:01
+:END:
+<2023-05-02 Tue>
+[2023-05-02 Tue 15:23]
+
+[[file:~/org/dev.org::*What is selectors?][What is selectors?]]
+
+Final decision == outputting at most 1 thread
+*** DONE Why scheduler config is stored separately from the scheduler?
+CLOSED: [2023-05-02 Tue 16:17]
+:LOGBOOK:
+CLOCK: [2023-05-02 Tue 11:37]--[2023-05-02 Tue 11:37] =>  0:00
+:END:
+[2023-05-02 Tue]
+[[file:~/dev/lotto/src/engine/scheduler/scheduler.c::scheduler_config_t scheduler_config;]]
+*** DONE Is it possible to remove global variables?
+CLOSED: [2023-05-02 Tue 16:17]
+:LOGBOOK:
+CLOCK: [2023-05-02 Tue 11:43]--[2023-05-02 Tue 11:44] =>  0:01
+:END:
+[2023-05-02 Tue]
+[[file:~/dev/lotto/src/engine/scheduler/scheduler.c::static scheduler_t scheduler;]]
+
+Present some global context that includes the whole thing, and pass it explicitly
+via function calls.
+*** DONE Why do we need seed?
+CLOSED: [2023-05-02 Tue 16:17]
+:LOGBOOK:
+CLOCK: [2023-05-02 Tue 11:44]--[2023-05-02 Tue 11:45] =>  0:01
+:END:
+[2023-05-02 Tue]
+[[file:~/dev/lotto/src/engine/scheduler/scheduler.c::scheduler_config.seed = seed ? atoi(seed) : real_time(0);]]
+*** DONE What is strategy
+CLOSED: [2023-05-02 Tue 16:17]
+:LOGBOOK:
+CLOCK: [2023-05-02 Tue 11:45]--[2023-05-02 Tue 11:45] =>  0:00
+:END:
+[2023-05-02 Tue]
+[[file:~/dev/lotto/src/engine/scheduler/scheduler.c::scheduler_config.strategy = strategy_from(getenv("LOTTO_STRATEGY"));]]
+*** DONE Why do we need to call all schedulers
+CLOSED: [2023-05-02 Tue 16:17]
+:LOGBOOK:
+CLOCK: [2023-05-02 Tue 11:45]--[2023-05-02 Tue 11:45] =>  0:00
+:END:
+[2023-05-02 Tue]
+[[file:~/dev/lotto/src/engine/scheduler/scheduler.c::sched_call(schedulers\[i\], reset, full);]]
+*** DONE Why sched_call is a macro?
+CLOSED: [2023-05-02 Tue 16:17]
+:LOGBOOK:
+CLOCK: [2023-05-02 Tue 11:49]--[2023-05-02 Tue 11:50] =>  0:01
+:END:
+[2023-05-02 Tue]
+[[file:~/dev/lotto/src/engine/scheduler/scheduler.c::sched_call(schedulers\[i\], thread_register, thread);]]
+*** DONE So something is only recordered, something may be forced and chosen
+CLOSED: [2023-05-02 Tue 16:17]
+:LOGBOOK:
+CLOCK: [2023-05-02 Tue 11:52]--[2023-05-02 Tue 11:52] =>  0:00
+:END:
+[2023-05-02 Tue]
+[[file:~/dev/lotto/src/engine/scheduler/scheduler.c::parent. Other decisions are all left to the OS scheduler and forced to be]]
+*** TODO Better name is scheduler_thread_count
+:LOGBOOK:
+CLOCK: [2023-05-02 Tue 11:57]--[2023-05-02 Tue 11:57] =>  0:00
+:END:
+[2023-05-02 Tue]
+[[file:~/dev/lotto/src/engine/scheduler/scheduler.c::switch (scheduler_thread_size(params.threads)) {]]
+*** DONE Check basic idea
+CLOSED: [2023-05-02 Tue 14:59]
+:LOGBOOK:
+CLOCK: [2023-05-02 Tue 12:03]--[2023-05-02 Tue 12:07] =>  0:04
+:END:
+[2023-05-02 Tue]
+[[file:~/dev/lotto/src/thread/intercept_tsan.c::TSAN_DECL(void, func_entry, void *call_pc)]]
+
+So the basic idea is:
+1. Compiler with tsan enabled but do not link a default libtsan from LLVM
+2. Instead, provide own implementation of `__tsan_` functions and call scheduler instrumentations
+3. Record these calls into some file
+
+OK, nut how we actually _replay_ these things?
+We do not use ptrace or similar kernel mechanism to control execution of a program.
+**** Answers                                                        :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-05-02 Tue 14:57]--[2023-05-02 Tue 15:04] =>  0:07
+:END:
+<2023-05-02 Tue>
+[2023-05-02 Tue 14:57]
+
+Upon encountering an instrumented function, sequencer_capture is called.
+It decides who goes next based on _sequencer_replay and/or scheduler_preprocess
+**** If thread needs to switch, the inactive thread waits...        :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-05-02 Tue 15:05]--[2023-05-02 Tue 15:05] =>  0:00
+:END:
+<2023-05-02 Tue>
+[2023-05-02 Tue 15:05]
+
+[[file:~/org/dev.org::*Answers][Answers]]
+Waits in switcher_yield
+*** DONE Do we actually intercept calls to tsan functions?
+CLOSED: [2023-05-02 Tue 15:06]
+:LOGBOOK:
+CLOCK: [2023-05-02 Tue 12:15]--[2023-05-02 Tue 12:16] =>  0:01
+:END:
+[2023-05-02 Tue]
+[[file:~/dev/lotto/src/thread/intercept_tsan.c::define CALL_TSAN(F, ...) REAL(__tsan_##F, __VA_ARGS__)]]
+
+Do we actually intercept calls to tsan functions, and after our operations we call tsan by itself?
+**** Yes, actual tsan functions are called                          :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-05-02 Tue 15:06]--[2023-05-02 Tue 15:06] =>  0:00
+:END:
+<2023-05-02 Tue>
+[2023-05-02 Tue 15:06]
+
+[[file:~/org/dev.org::*Do we actually intercept calls to tsan functions?][Do we actually intercept calls to tsan functions?]]
+*** DONE What is delayed functions and calls?
+CLOSED: [2023-05-02 Tue 14:36]
+:LOGBOOK:
+CLOCK: [2023-05-02 Tue 13:24]--[2023-05-02 Tue 13:24] =>  0:00
+:END:
+[2023-05-02 Tue]
+[[file:~/dev/lotto/src/engine/scheduler/scheduler_capture_group.c::if (getenv("LOTTO_DELAYED_FUNCTIONS") && getenv("LOTTO_DELAYED_CALLS")) {]]
+
+Why do they are "delayed"?
+**** Answers                                                        :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-05-02 Tue 14:33]--[2023-05-02 Tue 14:57] =>  0:24
+:END:
+<2023-05-02 Tue>
+[2023-05-02 Tue 14:33]
+
+[[file:~/org/dev.org::*What is delayed functions and calls?][What is delayed functions and calls?]]
+
+Just adjusting the scheduling policy so that calls are executed be different threads in a sequence.
+Like "user wants to know if these calls interfere with each other and cause errors".
+*** Notes on hypervisors                                            :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-05-02 Tue 16:17]--[2023-05-02 Tue 16:19] =>  0:02
+:END:
+<2023-05-02 Tue>
+[2023-05-02 Tue 16:17]
+
+[[file:~/org/dev.org::*Support LOTTO for el2][Support LOTTO for el2]]
+[[https://developer.arm.com/documentation/102142/0100/Stage-2-translation][ARM docs]]
+VM -- Virtual Machine
+VM consists of several Virtual Processors; each consists of several vCPUs.
+VMID -- Virtual Machine ID is operated by hypervisor.
+The VMID is stored in VTTBR_EL2 can either be 8 or 16 bits.
+The VMID is controlled by the VTCR_EL2.VS bit.
+Support for 16-bit VMIDs is optional, and was added in Armv8.1-A.
+Translations for the EL2 and EL3 translation regimes are not tagged with a VMID,
+because they are not subject to stage 2 translation.
+TLB entries can also be tagged with an Address Space Identifier (ASID).
+Each VM has its own ASID namespace.
+For example, two VMs might both use ASID 5, but they use them for different things.
+The combination of ASID and VMID is the thing that is important.
+
+Emulated peripheral
+To emulate a peripheral, a hypervisor needs to know not only which peripheral was accessed,
+but also which register in that peripheral was accessed, whether the access was a read or a write,
+the size of the access, and the registers used for transferring data.
+
+The Exception Model guide introduces the FAR_ELx registers.
+When dealing with stage 1 faults, these registers report the virtual address that triggered the exception.
+A virtual address is not helpful to a hypervisor, because the hypervisor would not usually know how
+the Guest OS has configured its virtual address space. For stage 2 faults, there is an additional register,
+HPFAR_EL2, which reports the IPA of the address that aborted. Because the IPA space is controlled
+by the hypervisor, it can use this information to determine the register that it needs to emulate.
+
+[[https://developer.arm.com/documentation/102142/0100/Trapping-and-emulation-of-instructions][Trapping of instructions]]

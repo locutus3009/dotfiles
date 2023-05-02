@@ -38,8 +38,7 @@ This function should only modify configuration layer settings."
      python
      (org :variables
           org-enable-jira-support t
-          org-jira-working-dir "~/org/"
-          jiralib-url "https://mobilerndhub.sec.samsung.net/its")
+          org-jira-working-dir "~/org/")
      rust
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.

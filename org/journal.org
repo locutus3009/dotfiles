@@ -79,6 +79,18 @@ CLOCK: [2023-03-30 Чт 15:54]--[2023-03-30 Чт 15:55] =>  0:01
 *** 2023-04-26 Wednesday
 *** 2023-04-27 Thursday
 *** 2023-04-28 Friday
+** 2023-05 May
+*** 2023-05-02 Tuesday
+**** Notes on hypervisors                                           :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-05-02 Tue 16:17]--[2023-05-02 Tue 16:19] =>  0:02
+:END:
+<2023-05-02 Tue>
+[2023-05-02 Tue 16:17]
+
+[[file:~/org/dev.org::*Support LOTTO for el2][Support LOTTO for el2]]
+[[https://developer.arm.com/documentation/102142/0100/Stage-2-translation][ARM docs]]
+
 * Turn on device
 #+BEGIN_SRC bash
 ./USBswitchCmd 1
