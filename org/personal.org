@@ -2,9 +2,11 @@
 #+STARTUP: showall
 
 * Tasks
-** HOLD Свой дом                                                       :HOLD:
-SCHEDULED: <2023-08-31 Чт>
+** CANCELLED Свой дом                                             :CANCELLED:
+CLOSED: [2023-05-12 Fri 16:23] SCHEDULED: <2023-08-31 Чт>
 
+- State "CANCELLED"  from "HOLD"       [2023-05-12 Fri 16:23] \\
+  Will be processed in another agenda workspace (in home)
 - State "HOLD"       from "TODO"       [2023-03-30 Чт 16:20] \\
   Пока не гоним события, надо пожить в Дрездене
 *** CANCELLED Продать квартиру                                    :CANCELLED:
@@ -58,12 +60,18 @@ CLOCK: [2022-10-14 Пт 22:10]--[2022-10-14 Пт 22:10] =>  0:00
 :END:
 [2022-10-14 Пт]
 [[file:~/org/personal.org::*Продать квартиру][Продать квартиру]]
-*** HOLD Решить, где покупать дом                                      :HOLD:
+*** CANCELLED Решить, где покупать дом                            :CANCELLED:
+CLOSED: [2023-05-12 Fri 16:23]
+- State "CANCELLED"  from "HOLD"       [2023-05-12 Fri 16:23] \\
+  Will be processed in another agenda workspace (in home)
 - State "HOLD"       from "TODO"       [2022-09-23 Пт 14:07] \\
   Сейчас в Казахстане, прогнозы делать сложно
   Зависит от того, переезжаем или нет, меняю работу или нет.
 
-*** HOLD Купить дом и землю                                            :HOLD:
+*** CANCELLED Купить дом и землю                                  :CANCELLED:
+CLOSED: [2023-05-12 Fri 16:23]
+- State "CANCELLED"  from "HOLD"       [2023-05-12 Fri 16:23] \\
+  Will be processed in another agenda workspace (in home)
 - State "HOLD"       from "TODO"       [2022-09-23 Пт 14:08] \\
   Сейчас в Казахстане, прогнозы делать сложно
 *** NEXT Переехать
@@ -93,7 +101,8 @@ CLOCK: [2023-03-30 Чт 16:24]--[2023-03-30 Чт 16:25] =>  0:01
 Ищем на immoscout24, есть несколько предожений.
 Лидирующий вариант -- сразу долгосрочный вариант с выкупом мебели.
 Сегодня онлайн-просмотр.
-**** TODO Получить Anmeldung
+**** DONE Получить Anmeldung
+CLOSED: [2023-05-08 Mon 10:37]
 :LOGBOOK:
 CLOCK: [2023-03-30 Чт 16:29]--[2023-03-30 Чт 16:29] =>  0:00
 :END:
@@ -101,8 +110,8 @@ CLOCK: [2023-03-30 Чт 16:29]--[2023-03-30 Чт 16:29] =>  0:00
 [[file:~/org/personal.org::*Переехать][Переехать]]
 
 Термин на 24 апреля 2023 года, возможно придется перенести
-***** NEXT Получить Wohnungsgeberbestätigung
-SCHEDULED: <2023-05-05 Fri>
+***** DONE Получить Wohnungsgeberbestätigung
+CLOSED: [2023-05-08 Mon 10:37] SCHEDULED: <2023-05-05 Fri>
 :LOGBOOK:
 CLOCK: [2023-03-30 Чт 16:30]--[2023-03-30 Чт 16:31] =>  0:01
 :END:
@@ -111,7 +120,7 @@ CLOCK: [2023-03-30 Чт 16:30]--[2023-03-30 Чт 16:31] =>  0:01
 
 Его делает арендодатель, необходим для получения регистрации.
 Необходимо сделать и для меня, и дла Иры.
-**** TODO Оформить BlueKart
+**** NEXT Оформить BlueKart
 SCHEDULED: <2023-09-30 Сб>
 :LOGBOOK:
 CLOCK: [2023-03-30 Чт 16:32]--[2023-03-30 Чт 16:32] =>  0:00
@@ -162,13 +171,22 @@ CLOCK: [2022-09-18 Вс 13:01]--[2022-09-18 Вс 13:01] =>  0:00
 :END:
 [2022-09-18 Вс]
 [[file:~/org/personal.org::*Купить новую рамку для декоративной иконы Иры][Купить новую рамку для декоративной иконы Иры]]
-** HOLD Машина                                                         :HOLD:
+** CANCELLED Машина                                               :CANCELLED:
+CLOSED: [2023-05-12 Fri 16:23]
+- State "CANCELLED"  from "HOLD"       [2023-05-12 Fri 16:23] \\
+  Will be processed in another agenda workspace (in home)
 - State "HOLD"       from "TODO"       [2022-09-23 Пт 14:08] \\
   Сейчас в Казахстане, прогнозы делать сложно
-*** HOLD Оформить страховку и доверенность                             :HOLD:
+*** CANCELLED Оформить страховку и доверенность                   :CANCELLED:
+CLOSED: [2023-05-12 Fri 16:23]
+- State "CANCELLED"  from "HOLD"       [2023-05-12 Fri 16:23] \\
+  Will be processed in another agenda workspace (in home)
 - State "HOLD"       from "TODO"       [2022-09-23 Пт 14:08] \\
   Сейчас в Казахстане, прогнозы делать сложно
-*** HOLD Перегнать машину из Ухты                                      :HOLD:
+*** CANCELLED Перегнать машину из Ухты                            :CANCELLED:
+CLOSED: [2023-05-12 Fri 16:23]
+- State "CANCELLED"  from "HOLD"       [2023-05-12 Fri 16:23] \\
+  Will be processed in another agenda workspace (in home)
 - State "HOLD"       from "TODO"       [2022-09-23 Пт 14:08] \\
   Сейчас в Казахстане, прогнозы делать сложно
 *** Туарег                                                          :JOURNAL:

@@ -35,7 +35,8 @@ CLOCK: [2023-04-20 Thu 11:29]--[2023-04-20 Thu 11:29] =>  0:00
 :END:
 [2023-04-20 Thu]
 [[file:~/org/dev.org::*Integration of Raspberry PI into Duck CI][Integration of Raspberry PI into Duck CI]]
-*** HOLD Install hardware in the server room                           :HOLD:
+*** NEXT Install hardware in the server room
+- State "NEXT"       from "HOLD"       [2023-05-04 Thu 09:53]
 - State "HOLD"       from "NEXT"       [2023-04-28 Fri 13:53] \\
   Waiting for static IP approval, after this we may state a migration
 :LOGBOOK:
@@ -120,8 +121,10 @@ CLOCK: [2023-04-28 Fri 13:34]--[2023-04-28 Fri 13:35] =>  0:01
 Address: 10.206.133.88
 Netmask: 255.255.255.0
 MAC: d8:3a:dd:06:b4:ff
-*** IN_REVIEW Contact some guy regarding a static IP for RPI4b
-SCHEDULED: <2023-05-02 Tue>
+*** CANCELLED Contact some guy regarding a static IP for RPI4b    :CANCELLED:
+CLOSED: [2023-05-04 Thu 09:53] SCHEDULED: <2023-05-02 Tue>
+- State "CANCELLED"  from "DONE"       [2023-05-04 Thu 09:53] \\
+  Guy did not respond
 :LOGBOOK:
 CLOCK: [2023-04-28 Fri 13:36]--[2023-04-28 Fri 13:38] =>  0:02
 :END:
@@ -129,7 +132,7 @@ CLOCK: [2023-04-28 Fri 13:36]--[2023-04-28 Fri 13:38] =>  0:02
 [[file:~/org/dev.org::*Integration of Raspberry PI into Duck CI][Integration of Raspberry PI into Duck CI]]
 
 Huawei ID of this guy: jwx1115079 (Jiayi Wei)
-** NEXT Support LOTTO for el2
+** NEXT Support LOTTO for el2                                         :lotto:
 SCHEDULED: <2023-05-31 Wed>
 :LOGBOOK:
 CLOCK: [2023-05-02 Tue 11:25]--[2023-05-02 Tue 11:25] =>  0:00
@@ -156,7 +159,7 @@ CLOCK: [2023-05-02 Tue 11:28]--[2023-05-02 Tue 11:28] =>  0:00
 :END:
 [2023-05-02 Tue]
 [[file:~/dev/lotto/src/engine/scheduler/scheduler.c::define N_HANDLERS 7]]
-**** Handlers are just filters                                      :JOURNAL:
+**** Handlers are just filters                                :JOURNAL:lotto:
 :LOGBOOK:
 CLOCK: [2023-05-02 Tue 15:23]--[2023-05-02 Tue 15:23] =>  0:00
 :END:
@@ -171,7 +174,7 @@ CLOCK: [2023-05-02 Tue 11:37]--[2023-05-02 Tue 11:37] =>  0:00
 :END:
 [2023-05-02 Tue]
 [[file:~/dev/lotto/src/engine/scheduler/scheduler.c::selectors\[N_STRAT\]; // no extensions planned at the moment]]
-**** Selectors are handlers capable for final decision              :JOURNAL:
+**** Selectors are handlers capable for final decision        :JOURNAL:lotto:
 :LOGBOOK:
 CLOCK: [2023-05-02 Tue 15:23]--[2023-05-02 Tue 15:24] =>  0:01
 :END:
@@ -233,7 +236,8 @@ CLOCK: [2023-05-02 Tue 11:52]--[2023-05-02 Tue 11:52] =>  0:00
 :END:
 [2023-05-02 Tue]
 [[file:~/dev/lotto/src/engine/scheduler/scheduler.c::parent. Other decisions are all left to the OS scheduler and forced to be]]
-*** TODO Better name is scheduler_thread_count
+*** DONE Better name is scheduler_thread_count
+CLOSED: [2023-05-03 Wed 10:04]
 :LOGBOOK:
 CLOCK: [2023-05-02 Tue 11:57]--[2023-05-02 Tue 11:57] =>  0:00
 :END:
@@ -254,7 +258,7 @@ So the basic idea is:
 
 OK, nut how we actually _replay_ these things?
 We do not use ptrace or similar kernel mechanism to control execution of a program.
-**** Answers                                                        :JOURNAL:
+**** Answers                                                  :JOURNAL:lotto:
 :LOGBOOK:
 CLOCK: [2023-05-02 Tue 14:57]--[2023-05-02 Tue 15:04] =>  0:07
 :END:
@@ -263,7 +267,7 @@ CLOCK: [2023-05-02 Tue 14:57]--[2023-05-02 Tue 15:04] =>  0:07
 
 Upon encountering an instrumented function, sequencer_capture is called.
 It decides who goes next based on _sequencer_replay and/or scheduler_preprocess
-**** If thread needs to switch, the inactive thread waits...        :JOURNAL:
+**** If thread needs to switch, the inactive thread waits...  :JOURNAL:lotto:
 :LOGBOOK:
 CLOCK: [2023-05-02 Tue 15:05]--[2023-05-02 Tue 15:05] =>  0:00
 :END:
@@ -281,7 +285,7 @@ CLOCK: [2023-05-02 Tue 12:15]--[2023-05-02 Tue 12:16] =>  0:01
 [[file:~/dev/lotto/src/thread/intercept_tsan.c::define CALL_TSAN(F, ...) REAL(__tsan_##F, __VA_ARGS__)]]
 
 Do we actually intercept calls to tsan functions, and after our operations we call tsan by itself?
-**** Yes, actual tsan functions are called                          :JOURNAL:
+**** Yes, actual tsan functions are called                    :JOURNAL:lotto:
 :LOGBOOK:
 CLOCK: [2023-05-02 Tue 15:06]--[2023-05-02 Tue 15:06] =>  0:00
 :END:
@@ -298,7 +302,7 @@ CLOCK: [2023-05-02 Tue 13:24]--[2023-05-02 Tue 13:24] =>  0:00
 [[file:~/dev/lotto/src/engine/scheduler/scheduler_capture_group.c::if (getenv("LOTTO_DELAYED_FUNCTIONS") && getenv("LOTTO_DELAYED_CALLS")) {]]
 
 Why do they are "delayed"?
-**** Answers                                                        :JOURNAL:
+**** Answers                                                  :JOURNAL:lotto:
 :LOGBOOK:
 CLOCK: [2023-05-02 Tue 14:33]--[2023-05-02 Tue 14:57] =>  0:24
 :END:
@@ -309,7 +313,7 @@ CLOCK: [2023-05-02 Tue 14:33]--[2023-05-02 Tue 14:57] =>  0:24
 
 Just adjusting the scheduling policy so that calls are executed be different threads in a sequence.
 Like "user wants to know if these calls interfere with each other and cause errors".
-*** Notes on hypervisors                                            :JOURNAL:
+*** Notes on hypervisors                                      :JOURNAL:lotto:
 :LOGBOOK:
 CLOCK: [2023-05-02 Tue 16:17]--[2023-05-02 Tue 16:19] =>  0:02
 :END:
@@ -344,3 +348,170 @@ HPFAR_EL2, which reports the IPA of the address that aborted. Because the IPA sp
 by the hypervisor, it can use this information to determine the register that it needs to emulate.
 
 [[https://developer.arm.com/documentation/102142/0100/Trapping-and-emulation-of-instructions][Trapping of instructions]]
+*** Redirect trap to vIRQ                                     :JOURNAL:lotto:
+:LOGBOOK:
+CLOCK: [2023-05-03 Wed 09:42]--[2023-05-03 Wed 09:43] =>  0:01
+:END:
+<2023-05-03 Wed>
+[2023-05-03 Wed 09:42]
+
+[[file:~/org/dev.org::*Support LOTTO for el2][Support LOTTO for el2]]
+
+Based on [[https://developer.arm.com/documentation/102142/0100/Virtualizing-exceptions][ARM docs]], need to check extensively.
+The idea is very simple: within hypervisor, setup
+handlers that all needed traps will be redirected to the vIRQ
+on vCPU of Lotto VM.
+It may not be possible, but worth investigating.
+*** I think it is actually possible                           :JOURNAL:lotto:
+:LOGBOOK:
+CLOCK: [2023-05-03 Wed 09:53]--[2023-05-03 Wed 09:55] =>  0:02
+:END:
+<2023-05-03 Wed>
+[2023-05-03 Wed 09:53]
+
+[[file:~/org/dev.org::*Redirect trap to vIRQ][Redirect trap to vIRQ]]
+
+See this [[https://lore.kernel.org/linux-arm-kernel/20230112191927.1814989-3-maz@kernel.org/T/][Linux patch set]]
+Especially this patch [[https://lore.kernel.org/linux-arm-kernel/20200211174938.27809-30-maz@kernel.org/][KVM: arm64: nv: Forward debug traps to the nested guest]]
+*** DONE Need to check Hafnium source code                            :lotto:
+CLOSED: [2023-05-08 Mon 15:56]
+:LOGBOOK:
+CLOCK: [2023-05-03 Wed 10:16]--[2023-05-03 Wed 10:16] =>  0:00
+:END:
+[2023-05-03 Wed]
+[[file:~/org/dev.org::*I think it is actually possible][I think it is actually possible]]
+*** Key system registers when handling exceptions             :JOURNAL:lotto:
+:LOGBOOK:
+CLOCK: [2023-05-03 Wed 13:32]--[2023-05-03 Wed 13:37] =>  0:05
+:END:
+<2023-05-03 Wed>
+[2023-05-03 Wed 13:32]
+
+[[file:~/org/dev.org::*Support LOTTO for el2][Support LOTTO for el2]]
+
+Key System registers when handling exceptions
+|-----------------------------------+-----------+--------------------------------------------------------------------------------------------------------|
+| Register                          | Name      | Description                                                                                            |
+|-----------------------------------+-----------+--------------------------------------------------------------------------------------------------------|
+| Exception Link Register           | ELR_ELx   | Holds the address of the instruction which caused the exception                                        |
+| Exception Syndrome Register       | ESR_ELx   | Includes information about the reasons for the exception                                               |
+| Fault Address Register            | FAR_ELx   | Holds the virtual faulting address                                                                     |
+| Hypervisor Configuration Register | HCR_ELx   | Controls virtualization settings and trapping of exceptions to EL2                                     |
+| Secure Configuration Register     | SCR_ELx   | Controls Secure state and trapping of exceptions to EL3                                                |
+| System Control Register           | SCTLR_ELx | Controls standard memory, system facilities, and provides status information for implemented functions |
+| Saved Program Status Register     | SPSR_ELx  | Holds the saved processor state when an exception is taken to this ELx                                 |
+| Vector Base Address Register      | VBAR_ELx  | Holds the exception base address for any exception that is taken to ELx                                |
+|-----------------------------------+-----------+--------------------------------------------------------------------------------------------------------|
+
+Source: [[https://developer.arm.com/documentation/102412/0103/Privilege-and-Exception-levels/Types-of-privilege][ARM docs]]
+*** Alternative solution: self-hosted debug                   :JOURNAL:lotto:
+:LOGBOOK:
+CLOCK: [2023-05-03 Wed 14:05]--[2023-05-03 Wed 14:07] =>  0:02
+:END:
+<2023-05-03 Wed>
+[2023-05-03 Wed 14:05]
+
+[[file:~/org/dev.org::*Support LOTTO for el2][Support LOTTO for el2]]
+
+[[https://developer.arm.com/documentation/102120/latest/][ARM docs on self hosted debug]]
+Provide a debugger from a hypervisor, placing all breakpoints
+into the places specified by instrumented code or by debug
+information from a Kernel image.
+*** Only synchronous exceptions may be used for lotto         :JOURNAL:lotto:
+:LOGBOOK:
+CLOCK: [2023-05-03 Wed 14:28]--[2023-05-03 Wed 14:30] =>  0:02
+:END:
+<2023-05-03 Wed>
+[2023-05-03 Wed 14:28]
+
+[[file:~/org/dev.org::*Support LOTTO for el2][Support LOTTO for el2]]
+Only synchronous exceptions may be used by lotto recoreder/replayer to allow
+a deterministic control flow.
+All async exceptions must be done as is, timer is one of such examples.
+*** Sync exceptions route rules                               :JOURNAL:lotto:
+:LOGBOOK:
+CLOCK: [2023-05-03 Wed 14:33]--[2023-05-03 Wed 14:34] =>  0:01
+:END:
+<2023-05-03 Wed>
+[2023-05-03 Wed 14:33]
+
+[[file:~/org/dev.org::*Support LOTTO for el2][Support LOTTO for el2]]
+
+Synchronous exceptions are routed according to the rules associated with the exception-generating instructions SVC,
+HVC, and SMC. When implemented, other classes of exception can be routed to EL2 (Hypervisor) or EL3 (Secure Monitor).
+Routing is set independently for IRQs, FIQs, and SErrors.
+
+So, traps cannot be re-routed from a hypervisor to a guest VM?
+[[https://developer.arm.com/documentation/102412/0103/Handling-exceptions/Taking-an-exception][ARM docs]]
+*** GIC specification                                               :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-05-04 Thu 09:53]--[2023-05-04 Thu 09:53] =>  0:00
+:END:
+<2023-05-04 Thu>
+[2023-05-04 Thu 09:53]
+
+[[file:~/org/dev.org::*Support LOTTO for el2][Support LOTTO for el2]]
+
+[[https://developer.arm.com/documentation/ihi0069/h/?lang=en][Design doc]]
+*** Draft implementation ready                                      :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-05-08 Mon 15:57]--[2023-05-08 Mon 15:57] =>  0:00
+:END:
+<2023-05-08 Mon>
+[2023-05-08 Mon 15:57]
+
+[[file:~/org/dev.org::*Support LOTTO for el2][Support LOTTO for el2]]
+
+Draft implementation is ready; now the next task is
+to prepare a second VM with lotte inside.
+*** DONE Add Lotto VM as a secondary VM that runs on separate physical core
+CLOSED: [2023-05-10 Wed 10:37]
+:LOGBOOK:
+CLOCK: [2023-05-08 Mon 15:58]--[2023-05-08 Mon 15:59] =>  0:01
+:END:
+[2023-05-08 Mon]
+[[file:~/org/dev.org::*Support LOTTO for el2][Support LOTTO for el2]]
+
+For now, just present a minimal kernel that may call hypervisor.
+*** DONE Setup a probation plan
+CLOSED: [2023-05-10 Wed 18:00] SCHEDULED: <2023-05-09 Tue>
+:LOGBOOK:
+CLOCK: [2023-05-08 Mon 15:59]--[2023-05-08 Mon 16:00] =>  0:01
+:END:
+[2023-05-08 Mon]
+[[file:~/org/dev.org::*Support LOTTO for el2][Support LOTTO for el2]]
+*** DONE Integrate lotto with lotto VM
+CLOSED: [2023-05-12 Fri 16:17]
+:LOGBOOK:
+CLOCK: [2023-05-10 Wed 10:37]--[2023-05-10 Wed 10:38] =>  0:01
+:END:
+[2023-05-10 Wed]
+[[file:~/org/dev.org::*Support LOTTO for el2][Support LOTTO for el2]]
+*** NEXT Support LOTTO replay on VM
+SCHEDULED: <2023-05-16 Tue>
+:LOGBOOK:
+CLOCK: [2023-05-12 Fri 16:18]--[2023-05-12 Fri 16:18] =>  0:00
+:END:
+[2023-05-12 Fri]
+[[file:~/org/dev.org::*Integrate lotto with lotto VM][Integrate lotto with lotto VM]]
+*** TODO Run HM as a guest VM together with lotto VM
+SCHEDULED: <2023-05-19 Fri>
+:LOGBOOK:
+CLOCK: [2023-05-12 Fri 16:19]--[2023-05-12 Fri 16:20] =>  0:01
+:END:
+[2023-05-12 Fri]
+[[file:~/org/dev.org::*Support LOTTO for el2][Support LOTTO for el2]]
+*** TODO Refactor and simplify code
+SCHEDULED: <2023-05-31 Wed>
+:LOGBOOK:
+CLOCK: [2023-05-12 Fri 16:20]--[2023-05-12 Fri 16:21] =>  0:01
+:END:
+[2023-05-12 Fri]
+[[file:~/org/dev.org::*Support LOTTO for el2][Support LOTTO for el2]]
+*** TODO Run lotto VM with guest on real hardware
+SCHEDULED: <2023-06-30 Fri>
+:LOGBOOK:
+CLOCK: [2023-05-12 Fri 16:21]--[2023-05-12 Fri 16:22] =>  0:01
+:END:
+[2023-05-12 Fri]
+[[file:~/org/dev.org::*Support LOTTO for el2][Support LOTTO for el2]]

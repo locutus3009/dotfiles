@@ -61,7 +61,7 @@ This function should only modify configuration layer settings."
      spell-checking
      syntax-checking
      version-control
-     gtags
+     ;; gtags
      treemacs
      cmake)
 
@@ -425,7 +425,7 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
 
    ;; Code folding method. Possible values are `evil', `origami' and `vimish'.
    ;; (default 'evil)
@@ -573,6 +573,8 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+(global-set-key (kbd "TAB") `tab-to-tab-stop)
+
 (setq org-todo-keywords
       (quote ((sequence "TODO(t)" "NEXT(n)" "IN_REVIEW(r)" "|" "DONE(d)")
               (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE" "MEETING"))))
@@ -619,6 +621,19 @@ before packages are loaded."
 (require 'epa-file)
 (epa-file-enable)
 (require 'org-tempo)
+
+(dir-locals-set-class-variables 'hm-verif-kernel-directory
+   '((nil . ((indent-tabs-mode . t)
+         (tab-width . 8)
+         (fill-column . 80)))
+ ;; Warn about spaces used for indentation:
+ (c-mode . ((c-file-style . "Linux")))))
+
+(dir-locals-set-directory-class
+  "/home/locutus/dev/hm-grc-scripts/hm-verif-kernel" 'hm-verif-kernel-directory)
+
+(dir-locals-set-directory-class
+  "/home/locutus/dev/hm-grc-scripts/hm-uvmm" 'hm-verif-kernel-directory)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -633,6 +648,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(backward-delete-char-untabify-method nil)
  '(connection-local-criteria-alist
    '(((:application eshell)
       eshell-connection-default-profile)
@@ -713,9 +729,16 @@ This function is called at the very end of Spacemacs initialization."
      (tramp-connection-local-default-system-profile
       (path-separator . ":")
       (null-device . "/dev/null"))) t)
+ '(electric-indent-mode nil)
+ '(global-hungry-delete-mode nil)
  '(org-agenda-files (append (file-expand-wildcards "~/org/*.org")))
  '(package-selected-packages
-   '(company-lua lua-mode ctags-update yaml-mode emacsql-sqlite-builtin esqlite xah-fly-keys sqlite3 add-node-modules-path impatient-mode import-js grizzl js-doc js2-refactor multiple-cursors livid-mode nodejs-repl npm-mode prettier-js skewer-mode js2-mode simple-httpd tern web-beautify company-c-headers company-rtags company-ycmd cpp-auto-include disaster flycheck-rtags flycheck-ycmd gendoxy google-c-style helm-rtags rtags ycmd request-deferred ac-ispell auto-complete auto-yasnippet esh-help eshell-prompt-extras eshell-z fuzzy gh-md helm-c-yasnippet helm-company markdown-toc mmm-mode multi-term mwim shell-pop terminal-here unfill vterm xterm-color yasnippet-snippets yasnippet blacken code-cells company-anaconda anaconda-mode cython-mode helm-cscope helm-pydoc importmagic epc ctable concurrent deferred live-py-mode lsp-pyright lsp-python-ms nose pip-requirements pipenv load-env-vars pippel poetry transient py-isort pydoc pyenv-mode pythonic pylookup pytest pyvenv sphinx-doc stickyfunc-enhance xcscope yapfify cargo company counsel-gtags counsel swiper ivy dap-mode lsp-docker lsp-treemacs bui yaml lsp-mode markdown-mode flycheck-rust ggtags helm-gtags racer pos-tip ron-mode rust-mode toml-mode ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired toc-org term-cursor symon symbol-overlay string-inflection string-edit spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline-all-the-icons space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-ediff evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
+   '(company-lua lua-mode ctags-update yaml-mode emacsql-sqlite-builtin esqlite xah-fly-keys sqlite3 add-node-modules-path impatient-mode import-js grizzl js-doc js2-refactor multiple-cursors livid-mode nodejs-repl npm-mode prettier-js skewer-mode js2-mode simple-httpd tern web-beautify company-c-headers company-rtags company-ycmd cpp-auto-include disaster flycheck-rtags flycheck-ycmd gendoxy google-c-style helm-rtags rtags ycmd request-deferred ac-ispell auto-complete auto-yasnippet esh-help eshell-prompt-extras eshell-z fuzzy gh-md helm-c-yasnippet helm-company markdown-toc mmm-mode multi-term mwim shell-pop terminal-here unfill vterm xterm-color yasnippet-snippets yasnippet blacken code-cells company-anaconda anaconda-mode cython-mode helm-cscope helm-pydoc importmagic epc ctable concurrent deferred live-py-mode lsp-pyright lsp-python-ms nose pip-requirements pipenv load-env-vars pippel poetry transient py-isort pydoc pyenv-mode pythonic pylookup pytest pyvenv sphinx-doc stickyfunc-enhance xcscope yapfify cargo company counsel-gtags counsel swiper ivy dap-mode lsp-docker lsp-treemacs bui yaml lsp-mode markdown-mode flycheck-rust ggtags helm-gtags racer pos-tip ron-mode rust-mode toml-mode ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired toc-org term-cursor symon symbol-overlay string-inflection string-edit spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline-all-the-icons space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-ediff evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line))
+ '(safe-local-variable-values
+   '((some-useful-setting . value)
+     (javascript-backend . tide)
+     (javascript-backend . tern)
+     (javascript-backend . lsp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
