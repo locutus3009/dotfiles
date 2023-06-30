@@ -487,8 +487,10 @@ CLOCK: [2023-05-10 Wed 10:37]--[2023-05-10 Wed 10:38] =>  0:01
 :END:
 [2023-05-10 Wed]
 [[file:~/org/dev.org::*Support LOTTO for el2][Support LOTTO for el2]]
-*** NEXT Support LOTTO replay on VM
-SCHEDULED: <2023-05-16 Tue>
+*** HOLD Support LOTTO replay on VM                                    :HOLD:
+SCHEDULED: <2023-06-23 Fri>
+- State "HOLD"       from "NEXT"       [2023-05-16 Tue 17:50] \\
+  After demo
 :LOGBOOK:
 CLOCK: [2023-05-12 Fri 16:18]--[2023-05-12 Fri 16:18] =>  0:00
 :END:
@@ -501,8 +503,8 @@ CLOCK: [2023-05-12 Fri 16:19]--[2023-05-12 Fri 16:20] =>  0:01
 :END:
 [2023-05-12 Fri]
 [[file:~/org/dev.org::*Support LOTTO for el2][Support LOTTO for el2]]
-*** TODO Refactor and simplify code
-SCHEDULED: <2023-05-31 Wed>
+*** DONE Refactor and simplify code
+CLOSED: [2023-06-30 Fri 16:53] SCHEDULED: <2023-05-31 Wed>
 :LOGBOOK:
 CLOCK: [2023-05-12 Fri 16:20]--[2023-05-12 Fri 16:21] =>  0:01
 :END:
@@ -515,3 +517,106 @@ CLOCK: [2023-05-12 Fri 16:21]--[2023-05-12 Fri 16:22] =>  0:01
 :END:
 [2023-05-12 Fri]
 [[file:~/org/dev.org::*Support LOTTO for el2][Support LOTTO for el2]]
+*** Run guest on host HM                                            :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-05-16 Tue 17:49]--[2023-05-16 Tue 17:50] =>  0:01
+:END:
+<2023-05-16 Tue>
+[2023-05-16 Tue 17:49]
+
+[[file:~/org/dev.org::*Run HM as a guest VM together with lotto VM][Run HM as a guest VM together with lotto VM]]
+Run linux VM:
+
+export T=virt-hyp
+export VM_IMAGE=/home/locutus/dev/hm-grc-scripts/files/linux_virt.img
+
+./scripts/run-hm.sh
+vm.elf --bindcore 0 -v 4 &
+
+Open second console:
+minicom -D /dev/pts/6
+Login: root
+Halt: halt
+Reboot: reboot
+*** Thoughts on new implementation                                  :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-05-30 Tue 14:28]--[2023-05-30 Tue 14:29] =>  0:01
+:END:
+<2023-05-30 Tue>
+[2023-05-30 Tue 14:28]
+
+[[file:~/org/dev.org::*Support LOTTO for el2][Support LOTTO for el2]]
+
+Use activation form hypervisor driver to provide decisions from vm.elf.
+*** Talk with Djogu                                                 :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-06-01 Thu 13:12]--[2023-06-01 Thu 13:12] =>  0:00
+:END:
+<2023-06-01 Thu>
+[2023-06-01 Thu 13:12]
+
+[[file:~/org/dev.org::*Support LOTTO for el2][Support LOTTO for el2]]
+*** Possibilities                                                   :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-06-09 Fri 14:36]--[2023-06-09 Fri 14:58] =>  0:22
+:END:
+<2023-06-09 Fri>
+[2023-06-09 Fri 14:35]
+
+[[file:~/dev/hm-grc-scripts/SRC/lotto/src/hm-lotto/lotto.c::last_successful_yield_vcpu_id = vcpu_id;]]
+
+Skip the thread_init or first sync
+We must ensure that lotto decisions are made for the same
+tick as it is expected form the event information.
+
+Maybe introduce some callback in psci interrupt handler
+CAT_THREAD_CREATE
+
+Maybe we don't need a queue after all, need to check it again.
+
+Need to draw new sequence diagrams.
+
+*** DONE Give a try to Watchdog
+CLOSED: [2023-06-16 Fri 11:56]
+:LOGBOOK:
+CLOCK: [2023-06-09 Fri 15:37]--[2023-06-09 Fri 15:40] =>  0:03
+:END:
+[2023-06-09 Fri]
+[[file:~/org/dev.org::*Support LOTTO for el2][Support LOTTO for el2]]
+
+Use the main branch of a lotto
+It brings a limit for how long core can run without preempting
+to another one.
+*** CANCELLED Report a bug about a program counter                :CANCELLED:
+CLOSED: [2023-06-30 Fri 16:53]
+- State "CANCELLED"  from "TODO"       [2023-06-30 Fri 16:53] \\
+  Not found
+:LOGBOOK:
+CLOCK: [2023-06-09 Fri 15:42]--[2023-06-09 Fri 15:42] =>  0:00
+:END:
+[2023-06-09 Fri]
+[[file:~/dev/hm-grc-scripts/SRC/lotto/src/hm-lotto/lotto.c::.pc = pc & 0xFFFFFFFF,]]
+*** Commands to check with random                                   :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-06-09 Fri 15:49]--[2023-06-09 Fri 15:50] =>  0:01
+:END:
+<2023-06-09 Fri>
+[2023-06-09 Fri 15:48]
+
+#+begin_src
+export LOTTO_SEED=123
+export LOTTO_STRATEGY=random
+vm.elf --plugin /etc/lotto/liblotto.so.1 --bindcore 0 -v 4
+#+end_src
+*** TODO Use network byte order to store integers in LOTTO recordings
+:LOGBOOK:
+CLOCK: [2023-06-16 Fri 11:57]--[2023-06-16 Fri 11:58] =>  0:01
+:END:
+[2023-06-16 Fri]
+** TODO Prepare plan for a next week
+SCHEDULED: <2023-07-03 Mon>
+:LOGBOOK:
+CLOCK: [2023-06-30 Fri 16:58]--[2023-06-30 Fri 16:58] =>  0:00
+:END:
+[2023-06-30 Fri]
+[[file:~/org/journal.org::*Notes after week 26][Notes after week 26]]

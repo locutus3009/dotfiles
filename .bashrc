@@ -133,3 +133,6 @@ export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -t"                  # $EDITOR opens in terminal
 export VISUAL="emacsclient -c -a emacs"         # $VISUAL opens in GUI mode
 export PATH="$PATH:/usr/sbin"
+export PATH="$PATH:/home/locutus/apps/Zotero_linux-x86_64"
+export PATH="$PATH:/home/locutus/apps"
+export PATH="$PATH:/home/locutus/Foundation_Platform/models/Linux64_GCC-6.4"

@@ -84,6 +84,73 @@ CLOCK: [2023-03-30 Чт 15:54]--[2023-03-30 Чт 15:55] =>  0:01
 *** 2023-05-03 Wednesday
 *** 2023-05-04 Thursday
 *** 2023-05-08 Monday
+*** 2023-05-16 Tuesday
+*** 2023-05-30 Tuesday
+** 2023-06 June
+*** 2023-06-01 Thursday
+**** Hahaha                                                         :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-06-01 Thu 13:38]--[2023-06-01 Thu 13:38] =>  0:00
+:END:
+<2023-06-01 Thu>
+[2023-06-01 Thu 13:38]
+**** Test test test                                                 :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-06-01 Thu 15:56]
+:END:
+<2023-06-01 Thu>
+[2023-06-01 Thu 15:56]
+
+[[mu4e:msgid:note_217943@rnd-gitlab-eu-c.huawei.com][Re: duck | Avoid rounding errors when converting time units to ticks. (!993)]]
+**** Test using email attachment in org-mode                        :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-06-01 Thu 17:29]--[2023-06-01 Thu 17:29] =>  0:00
+:END:
+<2023-06-01 Thu>
+[2023-06-01 Thu 17:28]
+
+[[mu4e:msgid:874jnrgq4u.fsf@nerovny][One more test]]
+Looks like it works!
+*** 2023-06-09 Friday
+*** 2023-06-30 Friday
+**** Notes on CI job for HM-lotto                                   :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-06-30 Fri 11:22]--[2023-06-30 Fri 11:22] =>  0:00
+:END:
+<2023-06-30 Fri>
+[2023-06-30 Fri 11:21]
+
+[[file:~/dev/lotto/.ci/hm-lotto.Dockerfile::FROM rnd-gitlab-eu-c.huawei.com:8443/germany-research-center/dresden-lab/hm-mobile/scripts/docker/hmbase22:latest]]
+
+So, the main script hmbaseXX provides an infrastructure that may be used to run HM build scripts from hm-grc-scripts.
+1. I need a token to access this repository for CI job (dresden-lab/hm-mobile). It is not built automatically so probably I must create some CI job that builds such an image for me
+2. Next, I need to prepare a separate dockerfile for s4c/lotto CI job, it must download hm-grc-scripts automatically including all submodules so I need a token to dresden-lab/hongmengos/*
+3. I must utilize some custom long living branch for uvmm and hm-verif-kernel so I need a token for dresden-lab/ententeich
+
+The step 1 is very heavy and it will produce a giant container -- it is better to utilize the HM SDK for such purposes -- I only need to build an application (a plugin for uvmm), does not need to run tests on CI yet.
+However, it requires a modified system headers
+**** Notes after week 26                                            :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-06-30 Fri 16:54]--[2023-06-30 Fri 16:58] =>  0:04
+:END:
+<2023-06-30 Fri>
+[2023-06-30 Fri 16:54]
+
+I have successfully started to work more time then on previous week.
+The solution is just to perform simple work after lunch -- code review,
+discussion, very simple coding.
+
+Leave all hard things to the first part of a day, and complete it before the lunch.
+
+I have prepared a patch that provides a build stage for LOTTO CI for HM-lotto,
+it works nice.
+I have learned something about docker, I like this thing.
+
+Next week, I definitely need to finish the Duck-related task,
+complete my activities there.
+It is not as hard as it looks like but it is annoying.
+
+I also need to discuss with Diogo my LOTTO plan and deadlines.
 * Turn on device
 #+BEGIN_SRC bash
 ./USBswitchCmd 1

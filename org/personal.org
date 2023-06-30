@@ -74,7 +74,10 @@ CLOSED: [2023-05-12 Fri 16:23]
   Will be processed in another agenda workspace (in home)
 - State "HOLD"       from "TODO"       [2022-09-23 Пт 14:08] \\
   Сейчас в Казахстане, прогнозы делать сложно
-*** NEXT Переехать
+*** CANCELLED Переехать                                           :CANCELLED:
+CLOSED: [2023-06-01 Thu 17:33]
+- State "CANCELLED"  from "NEXT"       [2023-06-01 Thu 17:33] \\
+  Handled in personal org-files
 - State "NEXT"       from "HOLD"       [2023-03-30 Чт 16:18]
 - State "HOLD"       from "TODO"       [2022-09-23 Пт 14:08] \\
   Сейчас в Казахстане, прогнозы делать сложно
@@ -120,8 +123,10 @@ CLOCK: [2023-03-30 Чт 16:30]--[2023-03-30 Чт 16:31] =>  0:01
 
 Его делает арендодатель, необходим для получения регистрации.
 Необходимо сделать и для меня, и дла Иры.
-**** NEXT Оформить BlueKart
-SCHEDULED: <2023-09-30 Сб>
+**** CANCELLED Оформить BlueKart                                  :CANCELLED:
+CLOSED: [2023-06-01 Thu 17:33] SCHEDULED: <2023-09-30 Сб>
+- State "CANCELLED"  from "NEXT"       [2023-06-01 Thu 17:33] \\
+  Handled in personal org-files
 :LOGBOOK:
 CLOCK: [2023-03-30 Чт 16:32]--[2023-03-30 Чт 16:32] =>  0:00
 :END:
