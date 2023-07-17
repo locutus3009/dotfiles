@@ -550,7 +550,10 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-home-shorten-agenda-source nil
 
    ;; If non-nil then byte-compile some of Spacemacs files.
-   dotspacemacs-byte-compile nil))
+   dotspacemacs-byte-compile nil
+
+   ;; Prevent scroll bar from bouncing
+   dotspacemacs-scroll-bar-while-scrolling nil))
 
 (defun dotspacemacs/user-env ()
   "Environment variables setup.
@@ -680,8 +683,15 @@ before packages are loaded."
 (global-unset-key (kbd "<C-delete>"))
 (global-unset-key (kbd "<home>"))
 (global-unset-key (kbd "<end>"))
+(global-unset-key (kbd "<mouse-2>"))
+(global-unset-key (kbd "<mouse-3>"))
 ;; (require 'no-easy-keys)
 ;; (no-easy-keys 1)
+
+;; Multiple cursors
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 (dir-locals-set-class-variables 'hm-verif-kernel-directory
    '((nil . ((indent-tabs-mode . t)
