@@ -127,7 +127,6 @@ fi
 export GPG_TTY=$(tty)
 
 . "$HOME/.cargo/env"
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME/'
 alias emacs='emacsclient -t'
 export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -t"                  # $EDITOR opens in terminal
