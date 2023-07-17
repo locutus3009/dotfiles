@@ -128,10 +128,10 @@ export GPG_TTY=$(tty)
 
 . "$HOME/.cargo/env"
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME/'
-#alias emacs='emacsclient -t'
+alias emacs='emacsclient -t'
 export ALTERNATE_EDITOR=""
-#export EDITOR="emacsclient -t"                  # $EDITOR opens in terminal
-#export VISUAL="emacsclient -c -a emacs"         # $VISUAL opens in GUI mode
+export EDITOR="emacsclient -t"                  # $EDITOR opens in terminal
+export VISUAL="emacsclient -c -a emacs"         # $VISUAL opens in GUI mode
 export PATH="$PATH:/usr/sbin"
 export PATH="$PATH:/home/locutus/apps/Zotero_linux-x86_64"
 export PATH="$PATH:/home/locutus/apps"
