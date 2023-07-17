@@ -151,6 +151,33 @@ complete my activities there.
 It is not as hard as it looks like but it is annoying.
 
 I also need to discuss with Diogo my LOTTO plan and deadlines.
+** 2023-07 July
+*** 2023-07-04 Tuesday
+**** Proposal: use livepatch to update vanilla binaries on the fly  :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-07-04 Tue 16:21]--[2023-07-04 Tue 16:23] =>  0:02
+:END:
+<2023-07-04 Tue>
+[2023-07-04 Tue 16:21]
+
+[[file:~/dev/lotto/src/hm-lotto/livepatch.c]]
+Provide all needed functions that do the following:
+1) Hotpatch hypervisor driver in HM kernel in runtime to allow
+control of vCPU switching
+2) Alter behavior of vm.elf in runtime as well
+*** 2023-07-10 Monday
+**** There is a problem here :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-07-10 Mon 09:55]--[2023-07-10 Mon 09:56] =>  0:01
+:END:
+<2023-07-10 Mon>
+[2023-07-10 Mon 09:55]
+
+[[file:~/dev/lotto/src/hm-lotto/livepatch.c::livepatch_alloc_mem(size_t size)]]
+
+It looks like CFI produces a trap here -- need to check with objdump
+*** 2023-07-11 Tuesday
+*** 2023-07-14 Friday
 * Turn on device
 #+BEGIN_SRC bash
 ./USBswitchCmd 1

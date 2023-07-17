@@ -1,5 +1,5 @@
 #-*- mode: org -*-
-#+STARTUP: showall
+#+STARTUP: showall noinlineimages
 
 * Tasks
 ** DONE Build Duck
@@ -132,8 +132,8 @@ CLOCK: [2023-04-28 Fri 13:36]--[2023-04-28 Fri 13:38] =>  0:02
 [[file:~/org/dev.org::*Integration of Raspberry PI into Duck CI][Integration of Raspberry PI into Duck CI]]
 
 Huawei ID of this guy: jwx1115079 (Jiayi Wei)
-** NEXT Support LOTTO for el2                                         :lotto:
-SCHEDULED: <2023-05-31 Wed>
+** DONE Support LOTTO for el2                                         :lotto:
+CLOSED: [2023-07-10 Mon 09:47] SCHEDULED: <2023-09-30 Sat>
 :LOGBOOK:
 CLOCK: [2023-05-02 Tue 11:25]--[2023-05-02 Tue 11:25] =>  0:00
 :END:
@@ -487,8 +487,9 @@ CLOCK: [2023-05-10 Wed 10:37]--[2023-05-10 Wed 10:38] =>  0:01
 :END:
 [2023-05-10 Wed]
 [[file:~/org/dev.org::*Support LOTTO for el2][Support LOTTO for el2]]
-*** HOLD Support LOTTO replay on VM                                    :HOLD:
-SCHEDULED: <2023-06-23 Fri>
+*** DONE Support LOTTO replay on VM
+CLOSED: [2023-07-10 Mon 09:46] SCHEDULED: <2023-08-31 Thu>
+- State "DONE"       from "HOLD"       [2023-07-10 Mon 09:46]
 - State "HOLD"       from "NEXT"       [2023-05-16 Tue 17:50] \\
   After demo
 :LOGBOOK:
@@ -497,7 +498,7 @@ CLOCK: [2023-05-12 Fri 16:18]--[2023-05-12 Fri 16:18] =>  0:00
 [2023-05-12 Fri]
 [[file:~/org/dev.org::*Integrate lotto with lotto VM][Integrate lotto with lotto VM]]
 *** TODO Run HM as a guest VM together with lotto VM
-SCHEDULED: <2023-05-19 Fri>
+SCHEDULED: <2023-07-31 Mon>
 :LOGBOOK:
 CLOCK: [2023-05-12 Fri 16:19]--[2023-05-12 Fri 16:20] =>  0:01
 :END:
@@ -511,7 +512,7 @@ CLOCK: [2023-05-12 Fri 16:20]--[2023-05-12 Fri 16:21] =>  0:01
 [2023-05-12 Fri]
 [[file:~/org/dev.org::*Support LOTTO for el2][Support LOTTO for el2]]
 *** TODO Run lotto VM with guest on real hardware
-SCHEDULED: <2023-06-30 Fri>
+SCHEDULED: <2023-08-31 Thu>
 :LOGBOOK:
 CLOCK: [2023-05-12 Fri 16:21]--[2023-05-12 Fri 16:22] =>  0:01
 :END:
@@ -613,10 +614,97 @@ vm.elf --plugin /etc/lotto/liblotto.so.1 --bindcore 0 -v 4
 CLOCK: [2023-06-16 Fri 11:57]--[2023-06-16 Fri 11:58] =>  0:01
 :END:
 [2023-06-16 Fri]
-** TODO Prepare plan for a next week
-SCHEDULED: <2023-07-03 Mon>
+** DONE Prepare plan for a next week
+CLOSED: [2023-07-04 Tue 16:26] SCHEDULED: <2023-07-03 Mon>
 :LOGBOOK:
 CLOCK: [2023-06-30 Fri 16:58]--[2023-06-30 Fri 16:58] =>  0:00
 :END:
 [2023-06-30 Fri]
 [[file:~/org/journal.org::*Notes after week 26][Notes after week 26]]
+** DONE Implement a simple livepatch for kernel and/or userspace
+CLOSED: [2023-07-10 Mon 09:45] SCHEDULED: <2023-07-07 Fri>
+:LOGBOOK:
+CLOCK: [2023-07-04 Tue 16:25]--[2023-07-04 Tue 16:25] =>  0:00
+:END:
+[2023-07-04 Tue]
+[[file:~/org/dev.org::*Prepare plan for a next week][Prepare plan for a next week]]
+** DONE For some reason, plugin is not initialized
+CLOSED: [2023-07-10 Mon 09:45]
+:LOGBOOK:
+CLOCK: [2023-07-05 Wed 09:31]--[2023-07-05 Wed 09:32] =>  0:01
+:END:
+[2023-07-05 Wed]
+[[file:~/org/dev.org::*Implement a simple livepatch for kernel and/or userspace][Implement a simple livepatch for kernel and/or userspace]]
+
+Need to check this.
+The structure definition of operation looks correct.
+Do I need to instrument uvmm instead?
+** DONE Solve problems with CFI and userspace patch
+CLOSED: [2023-07-13 Thu 13:26] SCHEDULED: <2023-07-14 Fri>
+:LOGBOOK:
+CLOCK: [2023-07-10 Mon 09:44]--[2023-07-10 Mon 09:44] =>  0:00
+:END:
+[2023-07-10 Mon]
+[[file:~/org/dev.org::*Implement a simple livepatch for kernel and/or userspace][Implement a simple livepatch for kernel and/or userspace]]
+** CANCELLED Patch for the kernel as well                         :CANCELLED:
+CLOSED: [2023-07-13 Thu 13:26] SCHEDULED: <2023-07-14 Fri>
+- State "CANCELLED"  from "TODO"       [2023-07-13 Thu 13:26] \\
+  Not needed anymore
+:LOGBOOK:
+CLOCK: [2023-07-10 Mon 09:45]--[2023-07-10 Mon 09:45] =>  0:00
+:END:
+[2023-07-10 Mon]
+[[file:~/org/dev.org::*Implement a simple livepatch for kernel and/or userspace][Implement a simple livepatch for kernel and/or userspace]]
+** NEXT RME proposal
+:LOGBOOK:
+CLOCK: [2023-07-11 Tue 10:47]--[2023-07-11 Tue 10:47] =>  0:00
+:END:
+[2023-07-11 Tue]
+*** IN_REVIEW RME: first pitch presentation
+SCHEDULED: <2023-07-12 Wed>
+:LOGBOOK:
+CLOCK: [2023-07-11 Tue 10:47]--[2023-07-11 Tue 10:47] =>  0:00
+:END:
+[2023-07-11 Tue]
+[[file:~/org/dev.org::*RME proposal][RME proposal]]
+*** ARM Dynamic TrustZone pattern                                   :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-07-11 Tue 10:48]--[2023-07-11 Tue 10:49] =>  0:01
+:END:
+<2023-07-11 Tue>
+[2023-07-11 Tue 10:48]
+
+[[file:~/org/dev.org::*RME: first pitch presentation][RME: first pitch presentation]]
+
+[[https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/introducing-arms-dynamic-trustzone-technology][ARM website link]]
+
+#+ATTR_HTML: :width 600px
+[[./img/rme/classic.png]]
+
+#+ATTR_HTML: :width 600px
+[[./img/rme/new.png]]
+*** Content providers                                               :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-07-11 Tue 11:09]--[2023-07-11 Tue 11:11] =>  0:02
+:END:
+<2023-07-11 Tue>
+[2023-07-11 Tue 11:09]
+
+[[file:~/org/dev.org::*ARM Dynamic TrustZone pattern][ARM Dynamic TrustZone pattern]]
+
+[[https://www.cdsaonline.org/][CDSA association]]
+[[https://www.widevine.com/#new_tab][Widevine codec]]
+[[https://wasabi.com][Some cloud-based physical security solutions]]
+*** Realm context switching                                         :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-07-14 Fri 11:51]--[2023-07-14 Fri 11:51] =>  0:00
+:END:
+<2023-07-14 Fri>
+[2023-07-14 Fri 11:51]
+
+[[file:~/org/dev.org::*RME: first pitch presentation][RME: first pitch presentation]]
+
+#+ATTR_HTML: :width 600px
+[[./img/rme/images_realm-context-switching_NEW.png]]
+
+[[https://developer.arm.com/documentation/den0127/0200/Realm-management/Realm-context-switching][ARM docs]]

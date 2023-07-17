@@ -64,6 +64,7 @@ This function should only modify configuration layer settings."
      ;; gtags
      treemacs
      cmake
+     shell
      (mu4e :variables
              mu4e-use-maildirs-extension t
              mu4e-enable-async-operations nil
@@ -79,8 +80,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(
-     gitlab)
+   dotspacemacs-additional-packages '(gitlab sqlite3)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -656,6 +656,27 @@ before packages are loaded."
 (require 'epa-file)
 (epa-file-enable)
 (require 'org-tempo)
+
+(global-unset-key (kbd "<left>"))
+(global-unset-key (kbd "<right>"))
+(global-unset-key (kbd "<up>"))
+(global-unset-key (kbd "<down>"))
+(global-unset-key (kbd "<C-left>"))
+(global-unset-key (kbd "<C-right>"))
+(global-unset-key (kbd "<C-up>"))
+(global-unset-key (kbd "<C-down>"))
+(global-unset-key (kbd "<M-left>"))
+(global-unset-key (kbd "<M-right>"))
+(global-unset-key (kbd "<M-up>"))
+(global-unset-key (kbd "<M-down>"))
+(global-unset-key (kbd "<prior>"))
+(global-unset-key (kbd "<next>"))
+(global-unset-key (kbd "<deletechar>"))
+(global-unset-key (kbd "<C-delete>"))
+(global-unset-key (kbd "<home>"))
+(global-unset-key (kbd "<end>"))
+;; (require 'no-easy-keys)
+;; (no-easy-keys 1)
 
 (dir-locals-set-class-variables 'hm-verif-kernel-directory
    '((nil . ((indent-tabs-mode . t)
