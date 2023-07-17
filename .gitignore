@@ -1,3 +1,13 @@
 **/.vscode/**
 .cfg
 .*
+email/**
+yEd/**
+dev/**
+apps/**
+Zotero/**
+Downloads/**
+Documents/**
+Videos/**
+Pictures/**
+Foundation_Platform/**
