@@ -180,7 +180,7 @@ It looks like CFI produces a trap here -- need to check with objdump
 *** 2023-07-14 Friday
 
 *** 2023-07-17 Monday
-****                                                              :JOURNAL:
+**** Test                                                           :JOURNAL:
 :LOGBOOK:
 CLOCK: [2023-07-17 Mon 14:13]--[2023-07-17 Mon 14:13] =>  0:00
 :END:
