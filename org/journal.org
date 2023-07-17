@@ -178,6 +178,14 @@ CLOCK: [2023-07-10 Mon 09:55]--[2023-07-10 Mon 09:56] =>  0:01
 It looks like CFI produces a trap here -- need to check with objdump
 *** 2023-07-11 Tuesday
 *** 2023-07-14 Friday
+
+*** 2023-07-17 Monday
+****                                                              :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-07-17 Mon 14:13]--[2023-07-17 Mon 14:13] =>  0:00
+:END:
+<2023-07-17 Mon>
+[2023-07-17 Mon 14:13]
 * Turn on device
 #+BEGIN_SRC bash
 ./USBswitchCmd 1
