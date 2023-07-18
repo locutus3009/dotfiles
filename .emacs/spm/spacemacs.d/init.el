@@ -32,9 +32,10 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(lua
-     yaml
-     javascript
+   '(
+     ;; lua
+     ;; yaml
+     ;; javascript
      python
      (org :variables
           org-enable-jira-support t
@@ -50,10 +51,12 @@ This function should only modify configuration layer settings."
      emacs-lisp
      c-c++
      git
-     helm
+     ;; helm
+     (ivy :variables
+          ivy-enable-advanced-buffer-information t
+          ivy-enable-icons t)
      ;; lsp
      markdown
-     multiple-cursors
      ;; org
      (shell :variables
             shell-default-height 30
@@ -80,7 +83,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(gitlab sqlite3 auto-dim-other-buffers)
+   dotspacemacs-additional-packages '(gitlab sqlite3 auto-dim-other-buffers multiple-cursors)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -214,7 +217,11 @@ It should only modify the values of Spacemacs settings."
    ;; number is the project limit and the second the limit on the recent files
    ;; within a project.
    dotspacemacs-startup-lists '((recents . 5)
-                                (projects . 7))
+                                ;; (projects . 5)
+                                (recents-by-project . (5 .  5))
+                                (bookmarks . 5)
+                                (agenda . 5)
+                                (todos . 5))
 
    ;; True if the home buffer should respond to resize events. (default t)
    dotspacemacs-startup-buffer-responsive t
@@ -223,12 +230,12 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-show-startup-list-numbers t
 
    ;; The minimum delay in seconds between number key presses. (default 0.4)
-   dotspacemacs-startup-buffer-multi-digit-delay 0.4
+   dotspacemacs-startup-buffer-multi-digit-delay 0.8
 
    ;; If non-nil, show file icons for entries and headings on Spacemacs home buffer.
    ;; This has no effect in terminal or if "all-the-icons" package or the font
    ;; is not installed. (default nil)
-   dotspacemacs-startup-buffer-show-icons nil
+   dotspacemacs-startup-buffer-show-icons t
 
    ;; Default major mode for a new empty buffer. Possible values are mode
    ;; names such as `text-mode'; and `nil' to use Fundamental mode.
@@ -587,8 +594,6 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-(global-set-key (kbd "TAB") `tab-to-tab-stop)
-
 ;(setq epa-pinentry-mode 'loopback)
 
 ;; SMTP settings:
@@ -615,14 +620,15 @@ before packages are loaded."
       mu4e-compose-signature-auto-include nil   ; I don't want a message signature
       mu4e-use-fancy-chars t)                   ; allow fancy icons for mail threads
 
+(setq gitlab-host "https://rnd-gitlab-eu-c.huawei.com"
+      gitlab-token-id "nvKAC85y-nujqM6F8-Gy")
+
+;; Sequences of keywords used in org-mode
 (setq org-todo-keywords
       (quote ((sequence "TODO(t)" "NEXT(n)" "IN_REVIEW(r)" "|" "DONE(d)")
               (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE" "MEETING"))))
 
-(setq gitlab-host "https://rnd-gitlab-eu-c.huawei.com"
-      gitlab-token-id "nvKAC85y-nujqM6F8-Gy")
-
-;; Set color
+;; Set colors for org-mode keywords
 (setq org-todo-keyword-faces
       (quote (("TODO" :foreground "red" :weight bold)
               ("NEXT" :foreground "blue" :weight bold)
@@ -643,8 +649,10 @@ before packages are loaded."
               ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
               ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
               ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
+
 ;; Follow mode
 (add-hook 'org-agenda-mode-hook #'org-agenda-follow-mode)
+
 ;; Define the custum capture templates
 (setq org-capture-templates
        '(("t" "todo" entry (file org-default-notes-file)
@@ -665,6 +673,10 @@ before packages are loaded."
 (epa-file-enable)
 (require 'org-tempo)
 
+;; Tabulation to stop by default
+(global-set-key (kbd "TAB") `tab-to-tab-stop)
+
+;; Disable non-natural cursor movement
 (global-unset-key (kbd "<left>"))
 (global-unset-key (kbd "<right>"))
 (global-unset-key (kbd "<up>"))
@@ -683,17 +695,17 @@ before packages are loaded."
 (global-unset-key (kbd "<C-delete>"))
 (global-unset-key (kbd "<home>"))
 (global-unset-key (kbd "<end>"))
+
+;; Strip mouse usage
 (global-unset-key (kbd "<mouse-2>"))
 (global-unset-key (kbd "<mouse-3>"))
-;; (require 'no-easy-keys)
-;; (no-easy-keys 1)
 
 ;; Multiple cursors
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-M->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-M-<") 'mc/mark-previous-like-this)
+;; (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
-;; Compilation output
+;; Follow the end of compilation output
 (setq compilation-scroll-output t)
 
 ;; Tune projectile to compile & run interactively
@@ -771,6 +783,12 @@ because by default projectile does not."
 
 ;; Automatically dim other windows
 (auto-dim-other-buffers-mode t)
+
+;; Movement between windows
+(global-set-key (kbd "C-x C-p") 'windmove-up)
+(global-set-key (kbd "C-x C-n") 'windmove-down)
+(global-set-key (kbd "C-x C-.") 'windmove-right)
+(global-set-key (kbd "C-x C-,") 'windmove-left)
 
 )
 
