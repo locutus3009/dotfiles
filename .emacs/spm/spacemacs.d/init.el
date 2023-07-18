@@ -80,7 +80,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(gitlab sqlite3)
+   dotspacemacs-additional-packages '(gitlab sqlite3 auto-dim-other-buffers)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -693,18 +693,84 @@ before packages are loaded."
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
+;; Compilation output
+(setq compilation-scroll-output t)
+
+;; Tune projectile to compile & run interactively
+(defun my/projectile-run (arg &optional dir)
+  "Run a projectile project passing t to `compile'
+because by default projectile does not."
+  (interactive "P")
+  (when (projectile-project-p)
+    (let* ((project-root (projectile-project-root))
+           (default-run-cmd (projectile-run-command project-root))
+           (run-cmd (projectile-maybe-read-command arg default-run-cmd "Run command: "))
+           (default-directory project-root))
+      (puthash project-root run-cmd projectile-run-cmd-map)
+      ;; Pass a lambda to projectile-run-compilation so that we can add
+      ;; the `t' parameter to `compilation-start', which runs the
+      ;; compilation buffer under `comint-mode' mode, so it can read
+      ;; keyboard input.
+      (projectile-run-compilation (lambda () (compile run-cmd t))))))
+
+;; Make compile-command file- and directory-local
+(make-variable-buffer-local 'compile-command)
+
+;; Class for HongMeng kernel directory style
 (dir-locals-set-class-variables 'hm-verif-kernel-directory
    '((nil . ((indent-tabs-mode . t)
          (tab-width . 8)
-         (fill-column . 80)))
- ;; Warn about spaces used for indentation:
- (c-mode . ((c-file-style . "Linux")))))
+         (fill-column . 80)
+         (compile-command . "export T=virt-hyp && export E=dev && cd .. && ./scripts/build-hm.sh")
+         (projectile-project-compilation-cmd . "export T=virt-hyp && export E=dev && cd .. && ./scripts/build-hm.sh")))
+         ;; Warn about spaces used for indentation:
+         (c-mode . ((c-file-style . "Linux")))))
 
 (dir-locals-set-directory-class
   "/home/locutus/dev/hm-grc-scripts/hm-verif-kernel" 'hm-verif-kernel-directory)
 
+;; Class for hm-grc-scripts repo
+(dir-locals-set-class-variables 'hm-grc-scripts-directory
+                                '((nil . ((indent-tabs-mode . t)
+                                          (tab-width . 8)
+                                          (fill-column . 80)
+                                          (compile-command .  "export T=virt-hyp && export E=dev && export VM_IMAGE=/home/locutus/dev/hm-grc-scripts/files/linux_virt.img && export IMAGE_ROOTFS_MANIFEST=/home/locutus/dev/lotto//src/hm-lotto/lotto.manifest && ./scripts/build-uvmm.sh && source ~/dev/hm-grc-scripts/SDK/environment-setup-aarch64-euler-elf && ~/dev/lotto/src/hm-lotto/build.sh && ./scripts/build-hm.sh")
+                                          (projectile-project-compilation-cmd .  "export T=virt-hyp && export E=dev && export VM_IMAGE=/home/locutus/dev/hm-grc-scripts/files/linux_virt.img && export IMAGE_ROOTFS_MANIFEST=/home/locutus/dev/lotto//src/hm-lotto/lotto.manifest && ./scripts/build-uvmm.sh && source ~/dev/hm-grc-scripts/SDK/environment-setup-aarch64-euler-elf && ~/dev/lotto/src/hm-lotto/build.sh && ./scripts/build-hm.sh")))
+                                  ;; Warn about spaces used for indentation:
+                                  (c-mode . ((c-file-style . "Linux")))))
+
 (dir-locals-set-directory-class
-  "/home/locutus/dev/hm-grc-scripts/hm-uvmm" 'hm-verif-kernel-directory)
+  "/home/locutus/dev/hm-grc-scripts" 'hm-grc-scripts-directory)
+
+;; Class for hm-uvmm project
+(dir-locals-set-class-variables 'hm-uvmm-directory
+                                '((nil . ((indent-tabs-mode . t)
+                                          (tab-width . 8)
+                                          (fill-column . 80)
+                                          (compile-command . "export T=virt-hyp && export E=dev && cd .. && ./scripts/build-uvmm.sh")
+                                          (projectile-project-compilation-cmd . "export T=virt-hyp && export E=dev && cd .. && ./scripts/build-uvmm.sh")))
+                                  ;; Warn about spaces used for indentation:
+                                  (c-mode . ((c-file-style . "Linux")))))
+
+(dir-locals-set-directory-class
+ "/home/locutus/dev/hm-grc-scripts/hm-uvmm" 'hm-uvmm-directory)
+
+;; Class for hm-lotto project
+(dir-locals-set-class-variables 'hm-lotto-directory
+                                '((nil . ((indent-tabs-mode . n)
+                                          (tab-width . 4)
+                                          (fill-column . 80)
+                                          (compile-command . "export T=virt-hyp && export E=dev && source ~/dev/hm-grc-scripts/SDK/environment-setup-aarch64-euler-elf && ./src/hm-lotto/build.sh")
+                                          (projectile-project-compilation-cmd . "export T=virt-hyp && export E=dev && source ~/dev/hm-grc-scripts/SDK/environment-setup-aarch64-euler-elf && ./src/hm-lotto/build.sh")))
+                                  ;; Warn about spaces used for indentation:
+                                  (c-mode . ((c-file-style . "bsd")))))
+
+(dir-locals-set-directory-class
+ "/home/locutus/dev/lotto" 'hm-lotto-directory)
+
+;; Automatically dim other windows
+(auto-dim-other-buffers-mode t)
+
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -806,7 +872,15 @@ This function is called at the very end of Spacemacs initialization."
  '(package-selected-packages
    '(company-lua lua-mode ctags-update yaml-mode emacsql-sqlite-builtin esqlite xah-fly-keys sqlite3 add-node-modules-path impatient-mode import-js grizzl js-doc js2-refactor multiple-cursors livid-mode nodejs-repl npm-mode prettier-js skewer-mode js2-mode simple-httpd tern web-beautify company-c-headers company-rtags company-ycmd cpp-auto-include disaster flycheck-rtags flycheck-ycmd gendoxy google-c-style helm-rtags rtags ycmd request-deferred ac-ispell auto-complete auto-yasnippet esh-help eshell-prompt-extras eshell-z fuzzy gh-md helm-c-yasnippet helm-company markdown-toc mmm-mode multi-term mwim shell-pop terminal-here unfill vterm xterm-color yasnippet-snippets yasnippet blacken code-cells company-anaconda anaconda-mode cython-mode helm-cscope helm-pydoc importmagic epc ctable concurrent deferred live-py-mode lsp-pyright lsp-python-ms nose pip-requirements pipenv load-env-vars pippel poetry transient py-isort pydoc pyenv-mode pythonic pylookup pytest pyvenv sphinx-doc stickyfunc-enhance xcscope yapfify cargo company counsel-gtags counsel swiper ivy dap-mode lsp-docker lsp-treemacs bui yaml lsp-mode markdown-mode flycheck-rust ggtags helm-gtags racer pos-tip ron-mode rust-mode toml-mode ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired toc-org term-cursor symon symbol-overlay string-inflection string-edit spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline-all-the-icons space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-ediff evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line))
  '(safe-local-variable-values
-   '((some-useful-setting . value)
+   '((projectile-project-compilation-cmd . "export T=virt-hyp && export E=dev && source ~/dev/hm-grc-scripts/SDK/environment-setup-aarch64-euler-elf && ./src/hm-lotto/build.sh")
+     (indent-tabs-mode . n)
+     (projectile-project-compilation-cmd . "export T=virt-hyp && export E=dev && cd .. && ./scripts/build-hm.sh")
+     (projectile-project-compilation-cmd . "export T=virt-hyp && export E=dev && cd .. && ./scripts/build-uvmm.sh")
+     (projectile-project-compilation-cmd . "export T=virt-hyp && export E=dev && export VM_IMAGE=/home/locutus/dev/hm-grc-scripts/files/linux_virt.img && export IMAGE_ROOTFS_MANIFEST=/home/locutus/dev/lotto//src/hm-lotto/lotto.manifest && ./scripts/build-uvmm.sh && source ~/dev/hm-grc-scripts/SDK/environment-setup-aarch64-euler-elf && ~/dev/lotto/src/hm-lotto/build.sh && ./scripts/build-hm.sh")
+     (projectile-project-compilation-cmd symbol-value 'hm-all-build)
+     (projectile-project-compilation-cmd . hm-all-build)
+     (projectile-project-compilation-cmd concat "export T=virt-hyp && export E=dev" " && cd .. && ./scripts/build-uvmm.sh")
+     (some-useful-setting . value)
      (javascript-backend . tide)
      (javascript-backend . tern)
      (javascript-backend . lsp))))
