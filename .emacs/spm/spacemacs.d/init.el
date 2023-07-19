@@ -791,8 +791,15 @@ because by default projectile does not."
 (global-set-key (kbd "C-x C-,") 'windmove-left)
 
 ;; Ivy completion setup
+;; Do not put caret (^ symbol) at the beginning
+(setq ivy-initial-inputs-alist nil)
+;; Ignore order in all completion
+;; ex. format clang will also result in "clang-format"
 (setq ivy-re-builders-alist
       '((t . ivy--regex-ignore-order)))
+
+;; Use counsel for search through the project
+(global-set-key (kbd "C-S-s") 'counsel-projectile-grep)
 
 )
 
