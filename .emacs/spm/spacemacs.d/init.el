@@ -790,6 +790,10 @@ because by default projectile does not."
 (global-set-key (kbd "C-x C-.") 'windmove-right)
 (global-set-key (kbd "C-x C-,") 'windmove-left)
 
+;; Ivy completion setup
+(setq ivy-re-builders-alist
+      '((t . ivy--regex-ignore-order)))
+
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
