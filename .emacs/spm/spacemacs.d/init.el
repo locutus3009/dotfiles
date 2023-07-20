@@ -9,7 +9,7 @@ This function should only modify configuration layer settings."
    ;; Base distribution to use. This is a layer contained in the directory
    ;; `+distribution'. For now available distributions are `spacemacs-base'
    ;; or `spacemacs'. (default 'spacemacs)
-   dotspacemacs-distribution 'spacemacs
+   dotspacemacs-distribution 'spacemacs-base
 
    ;; Lazy installation of layers (i.e. layers are installed only when a file
    ;; with a supported type is opened). Possible values are `all', `unused'
@@ -33,47 +33,87 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     ;; This layer does basic setup for completion frameworks like helm, ivy and ido.
+     spacemacs-completion
+
+     ;; This layer adds support for distinct layouts/workspaces to
+     ;; spacemacs-layouts
+
+     ;; This layer adds packages to improve editing with Spacemacs.
+     ;; spacemacs-editing
+
+     ;; This layer defines a lot of functions used to visually enhance the currently edited line in Spacemacs.
+     spacemacs-editing-visual
+
+     ;; This layer adds support various language related services to Spacemacs.
+     ;; spacemacs-language
+
+     ;; This layer adds some general packages into Spacemacs.
+     ;; spacemacs-misc
+
+     ;; This layer adds various mode-lines to Spacemacs.
+     ;; spacemacs-modeline
+
+     ;; This layer adds general navigation functions to all supported layers.
+     ;; spacemacs-navigation
+
+     ;; This layer tweaks org-mode to integrate nicely into Spacemacs.
+     spacemacs-org
+
+     ;; This layer enables window-purpose, which provides an alternative,
+     ;; purpose-based window manager for Emacs. With this layer, your window
+     ;; layout should be robust and shouldn't change too much when opening all sorts of buffers.
+     ;; spacemacs-purpose
+
+     ;; This layer adds various modes to enhance Spacemacs visual appearance.
+     ;; spacemacs-visual
+
+     ;; Common language server
+     ;; lsp
+
+     ;; Languages
      ;; lua
      ;; yaml
      ;; javascript
      python
-     (org :variables
-          org-enable-jira-support t
-          org-jira-working-dir "~/org/")
      rust
-     ;; ----------------------------------------------------------------
-     ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
-     ;; `M-m f e R' (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
-     auto-completion
-     better-defaults
      emacs-lisp
-     c-c++
-     git
-     ;; helm
-     (ivy :variables
-          ivy-enable-advanced-buffer-information t
-          ivy-enable-icons t)
-     ;; lsp
+     ;; c-c++
+     (c-c++ :variables
+           c-c++-backend 'lsp-ccls
+           c-c++-adopt-subprojects t
+           ;; c-c++-lsp-enable-semantic-highlight 'rainbow
+     )
      markdown
-     ;; org
+     cmake
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
+
+     ;; Other layers
+     (org :variables
+          org-enable-jira-support t
+          org-jira-working-dir "~/org/")
+     auto-completion
+     better-defaults
+     git
+     (ivy :variables
+          ivy-enable-advanced-buffer-information t
+          ivy-enable-icons t)
      spell-checking
      syntax-checking
      version-control
      ;; gtags
      treemacs
-     cmake
-     shell
      (mu4e :variables
              mu4e-use-maildirs-extension t
              mu4e-enable-async-operations nil
              mu4e-enable-notifications t
-             mu4e-enable-mode-line t))
-
+             mu4e-enable-mode-line t)
+     (spotify :variables
+              counsel-spotify-client-id "b74a8567df0848fe80497de31ba37b92"
+              counsel-spotify-client-secret "140fbd1341a44208808f79481e42365e")
+     )
 
    ;; List of additional packages that will be installed without being wrapped
    ;; in a layer (generally the packages are installed only and should still be
@@ -83,7 +123,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(gitlab sqlite3 auto-dim-other-buffers multiple-cursors)
+   dotspacemacs-additional-packages '(gitlab sqlite3 auto-dim-other-buffers multiple-cursors smartparens elisp-format)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -217,8 +257,7 @@ It should only modify the values of Spacemacs settings."
    ;; number is the project limit and the second the limit on the recent files
    ;; within a project.
    dotspacemacs-startup-lists '((recents . 5)
-                                ;; (projects . 5)
-                                (recents-by-project . (5 .  5))
+                                (recents-by-project . (5 .  3))
                                 (bookmarks . 5)
                                 (agenda . 5)
                                 (todos . 5))
@@ -594,212 +633,8 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-;(setq epa-pinentry-mode 'loopback)
 
-;; SMTP settings:
-(setq send-mail-function 'smtpmail-send-it)    ; should not be modified
-(setq smtpmail-smtp-server "pop.huawei.com") ; host running SMTP server
-(setq smtpmail-smtp-service 25)               ; SMTP service port number
-(setq smtpmail-stream-type 'plain)          ; type of SMTP connections to use
-(setq smtpmail-smtp-user "n00834167")
-;(setq smtpmail-auth-credentials (expand-file-name "~/.authinfo.gpg"))
-(setq user-mail-address "nikolay.nerovnyy@huawei.com")
-
-;; Mail folders:
-(setq mu4e-drafts-folder "/Drafts")
-(setq mu4e-sent-folder   "/Sent Items")
-(setq mu4e-trash-folder  "/Trash")
-
-;; The command used to get your emails (adapt this line, see section 2.3):
-(setq mu4e-get-mail-command "mbsync --config ~/.config/.mbsyncrc work")
-;; Further customization:
-(setq mu4e-html2text-command "w3m -T text/html" ; how to hanfle html-formatted emails
-      mu4e-update-interval 300                  ; seconds between each mail retrieval
-      mu4e-headers-auto-update t                ; avoid to type `g' to update
-      mu4e-view-show-images t                   ; show images in the view buffer
-      mu4e-compose-signature-auto-include nil   ; I don't want a message signature
-      mu4e-use-fancy-chars t)                   ; allow fancy icons for mail threads
-
-(setq gitlab-host "https://rnd-gitlab-eu-c.huawei.com"
-      gitlab-token-id "nvKAC85y-nujqM6F8-Gy")
-
-;; Sequences of keywords used in org-mode
-(setq org-todo-keywords
-      (quote ((sequence "TODO(t)" "NEXT(n)" "IN_REVIEW(r)" "|" "DONE(d)")
-              (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE" "MEETING"))))
-
-;; Set colors for org-mode keywords
-(setq org-todo-keyword-faces
-      (quote (("TODO" :foreground "red" :weight bold)
-              ("NEXT" :foreground "blue" :weight bold)
-              ("DONE" :foreground "green" :weight bold)
-              ("WAITING" :foreground "orange" :weight bold)
-              ("HOLD" :foreground "magenta" :weight bold)
-              ("CANCELLED" :foreground "yellow" :weight bold)
-              ("MEETING" :foreground "yellow" :weight bold)
-              ("PHONE" :foreground "yellow" :weight bold)
-              ("IN_REVIEW" :foreground "orange" :weight bold))))
-
-;; Set follow rules
-(setq org-todo-state-tags-triggers
-      (quote (("CANCELLED" ("CANCELLED" . t))
-              ("WAITING" ("WAITING" . t))
-              ("HOLD" ("WAITING") ("HOLD" . t))
-              (done ("WAITING") ("HOLD"))
-              ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
-              ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
-              ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
-
-;; Follow mode
-(add-hook 'org-agenda-mode-hook #'org-agenda-follow-mode)
-
-;; Define the custum capture templates
-(setq org-capture-templates
-       '(("t" "todo" entry (file org-default-notes-file)
-          "* TODO %?\n%u\n%a\n" :clock-in t :clock-resume t)
-         ("m" "Meeting" entry (file org-default-notes-file)
-          "* MEETING with %? :MEETING:\n%t\n%a\n" :clock-in t :clock-resume t)
-         ("j" "Journal" entry (file+datetree "~/org/journal.org")
-          "* %? :JOURNAL:\n%t\n%U\n%i\n%a\n" :clock-in t :clock-resume t)
-         ("i" "Idea" entry (file org-default-notes-file)
-          "* %? :IDEA:\n%t\n%a\n" :clock-in t :clock-resume t)
-         ("n" "Next Task" entry (file+headline org-default-notes-file "Tasks")
-          "** NEXT %? \nDEADLINE: %t") ))
-(setq org-refile-targets (quote ((nil :maxlevel . 9)
-                                 (org-agenda-files :maxlevel . 9))))
-(setq org-agenda-start-on-weekday 1)
-(setq calendar-week-start-day 1)
-(require 'epa-file)
-(epa-file-enable)
-(require 'org-tempo)
-
-;; Tabulation to stop by default
-(global-set-key (kbd "TAB") `tab-to-tab-stop)
-
-;; Disable non-natural cursor movement
-(global-unset-key (kbd "<left>"))
-(global-unset-key (kbd "<right>"))
-(global-unset-key (kbd "<up>"))
-(global-unset-key (kbd "<down>"))
-(global-unset-key (kbd "<C-left>"))
-(global-unset-key (kbd "<C-right>"))
-(global-unset-key (kbd "<C-up>"))
-(global-unset-key (kbd "<C-down>"))
-(global-unset-key (kbd "<M-left>"))
-(global-unset-key (kbd "<M-right>"))
-(global-unset-key (kbd "<M-up>"))
-(global-unset-key (kbd "<M-down>"))
-(global-unset-key (kbd "<prior>"))
-(global-unset-key (kbd "<next>"))
-(global-unset-key (kbd "<deletechar>"))
-(global-unset-key (kbd "<C-delete>"))
-(global-unset-key (kbd "<home>"))
-(global-unset-key (kbd "<end>"))
-
-;; Strip mouse usage
-(global-unset-key (kbd "<mouse-2>"))
-(global-unset-key (kbd "<mouse-3>"))
-
-;; Multiple cursors
-(global-set-key (kbd "C-M->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-M-<") 'mc/mark-previous-like-this)
-;; (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
-
-;; Follow the end of compilation output
-(setq compilation-scroll-output t)
-
-;; Tune projectile to compile & run interactively
-(defun my/projectile-run (arg &optional dir)
-  "Run a projectile project passing t to `compile'
-because by default projectile does not."
-  (interactive "P")
-  (when (projectile-project-p)
-    (let* ((project-root (projectile-project-root))
-           (default-run-cmd (projectile-run-command project-root))
-           (run-cmd (projectile-maybe-read-command arg default-run-cmd "Run command: "))
-           (default-directory project-root))
-      (puthash project-root run-cmd projectile-run-cmd-map)
-      ;; Pass a lambda to projectile-run-compilation so that we can add
-      ;; the `t' parameter to `compilation-start', which runs the
-      ;; compilation buffer under `comint-mode' mode, so it can read
-      ;; keyboard input.
-      (projectile-run-compilation (lambda () (compile run-cmd t))))))
-
-;; Make compile-command file- and directory-local
-(make-variable-buffer-local 'compile-command)
-
-;; Class for HongMeng kernel directory style
-(dir-locals-set-class-variables 'hm-verif-kernel-directory
-   '((nil . ((indent-tabs-mode . t)
-         (tab-width . 8)
-         (fill-column . 80)
-         (compile-command . "export T=virt-hyp && export E=dev && cd .. && ./scripts/build-hm.sh")
-         (projectile-project-compilation-cmd . "export T=virt-hyp && export E=dev && cd .. && ./scripts/build-hm.sh")))
-         ;; Warn about spaces used for indentation:
-         (c-mode . ((c-file-style . "Linux")))))
-
-(dir-locals-set-directory-class
-  "/home/locutus/dev/hm-grc-scripts/hm-verif-kernel" 'hm-verif-kernel-directory)
-
-;; Class for hm-grc-scripts repo
-(dir-locals-set-class-variables 'hm-grc-scripts-directory
-                                '((nil . ((indent-tabs-mode . t)
-                                          (tab-width . 8)
-                                          (fill-column . 80)
-                                          (projectile-project-run-cmd . "export T=virt-hyp && export E=dev && export VM_IMAGE=/home/locutus/dev/hm-grc-scripts/files/linux_virt.img && export IMAGE_ROOTFS_MANIFEST=/home/locutus/dev/lotto//src/hm-lotto/lotto.manifest && ./scripts/run-hm.sh")
-                                          (compile-command .  "export T=virt-hyp && export E=dev && export VM_IMAGE=/home/locutus/dev/hm-grc-scripts/files/linux_virt.img && export IMAGE_ROOTFS_MANIFEST=/home/locutus/dev/lotto//src/hm-lotto/lotto.manifest && ./scripts/build-uvmm.sh && source ~/dev/hm-grc-scripts/SDK/environment-setup-aarch64-euler-elf && ~/dev/lotto/src/hm-lotto/build.sh && ./scripts/build-hm.sh")
-                                          (projectile-project-compilation-cmd .  "export T=virt-hyp && export E=dev && export VM_IMAGE=/home/locutus/dev/hm-grc-scripts/files/linux_virt.img && export IMAGE_ROOTFS_MANIFEST=/home/locutus/dev/lotto//src/hm-lotto/lotto.manifest && ./scripts/build-uvmm.sh && source ~/dev/hm-grc-scripts/SDK/environment-setup-aarch64-euler-elf && ~/dev/lotto/src/hm-lotto/build.sh && ./scripts/build-hm.sh")))
-                                  ;; Warn about spaces used for indentation:
-                                  (c-mode . ((c-file-style . "Linux")))))
-
-(dir-locals-set-directory-class
-  "/home/locutus/dev/hm-grc-scripts" 'hm-grc-scripts-directory)
-
-;; Class for hm-uvmm project
-(dir-locals-set-class-variables 'hm-uvmm-directory
-                                '((nil . ((indent-tabs-mode . t)
-                                          (tab-width . 8)
-                                          (fill-column . 80)
-                                          (compile-command . "export T=virt-hyp && export E=dev && cd .. && ./scripts/build-uvmm.sh")
-                                          (projectile-project-compilation-cmd . "export T=virt-hyp && export E=dev && cd .. && ./scripts/build-uvmm.sh")))
-                                  ;; Warn about spaces used for indentation:
-                                  (c-mode . ((c-file-style . "Linux")))))
-
-(dir-locals-set-directory-class
- "/home/locutus/dev/hm-grc-scripts/hm-uvmm" 'hm-uvmm-directory)
-
-;; Class for hm-lotto project
-(dir-locals-set-class-variables 'hm-lotto-directory
-                                '((nil . ((indent-tabs-mode . nil)
-                                          (tab-width . 4)
-                                          (fill-column . 80)
-                                          (compile-command . "export T=virt-hyp && export E=dev && source ~/dev/hm-grc-scripts/SDK/environment-setup-aarch64-euler-elf && ./src/hm-lotto/build.sh")
-                                          (projectile-project-compilation-cmd . "export T=virt-hyp && export E=dev && source ~/dev/hm-grc-scripts/SDK/environment-setup-aarch64-euler-elf && ./src/hm-lotto/build.sh")))
-                                  ;; Warn about spaces used for indentation:
-                                  (c-mode . ((c-file-style . "bsd")))))
-
-(dir-locals-set-directory-class
- "/home/locutus/dev/lotto" 'hm-lotto-directory)
-
-;; Automatically dim other windows
-(auto-dim-other-buffers-mode t)
-
-;; Movement between windows
-(global-set-key (kbd "C-x C-p") 'windmove-up)
-(global-set-key (kbd "C-x C-n") 'windmove-down)
-(global-set-key (kbd "C-x C-.") 'windmove-right)
-(global-set-key (kbd "C-x C-,") 'windmove-left)
-
-;; Ivy completion setup
-;; Do not put caret (^ symbol) at the beginning
-(setq ivy-initial-inputs-alist nil)
-;; Ignore order in all completion
-;; ex. format clang will also result in "clang-format"
-(setq ivy-re-builders-alist
-      '((t . ivy--regex-ignore-order)))
-
-;; Use counsel for search through the project
-(global-set-key (kbd "C-S-s") 'counsel-projectile-grep)
+(load-file "~/.emacs/common/main.el")
 
 )
 
@@ -902,7 +737,8 @@ This function is called at the very end of Spacemacs initialization."
  '(package-selected-packages
    '(company-lua lua-mode ctags-update yaml-mode emacsql-sqlite-builtin esqlite xah-fly-keys sqlite3 add-node-modules-path impatient-mode import-js grizzl js-doc js2-refactor multiple-cursors livid-mode nodejs-repl npm-mode prettier-js skewer-mode js2-mode simple-httpd tern web-beautify company-c-headers company-rtags company-ycmd cpp-auto-include disaster flycheck-rtags flycheck-ycmd gendoxy google-c-style helm-rtags rtags ycmd request-deferred ac-ispell auto-complete auto-yasnippet esh-help eshell-prompt-extras eshell-z fuzzy gh-md helm-c-yasnippet helm-company markdown-toc mmm-mode multi-term mwim shell-pop terminal-here unfill vterm xterm-color yasnippet-snippets yasnippet blacken code-cells company-anaconda anaconda-mode cython-mode helm-cscope helm-pydoc importmagic epc ctable concurrent deferred live-py-mode lsp-pyright lsp-python-ms nose pip-requirements pipenv load-env-vars pippel poetry transient py-isort pydoc pyenv-mode pythonic pylookup pytest pyvenv sphinx-doc stickyfunc-enhance xcscope yapfify cargo company counsel-gtags counsel swiper ivy dap-mode lsp-docker lsp-treemacs bui yaml lsp-mode markdown-mode flycheck-rust ggtags helm-gtags racer pos-tip ron-mode rust-mode toml-mode ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired toc-org term-cursor symon symbol-overlay string-inflection string-edit spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline-all-the-icons space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-ediff evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line))
  '(safe-local-variable-values
-   '((projectile-project-compilation-cmd . "export T=virt-hyp && export E=dev && source ~/dev/hm-grc-scripts/SDK/environment-setup-aarch64-euler-elf && ./src/hm-lotto/build.sh")
+   '((projectile-project-run-cmd . "export T=virt-hyp && export E=dev && export VM_IMAGE=/home/locutus/dev/hm-grc-scripts/files/linux_virt.img && export IMAGE_ROOTFS_MANIFEST=/home/locutus/dev/lotto//src/hm-lotto/lotto.manifest && ./scripts/run-hm.sh")
+     (projectile-project-compilation-cmd . "export T=virt-hyp && export E=dev && source ~/dev/hm-grc-scripts/SDK/environment-setup-aarch64-euler-elf && ./src/hm-lotto/build.sh")
      (indent-tabs-mode . n)
      (projectile-project-compilation-cmd . "export T=virt-hyp && export E=dev && cd .. && ./scripts/build-hm.sh")
      (projectile-project-compilation-cmd . "export T=virt-hyp && export E=dev && cd .. && ./scripts/build-uvmm.sh")
