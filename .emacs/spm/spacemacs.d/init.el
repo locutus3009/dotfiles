@@ -634,7 +634,7 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
-(load-file "~/.emacs/common/main.el")
+(load-file "~/.emacs/common/common.el")
 
 )
 
