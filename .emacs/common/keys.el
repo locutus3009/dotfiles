@@ -25,16 +25,8 @@
 (global-unset-key (kbd "<mouse-2>"))
 (global-unset-key (kbd "<mouse-3>"))
 
-;; Multiple cursors
-(global-set-key (kbd "C-M->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-M-<") 'mc/mark-previous-like-this)
-;; (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
-
 ;; Movement between windows
 (global-set-key (kbd "C-x C-p") 'windmove-up)
 (global-set-key (kbd "C-x C-n") 'windmove-down)
 (global-set-key (kbd "C-x C-.") 'windmove-right)
 (global-set-key (kbd "C-x C-,") 'windmove-left)
-
-;; Use counsel for search through the project
-(global-set-key (kbd "C-S-s") 'counsel-projectile-grep)

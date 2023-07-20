@@ -38,3 +38,6 @@ minicom.log
 .yEd/**
 .zotero/**
 .emacs/spm/spacemacs.d/.spacemacs.env
+.notes
+.emacs/common/packages.el
+.emacs/my/smex-items

@@ -75,8 +75,8 @@ This function should only modify configuration layer settings."
      ;; lua
      ;; yaml
      ;; javascript
-     python
-     rust
+     ;; python
+     ;; rust
      emacs-lisp
      ;; c-c++
      (c-c++ :variables
@@ -84,8 +84,8 @@ This function should only modify configuration layer settings."
            c-c++-adopt-subprojects t
            ;; c-c++-lsp-enable-semantic-highlight 'rainbow
      )
-     markdown
-     cmake
+     ;; markdown
+     ;; cmake
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
@@ -103,16 +103,15 @@ This function should only modify configuration layer settings."
      spell-checking
      syntax-checking
      version-control
-     ;; gtags
      treemacs
      (mu4e :variables
              mu4e-use-maildirs-extension t
              mu4e-enable-async-operations nil
              mu4e-enable-notifications t
              mu4e-enable-mode-line t)
-     (spotify :variables
-              counsel-spotify-client-id "b74a8567df0848fe80497de31ba37b92"
-              counsel-spotify-client-secret "140fbd1341a44208808f79481e42365e")
+     ;; (spotify :variables
+     ;;          counsel-spotify-client-id "b74a8567df0848fe80497de31ba37b92"
+     ;;          counsel-spotify-client-secret "140fbd1341a44208808f79481e42365e")
      )
 
    ;; List of additional packages that will be installed without being wrapped
@@ -123,7 +122,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(gitlab sqlite3 auto-dim-other-buffers multiple-cursors smartparens elisp-format)
+   dotspacemacs-additional-packages '(gitlab sqlite3 auto-dim-other-buffers multiple-cursors smartparens elisp-format counsel-projectile)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()

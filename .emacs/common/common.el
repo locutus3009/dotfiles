@@ -6,6 +6,14 @@
 (load-file "~/.emacs/common/projects/hm-verif-kernel.el")
 (load-file "~/.emacs/common/projects/hm-grc-scripts.el")
 
+;; Multiple cursors
+(global-set-key (kbd "C-M->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-M-<") 'mc/mark-previous-like-this)
+;; (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+;; Use counsel for search through the project
+(global-set-key (kbd "C-S-s") 'counsel-projectile-grep)
+
 ;; (setq epa-pinentry-mode 'loopback)
 
 ;; Fine tune smartparens package
