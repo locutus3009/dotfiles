@@ -41,3 +41,5 @@ minicom.log
 .notes
 .emacs/common/packages.el
 .emacs/my/smex-items
+/.emacs/my/places
+.em
