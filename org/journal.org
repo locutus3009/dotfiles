@@ -197,6 +197,21 @@ CLOCK: [2023-07-20 Thu 18:05]--[2023-07-20 Thu 18:05] =>  0:00
 [2023-07-20 Thu 18:05]
 
 [[file:~/org/dev.org::*Integration of Raspberry PI into Duck CI][Integration of Raspberry PI into Duck CI]]
+
+*** 2023-07-21 Friday
+**** Migrate to Vanilla emacs                                       :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-07-21 Fri 17:01]--[2023-07-21 Fri 17:02] =>  0:01
+:END:
+<2023-07-21 Fri>
+[2023-07-21 Fri 17:01]
+
+Today I have finally migrated to vanilla Emacs with some additional packages.
+My productivity was heavily boosted and I like my new experience.
+This helped me with my procrastination a lot, I have wrote several
+useful pieces of important projects, though not so many yet.
+
+No I will stop to configure my editor and focus on my primary goals.
 * Turn on device
 #+BEGIN_SRC bash
 ./USBswitchCmd 1

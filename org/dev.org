@@ -661,7 +661,7 @@ CLOCK: [2023-07-11 Tue 10:47]--[2023-07-11 Tue 10:47] =>  0:00
 :END:
 [2023-07-11 Tue]
 *** IN_REVIEW RME: first pitch presentation
-SCHEDULED: <2023-07-12 Wed>
+SCHEDULED: <2023-07-24 Mon>
 :LOGBOOK:
 CLOCK: [2023-07-11 Tue 10:47]--[2023-07-11 Tue 10:47] =>  0:00
 :END:
@@ -801,28 +801,28 @@ CLOCK: [2023-07-14 Fri 11:51]--[2023-07-14 Fri 11:51] =>  0:00
 [[./img/rme/images_realm-context-switching_NEW.png]]
 
 [[https://developer.arm.com/documentation/den0127/0200/Realm-management/Realm-context-switching][ARM docs]]
-** NEXT hm-lotto: implement Tony's idea
+** DONE hm-lotto: implement Tony's idea
 SCHEDULED: <2023-07-21 Fri>
 :LOGBOOK:
 CLOCK: [2023-07-18 Tue 15:35]--[2023-07-18 Tue 15:36] =>  0:01
 :END:
 [2023-07-18 Tue]
 *** IN_REVIEW hm-lotto: support sync event
-SCHEDULED: <2023-07-19 Wed>
+SCHEDULED: <2023-07-24 Mon>
 :LOGBOOK:
 CLOCK: [2023-07-18 Tue 15:37]--[2023-07-18 Tue 15:37] =>  0:00
 :END:
 [2023-07-18 Tue]
 [[file:~/org/dev.org::*hm-lotto: implement Tony's idea][hm-lotto: implement Tony's idea]]
 *** NEXT hm-lotto: support vCPU creation
-SCHEDULED: <2023-07-20 Thu>
+SCHEDULED: <2023-07-25 Tue>
 :LOGBOOK:
 CLOCK: [2023-07-18 Tue 15:38]--[2023-07-18 Tue 15:38] =>  0:00
 :END:
 [2023-07-18 Tue]
 [[file:~/org/dev.org::*hm-lotto: implement Tony's idea][hm-lotto: implement Tony's idea]]
 *** NEXT hm-lotto: support vcpu destruction
-SCHEDULED: <2023-07-20 Thu>
+SCHEDULED: <2023-07-24 Mon>
 :LOGBOOK:
 CLOCK: [2023-07-18 Tue 15:38]--[2023-07-18 Tue 15:38] =>  0:00
 :END:

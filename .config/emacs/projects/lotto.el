@@ -2,6 +2,7 @@
 (dir-locals-set-class-variables 'hm-lotto-directory '((nil . ((indent-tabs-mode . nil)
                                                               (tab-width . 4)
                                                               (fill-column . 80)
+							      ;; (add-to-list 'lsp-clients-clangd-args "--compile-commands-dir=./build" "--query-driver=/**/bin/aarch64-euler-elf-*")
                                                               (compile-command .
                                                                                "export T=virt-hyp && export E=dev && source ~/dev/hm-grc-scripts/SDK/environment-setup-aarch64-euler-elf && ./src/hm-lotto/build.sh")
                                                               (projectile-project-compilation-cmd .
