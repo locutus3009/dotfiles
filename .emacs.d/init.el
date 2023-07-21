@@ -327,11 +327,11 @@
 	mu4e-use-fancy-chars t)	  ; allow fancy icons for mail threads
   )
 
-(load-file "~/.emacs/keys.el")
-(load-file "~/.emacs/projects/lotto.el")
-(load-file "~/.emacs/projects/hm-uvmm.el")
-(load-file "~/.emacs/projects/hm-verif-kernel.el")
-(load-file "~/.emacs/projects/hm-grc-scripts.el")
+(load-file "~/.config/emacs/keys.el")
+(load-file "~/.config/emacs/projects/lotto.el")
+(load-file "~/.config/emacs/projects/hm-uvmm.el")
+(load-file "~/.config/emacs/projects/hm-verif-kernel.el")
+(load-file "~/.config/emacs/projects/hm-grc-scripts.el")
 
 ;; (use-package
 ;;   gitlab

@@ -14,7 +14,11 @@ minicom.log
 .android/**
 .cache/**
 .cargo/**
-.config/**
+
+!.config/
+.config/*
+!.config/emacs/
+
 .config.old/**
 .emacs.d.save/**
 .doom.d/**
