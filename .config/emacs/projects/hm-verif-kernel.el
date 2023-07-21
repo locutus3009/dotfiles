@@ -1,4 +1,8 @@
-;; Class for HongMeng kernel directory style
+;;; my/projects/hm-verif-kernel --- Class for HongMeng kernel directory style
+;;; Commentary:
+;;; none
+
+;;; Code:
 (dir-locals-set-class-variables 'hm-verif-kernel-directory '((nil . ((indent-tabs-mode . t)
                                                                      (tab-width . 8)
                                                                      (fill-column . 80)
@@ -14,3 +18,5 @@
 
 (dir-locals-set-directory-class "/home/locutus/dev/hm-grc-scripts/hm-verif-kernel"
                                 'hm-verif-kernel-directory)
+
+;;; hm-verif-kernel.el ends here

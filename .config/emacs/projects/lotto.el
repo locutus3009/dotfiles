@@ -1,4 +1,8 @@
-;; Class for hm-lotto project
+;;; my/projects/hm-lotto --- Class for hm-lotto project
+;;; Commentary:
+;;; none
+
+;;; Code:
 (dir-locals-set-class-variables 'hm-lotto-directory '((nil . ((indent-tabs-mode . nil)
                                                               (tab-width . 4)
                                                               (fill-column . 80)
@@ -12,3 +16,5 @@
                                                       (c-mode . ((c-file-style . "bsd")))))
 
 (dir-locals-set-directory-class "/home/locutus/dev/lotto" 'hm-lotto-directory)
+
+;;; lotto.el ends here

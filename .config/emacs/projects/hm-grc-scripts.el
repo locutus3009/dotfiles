@@ -1,4 +1,8 @@
-;; Class for hm-grc-scripts repo
+;;; my/projects/hm-grc-scripts --- Class for hm-grc-scripts repo
+;;; Commentary:
+;;; none
+
+;;; Code:
 (dir-locals-set-class-variables 'hm-grc-scripts-directory '((nil . ((indent-tabs-mode . t)
                                                                     (tab-width . 8)
                                                                     (fill-column . 80)
@@ -15,3 +19,5 @@
                                                                                       lsp-clangd)))))
 
 (dir-locals-set-directory-class "/home/locutus/dev/hm-grc-scripts" 'hm-grc-scripts-directory)
+
+;;; hm-grc-scripts.el ends here
