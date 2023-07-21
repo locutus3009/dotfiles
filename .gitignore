@@ -37,9 +37,7 @@ minicom.log
 .thunderbird/**
 .yEd/**
 .zotero/**
-.emacs/spm/spacemacs.d/.spacemacs.env
 .notes
-.emacs/common/packages.el
-.emacs/my/smex-items
-/.emacs/my/places
+.emacs.d/smex-items
+.emacs.d/places
 .em

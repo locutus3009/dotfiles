@@ -17,7 +17,7 @@
 (save-place-mode 1)
 
 ;; Do not use `init.el` for `custom-*` code - use `custom-file.el`.
-(setq custom-file "~/.emacs/my/custom-file.el")
+(setq custom-file "~/.emacs.d/custom-file.el")
 
 ;; Assuming that the code in custom-file is execute before the code
 ;; ahead of this line is not a safe assumption. So load this file
@@ -327,11 +327,11 @@
 	mu4e-use-fancy-chars t)	  ; allow fancy icons for mail threads
   )
 
-(load-file "~/.emacs/common/keys.el")
-(load-file "~/.emacs/common/projects/lotto.el")
-(load-file "~/.emacs/common/projects/hm-uvmm.el")
-(load-file "~/.emacs/common/projects/hm-verif-kernel.el")
-(load-file "~/.emacs/common/projects/hm-grc-scripts.el")
+(load-file "~/.emacs/keys.el")
+(load-file "~/.emacs/projects/lotto.el")
+(load-file "~/.emacs/projects/hm-uvmm.el")
+(load-file "~/.emacs/projects/hm-verif-kernel.el")
+(load-file "~/.emacs/projects/hm-grc-scripts.el")
 
 ;; (use-package
 ;;   gitlab
