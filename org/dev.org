@@ -122,6 +122,16 @@ CLOCK: [2023-04-28 Fri 13:34]--[2023-04-28 Fri 13:35] =>  0:01
 Address: 10.206.133.88
 Netmask: 255.255.255.0
 MAC: d8:3a:dd:06:b4:ff
+**** Correct IP address                                             :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-07-24 Mon 14:34]--[2023-07-24 Mon 14:34] =>  0:00
+:END:
+<2023-07-24 Mon>
+[2023-07-24 Mon 14:34]
+
+[[file:~/dev/duck/scripts/rpi4b/screen_cleware.exp::send "setenv ipaddr 10.206.133.101\r"]]
+
+10.206.133.101
 *** CANCELLED Contact some guy regarding a static IP for RPI4b    :CANCELLED:
 CLOSED: [2023-05-04 Thu 09:53] SCHEDULED: <2023-05-02 Tue>
 - State "CANCELLED"  from "DONE"       [2023-05-04 Thu 09:53] \\
@@ -141,6 +151,20 @@ CLOCK: [2023-07-24 Mon 11:22]--[2023-07-24 Mon 11:22] =>  0:00
 [2023-07-24 Mon 11:22]
 
 [[file:~/org/dev.org::*Integration of Raspberry PI into Duck CI][Integration of Raspberry PI into Duck CI]]
+*** Problem with network bootup on rpi4b                            :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-07-24 Mon 17:51]--[2023-07-24 Mon 17:52] =>  0:01
+:END:
+<2023-07-24 Mon>
+[2023-07-24 Mon 17:51]
+
+[[file:~/org/dev.org::*Integration of Raspberry PI into Duck CI][Integration of Raspberry PI into Duck CI]]
+
+Sometimes it takes too long to establish network,
+sometimes it never ups,
+sometimes it works just fine.
+
+I don't know the reason yet -- need to fix.
 ** DONE Support LOTTO for el2                                         :lotto:
 CLOSED: [2023-07-10 Mon 09:47] SCHEDULED: <2023-09-30 Sat>
 :LOGBOOK:
