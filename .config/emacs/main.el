@@ -25,6 +25,14 @@
 ;; Follow the end of compilation output
 (setq compilation-scroll-output t)
 
+;; define function to shutdown emacs server instance
+(defun server-shutdown ()
+  "Save buffers, Quit, and Shutdown (kill) server"
+  (interactive)
+  (save-some-buffers)
+  (kill-emacs)
+  )
+
 ;; Do not use `init.el` for `custom-*` code - use `custom-file.el`.
 (setq custom-file "~/.emacs.d/custom-file.el")
 
@@ -38,3 +46,10 @@
 (package-initialize)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (require 'use-package)
+
+;; Use pinentry to type passwords
+(use-package pinentry
+  :ensure t
+  :init
+  (setq epg-pinentry-mode 'loopback)
+  (pinentry-start))

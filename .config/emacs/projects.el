@@ -46,4 +46,4 @@ because by default projectile does not."
 (load-file "~/.config/emacs/projects/hm-uvmm.el")
 (load-file "~/.config/emacs/projects/hm-verif-kernel.el")
 (load-file "~/.config/emacs/projects/hm-grc-scripts.el")
-
+(load-file "~/.config/emacs/projects/duck.el")
