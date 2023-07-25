@@ -20,4 +20,5 @@
   (setq dashboard-set-navigator t)
   (setq dashboard-set-init-info t)
   (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name)
-  (setq dashboard-projects-backend 'projectile))
+  (setq dashboard-projects-backend 'projectile)
+  (dashboard-refresh-buffer))

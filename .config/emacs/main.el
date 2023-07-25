@@ -33,6 +33,9 @@
   (kill-emacs)
   )
 
+;; Start as server
+(server-start)
+
 ;; Do not use `init.el` for `custom-*` code - use `custom-file.el`.
 (setq custom-file "~/.emacs.d/custom-file.el")
 
