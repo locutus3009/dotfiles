@@ -33,6 +33,9 @@
   (kill-emacs)
   )
 
+;; Store authentification data in external file
+(setq auth-sources '("~/.authinfo.gpg"))
+
 ;; Start as server
 (server-start)
 

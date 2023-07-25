@@ -4,12 +4,26 @@
   :ensure t
   :bind ("C-x g" . magit-status))
 
+;; SQlite3 is needed by forge
+(use-package sqlite3
+  :ensure t)
+
+;; Magit-forge allows to connect to gitlab
+(use-package forge
+  :ensure t
+  :after magit sqlite3
+  :config
+  (add-to-list 'forge-alist '("rnd-gitlab-eu-c.huawei.com" "rnd-gitlab-eu-c.huawei.com/api/v4" "rnd-gitlab-eu-c.huawei.com" forge-gitlab-repository))
+  (add-to-list 'forge-owned-accounts '(("n00834167"))))
+
 (use-package
   projectile
   :ensure t
   :config (projectile-mode +1)
   ;; Recommended keymap prefix on Windows/Linux
   (define-key projectile-mode-map (kbd "M-m p") 'projectile-command-map)
+  (setq projectile-run-use-comint-mode t)
+  (setq projectile-compile-use-comint-mode t)
   (setq projectile-project-search-path '("~/dev" ("~/dev/hm-grc-scripts" . 2))))
 
 ;; Tune projectile to compile & run interactively
@@ -32,14 +46,6 @@ because by default projectile does not."
 
 ;; Make compile-command file- and directory-local
 (make-variable-buffer-local 'compile-command)
-
-;; (use-package
-;;   gitlab
-;; :ensure t
-;; :config
-;; ;; GitLab
-;; (setq gitlab-host "https://rnd-gitlab-eu-c.huawei.com" gitlab-token-id "nvKAC85y-nujqM6F8-Gy")
-;; )
 
 ;; Projects
 (load-file "~/.config/emacs/projects/lotto.el")

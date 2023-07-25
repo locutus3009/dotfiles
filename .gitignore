@@ -46,3 +46,5 @@ minicom.log
 .emacs.d/places
 .em
 /.minirc.dfl
+/.authinfo.gpg
+/.authinfo.gpg~
