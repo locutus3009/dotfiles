@@ -51,6 +51,9 @@
   ;; Follow mode
   (add-hook 'org-agenda-mode-hook #'org-agenda-follow-mode)
 
+  ;; Default notes file
+  (setq org-default-notes-file "~/org/notes.org")
+
   ;; Define the custum capture templates
   (setq org-capture-templates '(("t" "todo" entry (file org-default-notes-file)
 				 "* TODO %?\n%u\n%a\n"

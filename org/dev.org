@@ -14,7 +14,7 @@ CLOSED: [2023-04-19 Wed 16:31] SCHEDULED: <2023-04-21 Fri>
 CLOCK: [2023-04-19 Wed 10:26]--[2023-04-19 Wed 10:27] =>  0:01
 :END:
 [2023-04-19 Wed]
-** IN_REVIEW Integration of Raspberry PI into Duck CI
+** DONE Integration of Raspberry PI into Duck CI
 SCHEDULED: <2023-04-24 Mon>
 После этого можно перейти к обсуждению большого задания на probation period.
 SCHEDULED: <2023-04-26 Wed>
@@ -36,7 +36,21 @@ CLOCK: [2023-04-20 Thu 11:29]--[2023-04-20 Thu 11:29] =>  0:00
 :END:
 [2023-04-20 Thu]
 [[file:~/org/dev.org::*Integration of Raspberry PI into Duck CI][Integration of Raspberry PI into Duck CI]]
-*** NEXT Install hardware in the server room
+*** WAITING Install rpi4b and nuc2 hardware in the server room      :WAITING:
+- State "WAITING"    from "NEXT"       [2023-07-25 Tue 13:51] \\
+  Need to wait for move of servers to Munich to make some room.
+
+  #+begin_quote
+  Nikolay Nerovnyy(00834167) 2023-07-25 11:40
+  No success as no available slots for me for both ethernet and power)
+  I think I will weit for some time because it looks like I need a help onsite
+
+  zhangyue(00588761) 2023-07-25 11:43
+  we need to move some servers to Munich to make some room
+
+  Nikolay Nerovnyy(00834167) 2023-07-25 11:43
+  OK
+  #+end_quote>
 - State "NEXT"       from "HOLD"       [2023-05-04 Thu 09:53]
 - State "HOLD"       from "NEXT"       [2023-04-28 Fri 13:53] \\
   Waiting for static IP approval, after this we may state a migration
@@ -530,8 +544,9 @@ CLOCK: [2023-05-12 Fri 16:18]--[2023-05-12 Fri 16:18] =>  0:00
 :END:
 [2023-05-12 Fri]
 [[file:~/org/dev.org::*Integrate lotto with lotto VM][Integrate lotto with lotto VM]]
-*** TODO Run HM as a guest VM together with lotto VM
+*** NEXT Run HM as a guest VM together with lotto VM
 SCHEDULED: <2023-07-31 Mon>
+- State "NEXT"       from "WAITING"    [2023-07-25 Tue 13:51]
 :LOGBOOK:
 CLOCK: [2023-05-12 Fri 16:19]--[2023-05-12 Fri 16:20] =>  0:01
 :END:
@@ -689,12 +704,13 @@ CLOCK: [2023-07-10 Mon 09:45]--[2023-07-10 Mon 09:45] =>  0:00
 [2023-07-10 Mon]
 [[file:~/org/dev.org::*Implement a simple livepatch for kernel and/or userspace][Implement a simple livepatch for kernel and/or userspace]]
 ** NEXT RME proposal
+SCHEDULED: <2023-08-04 Fri>
 :LOGBOOK:
 CLOCK: [2023-07-11 Tue 10:47]--[2023-07-11 Tue 10:47] =>  0:00
 :END:
 [2023-07-11 Tue]
-*** IN_REVIEW RME: first pitch presentation
-SCHEDULED: <2023-07-24 Mon>
+*** DONE RME: first pitch presentation
+SCHEDULED: <2023-07-27 Thu>
 :LOGBOOK:
 CLOCK: [2023-07-11 Tue 10:47]--[2023-07-11 Tue 10:47] =>  0:00
 :END:
@@ -834,6 +850,42 @@ CLOCK: [2023-07-14 Fri 11:51]--[2023-07-14 Fri 11:51] =>  0:00
 [[./img/rme/images_realm-context-switching_NEW.png]]
 
 [[https://developer.arm.com/documentation/den0127/0200/Realm-management/Realm-context-switching][ARM docs]]
+*** Capture of TODOs does not work                                  :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-07-25 Tue 13:57]--[2023-07-25 Tue 13:58] =>  0:01
+:END:
+<2023-07-25 Tue>
+[2023-07-25 Tue 13:57]
+*** TODO Prepare a proposal submission
+SCHEDULED: <2023-07-28 Fri>
+:LOGBOOK:
+CLOCK: [2023-07-25 Tue 14:03]--[2023-07-25 Tue 14:05] =>  0:02
+:END:
+[2023-07-25 Tue]
+[[file:~/org/dev.org::*RME proposal][RME proposal]]
+
+#+begin_quote
+Antonios Motakis(00760267) 2023-07-24 15:12
+hi Nikolay, I discussed the innovation contest today with
+yutao and zhangyue, I think we should submit your idea as well
+
+Antonios Motakis(00760267) 2023-07-24 15:14
+Do you think we could prepare it for submission this week?
+It's not a terrible amount of work, it's just a couple of
+paragraphs usually in the form describing the idea.
+Most submissions I've seen don't have much more than that,
+some go further with slides. Since you already have slides
+it's not too much work I think, depending how much
+other workload you have this week
+
+Antonios Motakis(00760267) 2023-07-24 15:16
+And I can also help
+you can check some submissions here to see how they look like
+https://jx.huawei.com/spark/home/campaignView/53e6e7b550a0488884c3039b3d68c118?type=1&newTab=true&eco=idea&comefrom=ecohome
+
+Nikolay Nerovnyy(00834167) 2023-07-24 16:53
+OK sure I will do it this week
+#+end_quote
 ** DONE hm-lotto: implement Tony's idea
 SCHEDULED: <2023-07-21 Fri>
 :LOGBOOK:
@@ -841,7 +893,7 @@ CLOCK: [2023-07-18 Tue 15:35]--[2023-07-18 Tue 15:36] =>  0:01
 :END:
 [2023-07-18 Tue]
 *** IN_REVIEW hm-lotto: support sync event
-SCHEDULED: <2023-07-24 Mon>
+SCHEDULED: <2023-07-27 Thu>
 :LOGBOOK:
 CLOCK: [2023-07-18 Tue 15:37]--[2023-07-18 Tue 15:37] =>  0:00
 :END:
@@ -855,7 +907,7 @@ CLOCK: [2023-07-18 Tue 15:38]--[2023-07-18 Tue 15:38] =>  0:00
 [2023-07-18 Tue]
 [[file:~/org/dev.org::*hm-lotto: implement Tony's idea][hm-lotto: implement Tony's idea]]
 *** NEXT hm-lotto: support vcpu destruction
-SCHEDULED: <2023-07-24 Mon>
+SCHEDULED: <2023-07-27 Thu>
 :LOGBOOK:
 CLOCK: [2023-07-18 Tue 15:38]--[2023-07-18 Tue 15:38] =>  0:00
 :END:

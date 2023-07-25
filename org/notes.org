@@ -5,3 +5,9 @@ CLOSED: [2023-03-30 Чт 15:46]
 CLOCK: [2022-10-06 Чт 18:00]--[2022-10-06 Чт 18:00] =>  0:00
 :END:
 [2022-10-06 Чт]
+* DONE Now it works
+:LOGBOOK:
+CLOCK: [2023-07-25 Tue 14:02]--[2023-07-25 Tue 14:02] =>  0:00
+:END:
+[2023-07-25 Tue]
+[[file:~/.config/emacs/agenda.el::setq org-default-notes-file "~/org/notes.org"]]
