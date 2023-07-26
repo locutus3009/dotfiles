@@ -8,7 +8,7 @@
  '(org-agenda-files
    '("~/org/lotto.org" "/home/locutus/org/rme.org" "/home/locutus/org/dev.org" "/home/locutus/org/journal.org" "/home/locutus/org/korean.org" "/home/locutus/org/notes.org" "/home/locutus/org/personal.org"))
  '(package-selected-packages
-   '(sqlite3 forge pinentry nerd-icons doom-themes solarized solarized-dark smart-mode-line doom-modeline spacebar clang-format flycheck which-key dap-c++ lsp-ivy lsp-ui lsp-mode treemacs-tab-bar treemacs-persp treemacs-magit treemacs-icons-dired treemacs-projectile smex page-break-lines dashboard all-the-icons-ivy-rich all-the-icons-ivy elisp-format multiple-cursors counsel-projectile counsel ivy auto-dim-other-buffers mu4e use-package org-journal magit company))
+   '(lua-mode sqlite3 forge pinentry nerd-icons doom-themes solarized solarized-dark smart-mode-line doom-modeline spacebar clang-format flycheck which-key dap-c++ lsp-ivy lsp-ui lsp-mode treemacs-tab-bar treemacs-persp treemacs-magit treemacs-icons-dired treemacs-projectile smex page-break-lines dashboard all-the-icons-ivy-rich all-the-icons-ivy elisp-format multiple-cursors counsel-projectile counsel ivy auto-dim-other-buffers mu4e use-package org-journal magit company))
  '(safe-local-variable-values
    '((projectile-project-configure-cmd . ". ~/.cargo/env && cmake -G Ninja -Bbuild --toolchain scripts/toolchain/clang-aarch64-linux-gnu.cmake -DWARNS_AS_ERRORS=False -DBOARD=BOARD_RPI4B -DRPI4B_POWER_CONTROL=relay")
      (projectile-project-configure-cmd . ". ~/.cargo/env && cmake -G Ninja -Bbuild --toolchain scripts/toolchain/clang-aarch64-linux-gnu.cmake -DWARNS_AS_ERRORS=False -DBOARD=BOARD_RPI4B")

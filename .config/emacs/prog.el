@@ -29,6 +29,10 @@
   (lsp-prefer-capf t)
   (lsp-keep-workspace-alive nil))
 
+;; Support of LUA programming language
+(use-package lua-mode
+  :ensure t)
+
 ;; optionally
 (use-package
   lsp-ui

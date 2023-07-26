@@ -549,29 +549,34 @@ client.connect_signal("request::titlebars", function(c)
         end)
     )
 
-    awful.titlebar(c) : setup {
+    awful.titlebar(c, {size=32, position="left"}) : setup {
         { -- Left
             awful.titlebar.widget.iconwidget(c),
             buttons = buttons,
-            layout  = wibox.layout.fixed.horizontal
+            layout  = wibox.layout.fixed.vertical
         },
         { -- Middle
-            { -- Title
-                align  = "center",
-                widget = awful.titlebar.widget.titlewidget(c)
-            },
-            buttons = buttons,
-            layout  = wibox.layout.flex.horizontal
+	    { -- Rotate title text
+	            { -- Title
+		       align  = "center",
+	               widget = awful.titlebar.widget.titlewidget(c)
+		    },
+	            buttons = buttons,
+	            layout  = wibox.layout.flex.vertical
+	    },
+	    widget = wibox.container.rotate,
+	    direction = "east"
         },
         { -- Right
-            awful.titlebar.widget.floatingbutton (c),
+            -- awful.titlebar.widget.floatingbutton (c),
             awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.ontopbutton    (c),
+            -- awful.titlebar.widget.stickybutton   (c),
+            -- awful.titlebar.widget.ontopbutton    (c),
             awful.titlebar.widget.closebutton    (c),
-            layout = wibox.layout.fixed.horizontal()
+            layout = wibox.layout.fixed.vertical()
         },
-        layout = wibox.layout.align.horizontal
+	opacity = 0.75,
+        layout = wibox.layout.align.vertical
     }
 end)
 
