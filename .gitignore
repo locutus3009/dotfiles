@@ -49,3 +49,9 @@ minicom.log
 /.authinfo.gpg
 /.authinfo.gpg~
 /.emacs.d/projects
+/.shell.pre-oh-my-zsh
+/.zcompdump*
+**~
+
+/.zsh_history
+/.zshrc.pre-oh-my-zsh
