@@ -38,7 +38,7 @@ theme.screen_margin = dpi(3)
 
 -- Borders
 theme.border_width  = dpi(0)
-theme.border_color = "#1e1e1e00"--xresources.color0
+theme.border_color = "#1e1e1e"--xresources.color0
 theme.border_normal = "#1e1e1e"--xresources.color0
 theme.border_focus  = "#1B2B34"--xresources.color0
 theme.border_marked = xresources.color0

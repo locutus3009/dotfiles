@@ -596,9 +596,14 @@ end)
 
 client.connect_signal("manage", function(c)
     c.shape = function(cr, w, h)
-        gears.shape.rounded_rect(cr, w, h, 16)
+        gears.shape.rounded_rect(cr, w, h, 8)
     end
 end)
+
+-- -- Toggle compositor
+-- apps.compositor = function ()
+--     awful.spawn.with_shell("sh -c 'pgrep picom > /dev/null && pkill picom || picom --experimental-backends --config ~/.config/picom/picom.conf & disown'")
+-- end
 
 --client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 --client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
