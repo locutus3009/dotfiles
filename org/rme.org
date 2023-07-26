@@ -1,0 +1,201 @@
+#-*- mode: org -*-
+#+STARTUP: showall noinlineimages
+
+* Tasks
+** NEXT RME proposal
+SCHEDULED: <2023-08-04 Fri>
+:LOGBOOK:
+CLOCK: [2023-07-11 Tue 10:47]--[2023-07-11 Tue 10:47] =>  0:00
+:END:
+[2023-07-11 Tue]
+*** DONE RME: first pitch presentation
+SCHEDULED: <2023-07-27 Thu>
+:LOGBOOK:
+CLOCK: [2023-07-11 Tue 10:47]--[2023-07-11 Tue 10:47] =>  0:00
+:END:
+[2023-07-11 Tue]
+[[file:~/org/dev.org::*RME proposal][RME proposal]]
+**** Discussion with Tony                                           :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-07-18 Tue 17:46]--[2023-07-18 Tue 17:49] =>  0:03
+:END:
+<2023-07-18 Tue>
+[2023-07-18 Tue 17:46]
+
+[[file:~/org/dev.org::*RME: first pitch presentation][RME: first pitch presentation]]
+
+Nikolay Nerovnyy(00834167) 2023-07-14 12:03
+Some additional info about realm management monitor -- it is not a full
+hypervisor, it is a mostly a simple thing that is aimed generally to manage
+realm metadata, switch context and route messages. It is not responsible for:
+dynamic resource allocation, scheduling decision, management of interrupts,
+device emulation -- all of these is managed by the host. So there is a place to
+construct a fully verified rmm
+
+Nikolay Nerovnyy(00834167) 2023-07-14 13:16
+So, after investigation that any my realm-related proposal would be more or less
+near the topic I have already sent to you
+
+Antonios Motakis(00760267) 2023-07-14 13:36
+so I looked at the slide, so you want to allow 3rd party realm apps packaged as
+a hongmeng library, and transparently map them to shared memory and hypercalls?
+so the user just writes a library he can "link" and call functions to, but we
+make it work across realms
+
+Nikolay Nerovnyy(00834167) 2023-07-14 13:38
+More or less, yes. It still requires application developer to perform their
+security hardenings such as input sanitizing, chain of trust, check of
+attestation etc. as fo any other security-related software engineering. Realms
+only gurantee the confidentiality and integrity of secure memory in the sence
+that there is no external way to affect this memory, but the applciation itself
+may be vulnerable (and implementation must ensure that such vulnerability will
+not affect the execution of the other realms and will not compromize the secure
+memory of the other realms)
+
+Antonios Motakis(00760267) 2023-07-14 13:39
+makes sense
+
+Nikolay Nerovnyy(00834167) 2023-07-14 13:40
+THis idea may be shrinked down to "just implement an extention for hmvirthm host
+to schedule realms and provision secure memory fo a custom lightweight rmm",
+without any high-level user SDK/framework
+hmvirt + hm host
+
+Nikolay Nerovnyy(00834167) 2023-07-14 13:41
+So, basically the scheduling and interrup managing is pretty the same as with
+ordinary VMs, but host can only manage granules (memory pages), nut not change
+and/or read its contents after initial provisioning
+
+Antonios Motakis(00760267) 2023-07-14 13:42
+we did consider at one point a policy layer in hmvirt, allowing for untrusted
+host scenarios. create a vm and allocate memory for it in HM, but prevent HM
+from messing with it after it was created
+
+Nikolay Nerovnyy(00834167) 2023-07-14 13:43
+But _technically_ it still can access VM memory pages. However, it is a good
+idea even for a classic hypervisor
+
+Nikolay Nerovnyy(00834167) 2023-07-14 13:57
+I have only one a bit separated but Realm-specific idea:
+Problem: realms gurantee confidentiality and integrity, but they do not gurantee
+availability because execution is controlled by untrusted hypervisor.
+Solution: provide availability gurantee by managing of realm from secure
+partition manager from a trust zone, and by scheduling from it. I am not sure
+that it is actually possible (at least all ARM docs explicitly draw lines from a
+rich world host os and hypervisor), but it may be worth researching --
+technically all of this management is done using smc instructions.
+But it is very strange idea
+
+Nikolay Nerovnyy(00834167) 2023-07-14 13:58
+And it requires changes in all components stack -- host os, hypervisor, spm,
+(probably) trusted os and its services, firmware
+
+Nikolay Nerovnyy(00834167) 2023-07-14 13:59
+Very global idea as you see
+
+Antonios Motakis(00760267) 2023-07-14 14:02
+if we run HM in non-VHE mode, then hmvirt is more privileged than it and we
+could have a scheduler there. actually I was pondering a couple days ago if we
+could have DUCK+hmvirt in EL2, and run HM in a privileged VM but still able to
+access some hmvirt interfaces, plus some interfaces that it will use to request
+a VM to be scheduled independently from HM
+
+Nikolay Nerovnyy(00834167) 2023-07-14 14:06
+Will it require hmpart as well?
+
+Antonios Motakis(00760267) 2023-07-14 14:07
+that depends on your design choices
+
+Nikolay Nerovnyy(00834167) 2023-07-14 14:07
+sure
+*** ARM Dynamic TrustZone pattern                                   :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-07-11 Tue 10:48]--[2023-07-11 Tue 10:49] =>  0:01
+:END:
+<2023-07-11 Tue>
+[2023-07-11 Tue 10:48]
+
+[[file:~/org/dev.org::*RME: first pitch presentation][RME: first pitch presentation]]
+
+[[https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/introducing-arms-dynamic-trustzone-technology][ARM website link]]
+
+#+ATTR_HTML: :width 600px
+[[./img/rme/classic.png]]
+
+#+ATTR_HTML: :width 600px
+[[./img/rme/new.png]]
+*** Content providers                                               :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-07-11 Tue 11:09]--[2023-07-11 Tue 11:11] =>  0:02
+:END:
+<2023-07-11 Tue>
+[2023-07-11 Tue 11:09]
+
+[[file:~/org/dev.org::*ARM Dynamic TrustZone pattern][ARM Dynamic TrustZone pattern]]
+
+[[https://www.cdsaonline.org/][CDSA association]]
+[[https://www.widevine.com/#new_tab][Widevine codec]]
+[[https://wasabi.com][Some cloud-based physical security solutions]]
+*** Realm context switching                                         :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-07-14 Fri 11:51]--[2023-07-14 Fri 11:51] =>  0:00
+:END:
+<2023-07-14 Fri>
+[2023-07-14 Fri 11:51]
+
+[[file:~/org/dev.org::*RME: first pitch presentation][RME: first pitch presentation]]
+
+#+ATTR_HTML: :width 600px
+[[./img/rme/images_realm-context-switching_NEW.png]]
+
+[[https://developer.arm.com/documentation/den0127/0200/Realm-management/Realm-context-switching][ARM docs]]
+*** Capture of TODOs does not work                                  :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-07-25 Tue 13:57]--[2023-07-25 Tue 13:58] =>  0:01
+:END:
+<2023-07-25 Tue>
+[2023-07-25 Tue 13:57]
+*** NEXT Prepare a proposal submission
+SCHEDULED: <2023-07-28 Fri>
+:LOGBOOK:
+CLOCK: [2023-07-25 Tue 14:03]--[2023-07-25 Tue 14:05] =>  0:02
+:END:
+[2023-07-25 Tue]
+[[file:~/org/dev.org::*RME proposal][RME proposal]]
+
+#+begin_quote
+Antonios Motakis(00760267) 2023-07-24 15:12
+hi Nikolay, I discussed the innovation contest today with
+yutao and zhangyue, I think we should submit your idea as well
+
+Antonios Motakis(00760267) 2023-07-24 15:14
+Do you think we could prepare it for submission this week?
+It's not a terrible amount of work, it's just a couple of
+paragraphs usually in the form describing the idea.
+Most submissions I've seen don't have much more than that,
+some go further with slides. Since you already have slides
+it's not too much work I think, depending how much
+other workload you have this week
+
+Antonios Motakis(00760267) 2023-07-24 15:16
+And I can also help
+you can check some submissions here to see how they look like
+https://jx.huawei.com/spark/home/campaignView/53e6e7b550a0488884c3039b3d68c118?type=1&newTab=true&eco=idea&comefrom=ecohome
+
+Nikolay Nerovnyy(00834167) 2023-07-24 16:53
+OK sure I will do it this week
+#+end_quote
+**** NEXT Look into examples and prepare plan
+SCHEDULED: <2023-07-26 Wed>
+:LOGBOOK:
+CLOCK: [2023-07-26 Wed 10:20]--[2023-07-26 Wed 10:20] =>  0:00
+:END:
+[2023-07-26 Wed]
+[[file:~/org/dev.org::*Prepare a proposal submission][Prepare a proposal submission]]
+**** TODO Prepare a proposal text
+SCHEDULED: <2023-07-27 Thu>
+:LOGBOOK:
+CLOCK: [2023-07-26 Wed 10:22]--[2023-07-26 Wed 10:22] =>  0:00
+:END:
+[2023-07-26 Wed]
+[[file:~/org/dev.org::*Prepare a proposal submission][Prepare a proposal submission]]

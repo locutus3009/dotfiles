@@ -48,3 +48,4 @@ minicom.log
 /.minirc.dfl
 /.authinfo.gpg
 /.authinfo.gpg~
+/.emacs.d/projects

@@ -127,10 +127,14 @@ fi
 export GPG_TTY=$(tty)
 
 . "$HOME/.cargo/env"
-alias emacs='emacsclient -t'
+alias cemacscli='emacsclient -c -nw -a emacs'
+alias cmagit='cemacscli  -eval \(magit-status\)'
+alias cagenda="cemacscli -eval \(org-agenda-list\)"
+alias emacscli='emacsclient -c -a emacs'
+alias magit='emacscli  -eval \(magit-status\)'
 export ALTERNATE_EDITOR=""
-export EDITOR="emacsclient -t"                  # $EDITOR opens in terminal
-export VISUAL="emacsclient -c -a emacs"         # $VISUAL opens in GUI mode
+export EDITOR="cemacscli"                       # $EDITOR opens in terminal
+export VISUAL="emacscli"         # $VISUAL opens in GUI mode
 export PATH="$PATH:/usr/sbin"
 export PATH="$PATH:/home/locutus/apps/Zotero_linux-x86_64"
 export PATH="$PATH:/home/locutus/apps"
