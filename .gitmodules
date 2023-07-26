@@ -1,3 +1,6 @@
 [submodule ".config/oh-my-zsh"]
 	path = .config/oh-my-zsh
 	url = https://github.com/ohmyzsh/ohmyzsh
+[submodule "/home/locutus/.config/kitty/kitty-themes"]
+	path = /home/locutus/.config/kitty/kitty-themes
+	url = https://github.com/dexpota/kitty-themes.git
