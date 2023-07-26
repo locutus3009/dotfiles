@@ -91,7 +91,8 @@ if not theme.gtk then
     gears_debug.print_warning("Can't load GTK+3 theme. Using 'xresources' theme as a fallback.")
     return theme
 end
-theme.gtk.button_border_radius = dpi(theme.gtk.button_border_radius or 0)
+-- theme.gtk.button_border_radius = dpi(theme.gtk.button_border_radius or 0)
+theme.gtk.button_border_radius = dpi(10)
 theme.gtk.button_border_width = dpi(theme.gtk.button_border_width or 1)
 theme.gtk.bold_font = theme.gtk.font_family .. ' Bold ' .. theme.gtk.font_size
 theme.gtk.menubar_border_color = mix(
@@ -125,7 +126,8 @@ theme.border_focus  = theme.gtk.wm_border_focused_color
 theme.border_marked = theme.gtk.success_color
 
 theme.border_width  = dpi(theme.gtk.button_border_width or 1)
-theme.border_radius = theme.gtk.button_border_radius
+-- theme.border_radius = theme.gtk.button_border_radius
+theme.border_radius = dpi(10)
 
 theme.useless_gap   = dpi(0)
 
@@ -242,6 +244,7 @@ theme.taglist_fg_empty = mix(
     theme.gtk.menubar_bg_color,
     theme.gtk.header_button_fg_color
 )
+
 
 theme.titlebar_font_normal = theme.gtk.bold_font
 theme.titlebar_bg_normal = theme.gtk.wm_border_unfocused_color
