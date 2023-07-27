@@ -179,7 +179,7 @@ sometimes it never ups,
 sometimes it works just fine.
 
 I don't know the reason yet -- need to fix.
-** TODO Check ctest for rpc4b
+** IN_REVIEW Check ctest for rpc4b
 SCHEDULED: <2023-07-27 Thu>
 :LOGBOOK:
 CLOCK: [2023-07-26 Wed 19:03]--[2023-07-26 Wed 19:03] =>  0:00
