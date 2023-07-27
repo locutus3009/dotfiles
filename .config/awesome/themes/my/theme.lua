@@ -1,8 +1,8 @@
 local awful = require("awful")
 local theme_name = "my"
 local theme_assets = require("beautiful.theme_assets")
-local xresources = require("beautiful.xresources")
-local dpi = xresources.apply_dpi
+local x = require("beautiful.xresources")
+local dpi = x.apply_dpi
 -- local gfs = require("gears.filesystem")
 -- local themes_path = gfs.get_themes_dir()
 -- local icon_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. theme_name .. "/icons/"
@@ -10,38 +10,38 @@ local layout_icon_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. them
 local titlebar_icon_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. theme_name .. "/titlebar/"
 -- local weather_icon_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. theme_name .. "/weather/"
 -- local taglist_icon_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. theme_name .. "/taglist/"
-local tip = titlebar_icon_path --alias to save time/space
--- local xrdb = xresources.get_current_theme()
+local tip = titlebar_icon_path -- alias to save time/space
+-- local xrdb = x.get_current_theme()
 
 -- local theme = dofile(os.getenv("HOME") .. "/.config/awesome/themes/default/theme.lua")
 local theme = {}
 
-theme.font          = "Iosevka Term, Medium 11"
+theme.font = "Iosevka Term, Medium 11"
 
-theme.bg_dark       = xresources.background
-theme.bg_normal     = "#1e1e1e40"--xresources.color5
-theme.bg_focus      = "#1B2B34C0"--xresources.color8
-theme.bg_urgent     = "#EC5f67"--xresources.color8
-theme.bg_minimize   = xresources.color8
-theme.bg_systray    = xresources.background
+theme.bg_dark = x.background
+theme.bg_normal = "#1e1e1e40" -- x.color5
+theme.bg_focus = "#1B2B34C0" -- x.color8
+theme.bg_urgent = "#EC5f67" -- x.color8
+theme.bg_minimize = x.color8
+theme.bg_systray = x.background
 
-theme.fg_normal     = "#D8DEE9"--xresources.color2
-theme.fg_focus      = "#ffffff"--xresources.color4
-theme.fg_urgent     = "#ff0000"--xresources.color3
-theme.fg_minimize   = xresources.color8
+theme.fg_normal = "#D8DEE9" -- x.color2
+theme.fg_focus = "#ffffff" -- x.color4
+theme.fg_urgent = "#ff0000" -- x.color3
+theme.fg_minimize = x.color8
 
 -- Gaps
-theme.useless_gap   = dpi(3)
+theme.useless_gap = dpi(3)
 -- This could be used to manually determine how far away from the
 -- screen edge the bars / notifications should be.
 theme.screen_margin = dpi(3)
 
 -- Borders
-theme.border_width  = dpi(0)
-theme.border_color = "#1e1e1e"--xresources.color0
-theme.border_normal = "#1e1e1e"--xresources.color0
-theme.border_focus  = "#1B2B34"--xresources.color0
-theme.border_marked = xresources.color0
+theme.border_width = dpi(0)
+theme.border_color = "#1e1e1e" -- x.color0
+theme.border_normal = "#1e1e1e" -- x.color0
+theme.border_focus = "#1B2B34" -- x.color0
+theme.border_marked = x.color0
 -- Rounded corners
 theme.border_radius = dpi(60)
 
@@ -62,7 +62,6 @@ theme.border_radius = dpi(60)
 -- theme.border_focus  = "#535d6c"
 -- theme.border_marked = "#91231c"
 
-
 -- -- Titlebars
 -- -- (Titlebar items can be customized in titlebars.lua)
 -- theme.titlebars_enabled = true
@@ -73,12 +72,12 @@ theme.border_radius = dpi(60)
 -- theme.titlebar_title_align = "center"
 -- -- Titlebar position: top, bottom, left, right
 -- -- theme.titlebar_position = "top"
--- theme.titlebar_bg = xresources.color0
+-- theme.titlebar_bg = x.color0
 -- theme.titlebar_bg_focus = "#ff000010"
--- -- theme.titlebar_bg_normal = xresources.color13
--- theme.titlebar_fg_focus = xresources.color7
--- theme.titlebar_fg_normal = xresources.color8
--- --theme.titlebar_fg = xresources.color7
+-- -- theme.titlebar_bg_normal = x.color13
+-- theme.titlebar_fg_focus = x.color7
+-- theme.titlebar_fg_normal = x.color8
+-- --theme.titlebar_fg = x.color7
 
 -- There are other variable sets
 -- overriding the default one when
@@ -91,7 +90,7 @@ theme.border_radius = dpi(60)
 -- prompt_[fg|bg|fg_cursor|bg_cursor|font]
 -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
 -- Example:
---theme.taglist_bg_focus = "#ff0000"
+-- theme.taglist_bg_focus = "#ff0000"
 
 -- Generate taglist squares:
 -- local taglist_square_size = dpi(4)
@@ -113,7 +112,7 @@ theme.border_radius = dpi(60)
 -- menu_[border_color|border_width]
 -- theme.menu_submenu_icon = themes_path.."default/submenu.png"
 theme.menu_height = dpi(15)
-theme.menu_width  = dpi(100)
+theme.menu_width = dpi(100)
 
 -- Notifications
 -- Position: bottom_left, bottom_right, bottom_middle,
@@ -121,11 +120,11 @@ theme.menu_width  = dpi(100)
 theme.notification_position = "top_right" -- BUG: some notifications appear at top_right regardless
 theme.notification_border_width = dpi(0)
 theme.notification_border_radius = theme.border_radius
-theme.notification_border_color = xresources.color10
-theme.notification_bg = xresources.color0
-theme.notification_fg = xresources.color7
-theme.notification_crit_bg = xresources.color3
-theme.notification_crit_fg = xresources.color0
+theme.notification_border_color = x.color10
+theme.notification_bg = x.color0
+theme.notification_fg = x.color7
+theme.notification_crit_bg = x.color3
+theme.notification_crit_fg = x.color0
 theme.notification_icon_size = dpi(60)
 -- theme.notification_height = dpi(80)
 -- theme.notification_width = dpi(300)
@@ -143,152 +142,145 @@ else
     theme.snap_border_width = dpi(theme.border_width * 2)
 end
 -- Doesnt work with 4.2, need awesome-git?
---theme.snapper_gap = theme.useless_gap
+-- theme.snapper_gap = theme.useless_gap
 
 -- Tag names
-theme.tagnames = {
-    " 1 ",
-    " 2 ",
-    " 3 ",
-    " 4 ",
-    " 5 ",
-    " 6 ",
-    " 7 ",
-    " 8 ",
-    " 9 ",
-    " 0 ",
-}
+theme.tagnames = {" 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 ", " 0 "}
 
 -- Widget separator
 theme.separator_text = "|"
---theme.separator_text = " :: "
---theme.separator_text = " • "
+-- theme.separator_text = " :: "
+-- theme.separator_text = " • "
 -- theme.separator_text = " •• "
-theme.separator_fg = xresources.color8
+theme.separator_fg = x.color8
 
 -- Wibar(s)
 theme.wibar_position = "bottom"
 theme.wibar_ontop = false
 theme.wibar_height = dpi(24)
-theme.wibar_fg = xresources.color7
-theme.wibar_bg = xresources.color0
+theme.wibar_fg = x.color7
+theme.wibar_bg = x.color0
 theme.wibar_opacity = 0.2
 theme.wibar_border_color = "#6699CC"
 theme.wibar_border_width = dpi(0)
 theme.wibar_border_radius = dpi(0)
 
-theme.prefix_fg = xresources.color8
+theme.prefix_fg = x.color8
 
- --Tasklist
+-- Tasklist
 theme.tasklist_disable_icon = true
 theme.tasklist_plain_task_name = true
-theme.tasklist_bg_focus = xresources.color0
-theme.tasklist_fg_focus = xresources.color4
-theme.tasklist_bg_normal = xresources.color0
-theme.tasklist_fg_normal = xresources.color15
-theme.tasklist_bg_minimize = xresources.color0
+theme.tasklist_bg_focus = x.color0
+theme.tasklist_fg_focus = x.color4
+theme.tasklist_bg_normal = x.color0
+theme.tasklist_fg_normal = x.color15
+theme.tasklist_bg_minimize = x.color0
 theme.tasklist_fg_minimize = theme.fg_minimize
-theme.tasklist_bg_urgent = xresources.color0
-theme.tasklist_fg_urgent = xresources.color3
+theme.tasklist_bg_urgent = x.color0
+theme.tasklist_fg_urgent = x.color3
 theme.tasklist_spacing = dpi(5)
 theme.tasklist_align = "center"
 
-theme.taglist_text_color_empty    = { xresources.color8, xresources.color8, xresources.color8, xresources.color8, xresources.color8, xresources.color8, xresources.color8, xresources.color8, xresources.color8, xresources.color8 }
-theme.taglist_text_color_occupied  = { xresources.color1, xresources.color2, xresources.color3, xresources.color4, xresources.color5, xresources.color6, xresources.color1, xresources.color2, xresources.color3, xresources.color4 }
-theme.taglist_text_color_focused  = { xresources.color1, xresources.color2, xresources.color3, xresources.color4, xresources.color5, xresources.color6, xresources.color1, xresources.color2, xresources.color3, xresources.color4 }
-theme.taglist_text_color_urgent   = { xresources.color9, xresources.color10, xresources.color11, xresources.color12, xresources.color13, xresources.color14, xresources.color9, xresources.color10, xresources.color11, xresources.color12 }
+theme.taglist_text_color_empty = {
+    x.color8, x.color8, x.color8, x.color8, x.color8, x.color8, x.color8, x.color8, x.color8, x.color8
+}
+theme.taglist_text_color_occupied = {
+    x.color1, x.color2, x.color3, x.color4, x.color5, x.color6, x.color1, x.color2, x.color3, x.color4
+}
+theme.taglist_text_color_focused = {
+    x.color1, x.color2, x.color3, x.color4, x.color5, x.color6, x.color1, x.color2, x.color3, x.color4
+}
+theme.taglist_text_color_urgent = {
+    x.color9, x.color10, x.color11, x.color12, x.color13, x.color14, x.color9, x.color10, x.color11, x.color12
+}
 
 -- Prompt
-theme.prompt_fg = xresources.color12
+theme.prompt_fg = x.color12
 
 -- Text Taglist (default)
 theme.taglist_font = "Iosevka Term, Heavy 11"
-theme.taglist_bg_focus = xresources.background
-theme.taglist_fg_focus = xresources.color12
-theme.taglist_bg_occupied = xresources.background
-theme.taglist_fg_occupied = xresources.color8
-theme.taglist_bg_empty = xresources.background
-theme.taglist_fg_empty = xresources.background
-theme.taglist_bg_urgent = xresources.background
-theme.taglist_fg_urgent = xresources.color3
+theme.taglist_bg_focus = x.background
+theme.taglist_fg_focus = x.color12
+theme.taglist_bg_occupied = x.background
+theme.taglist_fg_occupied = x.color8
+theme.taglist_bg_empty = x.background
+theme.taglist_fg_empty = x.background
+theme.taglist_bg_urgent = x.background
+theme.taglist_fg_urgent = x.color3
 theme.taglist_disable_icon = true
 theme.taglist_spacing = dpi(1)
 -- Generate taglist squares:
 local taglist_square_size = dpi(0)
-theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
-    taglist_square_size, theme.fg_focus
-)
-theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
-    taglist_square_size, theme.fg_normal
-)
+theme.taglist_squares_sel = theme_assets.taglist_squares_sel(taglist_square_size, theme.fg_focus)
+theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(taglist_square_size, theme.fg_normal)
 
 -- Variables set for theming the menu:
 -- theme.menu_submenu_icon = icon_path.."submenu.png"
 theme.menu_height = dpi(35)
-theme.menu_width  = dpi(180)
-theme.menu_bg_normal = xresources.color0
-theme.menu_fg_normal= xresources.color7
-theme.menu_bg_focus = xresources.color8
-theme.menu_fg_focus= xresources.color7
+theme.menu_width = dpi(180)
+theme.menu_bg_normal = x.color0
+theme.menu_fg_normal = x.color7
+theme.menu_bg_focus = x.color8
+theme.menu_fg_focus = x.color7
 theme.menu_border_width = dpi(0)
-theme.menu_border_color = xresources.color0
+theme.menu_border_color = x.color0
 
 -- Titlebar buttons
 -- Define the images to load
 theme.titlebar_close_button_normal = tip .. "close_normal.svg"
-theme.titlebar_close_button_focus  = tip .. "close_focus.svg"
+theme.titlebar_close_button_focus = tip .. "close_focus.svg"
 theme.titlebar_minimize_button_normal = tip .. "minimize_normal.svg"
-theme.titlebar_minimize_button_focus  = tip .. "minimize_focus.svg"
+theme.titlebar_minimize_button_focus = tip .. "minimize_focus.svg"
 theme.titlebar_ontop_button_normal_inactive = tip .. "ontop_normal_inactive.svg"
-theme.titlebar_ontop_button_focus_inactive  = tip .. "ontop_focus_inactive.svg"
+theme.titlebar_ontop_button_focus_inactive = tip .. "ontop_focus_inactive.svg"
 theme.titlebar_ontop_button_normal_active = tip .. "ontop_normal_active.svg"
-theme.titlebar_ontop_button_focus_active  = tip .. "ontop_focus_active.svg"
+theme.titlebar_ontop_button_focus_active = tip .. "ontop_focus_active.svg"
 theme.titlebar_sticky_button_normal_inactive = tip .. "sticky_normal_inactive.svg"
-theme.titlebar_sticky_button_focus_inactive  = tip .. "sticky_focus_inactive.svg"
+theme.titlebar_sticky_button_focus_inactive = tip .. "sticky_focus_inactive.svg"
 theme.titlebar_sticky_button_normal_active = tip .. "sticky_normal_active.svg"
-theme.titlebar_sticky_button_focus_active  = tip .. "sticky_focus_active.svg"
+theme.titlebar_sticky_button_focus_active = tip .. "sticky_focus_active.svg"
 theme.titlebar_floating_button_normal_inactive = tip .. "floating_normal_inactive.svg"
-theme.titlebar_floating_button_focus_inactive  = tip .. "floating_focus_inactive.svg"
+theme.titlebar_floating_button_focus_inactive = tip .. "floating_focus_inactive.svg"
 theme.titlebar_floating_button_normal_active = tip .. "floating_normal_active.svg"
-theme.titlebar_floating_button_focus_active  = tip .. "floating_focus_active.svg"
+theme.titlebar_floating_button_focus_active = tip .. "floating_focus_active.svg"
 theme.titlebar_maximized_button_normal_inactive = tip .. "maximized_normal_inactive.svg"
-theme.titlebar_maximized_button_focus_inactive  = tip .. "maximized_focus_inactive.svg"
+theme.titlebar_maximized_button_focus_inactive = tip .. "maximized_focus_inactive.svg"
 theme.titlebar_maximized_button_normal_active = tip .. "maximized_normal_active.svg"
-theme.titlebar_maximized_button_focus_active  = tip .. "maximized_focus_active.svg"
+theme.titlebar_maximized_button_focus_active = tip .. "maximized_focus_active.svg"
 -- (hover)
 theme.titlebar_close_button_normal_hover = tip .. "close_normal_hover.svg"
-theme.titlebar_close_button_focus_hover  = tip .. "close_focus_hover.svg"
+theme.titlebar_close_button_focus_hover = tip .. "close_focus_hover.svg"
 theme.titlebar_minimize_button_normal_hover = tip .. "minimize_normal_hover.svg"
-theme.titlebar_minimize_button_focus_hover  = tip .. "minimize_focus_hover.svg"
+theme.titlebar_minimize_button_focus_hover = tip .. "minimize_focus_hover.svg"
 theme.titlebar_ontop_button_normal_inactive_hover = tip .. "ontop_normal_inactive_hover.svg"
-theme.titlebar_ontop_button_focus_inactive_hover  = tip .. "ontop_focus_inactive_hover.svg"
+theme.titlebar_ontop_button_focus_inactive_hover = tip .. "ontop_focus_inactive_hover.svg"
 theme.titlebar_ontop_button_normal_active_hover = tip .. "ontop_normal_active_hover.svg"
-theme.titlebar_ontop_button_focus_active_hover  = tip .. "ontop_focus_active_hover.svg"
+theme.titlebar_ontop_button_focus_active_hover = tip .. "ontop_focus_active_hover.svg"
 theme.titlebar_sticky_button_normal_inactive_hover = tip .. "sticky_normal_inactive_hover.svg"
-theme.titlebar_sticky_button_focus_inactive_hover  = tip .. "sticky_focus_inactive_hover.svg"
+theme.titlebar_sticky_button_focus_inactive_hover = tip .. "sticky_focus_inactive_hover.svg"
 theme.titlebar_sticky_button_normal_active_hover = tip .. "sticky_normal_active_hover.svg"
-theme.titlebar_sticky_button_focus_active_hover  = tip .. "sticky_focus_active_hover.svg"
+theme.titlebar_sticky_button_focus_active_hover = tip .. "sticky_focus_active_hover.svg"
 theme.titlebar_floating_button_normal_inactive_hover = tip .. "floating_normal_inactive_hover.svg"
-theme.titlebar_floating_button_focus_inactive_hover  = tip .. "floating_focus_inactive_hover.svg"
+theme.titlebar_floating_button_focus_inactive_hover = tip .. "floating_focus_inactive_hover.svg"
 theme.titlebar_floating_button_normal_active_hover = tip .. "floating_normal_active_hover.svg"
-theme.titlebar_floating_button_focus_active_hover  = tip .. "floating_focus_active_hover.svg"
+theme.titlebar_floating_button_focus_active_hover = tip .. "floating_focus_active_hover.svg"
 theme.titlebar_maximized_button_normal_inactive_hover = tip .. "maximized_normal_inactive_hover.svg"
-theme.titlebar_maximized_button_focus_inactive_hover  = tip .. "maximized_focus_inactive_hover.svg"
+theme.titlebar_maximized_button_focus_inactive_hover = tip .. "maximized_focus_inactive_hover.svg"
 theme.titlebar_maximized_button_normal_active_hover = tip .. "maximized_normal_active_hover.svg"
-theme.titlebar_maximized_button_focus_active_hover  = tip .. "maximized_focus_active_hover.svg"
+theme.titlebar_maximized_button_focus_active_hover = tip .. "maximized_focus_active_hover.svg"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = layout_icon_path .. "fairh.png"
 theme.layout_fairv = layout_icon_path .. "fairv.png"
-theme.layout_floating  = layout_icon_path .. "floating.png"
+theme.layout_floating = layout_icon_path .. "floating.png"
 theme.layout_magnifier = layout_icon_path .. "magnifier.png"
-theme.layout_max = layout_icon_path .. "maxresources.png"
+theme.layout_max = layout_icon_path .. "max.png"
 theme.layout_fullscreen = layout_icon_path .. "fullscreen.png"
 theme.layout_tilebottom = layout_icon_path .. "tilebottom.png"
-theme.layout_tileleft   = layout_icon_path .. "tileleft.png"
+theme.layout_tileleft = layout_icon_path .. "tileleft.png"
 theme.layout_tile = layout_icon_path .. "tile.png"
 theme.layout_tiletop = layout_icon_path .. "tiletop.png"
-theme.layout_spiral  = layout_icon_path .. "spiral.png"
+theme.layout_spiral = layout_icon_path .. "spiral.png"
 theme.layout_dwindle = layout_icon_path .. "dwindle.png"
 theme.layout_cornernw = layout_icon_path .. "cornernw.png"
 theme.layout_cornerne = layout_icon_path .. "cornerne.png"
@@ -296,9 +288,7 @@ theme.layout_cornersw = layout_icon_path .. "cornersw.png"
 theme.layout_cornerse = layout_icon_path .. "cornerse.png"
 
 -- Generate Awesome icon:
-theme.awesome_icon = theme_assets.awesome_icon(
-    theme.menu_height, theme.bg_focus, theme.fg_focus
-)
+theme.awesome_icon = theme_assets.awesome_icon(theme.menu_height, theme.bg_focus, theme.fg_focus)
 
 theme.icon_theme = nil
 

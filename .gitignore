@@ -55,3 +55,4 @@ minicom.log
 
 /.zsh_history
 /.zshrc.pre-oh-my-zsh
+/.luarocks/
