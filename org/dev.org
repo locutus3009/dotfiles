@@ -186,4 +186,14 @@ CLOCK: [2023-07-26 Wed 19:03]--[2023-07-26 Wed 19:03] =>  0:00
 :END:
 [2023-07-26 Wed]
 
-Check that ctest job for CI also worcs
+Check that ctest job for CI also works
+*** Link to merge request                                           :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-07-27 Thu 17:22]--[2023-07-27 Thu 17:22] =>  0:00
+:END:
+<2023-07-27 Thu>
+[2023-07-27 Thu 17:22]
+
+[[file:~/org/dev.org::*Check ctest for rpc4b][Check ctest for rpc4b]]
+
+[[https://rnd-gitlab-eu-c.huawei.com/germany-research-center/dresden-lab/ententeich/duck/-/merge_requests/1002][link]]

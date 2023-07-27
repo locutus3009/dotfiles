@@ -192,6 +192,21 @@ CLOCK: [2023-07-26 Wed 10:20]--[2023-07-26 Wed 10:20] =>  0:00
 :END:
 [2023-07-26 Wed]
 [[file:~/org/dev.org::*Prepare a proposal submission][Prepare a proposal submission]]
+***** Good examples                                                 :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-07-27 Thu 17:50]--[2023-07-27 Thu 17:52] =>  0:02
+:END:
+<2023-07-27 Thu>
+[2023-07-27 Thu 17:50]
+
+[[file:~/org/rme.org::*Look into examples and prepare plan][Look into examples and prepare plan]]
+
+[[https://jx.huawei.com/spark/idea/38f7bf46bf4347d0bb30ab4db5263dff?code=csi&newTab=true][Robust Partitioning for Hard RTOS]]
+[[https://jx.huawei.com/spark/idea/4ef488e0e8b34ad0bdd840d1c0e0d756?code=csi&newTab=true][Energy aware cloud scheduling and monitoring]]
+[[https://jx.huawei.com/spark/idea/bcdcb6372adb4e30941cfd92923fe23d?code=csi&newTab=true][HM-vJTAG: a VM-based debugger for HongMeng on mobile phone platforms]]
+[[https://jx.huawei.com/spark/idea/f781b90e7bad423595d82ce1d4c63181?code=csi&newTab=true][Detection of side-channel attacks using performance counter anomalies]]
+[[https://jx.huawei.com/spark/idea/554423fa77f44438b30b16e3c86aa0e2?code=csi&newTab=true][PHAT Binaries for Max Performance and Energy-Efficiency on big.LITTLE Cores]]
+
 **** TODO Prepare a proposal text
 SCHEDULED: <2023-07-27 Thu>
 :LOGBOOK:
@@ -199,3 +214,26 @@ CLOCK: [2023-07-26 Wed 10:22]--[2023-07-26 Wed 10:22] =>  0:00
 :END:
 [2023-07-26 Wed]
 [[file:~/org/dev.org::*Prepare a proposal submission][Prepare a proposal submission]]
+*** New dialog with Tony                                            :JOURNAL:
+:LOGBOOK:
+CLOCK: [2023-07-27 Thu 17:41]--[2023-07-27 Thu 17:42] =>  0:01
+:END:
+<2023-07-27 Thu>
+[2023-07-27 Thu 17:41]
+
+[[file:~/org/rme.org::*Prepare a proposal text][Prepare a proposal text]]
+
+#+begin_quote
+Antonios Motakis(00760267) 2023-07-27 17:19
+Hi Nikolay, since I'm already away tomorrow I wanted
+to ask what's your status about the innovation contest proposal
+
+Nikolay Nerovnyy(00834167) 2023-07-27 17:23
+I am writing a text so I think it will be ready tomorrow or in Monday
+
+Antonios Motakis(00760267) 2023-07-27 17:38
+OK, you can ask Zhangyue for help since I'll be offline
+
+Nikolay Nerovnyy(00834167) 2023-07-27 17:39
+ok
+#+end_quote

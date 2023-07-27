@@ -533,21 +533,21 @@ CLOCK: [2023-07-18 Tue 15:35]--[2023-07-18 Tue 15:36] =>  0:01
 :END:
 [2023-07-18 Tue]
 *** IN_REVIEW hm-lotto: support sync event
-SCHEDULED: <2023-07-27 Thu>
+SCHEDULED: <2023-07-31 Mon>
 :LOGBOOK:
 CLOCK: [2023-07-18 Tue 15:37]--[2023-07-18 Tue 15:37] =>  0:00
 :END:
 [2023-07-18 Tue]
 [[file:~/org/dev.org::*hm-lotto: implement Tony's idea][hm-lotto: implement Tony's idea]]
 *** NEXT hm-lotto: support vCPU creation
-SCHEDULED: <2023-07-25 Tue>
+SCHEDULED: <2023-07-31 Mon>
 :LOGBOOK:
 CLOCK: [2023-07-18 Tue 15:38]--[2023-07-18 Tue 15:38] =>  0:00
 :END:
 [2023-07-18 Tue]
 [[file:~/org/dev.org::*hm-lotto: implement Tony's idea][hm-lotto: implement Tony's idea]]
 *** NEXT hm-lotto: support vcpu destruction
-SCHEDULED: <2023-07-27 Thu>
+SCHEDULED: <2023-07-31 Mon>
 :LOGBOOK:
 CLOCK: [2023-07-18 Tue 15:38]--[2023-07-18 Tue 15:38] =>  0:00
 :END:
