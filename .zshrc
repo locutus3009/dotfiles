@@ -79,7 +79,7 @@ ZSH_THEME="frontcube-my"
 plugins=(git timer-my)
 
 TIMER_THRESHOLD=1
-TIMER_FORMAT="\n\rtook \e[33m%d"
+TIMER_FORMAT="\n\ntook \e[33m%d\n"
 
 source $ZSH/oh-my-zsh.sh
 
