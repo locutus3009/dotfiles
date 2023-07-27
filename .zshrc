@@ -76,7 +76,7 @@ ZSH_THEME="frontcube-my"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git timer)
+plugins=(git timer-my)
 
 TIMER_THRESHOLD=1
 TIMER_FORMAT="\n\rtook \e[33m%d"
