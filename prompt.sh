@@ -42,7 +42,7 @@ else
     COLOR_LIGHT_PURPLE=''
     COLOR_BROWN=''
     COLOR_YELLOW=''
-1    COLOR_GRAY=''
+    COLOR_GRAY=''
     COLOR_LIGHT_GRAY=''
 fi
 
