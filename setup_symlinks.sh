@@ -11,7 +11,6 @@ ln -sf "$CURRENT_DIR/prompt.sh" "$HOME/prompt.sh"
 # Emacs
 mkdir -p "$HOME/.emacs.d"
 ln -sf "$CURRENT_DIR/emacs.d/init.el" "$HOME/.emacs.d/init.el"
-ln -sf "$CURRENT_DIR/emacs.d/custom-file.el" "$HOME/.emacs.d/custom-file.el"
 
 # GnuPG
 mkdir -p "$HOME/.gnupg"
