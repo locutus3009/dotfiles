@@ -51,7 +51,14 @@
 (require 'package)
 (package-initialize)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-(require 'use-package)
+
+;; install use-package
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+;; further reduce load time, from use-package official github page
+(eval-when-compile
+  (require 'use-package))
 
 ;; Use pinentry to type passwords
 (use-package pinentry
