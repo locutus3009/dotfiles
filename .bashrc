@@ -129,5 +129,5 @@ export GPG_TTY=$(tty)
 . "$HOME/.cargo/env"
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME/'
 
-export PATH="$PATH:$HOME/apps/idris2/bin/"
-eval "$(idris2 --bash-completion-script idris2)"
+#export PATH="$PATH:$HOME/apps/idris2/bin/"
+#eval "$(idris2 --bash-completion-script idris2)"
