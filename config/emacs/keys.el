@@ -30,3 +30,5 @@
 (global-set-key (kbd "C-x n") 'windmove-down)
 (global-set-key (kbd "C-x .") 'windmove-right)
 (global-set-key (kbd "C-x ,") 'windmove-left)
+(global-set-key (kbd "C-x C-.") 'windmove-right)
+(global-set-key (kbd "C-x C-,") 'windmove-left)

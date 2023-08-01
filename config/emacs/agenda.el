@@ -5,6 +5,8 @@
   ;; (org :variables
   ;;      org-enable-jira-support t
   ;;      org-jira-working-dir "~/org/")
+  ;; Enable habits module
+  (add-to-list 'org-modules 'org-habit t)
 
   ;; Sequences of keywords used in org-mode
   (setq org-todo-keywords (quote ((sequence "TODO(t)" "NEXT(n)" "IN_REVIEW(r)" "|" "DONE(d)")
@@ -63,6 +65,10 @@
 				 "* MEETING with %? :MEETING:\n%t\n%a\n"
 				 :clock-in t
 				 :clock-resume t)
+				("o" "Journal clocked" entry (file+datetree "~/org/journal.org")
+				 "* %? :JOURNAL:\n%t\n%a\n"
+				 :clock-in t
+				 :clock-resume t)
 				("j" "Journal" entry (file+datetree "~/org/journal.org")
 				 "* %? :JOURNAL:\n%t\n%U\n%i\n%a\n"
 				 :clock-in t
@@ -71,6 +77,8 @@
 				 "* %? :IDEA:\n%t\n%a\n"
 				 :clock-in t
 				 :clock-resume t)
+				("h" "Habit" entry (file "~/org/habits.org")
+				 "* NEXT %? :HABIT:\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n%u\n%a\n")
 				("n" "Next Task" entry (file+headline org-default-notes-file
 								      "Tasks")
 				 "** NEXT %? \nDEADLINE: %t") ))
@@ -82,4 +90,12 @@
   (epa-file-enable)
   (require 'org-tempo)
   (setq org-agenda-files (append (file-expand-wildcards "~/org/*.org")))
-  (setq org-agenda-start-with-log-mode t))
+  (setq org-agenda-start-with-log-mode t)
+  ;; Log creation time of TODO also
+  (setq org-treat-insert-todo-heading-as-state-change t)
+  ;; log into LOGBOOK drawer
+  (setq org-log-into-drawer t)
+  ;; Display habits on agenda view
+  (setq org-habit-show-all-today t)
+  ;; Hide text format modifiers
+  (setq org-hide-emphasis-markers t))
