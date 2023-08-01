@@ -38,3 +38,13 @@
   (global-set-key (kbd "C-M-<") 'mc/mark-previous-like-this)
   ;; (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
   )
+
+;; iedit -- edit multiple similar places
+(use-package
+  iedit
+  :ensure t)
+
+;; vterm -- used by Projectile
+(use-package
+  vterm
+  :ensure t)

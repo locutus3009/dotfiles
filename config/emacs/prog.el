@@ -107,3 +107,6 @@ otherwise assumed alphabetic."
 						  (equal "Mozilla" base-style)
 						  (equal "WebKit" base-style))
 						 (setq-local indent-tabs-mode nil))))))))))
+
+(use-package yaml-mode
+  :ensure t)
