@@ -29,3 +29,8 @@ rm -rf "$HOME/.config/picom"
 ln -sf "$CURRENT_DIR/config/picom" "$HOME/.config/picom"
 rm -rf "$HOME/.config/terminator"
 ln -sf "$CURRENT_DIR/config/terminator" "$HOME/.config/terminator"
+
+# Additional scripts
+mkdir -p "$HOME/apps"
+mkdir -p "$HOME/apps/bin"
+ln -sf "$CURRENT_DIR/apps/bin/run_hm_linux.sh" "$HOME/apps/bin/run_hm_linux.sh"

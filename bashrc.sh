@@ -126,6 +126,7 @@ export VISUAL="emacscli"         # $VISUAL opens in GUI mode
 export PATH="$PATH:/usr/sbin"
 export PATH="$PATH:/home/locutus/apps/Zotero_linux-x86_64"
 export PATH="$PATH:/home/locutus/apps"
+export PATH="$PATH:/home/locutus/apps/bin"
 export PATH="$PATH:/home/locutus/Foundation_Platform/models/Linux64_GCC-6.4"
 
 source ~/bash-preexec.sh
