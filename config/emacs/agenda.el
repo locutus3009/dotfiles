@@ -98,4 +98,6 @@
   ;; Display habits on agenda view
   (setq org-habit-show-all-today t)
   ;; Hide text format modifiers
-  (setq org-hide-emphasis-markers t))
+  (setq org-hide-emphasis-markers t)
+  ;; Record timestamp when task is done
+  (setq org-log-done 'time))
