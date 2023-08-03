@@ -34,3 +34,8 @@ ln -sf "$CURRENT_DIR/config/terminator" "$HOME/.config/terminator"
 mkdir -p "$HOME/apps"
 mkdir -p "$HOME/apps/bin"
 ln -sf "$CURRENT_DIR/apps/bin/run_hm_linux.sh" "$HOME/apps/bin/run_hm_linux.sh"
+
+# Ranger
+mkdir -p "$HOME/.config/ranger"
+ln -sf "$CURRENT_DIR/config/rc.conf" "$HOME/.config/ranger/rc.conf"
+ln -sf "$CURRENT_DIR/config/rifle.conf" "$HOME/.config/ranger/rifle.conf"
