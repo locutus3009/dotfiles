@@ -1,0 +1,281 @@
+# ####################################################
+# ## this is example configuration file, copy it to ##
+# ## ~/.ncmpcpp/config and set up your preferences  ##
+# ####################################################
+# #
+# ##### connection settings #####
+# #
+# ## set it in order to make tag editor and renaming files work properly
+# #
+# mpd_music_dir = "/home/maksval/Music/"
+# #
+# #mpd_connection_timeout = "5"
+# #
+# mpd_crossfade_time = "5"
+# #
+# ##### delays #####
+# #
+# ## delay after playlist highlighting will be disabled (0 = don't disable)
+# #
+# #playlist_disable_highlight_delay = "5"
+# #
+# ## defines how long various messages are supposed to be visible
+# #
+# #message_delay_time = "4"
+# #
+# ##### song format #####
+# ##
+# ## for song format you can use:
+# ##
+# ## %l - length
+# ## %f - short filename
+# ## %F - full filename
+# ## %a - artist
+# ## %t - title
+# ## %b - album
+# ## %y - year
+# ## %n - track number
+# ## %g - genre
+# ## %c - composer
+# ## %p - performer
+# ## %d - disc
+# ## %C - comment
+# ## %r - begin right align
+# ##
+# ## you can also put them in { } and then it will be displayed
+# ## only if all requested values are available and/or define alternate
+# ## value with { }|{ } eg. {%a - %t}|{%f}
+# ##
+# ## text can also have different color than the main window has,
+# ## eg. if you want length to have other color, write [.color]%t[/color]
+# ##
+# ## available colors:
+# ##
+# ## - black
+# ## - red
+# ## - green
+# ## - yellow
+# ## - blue
+# ## - magenta
+# ## - cyan
+# ## - white
+# ##
+# #
+# #song_list_format = "{[.green](%l)[/green] }{%a - }{%t}|{[.white]%f[/white]}"
+# #
+# #song_library_format = "{%n - }{%t}|{%f}"
+# #
+# #media_library_album_format = "{(%y) }%b"
+# #
+# #tag_editor_album_format = "{(%y) }%b"
+# #
+# #browser_playlist_prefix = "[.red]playlist[/red] "
+# #
+# #selected_item_prefix = "[.magenta]"
+# #
+# #selected_item_suffix = "[/magenta]"
+# #
+# ## colors are not supported for below veriables
+# #
+# #song_status_format = "{(%l) }{%a - }{%t}|{%f}"
+# song_status_format = "$7%t$9 $8by$9 $3%a$9"
+# #
+# #song_window_title_format = "{%a - }{%t}|{%f}"
+# #
+# ##### columns settings #####
+# ##
+# ## syntax of song columns list format is "column column etc."
+# ##
+# ## - syntax for each column is:
+# ##
+# ## (width of column in %)[column's color]{displayed tag}
+# ##
+# ## - color is optional (if it's not present, default window color will be used)
+# ##
+# #
+# #song_columns_list_format = "(8)[green]{l} (28)[cyan]{a} (28){b} (50)[red]{t}"
+# #song_columns_list_format = "(8)[white]{l} (28)[cyan]{a} (28)[white]{b} (50)[cyan]{t}"
+# song_list_format = "{$3 %a $9$1>>$9$7 %t $9$R$3 %n $1<<$9 %l $9}|{$8 %f$9}"
+
+
+# #
+# ##### various settings #####
+# #
+# playlist_display_mode = "columns" (classic/columns)
+# #
+# #incremental_seeking = "yes"
+# #
+# #seek_time = "1"
+# #
+# autocenter_mode = "yes"
+# #
+# #repeat_one_mode = "no"
+# #
+# #media_library_left_column = "a" (possible values: a,y,g,c,p, legend above)
+# #
+# #default_find_mode = "wrapped" (wrapped/normal)
+# #
+# #default_space_mode = "select" (add/select)
+# #
+# #default_tag_editor_left_col = "albums" (albums/dirs)
+# #
+# #default_tag_editor_pattern = "%n - %t"
+# #
+# #header_visibility = "no"
+# #
+# statusbar_visibility = "yes"
+# #
+# #fancy_scrolling = "yes"
+# #
+# #follow_now_playing_lyrics = "no"
+# #
+# #ncmpc_like_songs_adding = "no" (enabled - add/remove, disabled - always add)
+# #
+# enable_window_title = "yes"
+# #
+# ##### colors definitions #####
+# #
+# colors_enabled = "yes"
+# #
+# #empty_tag_color = "cyan"
+# #
+# #header_window_color = "default"
+# #
+# #volume_color = "default"
+# #
+# #state_line_color = "default"
+# #
+# #state_flags_color = "default"
+# #
+# #main_window_color = "yellow"
+# #
+# #color1 = "white"
+# #
+# #color2 = "green"
+# #
+# main_window_highlight_color = "yellow"
+# #
+# progressbar_color = "default"
+# progressbar_elapsed_color = "default"
+# #
+# #statusbar_color = "default"
+# #
+# #active_column_color = "red"
+# #
+# #window_border_color = "green"
+# #
+# #active_window_border = "red"
+# #
+# #playlist_display_mode = classic
+# #progressbar_color = red
+# #progressbar_elapsed_color = green
+# #main_window_color = red
+# #main_window_highlight_color = green
+# #active_column_color = blue
+
+# now_playing_prefix = "$b"
+# now_playing_suffix = "$/b"
+# progressbar_look = "─╼─"
+
+# visualizer_fifo_path = "/tmp/mpd.fifo"
+# visualizer_output_name = "my_fifo"
+# visualizer_sync_interval = "30"
+# visualizer_in_stereo = "yes"
+# visualizer_type = "wave" (spectrum/wave)
+# #visualizer_type = "spectrum" (spectrum/wave)
+# visualizer_look = "+|"
+# #now_playing_prefix = "$r"
+# #now_playing_suffix = "$/r"
+# user_interface = "alternative"
+
+
+
+
+
+# Author - Haron Prime
+# License - © 2017 WTFPL - http://www.wtfpl.net/
+
+mpd_host = localhost
+mpd_port = 6600
+mpd_music_dir = ~/Music
+system_encoding = UTF8
+enable_window_title = no
+
+ncmpcpp_directory = ~/.ncmpcpp
+lyrics_directory = ~/Music/Lyrics
+
+# Visualizer
+visualizer_fifo_path = /tmp/mpd.fifo
+visualizer_output_name = FIFO
+visualizer_sync_interval = 30
+visualizer_in_stereo = yes
+visualizer_type = wave_filled
+#visualizer_type = spectrum
+visualizer_color = 46,45,44,43,42,41,40,39,38,37,36,35
+#visualizer_look = |○
+visualizer_look = "●▮"
+
+
+# Columns
+song_columns_list_format = (1f)[cyan]{} (20)[green]{a}  (20)[blue]{t} (30)[cyan]{b} (20)[green]{f} (8f)[cyan]{yr } (8f)[cyan]{lr }
+#song_list_format = {$(81) %a  $9  $7%t$9 }|{ $(81)%f$9}$R{$7%b $7}
+song_list_format = "{$3[%l]$9} {$5%a$9} {$6%t$9} %y %n {$5%b$9}"
+#song_status_format = {{$7%a}  {$b%t$/b}  {%b}  {$b%y$/b$9}}
+song_status_format = {$7%N}
+song_library_format = {%n  --  }{%t}|{%f}
+now_playing_prefix = $b
+now_playing_suffix = $/b$9
+browser_playlist_prefix = $(red)Playlist: $9
+selected_item_prefix = $7
+selected_item_suffix = $9
+modified_item_prefix = $(red)> $9
+song_window_title_format = {%t}|{%f} - {%a}
+
+# Various
+playlist_show_remaining_time = no
+playlist_shorten_total_times = yes
+playlist_separate_albums = no
+playlist_display_mode = columns
+browser_display_mode = columns
+search_engine_display_mode = columns
+discard_colors_if_item_is_selected = no
+incremental_seeking = yes
+seek_time = 1
+autocenter_mode = yes
+centered_cursor = yes
+progressbar_look = "=> "
+progressbar_color = 240
+progressbar_elapsed_color = 246
+user_interface = alternative
+header_visibility = yes
+titles_visibility = no
+header_text_scrolling = yes
+cyclic_scrolling = no
+lines_scrolled = 1
+follow_now_playing_lyrics = no
+show_hidden_files_in_local_browser = no
+jump_to_now_playing_song_at_start = yes
+clock_display_seconds = no
+display_volume_level = yes
+display_bitrate = yes
+display_remaining_time = no
+regular_expressions = extended
+ignore_leading_the = no
+block_search_constraints_change_if_items_found = yes
+mouse_support = yes
+mouse_list_scroll_whole_page = no
+external_editor = vim
+use_console_editor = yes
+colors_enabled = yes
+empty_tag_color = white
+header_window_color = cyan
+state_line_color = 246
+state_flags_color = 246
+main_window_color = cyan
+statusbar_color = cyan
+window_border_color = cyan
+active_window_border = red
+#current_item_inactive_column_prefix = $(45)
+#current_item_inactive_column_suffix = $9
+#current_item_prefix = $(cyan)$r
+#current_item_suffix = $/r$9

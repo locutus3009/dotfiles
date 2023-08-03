@@ -7,6 +7,7 @@ ln -sf "$CURRENT_DIR/bash-preexec.sh" "$HOME/bash-preexec.sh"
 ln -sf "$CURRENT_DIR/bashrc.sh" "$HOME/.bashrc"
 ln -sf "$CURRENT_DIR/gdbinit.gdb" "$HOME/.gtbinit"
 ln -sf "$CURRENT_DIR/prompt.sh" "$HOME/prompt.sh"
+ln -sf "$CURRENT_DIR/asound.conf" "$HOME/.asound.conf"
 
 # Emacs
 mkdir -p "$HOME/.emacs.d"
@@ -31,6 +32,10 @@ rm -rf "$HOME/.config/terminator"
 ln -sf "$CURRENT_DIR/config/terminator" "$HOME/.config/terminator"
 rm -rf "$HOME/.config/ranger"
 ln -sf "$CURRENT_DIR/config/ranger" "$HOME/.config/ranger"
+rm -rf "$HOME/.config/ncmpcpp"
+ln -sf "$CURRENT_DIR/config/ncmpcpp" "$HOME/.config/ncmpcpp"
+rm -rf "$HOME/.config/mpd"
+ln -sf "$CURRENT_DIR/config/mpd" "$HOME/.config/mpd"
 
 # Additional scripts
 mkdir -p "$HOME/apps"
