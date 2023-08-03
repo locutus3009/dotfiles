@@ -8,6 +8,12 @@ ln -sf "$CURRENT_DIR/gdbinit.gdb" "$HOME/.gtbinit"
 ln -sf "$CURRENT_DIR/asound.conf" "$HOME/.asound.conf"
 ln -sf "$CURRENT_DIR/bash-preexec.sh" "$HOME/bash-preexec.sh"
 
+# X config
+ln -sf "$CURRENT_DIR/xbindkeysrc" "$HOME/.xbindkeysrc"
+ln -sf "$CURRENT_DIR/Xdefaults" "$HOME/.Xdefaults"
+ln -sf "$CURRENT_DIR/Xmodmap" "$HOME/.Xmodmap"
+ln -sf "$CURRENT_DIR/xprofile" "$HOME/.xprofile"
+
 # Emacs
 mkdir -p "$HOME/.emacs.d"
 ln -sf "$CURRENT_DIR/emacs.d/init.el" "$HOME/.emacs.d/init.el"

@@ -1,0 +1,739 @@
+! "Enabled modi" Set from: Default
+rofi.modi:                           drun,window,run,ssh
+! "Window width" Set from: Default
+! rofi.width:                          50
+! "Number of lines" Set from: Default
+! rofi.lines:                          15
+! "Number of columns" Set from: Default
+! rofi.columns:                        1
+! "Font to use" Set from: XResources
+rofi.font:                           Hack Regular 12
+! "Border width" Set from: Default
+! rofi.bw:                             1
+! "Location on screen" Set from: Default
+! rofi.location:                       0
+! "Padding" Set from: Default
+! rofi.padding:                        5
+! "Y-offset relative to location" Set from: Default
+! rofi.yoffset:                        0
+! "X-offset relative to location" Set from: Default
+! rofi.xoffset:                        0
+! "Always show number of lines" Set from: Default
+! rofi.fixed-num-lines:                true
+! "Whether to load and show icons" Set from: Default
+ rofi.show-icons:                     true
+! "Terminal to use" Set from: XResources
+! "Ssh client to use" Set from: Default
+! rofi.ssh-client:                     ssh
+! "Ssh command to execute" Set from: Default
+! rofi.ssh-command:                    {terminal} -e {ssh-client} {host}
+! "Run command to execute" Set from: Default
+! rofi.run-command:                    {cmd}
+! "Command to get extra run targets" Set from: Default
+! rofi.run-list-command:
+! "Run command to execute that runs in shell" Set from: Default
+! rofi.run-shell-command:              {terminal} -e {cmd}
+! "Command executed on accep-entry-custom for window modus" Set from: Default
+! rofi.window-command:                 xkill -id {window}
+! "Window fields to match in window mode" Set from: Default
+! rofi.window-match-fields:            all
+! "Theme to use to look for icons" Set from: Default
+! rofi.drun-icon-theme:
+! "Desktop entry fields to match in drun" Set from: Default
+! rofi.drun-match-fields:              name,generic,exec,categories
+! "Disable history in run/ssh" Set from: Default
+! rofi.disable-history:                false
+! "Use sorting" Set from: Default
+! rofi.sort:                           false
+! "Use levenshtein sorting also for fuzzy matching" Set from: Default
+! rofi.levenshtein-sort:               false
+! "Set case-sensitivity" Set from: Default
+! rofi.case-sensitive:                 false
+! "Cycle through the results list" Set from: Default
+! rofi.cycle:                          true
+! "Enable sidebar-mode" Set from: Default
+! rofi.sidebar-mode:                   false
+! "Row height (in chars)" Set from: Default
+! rofi.eh:                             1
+! "Enable auto select mode" Set from: Default
+! rofi.auto-select:                    false
+! "Parse hosts file for ssh mode" Set from: Default
+! rofi.parse-hosts:                    false
+! "Parse known_hosts file for ssh mode" Set from: Default
+! rofi.parse-known-hosts:              true
+! "Set the modi to combine in combi mode" Set from: Default
+! rofi.combi-modi:                     window,run
+! "Set the matching algorithm. (normal, regex, glob, fuzzy)" Set from: Default
+! rofi.matching:                       normal
+! "Tokenize input string" Set from: Default
+! rofi.tokenize:                       true
+! "Monitor id to show on" Set from: Default
+! rofi.m:                              -5
+! "Margin between rows *DEPRECATED*" Set from: Default
+! rofi.line-margin:                    2
+! "Padding within rows *DEPRECATED*" Set from: Default
+! rofi.line-padding:                   1
+! "Pre-set filter" Set from: Default
+! rofi.filter:
+! "Separator style (none, dash, solid) *DEPRECATED*" Set from: Default
+! rofi.separator-style:                dash
+! "Hide scroll-bar *DEPRECATED*" Set from: Default
+! rofi.hide-scrollbar:                 false
+! "Fullscreen" Set from: Default
+! rofi.fullscreen:                     false
+! "Fake transparency *DEPRECATED*" Set from: Default
+! rofi.fake-transparency:              false
+! "DPI" Set from: Default
+! rofi.dpi:                            -1
+! "Threads to use for string matching" Set from: Default
+! rofi.threads:                        0
+! "Scrollbar width *DEPRECATED*" Set from: Default
+! rofi.scrollbar-width:                8
+! "Scrolling method. (0: Page, 1: Centered)" Set from: Default
+! rofi.scroll-method:                  0
+! "Background to use for fake transparency. (background or screenshot)" Set from: Default
+! rofi.fake-background:                screenshot
+! "Window Format. w (desktop name), t (title), n (name), r (role), c (class) *DEPRECATED*" Set from: Default
+! rofi.window-format:                  {w}    {i}{c}   {t}
+! "Click outside the window to exit" Set from: Default
+! rofi.click-to-exit:                  true
+! "Indicate how it match by underlining it." Set from: Default
+! rofi.show-match:                     true
+! "New style theme file" Set from: Default
+ rofi.theme:							 /usr/share/rofi/themes/Arc-Dark.rasi
+! "Color scheme for normal row" Set from: Default
+! rofi.color-normal:
+! "Color scheme for urgent row" Set from: Default
+! rofi.color-urgent:
+! "Color scheme for active row" Set from: Default
+! rofi.color-active:
+! "Color scheme window" Set from: Default
+! rofi.color-window:
+! "Max history size (WARNING: can cause slowdowns when set to high)." Set from: Default
+! rofi.max-history-size:               25
+! "Hide the prefix mode prefix on the combi view." Set from: Default
+! rofi.combi-hide-mode-prefix:         false
+! "Pidfile location" Set from: Default
+! rofi.pid:                            /run/user/1000/rofi.pid
+! "The display name of this browser" Set from: Default
+! rofi.display-window:
+! "The display name of this browser" Set from: Default
+! rofi.display-windowcd:
+! "The display name of this browser" Set from: Default
+! rofi.display-run:
+! "The display name of this browser" Set from: Default
+! rofi.display-ssh:
+! "The display name of this browser" Set from: Default
+! rofi.display-drun:
+! "The display name of this browser" Set from: Default
+! rofi.display-combi:
+! "The display name of this browser" Set from: Default
+! rofi.display-keys:
+! "Paste primary selection" Set from: Default
+! rofi.kb-primary-paste:               Control+V,Shift+Insert
+! "Paste clipboard" Set from: Default
+! rofi.kb-secondary-paste:             Control+v,Insert
+! "Clear input line" Set from: Default
+! rofi.kb-clear-line:                  Control+w
+! "Beginning of line" Set from: Default
+! rofi.kb-move-front:                  Control+a
+! "End of line" Set from: Default
+! rofi.kb-move-end:                    Control+e
+! "Move back one word" Set from: Default
+! rofi.kb-move-word-back:              Alt+b
+! "Move forward one word" Set from: Default
+! rofi.kb-move-word-forward:           Alt+f
+! "Move back one char" Set from: Default
+! rofi.kb-move-char-back:              Left,Control+b
+! "Move forward one char" Set from: Default
+! rofi.kb-move-char-forward:           Right,Control+f
+! "Delete previous word" Set from: Default
+! rofi.kb-remove-word-back:            Control+Alt+h,Control+BackSpace
+! "Delete next word" Set from: Default
+! rofi.kb-remove-word-forward:         Control+Alt+d
+! "Delete next char" Set from: Default
+! rofi.kb-remove-char-forward:         Delete,Control+d
+! "Delete previous char" Set from: Default
+! rofi.kb-remove-char-back:            BackSpace,Control+h
+! "Delete till the end of line" Set from: Default
+! rofi.kb-remove-to-eol:               Control+k
+! "Delete till the start of line" Set from: Default
+! rofi.kb-remove-to-sol:               Control+u
+! "Accept entry" Set from: Default
+! rofi.kb-accept-entry:                Control+j,Control+m,Return,KP_Enter
+! "Use entered text as command (in ssh/run modi)" Set from: Default
+! rofi.kb-accept-custom:               Control+Return
+! "Use alternate accept command." Set from: Default
+! rofi.kb-accept-alt:                  Shift+Return
+! "Delete entry from history" Set from: Default
+! rofi.kb-delete-entry:                Shift+Delete
+! "Switch to the next mode." Set from: Default
+rofi.kb-mode-next:                   Shift+Right,Control+Tab
+! "Switch to the previous mode." Set from: Default
+ rofi.kb-mode-previous:               Shift+Left,Control+ISO_Left_Tab
+! "Go to the previous column" Set from: Default
+! rofi.kb-row-left:                    Control+Page_Up
+! "Go to the next column" Set from: Default
+! rofi.kb-row-right:                   Control+Page_Down
+! "Select previous entry" Set from: Default
+! rofi.kb-row-up:                      Up,Control+p,ISO_Left_Tab
+! "Select next entry" Set from: Default
+! rofi.kb-row-down:                    Down,Control+n
+! "Go to next row, if one left, accept it, if no left next mode." Set from: Default
+! rofi.kb-row-tab:                     Tab
+! "Go to the previous page" Set from: Default
+! rofi.kb-page-prev:                   Page_Up
+! "Go to the next page" Set from: Default
+! rofi.kb-page-next:                   Page_Down
+! "Go to the first entry" Set from: Default
+! rofi.kb-row-first:                   Home,KP_Home
+! "Go to the last entry" Set from: Default
+! rofi.kb-row-last:                    End,KP_End
+! "Set selected item as input text" Set from: Default
+! rofi.kb-row-select:                  Control+space
+! "Take a screenshot of the rofi window" Set from: Default
+! rofi.kb-screenshot:                  Alt+S
+! "Toggle case sensitivity" Set from: Default
+! rofi.kb-toggle-case-sensitivity:     grave,dead_grave
+! "Toggle sort" Set from: Default
+! rofi.kb-toggle-sort:                 Alt+grave
+! "Quit rofi" Set from: Default
+! rofi.kb-cancel:                      Escape,Control+g,Control+bracketleft
+! "Custom keybinding 1" Set from: Default
+! rofi.kb-custom-1:                    Alt+1
+! "Custom keybinding 2" Set from: Default
+! rofi.kb-custom-2:                    Alt+2
+! "Custom keybinding 3" Set from: Default
+! rofi.kb-custom-3:                    Alt+3
+! "Custom keybinding 4" Set from: Default
+! rofi.kb-custom-4:                    Alt+4
+! "Custom Keybinding 5" Set from: Default
+! rofi.kb-custom-5:                    Alt+5
+! "Custom keybinding 6" Set from: Default
+! rofi.kb-custom-6:                    Alt+6
+! "Custom Keybinding 7" Set from: Default
+! rofi.kb-custom-7:                    Alt+7
+! "Custom keybinding 8" Set from: Default
+! rofi.kb-custom-8:                    Alt+8
+! "Custom keybinding 9" Set from: Default
+! rofi.kb-custom-9:                    Alt+9
+! "Custom keybinding 10" Set from: Default
+! rofi.kb-custom-10:                   Alt+0
+! "Custom keybinding 11" Set from: Default
+! rofi.kb-custom-11:                   Alt+exclam
+! "Custom keybinding 12" Set from: Default
+! rofi.kb-custom-12:                   Alt+at
+! "Csutom keybinding 13" Set from: Default
+! rofi.kb-custom-13:                   Alt+numbersign
+! "Custom keybinding 14" Set from: Default
+! rofi.kb-custom-14:                   Alt+dollar
+! "Custom keybinding 15" Set from: Default
+! rofi.kb-custom-15:                   Alt+percent
+! "Custom keybinding 16" Set from: Default
+! rofi.kb-custom-16:                   Alt+dead_circumflex
+! "Custom keybinding 17" Set from: Default
+! rofi.kb-custom-17:                   Alt+ampersand
+! "Custom keybinding 18" Set from: Default
+! rofi.kb-custom-18:                   Alt+asterisk
+! "Custom Keybinding 19" Set from: Default
+! rofi.kb-custom-19:                   Alt+parenleft
+! "Select row 1" Set from: Default
+! rofi.kb-select-1:                    Super+1
+! "Select row 2" Set from: Default
+! rofi.kb-select-2:                    Super+2
+! "Select row 3" Set from: Default
+! rofi.kb-select-3:                    Super+3
+! "Select row 4" Set from: Default
+! rofi.kb-select-4:                    Super+4
+! "Select row 5" Set from: Default
+! rofi.kb-select-5:                    Super+5
+! "Select row 6" Set from: Default
+! rofi.kb-select-6:                    Super+6
+! "Select row 7" Set from: Default
+! rofi.kb-select-7:                    Super+7
+! "Select row 8" Set from: Default
+! rofi.kb-select-8:                    Super+8
+! "Select row 9" Set from: Default
+! rofi.kb-select-9:                    Super+9
+! "Select row 10" Set from: Default
+! rofi.kb-select-10:                   Super+0
+! "Go to the previous column" Set from: Default
+! rofi.ml-row-left:                    ScrollLeft
+! "Go to the next column" Set from: Default
+! rofi.ml-row-right:                   ScrollRight
+! "Select previous entry" Set from: Default
+! rofi.ml-row-up:                      ScrollUp
+! "Select next entry" Set from: Default
+! rofi.ml-row-down:                    ScrollDown
+! "Select hovered row" Set from: Default
+! rofi.me-select-entry:                MousePrimary
+! "Accept hovered row" Set from: Default
+! rofi.me-accept-entry:                MouseDPrimary
+! "Accept hovered row with custom action" Set from: Default
+! rofi.me-accept-custom:               Control+MouseDPrimary
+! rofi.fg:	    	argb:FFffffff
+! rofi.bg:		    argb:cc000000
+! rofi.bgalt:		    argb:dd2c3311
+! rofi.hlfg:		    #fdf6e3
+! rofi.hlbg:		    #859900
+! rofi.bc:	    	#859900
+rofi.terminal:		gnome-terminal
+
+! xscreensaver-command -restart
+
+Xcursor.theme: gentoo-silver
+! whiteglass
+! Silver
+! Vanilla-DMZ
+! Obsidian
+Xcursor.size: 20
+
+! # Сглаживание шрифтов #
+Xft.dpi:			    96
+Xft.lcdfilter:			lcddefault
+Xft.antialias:          true
+Xft.autohint: 			false
+Xft.hintstyle:			hintmedium ! hintslight  hintmedium hintfull
+Xft.hinting: 			true
+Xft.rgba: 				rgb
+! Xft.rgba:				0
+
+! Xft.antialias:  true
+! Xft.rgba:       0
+! Xft.hinting:    true
+! Xft.hintstyle:  1
+! Xft.dpi:	177
+! Xft.autohint:   false
+! Xft.lcdfilter:  1
+
+
+Emacs.FontBackend: 		xft
+Emacs.font:				Hack
+
+! URxvt
+! URxvt.font:                    xft:Droid Sans Mono:size=11:antialias=true:hinting=false
+URxvt.font:                    xft:Hack:size=11:antialias=true:hinting=true
+! URxvt.boldFont:                xft:Droid Sans Bold:pixelsize=15:antialias=true:hinting=false
+URxvt.boldfont:			xft:terminus:size=11:antialias=true:hinting=true
+
+!:antialias=true
+ URxvt.iconFile:	     	/usr/share/icons/utilities-terminal.svg
+
+! URxvt.perl-lib:		    /home/mgordeev/.urxvt/perl/
+
+
+ URxvt*scrollBar:	    	true
+ URxvt.scrollstyle: 		next
+ URxvt*scrollTtyOutput:		false
+ URxvt*scrollWithBuffer:	true
+ URxvt*secondaryWheel:		true
+
+ URxvt*saveLines:	    	13200
+
+ URxvt.perl-ext-common:  	default,tabbed,matcher,url-select,keyboard-select,clipboard,font-size
+ URxvt.keysym.M-Escape:		perl:keyboard-select:activate
+ URxvt.keysym.M-s: 		    perl:keyboard-select:search
+! URxvt.keysym.C-Up:     	perl:font-size:increase
+! URxvt.keysym.C-Down:   	perl:font-size:decrease
+ URxvt.keysym.C-M-Up:   	perl:font-size:incglobal
+ URxvt.keysym.C-M-Down: 	perl:font-size:decglobal
+! URxvt.keysym.C-S-c:	 	perl:clipboard:copy
+! URxvt.keysym.C-S-v: 		perl:clipboard:paste
+ URxvt.keysym.M-c:   		perl:clipboard:copy
+ URxvt.keysym.M-v:   		perl:clipboard:paste
+! URxvt.keysym.M-C-v: 		perl:clipboard:paste_escaped
+ URxvt.keysym.M-u:	      	perl:url-select:select_next
+
+
+ URxvt.url-select.launcher:	chromium-browser
+ URxvt.matcher.button:   	1
+ URxvt.url-select.underline:	true
+ URxvt.underlineURLs:   	true
+
+! URxvt*urgentOnBell: 		true
+
+ URxvt*tabbed.tabbar-bg:	0
+ URxvt*tabbed.tabbar-fg:	2
+ URxvt*tabbed.tab-bg:		0
+ URxvt*tabbed.tab-fg:		4
+
+ URxvt*transparent: 		false
+ URxvt*shading: 		5
+
+
+! URxvt*background:              #101e2e
+! URxvt*foreground:              Lightgrey
+! URxvt*cursorColor:             Green
+! URxvt.colorUL: 	    	#4682B4
+
+! ! URxvt*background:		#000000
+! ! URxvt*foreground:		#ffffff
+
+! ! URxvt*background: 		#212121
+! ! URxvt*foreground: 		#C0C0C0
+
+! ! ! black
+! ! URxvt*color0:			#3a3a3a
+! ! URxvt*color8:			#709080
+!   URxvt*color0:                 black
+!   URxvt*color8:                 grey9
+
+! ! ! red
+! ! URxvt*color1:			#cc9393
+! ! URxvt*color9:			#dca3a3
+!   URxvt*color1:                 #e9897c
+!   URxvt*color9:                 #FF3030
+
+! ! ! green
+! ! URxvt*color2:			#60b48a
+! ! URxvt*color10:		#c3bf9f
+!   URxvt*color2:                 #b6e77d
+!   URxvt*color10:                #70FF70
+
+! ! ! yellow
+! ! URxvt*color3:			#dfaf8f
+! ! URxvt*color11:		#f0dfaf
+!   URxvt*color3:                 yellow3
+!   URxvt*color11:                #F0F080
+
+! ! ! blue
+! ! URxvt*color4:			#506070
+! ! URxvt*color12:		#94bff3A
+!   URxvt*color4:                 #4a95d5
+!   URxvt*color12:                #B0B0FF
+
+! ! ! magenta
+! ! URxvt*color5:			#dc8cc3
+! ! URxvt*color13:		#ec93d3
+!   URxvt*color5:                 #ea96eb
+!   URxvt*color13:                #EFA0BF
+
+! ! ! orange
+! ! URxvt*color6:			#8cd0d3
+! ! URxvt*color14:		#93e0e3
+!   URxvt*color6:                 #009999
+!   URxvt*color14:                #A0FFFF
+
+! ! ! white
+! ! URxvt*color7:			#dcdccc
+! ! URxvt*color15:		#ffffff
+!   URxvt*color7:                 #D0B099
+!   URxvt*color15:                white
+
+
+
+#define t_bg_floor     #010000
+#define t_bg_dip       #191815
+#define t_background   #1f1e1b
+#define t_bg_bump      #2B2A27
+#define t_fg_comment   #68696C
+#define t_foreground   #8E8F93
+#define t_fg_highlight #9D9EA2
+#define t_fg_ceiling   #FEFFFF
+
+! *background: t_background
+! *foreground: t_foreground
+
+urxvt*colorBD: t_fg_highlight
+urxvt*colorIT: t_fg_highlight
+urxvt*colorUL: t_fg_highlight
+
+urxvt*cursorColor: #B47CAD
+
+
+*background:	#1E2541
+*foreground:	#EEFFFF
+*cursorColor:	#EEFFFF
+*color0:	#1E2541
+*color1:	#F0719B
+*color2:	#5AF7B0
+*color3:	#FFA56B
+*color4:	#57C7FF
+*color5:	#C792EA
+*color6:	#89DDFF
+*color7:	#EEFFFF
+*color8:	#354274
+*color9:	#F02E6E
+*color10:	#2CE592
+*color11:	#FF8537
+*color12:	#1DA0E2
+*color13:	#A742EA
+*color14:	#47BAE8
+*color15:	#DEE6E7
+*color16:	#2A335A
+
+
+
+! ! BLK
+! *color0: t_bg_bump
+! *color8: t_fg_comment
+
+! ! WHT
+! *color7: t_fg_highlight
+! *color15: t_fg_ceiling
+
+! ! RED
+! *color1: #99554F
+! *color9: #D58A83
+
+! ! YEL
+! *color3: #756830
+! *color11: #AE9D62
+
+! ! GRN
+! *color2: #38754B
+! *color10: #6EAC7E
+
+! ! CYN
+! *color6: #007683
+! *color14: #42AEBA
+
+! ! BLU
+! *color4: #496AA0
+! *color12: #81A0D9
+
+! ! MAG
+! *color5: #8C5786
+! *color13: #C58CBE
+
+! *color16: t_bg_floor
+! *color17: t_bg_dip
+! *color18: t_background
+! *color19: t_bg_bump
+! *color20: t_fg_comment
+! *color21: t_foreground
+! *color22: t_fg_highlight
+! *color23: t_fg_ceiling
+
+! *color24: #C47890
+! *color25: #C4778F
+! *color26: #C5778D
+! *color27: #C5778C
+! *color28: #C5788A
+! *color29: #C57888
+! *color30: #C57887
+! *color31: #C57885
+! *color32: #C67884
+! *color33: #C67882
+! *color34: #C67881
+! *color35: #C5787F
+! *color36: #C5797E
+! *color37: #C5797C
+! *color38: #C5797B
+! *color39: #C57979
+! *color40: #C57978
+! *color41: #C47A77
+! *color42: #C47A75
+! *color43: #C47A74
+! *color44: #C37B72
+! *color45: #C37B71
+! *color46: #C27B70
+! *color47: #C27C6E
+! *color48: #C17C6D
+! *color49: #C17D6C
+! *color50: #C07D6B
+! *color51: #BF7D69
+! *color52: #BF7E68
+! *color53: #BE7E67
+! *color54: #BD7F66
+! *color55: #BC7F65
+! *color56: #BC8064
+! *color57: #BB8063
+! *color58: #BA8161
+! *color59: #B98160
+! *color60: #B88260
+! *color61: #B7825F
+! *color62: #B6835E
+! *color63: #B5835D
+! *color64: #B4845C
+! *color65: #B3845B
+! *color66: #B2855A
+! *color67: #B1865A
+! *color68: #AF8659
+! *color69: #AE8758
+! *color70: #AD8758
+! *color71: #AC8857
+! *color72: #AB8857
+! *color73: #A98956
+! *color74: #A88956
+! *color75: #A78A55
+! *color76: #A58A55
+! *color77: #A48B55
+! *color78: #A38B54
+! *color79: #A18C54
+! *color80: #A08D54
+! *color81: #9F8D54
+! *color82: #9D8E54
+! *color83: #9C8E54
+! *color84: #9A8F54
+! *color85: #998F54
+! *color86: #979054
+! *color87: #969054
+! *color88: #949154
+! *color89: #939154
+! *color90: #919254
+! *color91: #909255
+! *color92: #8E9255
+! *color93: #8C9356
+! *color94: #8B9356
+! *color95: #899457
+! *color96: #889457
+! *color97: #869558
+! *color98: #849558
+! *color99: #839559
+! *color100: #81965A
+! *color101: #7F965A
+! *color102: #7E975B
+! *color103: #7C975C
+! *color104: #7A975D
+! *color105: #79985E
+! *color106: #77985F
+! *color107: #759860
+! *color108: #749961
+! *color109: #729962
+! *color110: #709963
+! *color111: #6E9A64
+! *color112: #6D9A65
+! *color113: #6B9A66
+! *color114: #699B67
+! *color115: #679B69
+! *color116: #669B6A
+! *color117: #649B6B
+! *color118: #629C6D
+! *color119: #609C6E
+! *color120: #5F9C6F
+! *color121: #5D9C71
+! *color122: #5B9C72
+! *color123: #599D73
+! *color124: #589D75
+! *color125: #569D76
+! *color126: #549D78
+! *color127: #529D79
+! *color128: #519D7B
+! *color129: #4F9E7C
+! *color130: #4D9E7E
+! *color131: #4B9E7F
+! *color132: #4A9E81
+! *color133: #489E82
+! *color134: #469E84
+! *color135: #459E85
+! *color136: #439E87
+! *color137: #419E89
+! *color138: #409E8A
+! *color139: #3E9E8C
+! *color140: #3D9E8D
+! *color141: #3B9E8F
+! *color142: #3A9F91
+! *color143: #389F92
+! *color144: #379F94
+! *color145: #359F95
+! *color146: #349E97
+! *color147: #339E98
+! *color148: #329E9A
+! *color149: #319E9B
+! *color150: #309E9D
+! *color151: #2F9E9F
+! *color152: #2E9EA0
+! *color153: #2E9EA2
+! *color154: #2D9EA3
+! *color155: #2D9EA4
+! *color156: #2C9EA6
+! *color157: #2C9EA7
+! *color158: #2C9EA9
+! *color159: #2D9DAA
+! *color160: #2D9DAC
+! *color161: #2D9DAD
+! *color162: #2E9DAE
+! *color163: #2F9DB0
+! *color164: #309DB1
+! *color165: #319CB2
+! *color166: #329CB3
+! *color167: #339CB5
+! *color168: #349CB6
+! *color169: #369BB7
+! *color170: #379BB8
+! *color171: #399BB9
+! *color172: #3B9BBA
+! *color173: #3C9ABB
+! *color174: #3E9ABC
+! *color175: #409ABD
+! *color176: #4299BE
+! *color177: #4499BF
+! *color178: #4699C0
+! *color179: #4898C1
+! *color180: #4A98C1
+! *color181: #4C98C2
+! *color182: #4E97C3
+! *color183: #5097C3
+! *color184: #5297C4
+! *color185: #5496C5
+! *color186: #5796C5
+! *color187: #5995C6
+! *color188: #5B95C6
+! *color189: #5D95C7
+! *color190: #5F94C7
+! *color191: #6294C7
+! *color192: #6493C8
+! *color193: #6693C8
+! *color194: #6892C8
+! *color195: #6B92C8
+! *color196: #6D91C8
+! *color197: #6F91C9
+! *color198: #7190C9
+! *color199: #7390C9
+! *color200: #758FC9
+! *color201: #788FC8
+! *color202: #7A8EC8
+! *color203: #7C8EC8
+! *color204: #7E8DC8
+! *color205: #808DC8
+! *color206: #828CC7
+! *color207: #848CC7
+! *color208: #868BC7
+! *color209: #888BC6
+! *color210: #8A8AC6
+! *color211: #8C89C5
+! *color212: #8E89C5
+! *color213: #9088C4
+! *color214: #9288C4
+! *color215: #9487C3
+! *color216: #9687C2
+! *color217: #9886C2
+! *color218: #9986C1
+! *color219: #9B85C0
+! *color220: #9D84BF
+! *color221: #9F84BE
+! *color222: #A083BD
+! *color223: #A283BC
+! *color224: #A482BB
+! *color225: #A582BA
+! *color226: #A781B9
+! *color227: #A881B8
+! *color228: #AA80B7
+! *color229: #AB80B6
+! *color230: #AD7FB5
+! *color231: #AE7FB4
+! *color232: #AF7EB3
+! *color233: #B17EB1
+! *color234: #B27DB0
+! *color235: #B37DAF
+! *color236: #B47CAD
+! *color237: #B67CAC
+! *color238: #B77CAB
+! *color239: #B87BA9
+! *color240: #B97BA8
+! *color241: #BA7BA7
+! *color242: #BB7AA5
+! *color243: #BC7AA4
+! *color244: #BD7AA2
+! *color245: #BD79A1
+! *color246: #BE799F
+! *color247: #BF799E
+! *color248: #C0799C
+! *color249: #C0789B
+! *color250: #C17899
+! *color251: #C27898
+! *color252: #C27896
+! *color253: #C37895
+! *color254: #C37893
+! *color255: #C47892
