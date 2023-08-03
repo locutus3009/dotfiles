@@ -89,9 +89,9 @@ local main_control_row_two = wibox.widget {
 		{
 			layout = wibox.layout.fixed.vertical,
 			spacing = dpi(5),
-			require('widget.airplane-mode'),
-			require('widget.bluetooth-toggle'),
-			require('widget.blue-light')
+			nil, -- 	require('widget.airplane-mode'),
+			nil, -- 	require('widget.bluetooth-toggle'),
+			nil, --		require('widget.blue-light')
 		}
 	),
 	{
@@ -102,7 +102,7 @@ local main_control_row_two = wibox.widget {
 				layout = wibox.layout.align.vertical,
 				expand = 'none',
 				nil,
-				nill, --require('widget.dont-disturb'),
+				nil, --require('widget.dont-disturb'),
 				nil
 			}
 		),

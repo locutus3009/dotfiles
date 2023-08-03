@@ -529,7 +529,7 @@ local locker = function(s)
 
 			-- Validation
 			if key == 'Return' then
-				-- Validate password
+			   -- Validate password
 				local authenticated = false
 				if input_password ~= nil then
 					-- If lua-pam library is 'okay'

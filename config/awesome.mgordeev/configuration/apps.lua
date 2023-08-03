@@ -7,7 +7,8 @@ local browser_google	    = "google-chrome-stable"
 local browser_google_flags  = " --high-dpi-support=1 --force-device-scale-factor=1 --enable-extensions --embed-flash-fullscreen  --ignore-gpu-blacklist --password-store=basic --proxy-server=\"127.0.0.1:3128\""
 local browser_firefox       = "firefox"
 local browser_firefoxPrfls  = browser_firefox .. " --ProfileManager"
-local browser    			= browser_google .. browser_google_flags
+-- local browser    			= browser_google .. browser_google_flags
+local browser    			= browser_firefox
 local browser_alternatives  = browser_firefoxPrfls
 
 return {
