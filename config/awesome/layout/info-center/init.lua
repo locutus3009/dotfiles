@@ -56,12 +56,12 @@ local info_center = function(s)
 	panel:connect_signal(
 		'property::height',
 		function()
-			awful.placement.bottom_right(
+			awful.placement.top_right(
 				panel,
 				{
 					honor_workarea = true,
 					margins = {
-						bottom = dpi(5),
+						top = dpi(5),
 						right = dpi(5)
 					}
 				}

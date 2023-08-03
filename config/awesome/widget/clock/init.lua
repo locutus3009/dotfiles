@@ -103,7 +103,7 @@ local create_clock = function(s)
 	)
 	
 	s.month_calendar      = awful.widget.calendar_popup.month({
-		start_sunday      = true,
+		start_sunday      = false,
 		spacing           = dpi(5),
 		font              = 'Inter Regular 10',
 		long_weekdays     = true,
@@ -145,7 +145,7 @@ local create_clock = function(s)
 
 	s.month_calendar:attach(
 		s.clock_widget, 
-		'br', 
+		'tr', 
 		{ 
 			on_pressed = true,
 			on_hover = false 

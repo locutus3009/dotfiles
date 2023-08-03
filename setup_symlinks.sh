@@ -26,7 +26,7 @@ ln -sf "$CURRENT_DIR/gnupg/gpg.conf" "$HOME/.gnupg/gpg.conf"
 # Other configs
 mkdir -p "$HOME/.config"
 rm -rf "$HOME/.config/awesome"
-ln -sf "$CURRENT_DIR/config/awesome.mgordeev" "$HOME/.config/awesome"
+ln -sf "$CURRENT_DIR/config/awesome" "$HOME/.config/awesome"
 rm -rf "$HOME/.config/emacs"
 ln -sf "$CURRENT_DIR/config/emacs" "$HOME/.config/emacs"
 rm -rf "$HOME/.config/kitty"

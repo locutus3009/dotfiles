@@ -17,14 +17,15 @@ local bottom_panel = function(s)
 		height = dpi(50),
 		width = s.geometry.width,
 		x = s.geometry.x,
-		y = s.geometry.height-50,
+		y = 0,
+--		y = s.geometry.height-50,
 		stretch = true,
 		bg = beautiful.background,
 		fg = beautiful.fg_normal
 	}
 
 	panel:struts {
-		bottom = dpi(50)
+		top = dpi(50)
 	}
 
 	panel:connect_signal(
@@ -70,7 +71,7 @@ local bottom_panel = function(s)
 	local add_button 		= build_widget(require('widget.open-default-app')(s))
 	s.search_apps			= build_widget(require('widget.search-apps')())
 	s.control_center_toggle = build_widget(require('widget.control-center-toggle')())
-	s.global_search			= build_widget(require('widget.global-search')())
+--	s.global_search			= build_widget(require('widget.global-search')())
 	s.info_center_toggle 	= build_widget(require('widget.info-center-toggle')())
 	s.tray_toggler  		= build_widget(require('widget.tray-toggle'))
 	s.updater 				= build_widget(require('widget.package-updater')())

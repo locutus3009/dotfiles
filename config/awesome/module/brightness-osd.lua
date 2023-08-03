@@ -234,14 +234,14 @@ local placement_placer = function()
 		end
 	end
 
-	awful.placement.bottom_right(
+	awful.placement.top_right(
 		brightness_osd,
 		{
 			margins = { 
 				left = 0,
 				right = osd_margin,
-				top = 0,
-				bottom = osd_margin
+				top = osd_margin,
+				bottom = 0
 			},
 			honor_workarea = true
 		}
