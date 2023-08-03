@@ -3,11 +3,10 @@
 CURRENT_DIR=$(pwd)
 
 # Top level files
-ln -sf "$CURRENT_DIR/bash-preexec.sh" "$HOME/bash-preexec.sh"
 ln -sf "$CURRENT_DIR/bashrc.sh" "$HOME/.bashrc"
 ln -sf "$CURRENT_DIR/gdbinit.gdb" "$HOME/.gtbinit"
-ln -sf "$CURRENT_DIR/prompt.sh" "$HOME/prompt.sh"
 ln -sf "$CURRENT_DIR/asound.conf" "$HOME/.asound.conf"
+ln -sf "$CURRENT_DIR/bash-preexec.sh" "$HOME/bash-preexec.sh"
 
 # Emacs
 mkdir -p "$HOME/.emacs.d"
@@ -36,6 +35,8 @@ rm -rf "$HOME/.config/ncmpcpp"
 ln -sf "$CURRENT_DIR/config/ncmpcpp" "$HOME/.config/ncmpcpp"
 rm -rf "$HOME/.config/mpd"
 ln -sf "$CURRENT_DIR/config/mpd" "$HOME/.config/mpd"
+rm -rf "$HOME/.config/pulse"
+ln -sf "$CURRENT_DIR/config/pulse" "$HOME/.config/pulse"
 
 # Additional scripts
 mkdir -p "$HOME/apps"
