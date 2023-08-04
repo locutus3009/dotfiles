@@ -20,7 +20,11 @@
 
 (defun gitlab-to-org ()
 (interactive)
-(with-temp-buffer (insert "* Gitlab issues")
+(with-temp-buffer
+(insert "# -*- buffer-read-only: t -*-")
+(end-of-line)
+(newline)
+(insert "* Gitlab issues")
 (end-of-line)
 (newline)
 (insert "#+CATEGORY: Gitlab")

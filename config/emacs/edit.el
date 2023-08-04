@@ -61,3 +61,9 @@
   (setq markdown-command "multimarkdown")
   (add-hook 'markdown-mode-hook 'auto-fill-mode)
   (add-hook 'markdown-mode-hook 'flyspell-mode) )
+
+(use-package move-text
+  :ensure t
+    :bind (:map global-map
+	      ("M-p" . move-text-up)
+	      ("M-n" . move-text-down)))
