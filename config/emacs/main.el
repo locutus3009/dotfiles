@@ -87,3 +87,4 @@
 
 (standard-display-ascii ?\227 " — ")
 
+(setq visible-bell t)
