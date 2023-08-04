@@ -51,8 +51,16 @@
 
 ;; Add melpa package manager
 (require 'package)
+(setq package-archives '(
+                         ("gnu" . "http://elpa.gnu.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")
+                         ("gnu" . "http://elpa.gnu.org/packages")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("org" . "http://orgmode.org/elpa/") ; Org-mode's repository
+                         ("SC"  . "http://joseito.republika.pl/sunrise-commander/")
+                         ) )
 (package-initialize)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+;; (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 
 ;; install use-package
 (unless (package-installed-p 'use-package)
@@ -68,3 +76,14 @@
   :init
   (setq epg-pinentry-mode 'loopback)
   (pinentry-start))
+
+(setq w3m-default-symbol
+      '("─┼" " ├" "─┬" " ┌" "─┤" " │" "─┐" ""
+        "─┴" " └" "──" ""   "─┘" ""   ""   ""
+        "─┼" " ┠" "━┯" " ┏" "─┨" " ┃" "━┓" ""
+        "━┷" " ┗" "━━" ""   "━┛" ""   ""   ""
+        " •" " □" " ☆" " ○" " ■" " ★" " ◎"
+        " ●" " △" " ●" " ○" " □" " ●" "≪ ↑ ↓ "))
+
+(standard-display-ascii ?\227 " — ")
+

@@ -9,6 +9,85 @@
   :ensure t
   :init (global-flycheck-mode))
 
+(use-package highlight-parentheses
+   :ensure t
+   :hook ((prog-mode . highlight-parentheses-mode))
+   )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Rustic
+;; https://robert.kra.hn/posts/rust-emacs-setup/#rustic
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package rustic
+  :ensure
+  :bind (:map rustic-mode-map
+              ("M-j" . lsp-ui-imenu)
+              ("M-?" . lsp-find-references)
+              ("C-c C-c l" . flycheck-list-errors)
+              ("C-c C-c a" . lsp-execute-code-action)
+              ("C-c C-c r" . lsp-rename)
+              ("C-c C-c q" . lsp-workspace-restart)
+              ("C-c C-c Q" . lsp-workspace-shutdown)
+              ("C-c C-c s" . lsp-rust-analyzer-status))
+  :config
+  ;; uncomment for less flashiness
+  ;; (setq lsp-eldoc-hook nil)
+  ;; (setq lsp-enable-symbol-highlighting nil)
+  ;; (setq lsp-signature-auto-activate nil)
+
+  ;; comment to disable rustfmt on save
+  (setq rustic-format-on-save t)
+  (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook))
+
+(defun rk/rustic-mode-hook ()
+  ;; so that run C-c C-c C-r works without having to confirm, but don't try to
+  ;; save rust buffers that are not file visiting. Once
+  ;; https://github.com/brotzeit/rustic/issues/253 has been resolved this should
+  ;; no longer be necessary.
+  (when buffer-file-name
+    (setq-local buffer-save-without-query t))
+  (add-hook 'before-save-hook 'lsp-format-buffer nil t))
+
+(use-package dash
+  :ensure t
+  :config
+  (require  'dash)
+  )
+
+(use-package irony
+  :ensure t
+  :disabled
+  :config
+  (progn
+    ;; If irony server was never installed, install it.
+    (unless (irony--find-server-executable) (call-interactively #'irony-install-server))
+
+    (add-hook 'c++-mode-hook 'irony-mode)
+    (add-hook 'c-mode-hook 'irony-mode)
+
+    ;; Use compilation database first, clang_complete as fallback.
+    (setq-default irony-cdb-compilation-databases '(irony-cdb-libclang
+                                                    irony-cdb-clang-complete))
+
+    (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+    ))
+
+;; I use irony with flycheck to get real-time syntax checking.
+(use-package flycheck-irony
+  :ensure t
+  :requires (flycheck irony)
+  :config
+  (progn
+    (eval-after-load 'flycheck '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))))
+
+;; Eldoc shows argument list of the function you are currently writing in the echo area.
+(use-package irony-eldoc
+	     :ensure t
+  :requires (eldoc irony)
+  :config
+  (progn
+    (add-hook 'irony-mode-hook #'irony-eldoc)))
+
 ;; Language server
 (use-package
   lsp-mode
@@ -25,7 +104,23 @@
          ;; if you want which-key integration
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp
-  :custom (lsp-auto-guess-root t)
+    :config
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+  :custom
+  ;; what to use when checking on-save. "check" is default, I prefer clippy
+  (lsp-rust-analyzer-cargo-watch-command "clippy")
+  (lsp-eldoc-render-all t)
+  (lsp-idle-delay 0.6)
+  ;; enable / disable the hints as you prefer:
+  (lsp-rust-analyzer-server-display-inlay-hints t)
+  (lsp-rust-analyzer-display-lifetime-elision-hints-enable "skip_trivial")
+  (lsp-rust-analyzer-display-chaining-hints t)
+  (lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names nil)
+  (lsp-rust-analyzer-display-closure-return-type-hints t)
+  (lsp-rust-analyzer-display-parameter-hints nil)
+  (lsp-rust-analyzer-display-reborrow-hints nil)
+
+  (lsp-auto-guess-root t)
   (lsp-prefer-capf t)
   (lsp-keep-workspace-alive nil))
 
@@ -37,7 +132,14 @@
 (use-package
   lsp-ui
   :ensure t
-  :commands lsp-ui-mode)
+  :commands lsp-ui-mode
+  :config
+    (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+    :custom
+  (lsp-ui-peek-always-show t)
+  (lsp-ui-sideline-show-hover t)
+  (lsp-ui-doc-enable nil))
 
 ;; if you are ivy user
 (use-package
@@ -53,10 +155,26 @@
 ;;   :commands lsp-treemacs-errors-list)
 
 ;; optional if you want which-key integration
-(use-package
-  which-key
+(use-package which-key
   :ensure t
-  :config (which-key-mode))
+  :init
+  (which-key-mode)
+  :config
+  (which-key-setup-side-window-right-bottom)
+  (which-key-show-major-mode)
+  ;; Allow C-h to trigger which-key before it is done automatically
+  (setq which-key-show-early-on-C-h t)
+  ;; make sure which-key doesn't show normally but refreshes quickly after it is
+  ;; triggered.
+  ;; (setq which-key-sort-order 'which-key-key-order-alpha
+  ;;       which-key-idle-delay 10000
+  ;;       which-key-idle-secondary-delay 0.05)
+  :diminish which-key-mode)
+
+;; optionally if you want to use debugger
+(use-package dap-mode
+	     :ensure t)
+;; (use-package dap-LANGUAGE) to load the dap adapter for your language
 
 ;; clang-format
 (use-package
@@ -108,5 +226,52 @@ otherwise assumed alphabetic."
 						  (equal "WebKit" base-style))
 						 (setq-local indent-tabs-mode nil))))))))))
 
+(use-package clang-format+
+	     :ensure t
+  :config
+  (add-hook 'c-mode-common-hook #'clang-format+-mode)
+  (add-hook 'c-mode-hook 'clang-format+-mode)
+  (setq clang-format+-context #'modification)
+  (local-set-key [tab] 'clang-format-region))
+
 (use-package yaml-mode
   :ensure t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;; Yasipnet ;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package yasnippet
+	     :ensure t
+	     :config
+	     (yas-global-mode 1)
+	     (defun yas-popup-isearch-prompt (prompt choices &optional display-fn)
+	       (when (featurep 'popup)
+		 (popup-menu*
+		  (mapcar
+		   (lambda (choice)
+		     (popup-make-item
+		      (or (and display-fn (funcall display-fn choice))
+			  choice)
+		      :value choice))
+		   choices)
+		  :prompt prompt
+		  ;; start isearch mode immediately
+		  :isearch t
+		  )))
+	     
+	     (setq yas-prompt-functions '(yas-popup-isearch-prompt yas-ido-prompt yas-no-prompt))
+	     )
+;;;;;;;;;; END YAS ;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;; Navigation ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package ggtags
+	     :ensure t
+  :requires xref
+  :config
+  ;; Enable helm-gtags-mode in languages that GNU Global supports
+  (add-hook 'c-mode-hook 'ggtags-mode 'xref-etags-mode)
+  (add-hook 'c++-mode-hook 'ggtags-mode  'xref-etags-mode)
+  (add-hook 'java-mode-hook 'ggtags-mode 'xref-etags-mode)
+  (add-hook 'asm-mode-hook 'ggtags-mode 'xref-etags-mode)
+  (add-hook 'python-mode 'ggtags-mode 'xref-etags-mode)
+  (add-hook 'lisp-mode 'ggtags-mode 'xref-etags-mode)
+  (add-hook 'elisp-mode 'ggtags-mode 'xref-etags-mode)
+  )

@@ -16,10 +16,10 @@
 
   (setq spacemacs-theme-org-agenda-height nil)
   (setq spacemacs-theme-org-height nil)
-  (setq-default
-   custom-enabled-themes (quote (spacemacs-dark))
-   custom-safe-themes
-   (quote ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
+  ;; (setq-default
+  ;;  custom-enabled-themes (quote (spacemacs-dark))
+  ;;  custom-safe-themes
+  ;;  (quote ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
 
   ;; Use the `spacemacs-dark` theme.
   (load-theme 'spacemacs-dark))
@@ -88,3 +88,10 @@
   :init
   ;; Automatically dim other windows
   (auto-dim-other-buffers-mode t))
+
+;; Nyan cat position indicator
+(use-package
+  nyan-mode
+  :ensure t
+  :init
+  (nyan-mode))

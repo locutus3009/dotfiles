@@ -2,7 +2,13 @@
 (use-package
   magit
   :ensure t
-  :bind ("C-x g" . magit-status))
+  :bind ("C-x g" . magit-status)
+    :config
+  ;; For Magit: disable auto revert buffer
+  (setq magit-auto-revert-mode nil)
+  (setq magit-gpg-secret-key-hist nil)    ; For working gpg-agent
+  (global-set-key (kbd "C-c g") 'magit-file-dispatch)
+)
 
 ;; SQlite3 is needed by forge
 (use-package sqlite3
@@ -22,6 +28,11 @@
   :config (projectile-mode +1)
   ;; Recommended keymap prefix on Windows/Linux
   (define-key projectile-mode-map (kbd "M-m p") 'projectile-command-map)
+  (setq projectile-completion-system 'ivy
+        ;; projectile-indexing-method 'git
+        projectile-enable-caching t
+        projectile-indexing-method 'native
+        )
   (setq projectile-run-use-comint-mode t)
   (setq projectile-compile-use-comint-mode t)
   (setq projectile-project-search-path '("~/dev" ("~/dev/hm-grc-scripts" . 2))))

@@ -16,7 +16,8 @@
   ;; Navigate in completion minibuffer with `C-n` and `C-p`.
   :bind (:map company-active-map
 	      ("C-n" . company-select-next)
-	      ("C-p" . company-select-previous))
+	      ("C-p" . company-select-previous)
+	      ("M-/" . company-complete-common-or-cycle))
   :config
   ;; Provide instant autocompletion.
   (setq company-idle-delay 0.3)
@@ -56,7 +57,9 @@
   (global-set-key (kbd "C-c k") 'counsel-ag)
   (global-set-key (kbd "C-x l") 'counsel-locate)
   (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
-  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history))
+  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+    (setq ivy-count-format "(%d/%d) ")
+)
 
 ;; counsel-projectile
 (use-package
