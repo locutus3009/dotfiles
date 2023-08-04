@@ -174,12 +174,13 @@ ruled.client.connect_signal(
 					'jetbrains-studio',
 					'Ettercap',
 					'scrcpy',
-                    'Emacs'
+					 'Emacs'
 				}
 			},
 			properties = {
 				tag = '3',
-				skip_decoration = true
+				skip_decoration = true,
+				size_hints_honor = false
 			}
 		}
 
