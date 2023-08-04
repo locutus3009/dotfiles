@@ -34,5 +34,11 @@
 ;; Treemacs setup & file browsing
 ;; (load-file "~/.config/emacs/treemacs.el")
 
+;; Dired sidebar file browsing
+(load-file "~/.config/emacs/dired.el")
+
+;; Gitlab integration
+(load-file "~/.config/emacs/gitlab.el")
+
 ;; Startup dashboard
 (load-file "~/.config/emacs/dashboard.el")
