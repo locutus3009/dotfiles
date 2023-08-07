@@ -3,7 +3,7 @@
 :config
   ;; (org :variables
   ;;      org-enable-jira-support t
-  ;;      org-jira-working-dir "~/org/")
+  ;;      org-jira-working-dir "~/ORG/")
   ;; Enable habits module
   (add-to-list 'org-modules 'org-habit t))
 
@@ -64,7 +64,7 @@
 (add-hook 'org-mode-hook 'auto-fill-mode)
 
 ;; Default notes file
-(setq org-default-notes-file "~/org/refile.org")
+(setq org-default-notes-file "~/ORG/refile.org")
 
 ;; Define the custum capture templates
 (setq org-capture-templates '(("t" "todo" entry (file org-default-notes-file) "* TODO %?\n%u\n%a\n"
@@ -73,16 +73,16 @@
 ("m" "Meeting" entry (file org-default-notes-file) "* MEETING with %? :MEETING:\n%t\n%a\n"
 :clock-in t
 :clock-resume t)
-("o" "Journal clocked" entry (file+datetree "~/org/journal.org") "* %? :JOURNAL:\n%t\n%a\n"
+("o" "Journal clocked" entry (file+datetree "~/ORG/journal.org") "* %? :JOURNAL:\n%t\n%a\n"
 :clock-in t
 :clock-resume t)
-("j" "Journal" entry (file+datetree "~/org/journal.org") "* %? :JOURNAL:\n%t\n%U\n%i\n%a\n"
+("j" "Journal" entry (file+datetree "~/ORG/journal.org") "* %? :JOURNAL:\n%t\n%U\n%i\n%a\n"
 :clock-in t
 :clock-resume t)
 ("i" "Idea" entry (file org-default-notes-file) "* %? :IDEA:\n%t\n%a\n"
 :clock-in t
 :clock-resume t)
-("h" "Habit" entry (file "~/org/habits.org") "* NEXT %? :HABIT:\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n%u\n%a\n")
+("h" "Habit" entry (file "~/ORG/habits.org") "* NEXT %? :HABIT:\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n%u\n%a\n")
 ("n" "Next Task" entry (file+headline org-default-notes-file "Tasks") "** NEXT %? \nDEADLINE: %t") ))
 
 (setq org-clock-clocktable-default-properties (quote (:maxlevel 10 
@@ -127,7 +127,7 @@
 ;; Set to <your Dropbox root directory>/MobileOrg.
 (setq org-directory "~/org")
 
-(setq org-agenda-files (append (file-expand-wildcards "~/org/*.org")))
+(setq org-agenda-files (append (file-expand-wildcards "~/ORG/*.org")))
 (setq org-agenda-start-with-log-mode t)
 ;; Log creation time of TODO also
 (setq org-treat-insert-todo-heading-as-state-change t)
