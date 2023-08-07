@@ -81,4 +81,4 @@
   (require 'epa-file)
   (epa-file-enable)
   (require 'org-tempo)
-  (setq org-agenda-files (append (file-expand-wildcards "~/ORG/*.org"))))
+  (setq org-agenda-files (append (file-expand-wildcards "~/ORG/*.org") (file-expand-wildcards "~/mnt/ORG/*.org"))))
