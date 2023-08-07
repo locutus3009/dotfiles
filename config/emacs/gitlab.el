@@ -70,5 +70,5 @@
 
 (defun emacs-gitlab-to-org-file ()
 (interactive)
-(let ((file "~/org/gitlab.org"))
+(let ((file "~/ORG/gitlab.org"))
 (with-temp-file file (insert (gitlab-to-org)))))
