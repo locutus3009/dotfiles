@@ -71,3 +71,11 @@
 ;;   :ensure t
 ;;   :init
 ;;   (simpleclip-mode 1))
+
+(use-package
+ visual-fill-column
+ :ensure t
+ :config
+ (add-hook
+  'visual-line-mode-hook #'visual-fill-column-mode)
+ (setq-default visual-fill-column-center-text t))
