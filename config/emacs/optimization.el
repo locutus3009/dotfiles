@@ -24,6 +24,7 @@
    (setq file-name-handler-alist file-name-handler-alist-original)
    (makunbound 'gc-cons-threshold-original)
    (makunbound 'file-name-handler-alist-original)
-   (message "gc-cons-threshold and file-name-handler-alist restored")))
+   (message
+    "gc-cons-threshold and file-name-handler-alist restored")))
 
 (provide 'optimization)

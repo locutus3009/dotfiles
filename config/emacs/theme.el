@@ -6,23 +6,23 @@
 
 ;; Use spacemacs theme
 (use-package
-  spacemacs-theme
-  :config
-  ;; Do not use a different background color for comments.
-  (setq spacemacs-theme-comment-bg nil)
+ spacemacs-theme
+ :config
+ ;; Do not use a different background color for comments.
+ (setq spacemacs-theme-comment-bg nil)
 
-  ;; Comments should appear in italics.
-  (setq spacemacs-theme-comment-italic t)
+ ;; Comments should appear in italics.
+ (setq spacemacs-theme-comment-italic t)
 
-  (setq spacemacs-theme-org-agenda-height nil)
-  (setq spacemacs-theme-org-height nil)
-  ;; (setq-default
-  ;;  custom-enabled-themes (quote (spacemacs-dark))
-  ;;  custom-safe-themes
-  ;;  (quote ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
+ (setq spacemacs-theme-org-agenda-height nil)
+ (setq spacemacs-theme-org-height nil)
+ ;; (setq-default
+ ;;  custom-enabled-themes (quote (spacemacs-dark))
+ ;;  custom-safe-themes
+ ;;  (quote ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
 
-  ;; Use the `spacemacs-dark` theme.
-  (load-theme 'spacemacs-dark))
+ ;; Use the `spacemacs-dark` theme.
+ (load-theme 'spacemacs-dark))
 
 ;; Solarized theme
 ;; (use-package
@@ -52,16 +52,16 @@
 ;;   (doom-themes-org-config))
 
 ;; nerd icons
-(use-package nerd-icons
-  :ensure t)
+(use-package nerd-icons :ensure t)
 
 ;; modeline from doom emacs
-(use-package doom-modeline
-  :ensure t
-  :hook (after-init . doom-modeline-mode)
-  :config
-  (setq doom-modeline-project-detection 'projectile)
-  (setq find-file-visit-truename t))
+(use-package
+ doom-modeline
+ :ensure t
+ :hook (after-init . doom-modeline-mode)
+ :config
+ (setq doom-modeline-project-detection 'projectile)
+ (setq find-file-visit-truename t))
 
 ;; ;; A nice looking modeline enhancement
 ;; (use-package spaceline
@@ -83,15 +83,11 @@
 
 ;; Auto dim other window
 (use-package
-  auto-dim-other-buffers
-  :ensure t
-  :init
-  ;; Automatically dim other windows
-  (auto-dim-other-buffers-mode t))
+ auto-dim-other-buffers
+ :ensure t
+ :init
+ ;; Automatically dim other windows
+ (auto-dim-other-buffers-mode t))
 
 ;; Nyan cat position indicator
-(use-package
-  nyan-mode
-  :ensure t
-  :init
-  (nyan-mode))
+(use-package nyan-mode :ensure t :init (nyan-mode))
