@@ -149,9 +149,9 @@
 (require 'org-tempo)
 
 ;; Set to <your Dropbox root directory>/MobileOrg.
-(setq org-directory "~/org")
+(setq org-directory "~/ORG")
 
-(setq org-agenda-files (append (file-expand-wildcards "~/ORG/*.org")))
+(setq org-agenda-files (append (file-expand-wildcards "~/ORG/*.org") (file-expand-wildcards "~/mnt/ORG/*.org")))
 (setq org-agenda-start-with-log-mode t)
 ;; Log creation time of TODO also
 (setq org-treat-insert-todo-heading-as-state-change t)
