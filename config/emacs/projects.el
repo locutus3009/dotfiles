@@ -41,11 +41,13 @@
   projectile-completion-system 'ivy
   ;; projectile-indexing-method 'git
   projectile-enable-caching t
-  projectile-indexing-method 'native)
+  projectile-indexing-method 'alien)
  (setq projectile-run-use-comint-mode t)
  (setq projectile-compile-use-comint-mode t)
  (setq projectile-project-search-path
-       '("~/dev" ("~/dev/hm-grc-scripts" . 2))))
+       '("~/dev" ("~/dev/hm-grc-scripts" . 2)))
+ ;; Use ggtags explicitly
+ (setq projectile-tags-backend 'ggtags))
 
 ;; Tune projectile to compile & run interactively
 (defun my/projectile-run (arg &optional dir)
