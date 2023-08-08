@@ -177,7 +177,7 @@
  :ensure t
  :init (which-key-mode)
  :config
- (which-key-setup-side-window-right-bottom)
+ (which-key-setup-side-window-bottom)
  (which-key-show-major-mode)
  ;; Allow C-h to trigger which-key before it is done automatically
  (setq which-key-show-early-on-C-h t)
