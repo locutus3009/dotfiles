@@ -47,5 +47,5 @@ ln -sf "$CURRENT_DIR/config/pulse" "$HOME/.config/pulse"
 
 # Additional scripts
 mkdir -p "$HOME/apps"
-mkdir -p "$HOME/apps/bin"
-ln -sf "$CURRENT_DIR/apps/bin/run_hm_linux.sh" "$HOME/apps/bin/run_hm_linux.sh"
+rm -rf "$HOME/apps/bin"
+ln -sf "$CURRENT_DIR/apps/bin" "$HOME/apps/bin"
