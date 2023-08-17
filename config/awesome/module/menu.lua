@@ -11,7 +11,7 @@ local hotkeys_popup = require('awful.hotkeys_popup').widget
 
 local terminal = apps.default.terminal
 local web_browser = apps.default.web_browser
-local file_manager = apps.default.file_manager
+local file_manager = apps.default.file_manager_console
 local text_editor = apps.default.text_editor
 local editor_cmd = terminal .. ' -e ' .. (os.getenv('EDITOR') or 'nano')
 

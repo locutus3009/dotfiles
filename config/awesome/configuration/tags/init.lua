@@ -41,7 +41,7 @@ local tags = {
    {
       type = 'files',
       icon = icons.file_manager,
-      default_app = apps.default.file_manager,
+      default_app = apps.default.file_manager_console,
       gap = beautiful.useless_gap,
       layout = awful.layout.suit.tile
    },
