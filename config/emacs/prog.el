@@ -12,7 +12,12 @@
  (elisp-autofmt-mode t))
 
 ;; Flycheck -- syntax checking
-(use-package flycheck :ensure t :init (global-flycheck-mode))
+(use-package
+ flycheck
+ :ensure t
+ :init
+ (global-flycheck-mode)
+ (setq flycheck-rust-cargo-executable "~/.cargo/bin/cargo"))
 
 (use-package
  highlight-parentheses
