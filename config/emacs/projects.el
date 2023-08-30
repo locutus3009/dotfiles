@@ -36,7 +36,7 @@
  :config (projectile-mode +1)
  ;; Recommended keymap prefix on Windows/Linux
  (define-key
-  projectile-mode-map (kbd "M-m p") 'projectile-command-map)
+  projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
  (setq
   projectile-completion-system 'ivy
   ;; projectile-indexing-method 'git
