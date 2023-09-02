@@ -30,8 +30,7 @@
   "Save buffers, Quit, and Shutdown (kill) server"
   (interactive)
   (save-some-buffers)
-  (kill-emacs)
-  )
+  (kill-emacs))
 
 ;; Store authentification data in external file
 (setq auth-sources '("~/.authinfo.gpg"))
@@ -42,7 +41,7 @@
 ;; Do not use `init.el` for `custom-*` code - use `custom-file.el`.
 (setq custom-file "~/.emacs.d/custom.el")
 (when (file-exists-p custom-file)
-    (load custom-file))
+  (load custom-file))
 
 ;; Assuming that the code in custom-file is execute before the code
 ;; ahead of this line is not a safe assumption. So load this file
@@ -51,8 +50,15 @@
 
 ;; Add melpa package manager
 (require 'package)
+(setq package-archives
+      '(("gnu" . "http://elpa.gnu.org/packages/")
+        ("melpa" . "https://melpa.org/packages/")
+        ("gnu" . "http://elpa.gnu.org/packages")
+        ("marmalade" . "http://marmalade-repo.org/packages/")
+        ("org" . "http://orgmode.org/elpa/") ; Org-mode's repository
+        ("SC" . "http://joseito.republika.pl/sunrise-commander/")))
 (package-initialize)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+;; (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 
 ;; install use-package
 (unless (package-installed-p 'use-package)
@@ -63,8 +69,64 @@
   (require 'use-package))
 
 ;; Use pinentry to type passwords
-(use-package pinentry
-  :ensure t
-  :init
-  (setq epg-pinentry-mode 'loopback)
-  (pinentry-start))
+(use-package
+ pinentry
+ :ensure t
+ :init
+ (setq epg-pinentry-mode 'loopback)
+ (pinentry-start))
+
+(setq w3m-default-symbol
+      '("─┼"
+        " ├"
+        "─┬"
+        " ┌"
+        "─┤"
+        " │"
+        "─┐"
+        ""
+        "─┴"
+        " └"
+        "──"
+        ""
+        "─┘"
+        ""
+        ""
+        ""
+        "─┼"
+        " ┠"
+        "━┯"
+        " ┏"
+        "─┨"
+        " ┃"
+        "━┓"
+        ""
+        "━┷"
+        " ┗"
+        "━━"
+        ""
+        "━┛"
+        ""
+        ""
+        ""
+        " •"
+        " □"
+        " ☆"
+        " ○"
+        " ■"
+        " ★"
+        " ◎"
+        " ●"
+        " △"
+        " ●"
+        " ○"
+        " □"
+        " ●"
+        "≪ ↑ ↓ "))
+
+(standard-display-ascii ?\227 " — ")
+
+(setq visible-bell t)
+
+;; backup in one place. flat, no tree structure
+(setq backup-directory-alist '(("" . "~/.emacs.d/backup")))

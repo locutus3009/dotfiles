@@ -56,8 +56,6 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-. ~/prompt.sh "${color_prompt}"
-
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
@@ -120,12 +118,32 @@ alias cmagit='cemacscli  -eval \(magit-status\)'
 alias cagenda="cemacscli -eval \(org-agenda-list\)"
 alias emacscli='emacsclient -c -a emacs'
 alias magit='emacscli  -eval \(magit-status\)'
-export ALTERNATE_EDITOR=""
-export EDITOR="cemacscli"        # $EDITOR opens in terminal
-export VISUAL="emacscli"         # $VISUAL opens in GUI mode
+alias kssh="kitty +kitten ssh"
+alias ssh="TERM=linux ssh"
+
+# Set SSH to use gpg-agent
+unset SSH_AGENT_PID
+if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+    export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
+fi
+
+export GPG_TTY=$(tty)
+gpg-connect-agent updatestartuptty /bye >> /dev/null
+
+export DE='gnome'
+export DM='awesome'
+export XDG_CURRENT_DESKTOP=GNOME
+export EDITOR='emacsclient -c -nw -a emacs'
+export VISUAL='emacsclient -c -a emacs'
+export RANGER_LOAD_DEFAULT_RC=FALSE
+#export ALTERNATE_EDITOR=""
+#export EDITOR="cemacscli"        # $EDITOR opens in terminal
+#export VISUAL="emacscli"         # $VISUAL opens in GUI mode
 export PATH="$PATH:/usr/sbin"
 export PATH="$PATH:/home/locutus/apps/Zotero_linux-x86_64"
 export PATH="$PATH:/home/locutus/apps"
+export PATH="$PATH:/home/locutus/apps/bin"
 export PATH="$PATH:/home/locutus/Foundation_Platform/models/Linux64_GCC-6.4"
 
-source ~/bash-preexec.sh
+source "$HOME/bash-preexec.sh"
+eval "$(starship init bash)"

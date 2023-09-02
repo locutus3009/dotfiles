@@ -23,7 +23,7 @@
 (load-file "~/.config/emacs/prog.el")
 
 ;; Fine-tuning org-mode
-(load-file "~/.config/emacs/agenda.el")
+(load-file "~/.config/emacs/orgconf.el")
 
 ;; Mail
 ;; (load-file "~/.config/emacs/mail.el")
@@ -33,6 +33,18 @@
 
 ;; Treemacs setup & file browsing
 ;; (load-file "~/.config/emacs/treemacs.el")
+
+;; Dired sidebar file browsing
+(load-file "~/.config/emacs/dired.el")
+
+;; Gitlab integration
+(load-file "~/.config/emacs/gitlab.el")
+
+;; ranger-like directory browser integration
+;; (load-file "~/.config/emacs/ranger.el")
+
+;; Optimization
+(load-file "~/.config/emacs/optimization.el")
 
 ;; Startup dashboard
 (load-file "~/.config/emacs/dashboard.el")

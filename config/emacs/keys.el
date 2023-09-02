@@ -26,7 +26,9 @@
 (global-unset-key (kbd "<mouse-3>"))
 
 ;; Movement between windows
-(global-set-key (kbd "C-x C-p") 'windmove-up)
-(global-set-key (kbd "C-x C-n") 'windmove-down)
+(global-set-key (kbd "C-x p") 'windmove-up)
+(global-set-key (kbd "C-x n") 'windmove-down)
+(global-set-key (kbd "C-x .") 'windmove-right)
+(global-set-key (kbd "C-x ,") 'windmove-left)
 (global-set-key (kbd "C-x C-.") 'windmove-right)
 (global-set-key (kbd "C-x C-,") 'windmove-left)

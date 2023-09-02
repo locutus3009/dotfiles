@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+
+# /usr/lib/xfce4/notifyd/xfce4-notifyd &
+# Make sure this is before the 'exec' command or it won't be sourced.
+# [ -f /etc/xprofile ] && source /etc/xprofile
+
+## Monitor config:
+#~/bin/monitor-control.sh
+# xrandr --output VGA1  --mode 1280x1024 --rotate left --auto --dpi 100
+# xrandr --output HDMI1  --mode 1680x1050 --dpi 100 &
+# xrandr --output HDMI1  --mode 1680x1050 --dpi 100 --rotate left --pos 1920x0 --output HDMI2 --mode 1920x1080i --pos 1920x0
+# xrandr --output HDMI1  --mode 1680x1050 --rotate left 106 --output HDMI2 --mode 1920x1080 --left-of HDMI1 --primary --dpi 106 &
+#xrandr --output HDMI1  --mode 1680x1050 --rotate left --dpi 102 --output HDMI2  --mode 1920x1080 --right-of HDMI1 --primary --dpi 102  &
+#xrandr --output DP-1  --auto --rotate normal --output LVDS-1  --off
+#xrandr --output HDMI1  --auto --dpi 120 --rotate left --output HDMI2 --mode 1920x1080 --right-of HDMI1 --primary --dpi 120
+#xrandr --output HDMI1  --mode 1680x1050 --rotate normal --dpi 100 --primary --output HDMI2 --off &
+# xrandr --output HDMI-1  --auto --rotate normal --output HDMI-2  --auto --rotate normal
+# xrandr --output eDP-1-1 --mode 2880x1620 --rotate normal --output DP-1-2  --auto --rotate normal --left-of eDP-1-1
+# xrandr --output eDP-1-1 --auto --rotate normal --output HDMI-1-1  --auto --rotate normal --left-of eDP-1-1
+xrandr --output DisplayPort-2 --auto --rotate normal
+
+#xcompmgr -c -t-5 -l-5 -r4.2 -o.55 &
+# keyboard conf:
+#setxkbmap  -layout us,ru -option terminate:ctrl_alt_bksp,grp:caps_toggle,grp_led:caps &
+# localectl set-x11-keymap us,ru "microsoft7000" ""  "terminate:ctrl_alt_bksp,grp:caps_toggle,grp_led:caps"
+
+
+if [ -s ~/.Xmodmap ]; then
+    xmodmap ~/.Xmodmap &
+fi
+# Keyboard settings
+if [ -s ~/.xbindkeysrc ]; then
+    xbindkeys -f ~/.xbindkeysrc &
+fi
+#xinput --set-prop 10 "libinput Natural Scrolling Enabled" 1
+
+if [[ ! -d ~/.cache/awesome ]]
+then
+        mkdir ~/.cache/awesome/
+fi
+#xcompmgr -fF -I-.002 -O-.003 -D1 &
+
+# gpg-connect-agent updatestartuptty /bye >> /dev/null &
+if [ -s ~/.Xresources ]; then
+    xrdb -merge ~/.Xresources &
+fi
+## export GDK_DPI_SCALE=0.5
+# export GDK_SCALE=1.5
+# export QT_AUTO_SCREEN_SCALE_FACTOR=true
+# export QT_SCALE_FACTOR=1.5
+export XDG_CURRENT_DESKTOP=GNOME
+export QT_QPA_PLATFORMTHEME="qt5ct"
+export GTK_THEME=Adwaita
+#export GTK2_RC_FILES=~/.themes/lovelace/gtk-2.0/gtkrc
+
+# Gnome Services
+
+#exec gnome-session --debug &
+# exec gnome-session --debug &
+exec dbus-launch --exit-with-session   /usr/bin/awesome >> ~/.cache/awesome/stdout 2>&1
+# exec xfce4-session >  ~/.cache/awesome/xfce4-session.log 2>&1
+# exec  ck-launch-session dbus-launch --exit-with-session /usr/bin/awesome
+# exec ck-launch-session /usr/bin/awesome >> ~/.cache/awesome/stderr 2&1
+#	*)
+#		echo "\$1 == $1"
+#		exec  ck-launch-session dbus-launch --exit-with-session /usr/bin/i3;;
+#esac
