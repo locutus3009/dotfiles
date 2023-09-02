@@ -255,7 +255,7 @@
      (org-agenda-time-grid nil) (org-agenda-show-all-dates nil)
      (org-agenda-entry-types '(:scheduled)) ;; this entry excludes :scheduled
      ))
-   (" " "Agenda"
+   ("m" "Agenda"
     ((agenda "" nil)
      (tags
       "REFILE"
