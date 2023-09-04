@@ -6,7 +6,8 @@
 
 ;; Use spacemacs theme
 (use-package
- spacemacs-theme
+  spacemacs-theme
+ :ensure t
  :config
  ;; Do not use a different background color for comments.
  (setq spacemacs-theme-comment-bg nil)

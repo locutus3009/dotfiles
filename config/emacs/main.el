@@ -36,7 +36,8 @@
 (setq auth-sources '("~/.authinfo.gpg"))
 
 ;; Start as server
-(server-start)
+(require 'server)
+(unless (server-running-p) (server-start))
 
 ;; Do not use `init.el` for `custom-*` code - use `custom-file.el`.
 (setq custom-file "~/.emacs.d/custom.el")
