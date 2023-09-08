@@ -10,7 +10,7 @@
  (global-set-key (kbd "\C-c\C-x g p") 'ivy-gitlab-list-projects)
  (setq
   gitlab-host "https://rnd-gitlab-eu-c.huawei.com"
-  gitlab-token-id "vAk9sQsfUfxibzgHz9UM"))
+  gitlab-token-id "VH7Cwajz2DAMXEsyXJz1"))
 
 (defun gitlab-issue-status-to-org (issue)
   (cond

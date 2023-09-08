@@ -145,5 +145,7 @@ export PATH="$PATH:/home/locutus/apps"
 export PATH="$PATH:/home/locutus/apps/bin"
 export PATH="$PATH:/home/locutus/Foundation_Platform/models/Linux64_GCC-6.4"
 
+#export MPD_HOST=$HOME/.config/mpd/socket
+
 source "$HOME/bash-preexec.sh"
 eval "$(starship init bash)"
