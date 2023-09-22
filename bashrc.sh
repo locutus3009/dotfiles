@@ -121,6 +121,10 @@ alias magit='emacscli  -eval \(magit-status\)'
 alias kssh="kitty +kitten ssh"
 alias ssh="TERM=linux ssh"
 
+alias poweroff="echo \"Please run /usr/sbin/poweroff explicitly\""
+alias reboot="echo \"Please run /usr/sbin/reboot explicitly\""
+alias shutdown="echo \"Please run /usr/sbin/shutdown explicitly\""
+
 # Set SSH to use gpg-agent
 unset SSH_AGENT_PID
 if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
