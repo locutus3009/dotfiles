@@ -493,6 +493,30 @@ local global_keys = awful.util.table.join(
 			focused.info_center:toggle()
 		end,
 		{description = 'open info center', group = 'launcher'}
+	),
+	awful.key(
+	   {'Ctrl'},
+	   '1',
+	   function()
+	      awful.spawn("ibus engine xkb:us::eng", false)
+	   end,
+	   {description = 'Select input method English', group = 'language'}
+	),
+	awful.key(
+	   {'Ctrl'},
+	   '2',
+	   function()
+	      awful.spawn("ibus engine hangul", false)
+	   end,
+	   {description = 'Select input method Korean (Hangul)', group = 'language'}
+	),
+	awful.key(
+	   {'Ctrl'},
+	   '3',
+	   function()
+	      awful.spawn("ibus engine xkb:ru::rus", false)
+	   end,
+	   {description = 'Select input method Russian', group = 'language'}
 	)
 )
 
