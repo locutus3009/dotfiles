@@ -57,6 +57,7 @@ export GTK_THEME=Adwaita
 # Gnome Services
 
 # Setup ibus
+export GLFW_IM_MODULE=ibus
 export GTK_IM_MODULE=ibus
 export QT_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
