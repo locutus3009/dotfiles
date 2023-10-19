@@ -1,6 +1,7 @@
 local awful = require('awful')
 local beautiful = require('beautiful')
 local wibox = require("wibox")
+local gears = require("gears")
 
 require('awful.autofocus')
 
@@ -14,6 +15,16 @@ local apps = require('configuration.apps')
 local text_widget = wibox.widget {
     text = "This is a sample text",
     widget = wibox.widget.textbox
+}
+
+-- Create a popup with the text widget
+local popup = awful.popup {
+    widget = text_widget,
+    border_color = "#000000",
+    border_width = 1,
+    placement = awful.placement.centered,
+    shape = gears.shape.rounded_rect,
+    visible = false
 }
 
 -- Key bindings
@@ -506,6 +517,10 @@ local global_keys = awful.util.table.join(
 	   '1',
 	   function()
 	      awful.spawn("ibus engine xkb:us::eng", false)
+	      popup.visible = true
+	      gears.timer.start_new(1, function()
+				       popup.visible = false
+	      end)
 	   end,
 	   {description = 'Select input method English', group = 'language'}
 	),
