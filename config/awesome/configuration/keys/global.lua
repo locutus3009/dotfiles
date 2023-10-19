@@ -11,20 +11,27 @@ local modkey = require('configuration.keys.mod').mod_key
 local altkey = require('configuration.keys.mod').alt_key
 local apps = require('configuration.apps')
 
--- Create a text widget
-local text_widget = wibox.widget {
-    text = "This is a sample text",
-    widget = wibox.widget.textbox
+local language_text_widget = wibox.widget {
+    text = "EN",
+    widget = wibox.widget.textbox,
+    font = "Arial 36" -- Specify the font name and size here
 }
 
 -- Create a popup with the text widget
 local popup = awful.popup {
-    widget = text_widget,
-    border_color = "#000000",
-    border_width = 1,
-    placement = awful.placement.centered,
-    shape = gears.shape.rounded_rect,
-    visible = false
+   widget = {
+      {
+	 language_text_widget,
+	 layout = wibox.layout.fixed.vertical,
+      },
+      margins = 10,
+      widget  = wibox.container.margin
+   },
+   border_width = 1,
+   placement = awful.placement.centered,
+   shape = gears.shape.rounded_rect,
+   visible = false,
+   ontop = true
 }
 
 -- Key bindings
@@ -517,6 +524,7 @@ local global_keys = awful.util.table.join(
 	   '1',
 	   function()
 	      awful.spawn("ibus engine xkb:us::eng", false)
+	      language_text_widget.text = "EN"
 	      popup.visible = true
 	      gears.timer.start_new(1, function()
 				       popup.visible = false
@@ -529,6 +537,11 @@ local global_keys = awful.util.table.join(
 	   '2',
 	   function()
 	      awful.spawn("ibus engine hangul", false)
+	      language_text_widget.text = "KO"
+	      popup.visible = true
+	      gears.timer.start_new(1, function()
+				       popup.visible = false
+	      end)
 	   end,
 	   {description = 'Select input method Korean (Hangul)', group = 'language'}
 	),
@@ -537,6 +550,11 @@ local global_keys = awful.util.table.join(
 	   '3',
 	   function()
 	      awful.spawn("ibus engine xkb:ru::rus", false)
+	      language_text_widget.text = "RU"
+	      popup.visible = true
+	      gears.timer.start_new(1, function()
+				       popup.visible = false
+	      end)
 	   end,
 	   {description = 'Select input method Russian', group = 'language'}
 	)
