@@ -537,7 +537,7 @@ local global_keys = awful.util.table.join(
 	   '2',
 	   function()
 	      awful.spawn("ibus engine hangul", false)
-	      language_text_widget.text = "KO"
+	      language_text_widget.text = "한"
 	      popup.visible = true
 	      gears.timer.start_new(1, function()
 				       popup.visible = false
@@ -550,7 +550,7 @@ local global_keys = awful.util.table.join(
 	   '3',
 	   function()
 	      awful.spawn("ibus engine xkb:ru::rus", false)
-	      language_text_widget.text = "RU"
+	      language_text_widget.text = "РУ"
 	      popup.visible = true
 	      gears.timer.start_new(1, function()
 				       popup.visible = false
