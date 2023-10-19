@@ -1,5 +1,6 @@
 local awful = require('awful')
 local beautiful = require('beautiful')
+local wibox = require("wibox")
 
 require('awful.autofocus')
 
@@ -8,6 +9,12 @@ local hotkeys_popup = require('awful.hotkeys_popup').widget
 local modkey = require('configuration.keys.mod').mod_key
 local altkey = require('configuration.keys.mod').alt_key
 local apps = require('configuration.apps')
+
+-- Create a text widget
+local text_widget = wibox.widget {
+    text = "This is a sample text",
+    widget = wibox.widget.textbox
+}
 
 -- Key bindings
 local global_keys = awful.util.table.join(
