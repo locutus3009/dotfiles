@@ -14,7 +14,7 @@ local apps = require('configuration.apps')
 local language_text_widget = wibox.widget {
     text = "EN",
     widget = wibox.widget.textbox,
-    font = "Arial 36" -- Specify the font name and size here
+    font = "Arial 48" -- Specify the font name and size here
 }
 
 -- Create a popup with the text widget
