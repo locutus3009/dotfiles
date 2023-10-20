@@ -543,7 +543,7 @@ local global_keys = awful.util.table.join(
 				       popup.visible = false
 	      end)
 	   end,
-	   {description = 'Select input method Korean (Hangul)', group = 'language'}
+	   {description = 'Select input method Korean (한국어)', group = 'language'}
 	),
 	awful.key(
 	   {'Ctrl'},
@@ -556,7 +556,7 @@ local global_keys = awful.util.table.join(
 				       popup.visible = false
 	      end)
 	   end,
-	   {description = 'Select input method Russian', group = 'language'}
+	   {description = 'Select input method Russian (Русский язык)', group = 'language'}
 	)
 )
 
