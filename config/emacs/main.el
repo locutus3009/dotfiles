@@ -39,6 +39,8 @@
 (require 'server)
 (unless (server-running-p) (server-start))
 
+(setq tramp-default-method "ssh")
+
 ;; Do not use `init.el` for `custom-*` code - use `custom-file.el`.
 (setq custom-file "~/.emacs.d/custom.el")
 (when (file-exists-p custom-file)
