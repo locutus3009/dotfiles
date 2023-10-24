@@ -1,5 +1,7 @@
 local awful = require('awful')
 local beautiful = require('beautiful')
+local wibox = require("wibox")
+local gears = require("gears")
 
 require('awful.autofocus')
 
@@ -8,6 +10,29 @@ local hotkeys_popup = require('awful.hotkeys_popup').widget
 local modkey = require('configuration.keys.mod').mod_key
 local altkey = require('configuration.keys.mod').alt_key
 local apps = require('configuration.apps')
+
+local language_text_widget = wibox.widget {
+    text = "EN",
+    widget = wibox.widget.textbox,
+    font = "Arial 48" -- Specify the font name and size here
+}
+
+-- Create a popup with the text widget
+local popup = awful.popup {
+   widget = {
+      {
+	 language_text_widget,
+	 layout = wibox.layout.fixed.vertical,
+      },
+      margins = 10,
+      widget  = wibox.container.margin
+   },
+   border_width = 1,
+   placement = awful.placement.centered,
+   shape = gears.shape.rounded_rect,
+   visible = false,
+   ontop = true
+}
 
 -- Key bindings
 local global_keys = awful.util.table.join(
@@ -493,6 +518,45 @@ local global_keys = awful.util.table.join(
 			focused.info_center:toggle()
 		end,
 		{description = 'open info center', group = 'launcher'}
+	),
+	awful.key(
+	   {'Ctrl'},
+	   '1',
+	   function()
+	      awful.spawn("ibus engine xkb:us::eng", false)
+	      language_text_widget.text = "EN"
+	      popup.visible = true
+	      gears.timer.start_new(1, function()
+				       popup.visible = false
+	      end)
+	   end,
+	   {description = 'Select input method English', group = 'language'}
+	),
+	awful.key(
+	   {'Ctrl'},
+	   '2',
+	   function()
+	      awful.spawn("ibus engine hangul", false)
+	      language_text_widget.text = "한"
+	      popup.visible = true
+	      gears.timer.start_new(1, function()
+				       popup.visible = false
+	      end)
+	   end,
+	   {description = 'Select input method Korean (한국어)', group = 'language'}
+	),
+	awful.key(
+	   {'Ctrl'},
+	   '3',
+	   function()
+	      awful.spawn("ibus engine xkb:ru::rus", false)
+	      language_text_widget.text = "РУ"
+	      popup.visible = true
+	      gears.timer.start_new(1, function()
+				       popup.visible = false
+	      end)
+	   end,
+	   {description = 'Select input method Russian (Русский язык)', group = 'language'}
 	)
 )
 

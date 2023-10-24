@@ -91,4 +91,4 @@
  (auto-dim-other-buffers-mode t))
 
 ;; Nyan cat position indicator
-(use-package nyan-mode :ensure t :init (nyan-mode))
+;; (use-package nyan-mode :ensure t :init (nyan-mode))

@@ -121,6 +121,10 @@ alias magit='emacscli  -eval \(magit-status\)'
 alias kssh="kitty +kitten ssh"
 alias ssh="TERM=linux ssh"
 
+alias poweroff="echo \"Please run /usr/sbin/poweroff explicitly\""
+alias reboot="echo \"Please run /usr/sbin/reboot explicitly\""
+alias shutdown="echo \"Please run /usr/sbin/shutdown explicitly\""
+
 # Set SSH to use gpg-agent
 unset SSH_AGENT_PID
 if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
@@ -144,6 +148,12 @@ export PATH="$PATH:/home/locutus/apps/Zotero_linux-x86_64"
 export PATH="$PATH:/home/locutus/apps"
 export PATH="$PATH:/home/locutus/apps/bin"
 export PATH="$PATH:/home/locutus/Foundation_Platform/models/Linux64_GCC-6.4"
+
+# Setup ibus
+export GLFW_IM_MODULE=ibus
+export GTK_IM_MODULE=ibus
+export QT_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
 
 #export MPD_HOST=$HOME/.config/mpd/socket
 
