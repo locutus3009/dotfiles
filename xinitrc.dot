@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-exec /usr/bin/awesome
+. ~/.xprofile
+#exec /usr/bin/awesome
