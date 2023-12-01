@@ -149,6 +149,7 @@ export PATH="$PATH:$HOME/apps"
 export PATH="$PATH:$HOME/apps/bin"
 export PATH="$PATH:$HOME/Foundation_Platform/models/Linux64_GCC-6.4"
 export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/racket/bin"
 
 # Setup ibus
 export GLFW_IM_MODULE=ibus
