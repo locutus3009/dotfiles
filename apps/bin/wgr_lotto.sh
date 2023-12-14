@@ -15,4 +15,4 @@ hdc shell "rm /data/mp.img"
 hdc file send build/lotto /data/lotto
 hdc file send build/test/integration/mp.img /data/mp.img
 hdc shell "chmod +x /data/lotto"
-hdc shell "export LOTTO_SEED=123 && export LOTTO_STRATEGY=random && vm.elf --plugin /data/lotto --bindcore 0 -v 4 --vgic-addr=0x7FFF000000 -k /data/mp.img -n 0"
+hdc shell "/data/lotto stress -r 10 --temporary-directory /data/tmp --output-trace /data/tmp/lotto.trace -- vm.elf --plugin /data/lotto --bindcore 0 -v 4 -b /data/mp.img -n 0 --bootaddr 0"
