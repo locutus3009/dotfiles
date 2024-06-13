@@ -148,6 +148,8 @@ export PATH="$PATH:/home/locutus/apps/Zotero_linux-x86_64"
 export PATH="$PATH:/home/locutus/apps"
 export PATH="$PATH:/home/locutus/apps/bin"
 export PATH="$PATH:/home/locutus/Foundation_Platform/models/Linux64_GCC-6.4"
+export PATH="$PATH:/home/locutus/dev/hm-grc-scripts/tools/hdc"
+export PATH="$PATH:/home/locutus/dev/platform-tools"
 
 # Setup ibus
 export GLFW_IM_MODULE=ibus

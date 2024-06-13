@@ -48,3 +48,6 @@
 
 ;; Startup dashboard
 (load-file "~/.config/emacs/dashboard.el")
+
+;; Startup dashboard
+(load-file "~/.config/emacs/emacs-copilot/copilot.el")
