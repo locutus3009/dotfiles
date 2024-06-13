@@ -48,7 +48,7 @@ require('module.titlebar')
 require('module.brightness-osd')
 require('module.volume-osd')
 require('module.lockscreen')
--- require('module.dynamic-wallpaper')
+require('module.dynamic-wallpaper')
 
 -- ░█░█░█▀█░█░░░█░░░█▀█░█▀█░█▀█░█▀▀░█▀▄
 -- ░█▄█░█▀█░█░░░█░░░█▀▀░█▀█░█▀▀░█▀▀░█▀▄
