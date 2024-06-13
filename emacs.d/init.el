@@ -48,6 +48,3 @@
 
 ;; Startup dashboard
 (load-file "~/.config/emacs/dashboard.el")
-
-;; Interactive completion
-;; (load-file "~/.config/emacs/emacs-copilot/copilot.el")
