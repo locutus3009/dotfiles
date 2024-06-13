@@ -6,4 +6,4 @@
 	url = https://github.com/elenapan/dotfiles
 [submodule "config/emacs/emacs-copilot"]
 	path = config/emacs/emacs-copilot
-	url = https://github.com/jart/emacs-copilot/
+	url = https://github.com/jart/emacs-copilot

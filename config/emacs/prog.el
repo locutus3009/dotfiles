@@ -315,3 +315,8 @@ otherwise assumed alphabetic."
 (use-package
  shfmt
  :ensure t)
+
+;; Racket tests
+(use-package
+ racket-mode
+ :ensure t)

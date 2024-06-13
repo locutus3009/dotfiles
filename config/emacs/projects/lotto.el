@@ -12,11 +12,10 @@
      ;; (add-to-list 'lsp-clients-clangd-args "--compile-commands-dir=./build" "--query-driver=/**/bin/aarch64-euler-elf-*")
      (compile-command
       .
-      "export T=virt-hyp && export E=dev && source ~/dev/hm-grc-scripts/SDK/environment-setup-aarch64-euler-elf && ./src/hm-lotto/build.sh")
+      "source ~/dev/hm-grc-scripts/SDK/environment-setup-aarch64-euler-elf qemu64lehyp && export HMSDKTARGET=$HMSDKTARGET && ./scripts/hm-lotto-build.sh")
      (projectile-project-compilation-cmd
       .
-      "export
- T=virt-hyp && export E=dev && source ~/dev/hm-grc-scripts/SDK/environment-setup-aarch64-euler-elf && ./src/hm-lotto/build.sh")))
+      "source ~/dev/hm-grc-scripts/SDK/environment-setup-aarch64-euler-elf qemu64lehyp && export HMSDKTARGET=$HMSDKTARGET && ./scripts/hm-lotto-build.sh")))
    ;; Warn about spaces used for indentation:
    (c-mode . ((c-file-style . "bsd")))))
 

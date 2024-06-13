@@ -144,12 +144,15 @@ export RANGER_LOAD_DEFAULT_RC=FALSE
 #export EDITOR="cemacscli"        # $EDITOR opens in terminal
 #export VISUAL="emacscli"         # $VISUAL opens in GUI mode
 export PATH="$PATH:/usr/sbin"
-export PATH="$PATH:/home/locutus/apps/Zotero_linux-x86_64"
-export PATH="$PATH:/home/locutus/apps"
-export PATH="$PATH:/home/locutus/apps/bin"
-export PATH="$PATH:/home/locutus/Foundation_Platform/models/Linux64_GCC-6.4"
-export PATH="$PATH:/home/locutus/dev/hm-grc-scripts/tools/hdc"
-export PATH="$PATH:/home/locutus/dev/platform-tools"
+export PATH="$PATH:$HOME/apps/Zotero_linux-x86_64"
+export PATH="$PATH:$HOME/apps"
+export PATH="$PATH:$HOME/apps/bin"
+export PATH="$PATH:$HOME/Foundation_Platform/models/Linux64_GCC-6.4"
+export PATH="$PATH:$HOME/dev/hm-grc-scripts/tools/hdc"
+export PATH="$PATH:$HOME/dev/platform-tools"
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/racket/bin"
+export PATH="$PATH:$HOME/apps/hdc"
 
 # Setup ibus
 export GLFW_IM_MODULE=ibus
