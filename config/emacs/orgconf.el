@@ -1,4 +1,8 @@
 (use-package
+ org-habit-stats
+ :ensure t)
+
+(use-package
  org
  :ensure t
  :config
