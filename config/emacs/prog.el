@@ -310,3 +310,20 @@ otherwise assumed alphabetic."
  (add-hook 'python-mode 'ggtags-mode 'xref-etags-mode)
  (add-hook 'lisp-mode 'ggtags-mode 'xref-etags-mode)
  (add-hook 'elisp-mode 'ggtags-mode 'xref-etags-mode))
+
+
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
+
+;;(use-package editorconfig
+;;  :ensure t)
+
+(add-to-list 'load-path "~/.config/emacs/copilot.el/")
+;;(load-file "~/.config/emacs/copilot.el/copilot.el")
+(require 'copilot)
+(add-hook 'prog-mode-hook 'copilot-mode)
+(define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+(define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
+(setq copilot-max-char 1000000)
