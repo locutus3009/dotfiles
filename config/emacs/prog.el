@@ -3,13 +3,13 @@
 ;;   elisp-format
 ;;   :ensure t)
 
-;; (use-package
-;;  elisp-autofmt
-;;  :ensure t
-;;  :config
-;;  (setq elisp-autofmt-python-bin "python3")
-;;  (setq elisp-autofmt-style 'native)
-;;  (elisp-autofmt-mode t))
+(use-package
+ elisp-autofmt
+ :ensure t
+ :config
+ (setq elisp-autofmt-python-bin "python3")
+ (setq elisp-autofmt-style 'native)
+ (elisp-autofmt-mode t))
 
 ;; Flycheck -- syntax checking
 (use-package

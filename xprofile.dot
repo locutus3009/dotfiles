@@ -56,6 +56,29 @@ export GTK_THEME=Adwaita
 
 # Gnome Services
 
+# Setup ibus
+export GLFW_IM_MODULE=ibus
+export GTK_IM_MODULE=ibus
+export QT_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+
+function run {
+    if ! pgrep $1 > /dev/null ;
+    then
+        $@&
+    fi
+}
+
+# ibus daemon
+run ibus-daemon -rxR
+
+# Emacs daemon
+run emacs --daemon
+
+# Enable numlock on login
+# Required numlockx to be installed
+run numlockx
+
 #exec gnome-session --debug &
 # exec gnome-session --debug &
 exec dbus-launch --exit-with-session   /usr/bin/awesome >> ~/.cache/awesome/stdout 2>&1
