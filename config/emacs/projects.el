@@ -72,4 +72,5 @@ because by default projectile does not."
 (make-variable-buffer-local 'compile-command)
 
 ;; Projects
+(load-file "~/.config/emacs/projects/linux.el")
 (load-file "~/.config/emacs/projects/dummy.el")
