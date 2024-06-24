@@ -79,7 +79,7 @@
  (add-hook
   'visual-line-mode-hook #'visual-fill-column-mode)
  (setq-default visual-fill-column-center-text t))
-+
+
 ;; Goto last change
 ;; (use-package
 ;;  goto-last-change

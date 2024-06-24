@@ -311,6 +311,10 @@ otherwise assumed alphabetic."
  (add-hook 'lisp-mode 'ggtags-mode 'xref-etags-mode)
  (add-hook 'elisp-mode 'ggtags-mode 'xref-etags-mode))
 
+;; Shell-format
+(use-package
+ shfmt
+ :ensure t)
 
 (use-package editorconfig
   :ensure t
