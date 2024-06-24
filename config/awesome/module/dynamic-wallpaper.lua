@@ -36,7 +36,7 @@ local wall_config = {
 	valid_picture_formats = config.module.dynamic_wallpaper.valid_picture_formats or {"jpg", "png", "jpeg"},
 
 	-- Table mapping schedule to wallpaper filename
-	wallpaper_schedule = config.module.dynamic_wallpaper.wallpaper_schedule or {
+	wallpaper_schedule = {
 		['00:00:00'] = 'wallhaven-1poo61.jpg',
 		['06:22:00'] = 'wallhaven-x1pv1v.png',
 		['12:00:00'] = 'noon-wallhaven-jxd1x5.jpg',
