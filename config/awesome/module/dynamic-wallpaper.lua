@@ -37,10 +37,10 @@ local wall_config = {
 
 	-- Table mapping schedule to wallpaper filename
 	wallpaper_schedule = config.module.dynamic_wallpaper.wallpaper_schedule or {
-		['00:00:00'] = 'midnight-wallpaper.jpg',
-		['06:22:00'] = 'morning-wallpaper.jpg',
-		['12:00:00'] = 'noon-wallpaper.jpg',
-		['17:58:00'] = 'night-wallpaper.jpg'
+		['00:00:00'] = 'wallhaven-1poo61.jpg',
+		['06:22:00'] = 'wallhaven-x1pv1v.png',
+		['12:00:00'] = 'noon-wallhaven-jxd1x5.jpg',
+		['17:58:00'] = 'night-wallhaven-jxlwpm.jpg'
 	},
 
 	-- Don't stretch wallpaper on multihead setups if true
