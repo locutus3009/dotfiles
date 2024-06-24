@@ -3,9 +3,9 @@
 CURRENT_DIR=$(pwd)
 
 # Top level files
-ln -sf "$CURRENT_DIR/bashrc.sh" "$HOME/.bashrc"
-ln -sf "$CURRENT_DIR/gdbinit.gdb" "$HOME/.gtbinit"
-ln -sf "$CURRENT_DIR/asound.conf" "$HOME/.asound.conf"
+ln -sf "$CURRENT_DIR/bashrc.dot.sh" "$HOME/.bashrc"
+ln -sf "$CURRENT_DIR/gdbinit.dot" "$HOME/.gtbinit"
+ln -sf "$CURRENT_DIR/asound.conf.dot" "$HOME/.asound.conf"
 ln -sf "$CURRENT_DIR/bash-preexec.sh" "$HOME/bash-preexec.sh"
 
 # X config
