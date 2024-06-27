@@ -25,6 +25,7 @@ xrandr --output DisplayPort-2 --auto --rotate normal
 #setxkbmap  -layout us,ru -option terminate:ctrl_alt_bksp,grp:caps_toggle,grp_led:caps &
 # localectl set-x11-keymap us,ru "microsoft7000" ""  "terminate:ctrl_alt_bksp,grp:caps_toggle,grp_led:caps"
 
+export LC_MONETARY=ru_RU.UTF-8
 
 if [ -s ~/.Xmodmap ]; then
     xmodmap ~/.Xmodmap &
