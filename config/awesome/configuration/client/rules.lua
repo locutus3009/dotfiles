@@ -218,9 +218,9 @@ ruled.client.connect_signal(
 			},
 			properties = {
 				tag = '5',
-				-- skip_decoration = true,
-				-- switch_to_tags = true,
-				maximized = true,
+				skip_decoration = true,
+				switch_to_tags = true,
+				-- maximized = true,
 			}
 		}
 
