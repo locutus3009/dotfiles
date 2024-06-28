@@ -209,7 +209,6 @@ ruled.client.connect_signal(
 			id = 'mails',
 			rule_any = {
 			   class = {
-			      'Telegram',
 			      'thunderbird'
 				},
 				name = {
@@ -221,6 +220,25 @@ ruled.client.connect_signal(
 				skip_decoration = true,
 				switch_to_tags = true,
 				-- maximized = true,
+			}
+		}
+
+		-- Telegram
+		ruled.client.append_rule {
+			id = 'telegram',
+			rule_any = {
+			   class = {
+			      'Telegram',
+				},
+				name = {
+                   'telegram'
+                }
+			},
+			properties = {
+				tag = '6',
+				-- skip_decoration = true,
+				-- switch_to_tags = true,
+				maximized = true,
 			}
 		}
 
@@ -241,7 +259,7 @@ ruled.client.connect_signal(
                 }
 			},
 			properties = {
-				tag = '6',
+				tag = '7',
 				switch_to_tags = true
 			}
 		}
@@ -271,30 +289,33 @@ ruled.client.connect_signal(
 				class = {
 					'Gimp-2.10',
 					'Inkscape',
-					'Flowblade'
-				}
+					'Flowblade',
+					'digikam'
+				},
+				name = { 'VLC' }
 			},
 			properties = {
-				tag = '8'
+			   tag = '8'
+			   -- maximized = true
 			}
 		}
 
 		-- Sandboxes and VMs
-		ruled.client.append_rule {
-			id = 'sandbox',
-			rule_any = {
-				class = {
-					'VirtualBox Manage',
-					'VirtualBox Machine',
-					'Gnome-boxes',
-					'Virt-manager',
-                    'FreeRDP_Windows10Corp'
-				}
-			},
-			properties = {
-				tag = '9'
-			}
-		}
+		-- ruled.client.append_rule {
+		-- 	id = 'sandbox',
+		-- 	rule_any = {
+		-- 		class = {
+		-- 			'VirtualBox Manage',
+		-- 			'VirtualBox Machine',
+		-- 			'Gnome-boxes',
+		-- 			'Virt-manager',
+                --     'FreeRDP_Windows10Corp'
+		-- 		}
+		-- 	},
+		-- 	properties = {
+		-- 		tag = '9'
+		-- 	}
+		-- }
 
 		-- Image viewers
 		ruled.client.append_rule {

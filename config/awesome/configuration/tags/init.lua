@@ -39,6 +39,13 @@ local tags = {
       layout = awful.layout.suit.floating
    },
    {
+      type = 'telegram',
+      icon = icons.telegram,
+      default_app = apps.default.telegram,
+      layout = awful.layout.suit.max,
+      gap = 0
+   },
+   {
       type = 'files',
       icon = icons.file_manager,
       default_app = apps.default.file_manager_console,
@@ -53,19 +60,19 @@ local tags = {
       layout = awful.layout.suit.floating,
       gap = 0
    },
-   {
-      type = 'graphics',
-      icon = icons.graphics,
-      default_app = apps.default.graphics,
-      gap = beautiful.useless_gap
-   },
-   {
-      type = 'sandbox',
-      icon = icons.sandbox,
-      default_app = apps.default.sandbox,
-      layout = awful.layout.suit.max,
-      gap = 0
-   }
+   -- {
+   --    type = 'graphics',
+   --    icon = icons.graphics,
+   --    default_app = apps.default.graphics,
+   --    gap = beautiful.useless_gap
+   -- },
+   -- -- {
+   --    type = 'sandbox',
+   --    icon = icons.sandbox,
+   --    default_app = apps.default.sandbox,
+   --    layout = awful.layout.suit.max,
+   --    gap = 0
+   -- }
    -- {
    --   type = 'social',
    --   icon = icons.social,

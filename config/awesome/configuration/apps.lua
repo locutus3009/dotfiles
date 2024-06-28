@@ -58,7 +58,8 @@ return {
       rofi_appmenu = 'rofi -dpi ' .. screen.primary.dpi ..
          ' -show drun -theme ' .. config_dir ..
          '/configuration/rofi/appmenu/blurry.rasi',
-      rofi = 'rofi'
+      rofi = 'rofi',
+      telegram = 'telegram-desktop'
 
       -- You can add more default applications here
    },
