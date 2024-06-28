@@ -93,7 +93,7 @@ local update_user_name = function()
 		fullname="$(getent passwd `whoami` | cut -d ':' -f 5 | cut -d ',' -f 1 | tr -d "\n")"
 		if [ -z "$fullname" ];
 		then
-				printf "$(whoami)@$(hostname)"
+				printf "$(whoami)@$HOSTNAME"
 		else
 			printf "$fullname"
 		fi

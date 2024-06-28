@@ -212,7 +212,7 @@ local locker = function(s)
 		fullname="$(getent passwd `whoami` | cut -d ':' -f 5 | cut -d ',' -f 1 | tr -d "\n")"
 		if [ -z "$fullname" ];
 		then
-			printf "$(whoami)@$(hostname)"
+			printf "$(whoami)@$HOSTNAME"
 		else
 			printf "$fullname"
 		fi
