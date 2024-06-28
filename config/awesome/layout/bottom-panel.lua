@@ -107,11 +107,11 @@ local bottom_panel = function(s)
 					widget = wibox.container.margin
 				},
 				s.tray_toggler,
-				-- s.updater,
+				s.updater,
 				s.screen_rec,
-				-- s.network,
-				-- s.bluetooth,
-				-- s.battery,
+				s.network,
+				s.bluetooth,
+				s.battery,
 				clock,
 				layout_box,
 				s.info_center_toggle

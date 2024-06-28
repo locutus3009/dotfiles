@@ -154,12 +154,12 @@ ruled.client.connect_signal(
 					'Tor Browser',
 					'discord',
 					'Chromium',
-					'Google-chrome',
-					'TelegramDesktop'
+					'Google-chrome'
 				}
 			},
 			properties = {
-				tag = '2'
+			   tag = '2',
+			   maximized = true
 			}
 		}
 
@@ -208,7 +208,9 @@ ruled.client.connect_signal(
 		ruled.client.append_rule {
 			id = 'mails',
 			rule_any = {
-				class = {
+			   class = {
+			      'Telegram',
+			      'thunderbird'
 				},
 				name = {
                    'thunderbird'
@@ -218,7 +220,7 @@ ruled.client.connect_signal(
 				tag = '5',
 				-- skip_decoration = true,
 				-- switch_to_tags = true,
-				placement = awful.placement.centered
+				maximized = true,
 			}
 		}
 

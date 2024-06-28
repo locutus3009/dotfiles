@@ -324,10 +324,10 @@ otherwise assumed alphabetic."
 ;;(use-package editorconfig
 ;;  :ensure t)
 
-(add-to-list 'load-path "~/.config/emacs/copilot.el/")
+;;(add-to-list 'load-path "~/.config/emacs/copilot.el/")
 ;;(load-file "~/.config/emacs/copilot.el/copilot.el")
-(require 'copilot)
-(add-hook 'prog-mode-hook 'copilot-mode)
-(define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
-(define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
-(setq copilot-max-char 1000000)
+;;(require 'copilot)
+;;(add-hook 'prog-mode-hook 'copilot-mode)
+;;(define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+;;(define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
+;;(setq copilot-max-char 1000000)

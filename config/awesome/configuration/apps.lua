@@ -37,7 +37,7 @@ return {
       -- Default IDE
       development = 'emacsclient',
       -- Default network manager
-      network_manager = 'kitty --start-as maximized sleep && nmtui',
+      network_manager = 'nm-connection-editor',
       -- Default bluetooth manager
       bluetooth_manager = 'blueman-manager',
       -- Default power manager
@@ -57,7 +57,8 @@ return {
       -- Default app menu
       rofi_appmenu = 'rofi -dpi ' .. screen.primary.dpi ..
          ' -show drun -theme ' .. config_dir ..
-         '/configuration/rofi/appmenu/blurry.rasi'
+         '/configuration/rofi/appmenu/blurry.rasi',
+      rofi = 'rofi'
 
       -- You can add more default applications here
    },
@@ -70,7 +71,7 @@ return {
       -- Blueman applet
       -- 'blueman-applet',
       -- Music server
-      'mpd',
+      -- 'mpd',
       -- Polkit and keyring
       '/usr/bin/lxqt-policykit-agent &' ..
          ' eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)',
@@ -87,7 +88,8 @@ return {
       -- You can add more start-up applications here
       'pulseaudio -vvvv --log-time=1 > $HOME/.cache/pulseverbose.log 2>&1',
       '/usr/lib/gsd-xsettings > $HOME/.cache/gnome-settings.log 2>&1',
-      'synergy'
+      -- 'synergy',
+      'dropbox'
    },
 
    -- List of binaries/shell scripts that will execute for a certain task

@@ -251,8 +251,7 @@ local create_weather_script = function(mode)
 		CITY="]] .. secrets.city_id .. [["
 		UNITS="]] .. secrets.units .. [["
 
-		weather=$(curl -sf "http://api.openweathermap.org/data/2.5/]] .. mode ..
-			[[?APPID="${KEY}"&id="${CITY}"&units="${UNITS}"")
+		weather=$(curl -sf "http://api.openweathermap.org/data/2.5/]] .. mode .. [[?APPID=${KEY}&id=${CITY}&units=${UNITS}")
 
 		if [ ! -z "$weather" ]; then
 			printf "${weather}"

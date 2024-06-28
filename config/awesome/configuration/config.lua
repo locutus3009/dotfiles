@@ -13,9 +13,9 @@ return {
 
 		weather = {
 			-- API Key
-			key = '',
+			key = 'b7109010d857d5ae365f34c4ced24c5b',
 			-- City ID
-			city_id = '',
+			city_id = '2935022',
 			-- Units
 			units = 'metric',
 			-- Update in N seconds

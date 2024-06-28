@@ -210,26 +210,26 @@ local global_keys = awful.util.table.join(
 		end,
 		{description = 'restore minimized', group = 'screen'}
 	),
-	awful.key(
-		{},
-		'XF86MonBrightnessUp',
-		function()
-			awful.spawn('light -A 10', false)
-			awesome.emit_signal('widget::brightness')
-			awesome.emit_signal('module::brightness_osd:show', true)
-		end,
-		{description = 'increase brightness by 10%', group = 'hotkeys'}
-	),
-	awful.key(
-		{},
-		'XF86MonBrightnessDown',
-		function()
-			awful.spawn('light -U 10', false)
-			awesome.emit_signal('widget::brightness')
-			awesome.emit_signal('module::brightness_osd:show', true)
-		end,
-		{description = 'decrease brightness by 10%', group = 'hotkeys'}
-	),
+	-- awful.key(
+	-- 	{},
+	-- 	'XF86MonBrightnessUp',
+	-- 	function()
+	-- 		awful.spawn('light -A 10', false)
+	-- 		awesome.emit_signal('widget::brightness')
+	-- 		awesome.emit_signal('module::brightness_osd:show', true)
+	-- 	end,
+	-- 	{description = 'increase brightness by 10%', group = 'hotkeys'}
+	-- ),
+	-- awful.key(
+	-- 	{},
+	-- 	'XF86MonBrightnessDown',
+	-- 	function()
+	-- 		awful.spawn('light -U 10', false)
+	-- 		awesome.emit_signal('widget::brightness')
+   	-- 		awesome.emit_signal('module::brightness_osd:show', true)
+	-- 	end,
+	-- 	{description = 'decrease brightness by 10%', group = 'hotkeys'}
+	-- ),
 	-- ALSA volume control
 	awful.key(
 		{},
@@ -258,6 +258,14 @@ local global_keys = awful.util.table.join(
 			awful.spawn('amixer -D pulse set Master 1+ toggle', false)
 		end,
 		{description = 'toggle mute', group = 'hotkeys'}
+	),
+	awful.key(
+		{modkey},
+		'Tab',
+		function()
+			awful.spawn('rofi -show window', false)
+		end,
+		{description = 'switch apps', group = 'hotkeys'}
 	),
 	awful.key(
 		{},
@@ -462,6 +470,7 @@ local global_keys = awful.util.table.join(
 				focused.control_center.opened = false
 			end
 			if focused.info_center then
+			   
 				focused.info_center:hide_dashboard()
 				focused.info_center.opened = false
 			end
