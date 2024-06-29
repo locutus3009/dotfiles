@@ -179,10 +179,9 @@ ruled.client.connect_signal('request::rules', function()
         id = 'files',
         rule_any = {
             class = {
-                'dolphin', 'ark', 'Nemo', 'File-roller', 'nautilus', 'ranger',
-                'files', 'Files'
+                'dolphin', 'ark', 'Nemo', 'File-roller', 'nautilus', 'ranger'
             },
-            name = {'ranger', 'nautilus', 'Files', 'files'}
+            name = {'ranger', 'nautilus'}
         },
         properties = {tag = '7', switch_to_tags = true}
     }
