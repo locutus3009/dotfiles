@@ -170,7 +170,7 @@ end
 
 local mpd_startup = [[
 # Let's make sure that MPD is running.
-if [ -z $(pgrep mpd) ]; then mpd; fi
+if [ -z $(pgrep mopidy) ]; then mopidy; fi
 ]]
 
 local mpd_change_event_listener = [[
