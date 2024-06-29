@@ -83,7 +83,8 @@ run numlockx
 
 #exec gnome-session --debug &
 # exec gnome-session --debug &
-exec dbus-launch --exit-with-session   /usr/bin/awesome >> ~/.cache/awesome/stdout 2>&1
+# exec dbus-launch --exit-with-x11   /usr/bin/awesome >> ~/.cache/awesome/stdout 2>&1
+exec /usr/bin/awesome >> ~/.cache/awesome/stdout 2>&1
 # exec xfce4-session >  ~/.cache/awesome/xfce4-session.log 2>&1
 # exec  ck-launch-session dbus-launch --exit-with-session /usr/bin/awesome
 # exec ck-launch-session /usr/bin/awesome >> ~/.cache/awesome/stderr 2&1
