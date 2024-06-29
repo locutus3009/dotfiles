@@ -25,7 +25,7 @@ local info_center = function(s)
                     layout = wibox.layout.fixed.vertical,
                     forced_width = dpi(panel_width),
                     spacing = dpi(10),
-                    require('widget.email'),
+                    -- require('widget.email'),
                     require('widget.weather'),
                     require('widget.notif-center')(s)
                 },
