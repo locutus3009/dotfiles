@@ -252,10 +252,15 @@ ruled.client.connect_signal(
 					'Nemo',
 					'File-roller',
                     'nautilus',
-                    'ranger'
+                    'ranger',
+		    'files',
+		    'Files'
 				},
                 name = {
-                   'ranger'
+                   'ranger',
+		   'nautilus',
+		   'Files',
+		   'files'
                 }
 			},
 			properties = {
