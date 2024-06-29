@@ -189,26 +189,33 @@ ruled.client.connect_signal('request::rules', function()
     -- Multimedia
     ruled.client.append_rule {
         id = 'multimedia',
-        rule_any = {class = {'vlc', 'Spotify', 'ncmpcpp', 'mpv'}},
+        rule_any = {
+            class = {
+                'vlc', 'Spotify', 'ncmpcpp', 'mpv', 'Gimp-2.10', 'Inkscape',
+                'Flowblade', 'digikam', 'yandex-music',
+                'Яндекс Музыка'
+            },
+            name = {'VLC', 'yandex-music', 'Яндекс Музыка'}
+        },
         properties = {
-            tag = '7',
+            tag = '8',
             switch_to_tags = true,
             placement = awful.placement.centered
         }
     }
 
     -- Multimedia Editing
-    ruled.client.append_rule {
-        id = 'graphics',
-        rule_any = {
-            class = {'Gimp-2.10', 'Inkscape', 'Flowblade', 'digikam'},
-            name = {'VLC'}
-        },
-        properties = {
-            tag = '8'
-            -- maximized = true
-        }
-    }
+    -- ruled.client.append_rule {
+    --     id = 'graphics',
+    --     rule_any = {
+    --         class = {'Gimp-2.10', 'Inkscape', 'Flowblade', 'digikam'},
+    --         name = {'VLC'}
+    --     },
+    --     properties = {
+    --         tag = '8'
+    --         -- maximized = true
+    --     }
+    -- }
 
     -- Sandboxes and VMs
     -- ruled.client.append_rule {
@@ -291,7 +298,7 @@ client.connect_signal('property::class', function(c)
             for c in awful.client.iterate(app) do c:jump_to(false) end
         else
             -- Move the instance to specified tag on this screen
-            local t = awful.tag.find_by_name(awful.screen.focused(), '5')
+            local t = awful.tag.find_by_name(awful.screen.focused(), '8')
             c:move_to_tag(t)
             t:view_only()
 
