@@ -42,7 +42,7 @@ return {
             -- Enable audio by default
             audio = false,
             -- Recordings directory
-            save_directory = '$(xdg-user-dir VIDEOS)/Recordings/',
+            save_directory = '$HOME/Videos/Recordings/',
             -- Mic level
             mic_level = '20',
             -- FPS
