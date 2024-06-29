@@ -144,6 +144,19 @@
 ;; Support of LUA programming language
 (use-package lua-mode :ensure t)
 
+(defun format-lua-buffer ()
+  "Format the current buffer using luaformatter."
+  (interactive)
+  (let* ((tmpfile (make-temp-file "luaformat"))
+         (command (format "lua-format -i %s" tmpfile)))
+    (unwind-protect
+        (progn
+          (write-region nil nil tmpfile)
+          (shell-command command nil)
+          (delete-region (point-min) (point-max))
+          (insert-file-contents tmpfile))
+      (delete-file tmpfile))))
+
 ;; optionally
 (use-package
  lsp-ui
