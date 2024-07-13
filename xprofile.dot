@@ -27,6 +27,7 @@ xrandr --output eDP-1 --auto --rotate normal
 # localectl set-x11-keymap us,ru "microsoft7000" ""  "terminate:ctrl_alt_bksp,grp:caps_toggle,grp_led:caps"
 
 export LC_MONETARY=ru_RU.UTF-8
+export LC_TIME=ru_RU.UTF-8
 
 if [ -s ~/.Xmodmap ]; then
     xmodmap ~/.Xmodmap &
@@ -54,6 +55,7 @@ fi
 export XDG_CURRENT_DESKTOP=GNOME
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export GTK_THEME=Adwaita
+export XDG_DATA_DIRS="$XDG_DATA_DIRS:/var/lib/flatpak/exports/share:/home/locutus/.local/share/flatpak/exports/share"
 #export GTK2_RC_FILES=~/.themes/lovelace/gtk-2.0/gtkrc
 
 # Gnome Services
@@ -80,6 +82,9 @@ run emacs --daemon
 # Enable numlock on login
 # Required numlockx to be installed
 run numlockx
+
+# Run power saving tool frontend
+run slimbookbattery
 
 #exec gnome-session --debug &
 # exec gnome-session --debug &
