@@ -18,13 +18,16 @@
 # xrandr --output HDMI-1  --auto --rotate normal --output HDMI-2  --auto --rotate normal
 # xrandr --output eDP-1-1 --mode 2880x1620 --rotate normal --output DP-1-2  --auto --rotate normal --left-of eDP-1-1
 # xrandr --output eDP-1-1 --auto --rotate normal --output HDMI-1-1  --auto --rotate normal --left-of eDP-1-1
-xrandr --output DisplayPort-2 --auto --rotate normal
+# xrandr --output DisplayPort-2 --auto --rotate normal
+xrandr --output eDP-1 --auto --rotate normal
 
 #xcompmgr -c -t-5 -l-5 -r4.2 -o.55 &
 # keyboard conf:
 #setxkbmap  -layout us,ru -option terminate:ctrl_alt_bksp,grp:caps_toggle,grp_led:caps &
 # localectl set-x11-keymap us,ru "microsoft7000" ""  "terminate:ctrl_alt_bksp,grp:caps_toggle,grp_led:caps"
 
+export LC_MONETARY=ru_RU.UTF-8
+export LC_TIME=ru_RU.UTF-8
 
 if [ -s ~/.Xmodmap ]; then
     xmodmap ~/.Xmodmap &
@@ -52,6 +55,7 @@ fi
 export XDG_CURRENT_DESKTOP=GNOME
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export GTK_THEME=Adwaita
+export XDG_DATA_DIRS="$XDG_DATA_DIRS:/var/lib/flatpak/exports/share:/home/locutus/.local/share/flatpak/exports/share"
 #export GTK2_RC_FILES=~/.themes/lovelace/gtk-2.0/gtkrc
 
 # Gnome Services
@@ -81,7 +85,8 @@ run numlockx
 
 #exec gnome-session --debug &
 # exec gnome-session --debug &
-exec dbus-launch --exit-with-session   /usr/bin/awesome >> ~/.cache/awesome/stdout 2>&1
+# exec dbus-launch --exit-with-x11   /usr/bin/awesome >> ~/.cache/awesome/stdout 2>&1
+exec /usr/bin/awesome >> ~/.cache/awesome/stdout 2>&1
 # exec xfce4-session >  ~/.cache/awesome/xfce4-session.log 2>&1
 # exec  ck-launch-session dbus-launch --exit-with-session /usr/bin/awesome
 # exec ck-launch-session /usr/bin/awesome >> ~/.cache/awesome/stderr 2&1

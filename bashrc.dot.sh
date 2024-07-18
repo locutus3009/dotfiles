@@ -148,11 +148,7 @@ export PATH="$PATH:$HOME/apps/Zotero_linux-x86_64"
 export PATH="$PATH:$HOME/apps"
 export PATH="$PATH:$HOME/apps/bin"
 export PATH="$PATH:$HOME/Foundation_Platform/models/Linux64_GCC-6.4"
-export PATH="$PATH:$HOME/dev/hm-grc-scripts/tools/hdc"
-export PATH="$PATH:$HOME/dev/platform-tools"
 export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:$HOME/racket/bin"
-export PATH="$PATH:$HOME/apps/hdc"
 
 # Setup ibus
 export GLFW_IM_MODULE=ibus

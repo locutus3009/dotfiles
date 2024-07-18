@@ -144,6 +144,19 @@
 ;; Support of LUA programming language
 (use-package lua-mode :ensure t)
 
+(defun format-lua-buffer ()
+  "Format the current buffer using luaformatter."
+  (interactive)
+  (let* ((tmpfile (make-temp-file "luaformat"))
+         (command (format "lua-format -i %s" tmpfile)))
+    (unwind-protect
+        (progn
+          (write-region nil nil tmpfile)
+          (shell-command command nil)
+          (delete-region (point-min) (point-max))
+          (insert-file-contents tmpfile))
+      (delete-file tmpfile))))
+
 ;; optionally
 (use-package
  lsp-ui
@@ -316,7 +329,18 @@ otherwise assumed alphabetic."
  shfmt
  :ensure t)
 
-;; Racket tests
-(use-package
- racket-mode
- :ensure t)
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
+
+;;(use-package editorconfig
+;;  :ensure t)
+
+;;(add-to-list 'load-path "~/.config/emacs/copilot.el/")
+;;(load-file "~/.config/emacs/copilot.el/copilot.el")
+;;(require 'copilot)
+;;(add-hook 'prog-mode-hook 'copilot-mode)
+;;(define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+;;(define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
+;;(setq copilot-max-char 1000000)

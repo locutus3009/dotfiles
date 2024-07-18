@@ -22,5 +22,3 @@
 (dir-locals-set-directory-class
  "/home/locutus/dev/linux"
  'linux-directory)
-
-;;; hm-verif-kernel.el ends here

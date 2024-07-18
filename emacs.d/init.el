@@ -48,3 +48,4 @@
 
 ;; Startup dashboard
 (load-file "~/.config/emacs/dashboard.el")
+(put 'upcase-region 'disabled nil)
