@@ -174,6 +174,21 @@ ruled.client.connect_signal('request::rules', function()
         }
     }
 
+    -- Telegram Media Viewer
+    ruled.client.append_rule {
+        id = 'telegram_media_viewer',
+        rule_any = {class = {'Media viewer'}, name = {'Media viewer'}},
+        properties = {
+            tag = '6',
+            titlebars_enabled = false,
+            round_corners = false,
+            floating = true,
+            above = true,
+            skip_decoration = true,
+            placement = awful.placement.centered
+        }
+    }
+
     -- File managers
     ruled.client.append_rule {
         id = 'files',
