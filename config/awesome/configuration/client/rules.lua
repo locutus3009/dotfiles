@@ -121,7 +121,18 @@ ruled.client.connect_signal('request::rules', function()
                 'firefox', 'Tor Browser', 'discord', 'Chromium', 'Google-chrome'
             }
         },
-        properties = {tag = '2', maximized = true}
+        properties = {
+            tag = '2',
+            -- maximized = true,
+            -- titlebars_enabled = false,
+            round_corners = false,
+            floating = true,
+            -- above = true,
+            -- skip_decoration = true,
+            placement = function(c)
+                awful.placement.maximize(c, {honor_workarea=true, honor_padding=true})
+            end
+        }
     }
 
     -- IDEs and Tools
@@ -144,21 +155,25 @@ ruled.client.connect_signal('request::rules', function()
     ruled.client.append_rule {
         id = 'text',
         rule_any = {
-            class = {'Geany', 'Atom', 'Subl3', 'code-oss'},
-            name = {'LibreOffice', 'libreoffice'}
+            class = {'Geany', 'Atom', 'Subl3', 'code-oss','Gnucash'},
+            name = {'LibreOffice', 'libreoffice','gnucash'}
         },
         properties = {tag = '4'}
     }
 
-    -- Gaming
+    -- Mail clients
     ruled.client.append_rule {
         id = 'mails',
         rule_any = {class = {'thunderbird'}, name = {'thunderbird'}},
         properties = {
             tag = '5',
             skip_decoration = true,
-            switch_to_tags = true
-            -- maximized = true,
+            switch_to_tags = true,
+            maximized = true,  -- Directly maximize the window
+            border_width = 0,  -- Ensure no borders are set
+            placement = function(c)
+                awful.placement.no_offscreen(c)  -- Ensure the window is fully on-screen
+            end
         }
     }
 
