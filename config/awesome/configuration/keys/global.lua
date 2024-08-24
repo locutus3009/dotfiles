@@ -273,15 +273,7 @@ local global_keys = awful.util.table.join( -- Hotkeys
         popup.visible = true
         gears.timer.start_new(1, function() popup.visible = false end)
     end, {description = 'Select input method English', group = 'language'}),
-                        awful.key({'Ctrl'}, '2', function()
-        awful.spawn("ibus engine hangul", false)
-        language_text_widget.text = "한"
-        popup.visible = true
-        gears.timer.start_new(1, function() popup.visible = false end)
-    end, {
-        description = 'Select input method Korean (한국어)',
-        group = 'language'
-    }), awful.key({'Ctrl'}, '3', function()
+                        awful.key({'Ctrl'}, '3', function()
         awful.spawn("ibus engine xkb:ru::rus", false)
         language_text_widget.text = "РУ"
         popup.visible = true
