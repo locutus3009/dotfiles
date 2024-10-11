@@ -85,10 +85,10 @@ return {
         --   "awesome-client 'awesome.emit_signal(\"module::lockscreen_show\")'" ""
         --   ]],
         -- You can add more start-up applications here
-        'pulseaudio -vvvv --log-time=1 > $HOME/.cache/pulseverbose.log 2>&1'
+        'pulseaudio -vvvv --log-time=1 > $HOME/.cache/pulseverbose.log 2>&1',
         -- '/usr/lib/gsd-xsettings > $HOME/.cache/gnome-settings.log 2>&1',
-        -- 'synergy',
-        -- 'dropbox'
+        'flatpak run com.symless.Synergy', 'thunderbird', 'firefox',
+        '/home/locutus/Downloads/tsetup.5.1.7/Telegram/Telegram'
     },
 
     -- List of binaries/shell scripts that will execute for a certain task
