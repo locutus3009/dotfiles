@@ -85,10 +85,9 @@ return {
         --   "awesome-client 'awesome.emit_signal(\"module::lockscreen_show\")'" ""
         --   ]],
         -- You can add more start-up applications here
-        'pulseaudio -vvvv --log-time=1 > $HOME/.cache/pulseverbose.log 2>&1'
+        'pulseaudio -vvvv --log-time=1 > $HOME/.cache/pulseverbose.log 2>&1',
         -- '/usr/lib/gsd-xsettings > $HOME/.cache/gnome-settings.log 2>&1',
-        -- 'synergy',
-        -- 'dropbox'
+        'thunderbird', 'firefox'
     },
 
     -- List of binaries/shell scripts that will execute for a certain task

@@ -130,7 +130,10 @@ ruled.client.connect_signal('request::rules', function()
             -- above = true,
             -- skip_decoration = true,
             placement = function(c)
-                awful.placement.maximize(c, {honor_workarea=true, honor_padding=true})
+                awful.placement.maximize(c, {
+                    honor_workarea = true,
+                    honor_padding = true
+                })
             end
         }
     }
@@ -155,8 +158,8 @@ ruled.client.connect_signal('request::rules', function()
     ruled.client.append_rule {
         id = 'text',
         rule_any = {
-            class = {'Geany', 'Atom', 'Subl3', 'code-oss','Gnucash'},
-            name = {'LibreOffice', 'libreoffice','gnucash'}
+            class = {'Geany', 'Atom', 'Subl3', 'code-oss', 'Gnucash'},
+            name = {'LibreOffice', 'libreoffice', 'gnucash'}
         },
         properties = {tag = '4'}
     }
@@ -169,10 +172,10 @@ ruled.client.connect_signal('request::rules', function()
             tag = '5',
             skip_decoration = true,
             switch_to_tags = true,
-            maximized = true,  -- Directly maximize the window
-            border_width = 0,  -- Ensure no borders are set
+            maximized = true, -- Directly maximize the window
+            border_width = 0, -- Ensure no borders are set
             placement = function(c)
-                awful.placement.no_offscreen(c)  -- Ensure the window is fully on-screen
+                awful.placement.no_offscreen(c) -- Ensure the window is fully on-screen
             end
         }
     }
@@ -209,7 +212,8 @@ ruled.client.connect_signal('request::rules', function()
         id = 'files',
         rule_any = {
             class = {
-                'dolphin', 'ark', 'Nemo', 'File-roller', 'nautilus', 'ranger'
+                'dolphin', 'ark', 'Nemo', 'File-roller', 'nautilus', 'ranger',
+                'Synergy', 'org.gnome.Nautilus'
             },
             name = {'ranger', 'nautilus'}
         },
