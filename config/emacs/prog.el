@@ -334,6 +334,13 @@ otherwise assumed alphabetic."
   :config
   (editorconfig-mode 1))
 
+(use-package racket-mode
+  :ensure t
+  :config
+  ;; Настройки для удобства работы с Racket
+  (add-hook 'racket-mode-hook #'racket-xp-mode)
+  (setq racket-smart-open-bracket-enable t))
+
 ;;(use-package editorconfig
 ;;  :ensure t)
 
