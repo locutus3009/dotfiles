@@ -53,3 +53,12 @@ ln -sf "$CURRENT_DIR/config/pulse" "$HOME/.config/pulse"
 mkdir -p "$HOME/apps"
 rm -rf "$HOME/apps/bin"
 ln -sf "$CURRENT_DIR/apps/bin" "$HOME/apps/bin"
+
+# Sort_pictures systemd service
+mkdir -p "$HOME/.config/systemd/user"
+ln -sf "$CURRENT_DIR/sort_pictures/systemd/sort_pictures.service" "$HOME/.config/systemd/user/sort_pictures.service"
+mkdir -p "$HOME/.config/sort_pictures"
+ln -sf "$CURRENT_DIR/sort_pictures/systemd/config.toml" "$HOME/.config/sort_pictures/config.toml"
+
+echo "Note: To build and install sort_pictures binary, run:"
+echo "  cd $CURRENT_DIR/sort_pictures && ./install.sh"

@@ -15,11 +15,23 @@ Personal configuration files for Arch Linux with KDE Plasma (Wayland) and SDDM.
 ## Installation
 
 ```bash
-cd ~/dev/dotfiles
+# Clone the repository
+cd ~/dev
+git clone <your-dotfiles-repo-url> dotfiles
+cd dotfiles
+
+# Initialize submodules
+git submodule update --init --recursive
+
+# Create symlinks
 ./setup_symlinks.sh
 ```
 
-This will create symlinks from your home directory to the configuration files in this repository.
+This will:
+1. Initialize the sort_pictures submodule
+2. Create symlinks from your home directory to the configuration files
+
+**Note:** After running setup, build sort_pictures following the instructions in the Sort_pictures Service section.
 
 ## Active Configurations
 
@@ -40,6 +52,20 @@ This will create symlinks from your home directory to the configuration files in
 
 ### Utilities
 - **apps/bin/** - Custom scripts and utilities
+
+### Sort_pictures Service
+- **sort_pictures/** - Git submodule containing Rust-based photo organization service
+- Automatically organizes photos by date and GPS location
+- Systemd user service runs in background
+- Config: `~/.config/sort_pictures/config.toml` (symlinked from submodule)
+- Service: `~/.config/systemd/user/sort_pictures.service` (symlinked from submodule)
+
+**To build and install:**
+```bash
+cd ~/dev/dotfiles/sort_pictures
+./install.sh
+systemctl --user enable --now sort_pictures.service
+```
 
 ## Environment Variables
 
@@ -73,11 +99,11 @@ magit       # GUI Magit
 
 ## Input Method
 
-iBus is configured as the default input method framework:
-- GLFW_IM_MODULE=ibus
-- GTK_IM_MODULE=ibus
-- QT_IM_MODULE=ibus
-- XMODIFIERS=@im=ibus
+Fcitx5 is configured as the default input method framework:
+- GLFW_IM_MODULE=fcitx
+- GTK_IM_MODULE=fcitx
+- QT_IM_MODULE=fcitx
+- XMODIFIERS=@im=fcitx
 
 ## Archived Configurations (legacy/)
 
@@ -109,6 +135,7 @@ dotfiles/
 ├── gdbinit.dot            # GDB config
 ├── setup_symlinks.sh      # Installation script
 ├── install.sh             # Legacy install script
+├── .gitmodules            # Git submodules config
 ├── emacs.d/               # Emacs init
 ├── config/
 │   ├── emacs/            # Main Emacs config
@@ -120,6 +147,12 @@ dotfiles/
 │   └── gpg-agent.conf    # GPG agent config
 ├── apps/
 │   └── bin/              # Custom scripts
+├── sort_pictures/         # Git submodule - photo organizer
+│   ├── systemd/
+│   │   ├── sort_pictures.service
+│   │   └── config.toml
+│   ├── src/              # Rust source code
+│   └── install.sh        # Build & install script
 └── legacy/               # Archived configurations
     ├── config/           # Old app configs
     ├── xprofile.dot      # X11 session
@@ -143,11 +176,20 @@ To update configs:
 2. Commit changes: `git add . && git commit -m "Description"`
 3. Changes are immediately active via symlinks
 
+To update submodules (sort_pictures):
+```bash
+git submodule update --remote
+cd sort_pictures
+./install.sh  # Rebuild if needed
+```
+
 To restore configs on a new system:
-1. Clone this repository to `~/dev/dotfiles`
-2. Run `./setup_symlinks.sh`
-3. Install required packages (Emacs, Kitty, Starship, etc.)
-4. Restart shell or source `~/.bashrc`
+1. Clone this repository: `git clone <repo-url> ~/dev/dotfiles`
+2. Initialize submodules: `git submodule update --init --recursive`
+3. Run `./setup_symlinks.sh`
+4. Build sort_pictures: `cd sort_pictures && ./install.sh`
+5. Install required packages (Emacs, Kitty, Starship, Fcitx5, etc.)
+6. Restart shell or source `~/.bashrc`
 
 ## License
 

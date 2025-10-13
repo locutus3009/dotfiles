@@ -148,11 +148,11 @@ export PATH="$PATH:$HOME/apps/bin"
 export PATH="$PATH:$HOME/Foundation_Platform/models/Linux64_GCC-6.4"
 export PATH="$PATH:$HOME/.local/bin"
 
-# Setup ibus
-export GLFW_IM_MODULE=ibus
-export GTK_IM_MODULE=ibus
-export QT_IM_MODULE=ibus
-export XMODIFIERS=@im=ibus
+# Setup Fcitx5
+export GLFW_IM_MODULE=fcitx
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
 
 #export MPD_HOST=$HOME/.config/mpd/socket
 
