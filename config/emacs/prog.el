@@ -6,6 +6,7 @@
 (use-package
  elisp-autofmt
  :ensure t
+ :defer t
  :config
  (setq elisp-autofmt-python-bin "python3")
  (setq elisp-autofmt-style 'native)
@@ -61,7 +62,7 @@
     (setq-local buffer-save-without-query t))
   (add-hook 'before-save-hook 'lsp-format-buffer nil t))
 
-(use-package dash :ensure t :config (require 'dash))
+(use-package dash :ensure t :defer t :config (require 'dash))
 
 (use-package
  irony
@@ -142,7 +143,7 @@
  (lsp-keep-workspace-alive nil))
 
 ;; Support of LUA programming language
-(use-package lua-mode :ensure t)
+(use-package lua-mode :ensure t :defer t)
 
 (defun format-lua-buffer ()
   "Format the current buffer using luaformatter."
@@ -207,11 +208,11 @@
  :diminish which-key-mode)
 
 ;; optionally if you want to use debugger
-(use-package dap-mode :ensure t)
+(use-package dap-mode :ensure t :defer t)
 ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
 
 ;; String manipulation library
-(use-package s :ensure t)
+(use-package s :ensure t :defer t)
 
 ;; clang-format
 (use-package
@@ -288,12 +289,13 @@ otherwise assumed alphabetic."
  (add-hook 'c-mode-hook 'clang-format+-mode)
  (setq clang-format+-context #'modification))
 
-(use-package yaml-mode :ensure t)
+(use-package yaml-mode :ensure t :defer t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;; Yasipnet ;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package
  yasnippet
  :ensure t
+ :defer t
  :config (yas-global-mode 1)
  (defun yas-popup-isearch-prompt (prompt choices &optional display-fn)
    (when (featurep 'popup)
@@ -337,7 +339,8 @@ otherwise assumed alphabetic."
 ;; Shell-format
 (use-package
  shfmt
- :ensure t)
+ :ensure t
+ :defer t)
 
 (use-package editorconfig
   :ensure t

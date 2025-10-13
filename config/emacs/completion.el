@@ -2,6 +2,7 @@
 (use-package
  smex
  :ensure t
+ :defer t
  :config (smex-initialize)
  ;;   (global-set-key (kbd "M-x") 'smex)
  ;; (global-set-key (kbd "M-X") 'smex-major-mode-commands)
@@ -30,6 +31,7 @@
 (use-package
  company-shell
  :ensure t
+ :defer t
  :config
  (add-to-list
   'company-backends

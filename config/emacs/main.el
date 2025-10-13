@@ -59,6 +59,8 @@
         ("marmalade" . "https://marmalade-repo.org/packages/")
         ("org" . "https://orgmode.org/elpa/") ; Org-mode's repository
         ("SC" . "https://joseito.republika.pl/sunrise-commander/")))
+;; Enable package-quickstart for faster startup and package operations
+(setq package-quickstart t)
 (package-initialize)
 ;; (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 

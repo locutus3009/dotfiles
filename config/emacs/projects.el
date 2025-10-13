@@ -14,7 +14,7 @@
 ;;   :ensure t)
 
 ;; SQlite3 is needed by forge
-(use-package sqlite3 :ensure t)
+(use-package sqlite3 :ensure t :defer t)
 
 ;; Magit-forge allows to connect to gitlab
 (use-package

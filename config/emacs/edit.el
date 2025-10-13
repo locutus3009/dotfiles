@@ -40,10 +40,10 @@
  )
 
 ;; iedit -- edit multiple similar places
-(use-package iedit :ensure t)
+(use-package iedit :ensure t :defer t)
 
 ;; vterm -- used by Projectile
-(use-package vterm :ensure t)
+(use-package vterm :ensure t :defer t)
 
 (use-package
  markdown-mode
@@ -73,6 +73,7 @@
 (use-package
  visual-fill-column
  :ensure t
+ :defer t
  :config
  (add-hook
   'visual-line-mode-hook #'visual-fill-column-mode)
