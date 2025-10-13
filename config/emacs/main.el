@@ -54,11 +54,11 @@
 ;; Add melpa package manager
 (require 'package)
 (setq package-archives
-      '(("gnu" . "http://elpa.gnu.org/packages/")
+      '(("gnu" . "https://elpa.gnu.org/packages/")
         ("melpa" . "https://melpa.org/packages/")
-        ("marmalade" . "http://marmalade-repo.org/packages/")
-        ("org" . "http://orgmode.org/elpa/") ; Org-mode's repository
-        ("SC" . "http://joseito.republika.pl/sunrise-commander/")))
+        ("marmalade" . "https://marmalade-repo.org/packages/")
+        ("org" . "https://orgmode.org/elpa/") ; Org-mode's repository
+        ("SC" . "https://joseito.republika.pl/sunrise-commander/")))
 (package-initialize)
 ;; (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 

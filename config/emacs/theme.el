@@ -23,7 +23,7 @@
  ;;  (quote ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
 
  ;; Use the `spacemacs-dark` theme.
- (load-theme 'spacemacs-dark))
+ (load-theme 'spacemacs-dark t))
 
 ;; Solarized theme
 ;; (use-package

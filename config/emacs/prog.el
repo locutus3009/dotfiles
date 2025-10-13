@@ -210,9 +210,13 @@
 (use-package dap-mode :ensure t)
 ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
 
+;; String manipulation library
+(use-package s :ensure t)
+
 ;; clang-format
 (use-package
  clang-format
+ :ensure t
  :after (s)
  :init
  (defun get-clang-format-option (config-str field is-num)
@@ -282,8 +286,7 @@ otherwise assumed alphabetic."
  :config
  (add-hook 'c-mode-common-hook #'clang-format+-mode)
  (add-hook 'c-mode-hook 'clang-format+-mode)
- (setq clang-format+-context #'modification)
- (local-set-key [tab] 'clang-format-region))
+ (setq clang-format+-context #'modification))
 
 (use-package yaml-mode :ensure t)
 
@@ -316,13 +319,20 @@ otherwise assumed alphabetic."
  :requires xref
  :config
  ;; Enable helm-gtags-mode in languages that GNU Global supports
- (add-hook 'c-mode-hook 'ggtags-mode 'xref-etags-mode)
- (add-hook 'c++-mode-hook 'ggtags-mode 'xref-etags-mode)
- (add-hook 'java-mode-hook 'ggtags-mode 'xref-etags-mode)
- (add-hook 'asm-mode-hook 'ggtags-mode 'xref-etags-mode)
- (add-hook 'python-mode 'ggtags-mode 'xref-etags-mode)
- (add-hook 'lisp-mode 'ggtags-mode 'xref-etags-mode)
- (add-hook 'elisp-mode 'ggtags-mode 'xref-etags-mode))
+ (add-hook 'c-mode-hook 'ggtags-mode)
+ (add-hook 'c-mode-hook 'xref-etags-mode)
+ (add-hook 'c++-mode-hook 'ggtags-mode)
+ (add-hook 'c++-mode-hook 'xref-etags-mode)
+ (add-hook 'java-mode-hook 'ggtags-mode)
+ (add-hook 'java-mode-hook 'xref-etags-mode)
+ (add-hook 'asm-mode-hook 'ggtags-mode)
+ (add-hook 'asm-mode-hook 'xref-etags-mode)
+ (add-hook 'python-mode-hook 'ggtags-mode)
+ (add-hook 'python-mode-hook 'xref-etags-mode)
+ (add-hook 'lisp-mode-hook 'ggtags-mode)
+ (add-hook 'lisp-mode-hook 'xref-etags-mode)
+ (add-hook 'emacs-lisp-mode-hook 'ggtags-mode)
+ (add-hook 'emacs-lisp-mode-hook 'xref-etags-mode))
 
 ;; Shell-format
 (use-package

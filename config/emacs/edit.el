@@ -45,8 +45,6 @@
 ;; vterm -- used by Projectile
 (use-package vterm :ensure t)
 
-(setq ivy-count-format "(%d/%d) ")
-
 (use-package
  markdown-mode
  :ensure t

@@ -123,7 +123,7 @@
 
 (setq
  org-clock-clocktable-default-properties
- (quote (:maxlevel 10 :emphasize t :compact t :ident t))
+ (quote (:maxlevel 10 :emphasize t :compact t :indent t))
  org-time-clocksum-format '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
 (setq org-duration-format (quote h:mm))
 
