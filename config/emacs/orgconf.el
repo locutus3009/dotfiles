@@ -3,6 +3,15 @@
 (use-package
  org
  :ensure t
+ :defer t
+ :init
+ ;; Performance optimizations - set before org loads
+ (setq org-agenda-inhibit-startup t)
+ (setq org-element-use-cache t)
+ (setq org-element-cache-persistent t)
+ (setq org-auto-align-tags nil)
+ (setq org-tags-column 0)
+ (setq org-agenda-ignore-properties '(effort appt stats category))
  :config
  ;; (org :variables
  ;;      org-enable-jira-support t
@@ -21,6 +30,28 @@
  (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
  (org-babel-do-load-languages
   'org-babel-load-languages '((plantuml . t))))
+
+;;;;;;;;;;;
+;; Org-modern - Beautiful org-mode display
+;;;;;;;;;;;
+(use-package
+ org-modern
+ :ensure t
+ :hook (org-mode . org-modern-mode)
+ :config
+ (setq org-modern-star 'replace)
+ (setq org-modern-hide-stars t))
+
+;;;;;;;;;;;
+;; Org-babel - Execute code blocks
+;;;;;;;;;;;
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (shell . t)
+   (python . t)))
+;; Confirm before evaluating code blocks (set to nil to skip confirmation)
+(setq org-confirm-babel-evaluate t)
 
 ;; Sequences of keywords used in org-mode
 (setq org-todo-keywords
@@ -56,8 +87,8 @@
               ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
               ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
 
-;; Follow mode
-(add-hook 'org-agenda-mode-hook #'org-agenda-follow-mode)
+;; Follow mode - can be slow, toggle manually with 'F' in agenda
+;; (add-hook 'org-agenda-mode-hook #'org-agenda-follow-mode)
 
 ;; Always enable certain modes with org-mode
 (add-hook 'org-mode-hook 'auto-fill-mode)
@@ -65,7 +96,7 @@
 ;; Default notes file
 (setq org-default-notes-file "~/ORG/refile.org")
 
-;; Define the custum capture templates
+;; Define the custom capture templates
 (setq
  org-capture-templates
  '(("t"
@@ -128,19 +159,22 @@
 (setq org-duration-format (quote h:mm))
 
 (setq org-clock-persist 'history)
-(org-clock-persistence-insinuate)
 
 (setq org-refile-targets
       (quote ((nil :maxlevel . 9) (org-agenda-files :maxlevel . 9))))
 
-; Use full outline paths for refile targets - we file directly with IDO
-(setq org-refile-use-outline-path t)
+;; Refile settings optimized for Ivy/Counsel
+;; Use full file paths for better ivy completion
+(setq org-refile-use-outline-path 'file)
 
-; Targets complete directly with IDO
+;; Complete in single step for faster ivy/counsel completion
 (setq org-outline-path-complete-in-steps nil)
 
-; Allow refile to create parent tasks with confirmation
+;; Allow refile to create parent tasks with confirmation
 (setq org-refile-allow-creating-parent-nodes (quote confirm))
+
+;; Better completion with counsel (disable ido for org)
+(setq org-completion-use-ido nil)
 
 ;;;; Refile settings
 ; Exclude DONE state tasks from refile targets
@@ -160,9 +194,8 @@
 ;; Set to <your Dropbox root directory>/MobileOrg.
 (setq org-directory "~/ORG")
 
-(setq org-agenda-files
-      (append
-       (file-expand-wildcards "~/ORG/*.org")))
+;; Use directory for better performance (avoids wildcard expansion on every access)
+(setq org-agenda-files '("~/ORG/"))
 (setq org-agenda-start-with-log-mode t)
 ;; Log creation time of TODO also
 (setq org-treat-insert-todo-heading-as-state-change t)
@@ -170,10 +203,20 @@
 (setq org-log-into-drawer t)
 ;; Display habits on agenda view
 (setq org-habit-show-all-today t)
+;; Better habits display
+(setq org-habit-graph-column 60)
+(setq org-habit-preceding-days 21)
+(setq org-habit-following-days 7)
 ;; Hide text format modifiers
 (setq org-hide-emphasis-markers t)
 ;; Record timestamp when task is done
 (setq org-log-done 'time)
+
+;; Column View for Effort tracking
+(setq org-columns-default-format
+      "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA")
+(setq org-global-properties
+      '(("Effort_ALL" . "0:15 0:30 1:00 2:00 3:00 4:00 6:00 8:00")))
 
 ;; Key bindings
 (global-set-key (kbd "C-c C-x C-r") 'org-clock-report)
@@ -183,9 +226,10 @@
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c b") 'org-switchb)
 ;; (global-set-key (kbd "C-c c") 'org-capture)
-(global-set-key (kbd "C-M-;") 'org/capture-todo)
-(global-set-key (kbd "C-M-'") 'ort/capture-checkitem)
-(global-set-key (kbd "C-M-`") 'ort/goto-todos)
+;; TODO: Define these functions or remove bindings
+;; (global-set-key (kbd "C-M-;") 'org/capture-todo)
+;; (global-set-key (kbd "C-M-'") 'ort/capture-checkitem)
+;; (global-set-key (kbd "C-M-`") 'ort/goto-todos)
 
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
@@ -197,15 +241,6 @@
    (concat "#+OPTIONS: tex:dvipng toc:nil" string) 'html t))
 ;;  (org-export-string-as (concat "" string) 'html t))
 (defalias 'org-export-string 'org-export-string-hack)
-
-;;;;;;;
-;;   Custom agenda
-;;
-;; Do not dim blocked tasks
-(setq org-agenda-dim-blocked-tasks nil)
-
-;; Compact the block agenda view
-(setq org-agenda-compact-blocks t)
 
 ;;;;;;;
 ;;   Custom agenda
@@ -358,7 +393,7 @@
 ;;;;;;;
 
 ;;;;;;;
-;;   Clock stetup
+;;   Clock setup
 ;;;;;;;
 ;;
 ;; Resume clocking task when emacs is restarted
@@ -370,8 +405,6 @@
 (setq org-clock-in-resume t)
 ;; Change tasks to NEXT when clocking in
 (setq org-clock-in-switch-to-state 'bh/clock-in-to-next)
-;; Separate drawers for clocking and logs
-(setq org-drawers (quote ("PROPERTIES" "LOGBOOK")))
 ;; Save clock data and state changes and notes in the LOGBOOK drawer
 (setq org-clock-into-drawer t)
 ;; Sometimes I change tasks I'm clocking quickly - this removes clocked tasks with 0:00 duration
