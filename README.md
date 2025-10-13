@@ -50,6 +50,30 @@ This will:
 - **gnupg/** - GPG and GPG-agent configuration (including SSH agent support)
 - **asound.conf.dot** - ALSA audio configuration
 
+### KDE Plasma Configuration
+Selective tracking of key Plasma configs (portable, stable settings only):
+
+- **config/plasma/kdeglobals** - Global KDE settings, theme (Breeze Dark), colors, fonts
+- **config/plasma/kwinrc** - KWin window manager settings:
+  - 6 named virtual desktops (Main, Firefox, Emacs, Thunderbird, Telegram, Digikam)
+  - Tiling configuration with 4px padding
+  - Night Color enabled (Dresden coordinates)
+  - Window effects (wobbly windows, translucency)
+- **config/plasma/kwinrulesrc** - Window rules for automatic app→desktop assignments:
+  - Firefox → Desktop 2 (maximized)
+  - Emacs → Desktop 3 (maximized)
+  - Thunderbird → Desktop 4 (maximized)
+  - Telegram → Desktop 5 (maximized)
+  - Digikam → Desktop 6
+  - Kitty → Desktop 1
+- **config/plasma/kglobalshortcutsrc** - All custom keyboard shortcuts (292 lines)
+- **config/plasma/plasmashellrc** - Panel appearance (floating, opacity)
+
+**Not tracked** (too dynamic or machine-specific):
+- Panel widget layout (`plasma-org.kde.plasma.desktop-appletsrc`) - reconfigure manually
+- Monitor configuration (`kwinoutputconfig.json`) - hardware-specific
+- Notifications, locale (using defaults)
+
 ### Utilities
 - **apps/bin/** - Custom scripts and utilities
 
@@ -140,6 +164,12 @@ dotfiles/
 ├── config/
 │   ├── emacs/            # Main Emacs config
 │   ├── kitty/            # Terminal config
+│   ├── plasma/           # KDE Plasma configs
+│   │   ├── kdeglobals
+│   │   ├── kwinrc
+│   │   ├── kwinrulesrc
+│   │   ├── kglobalshortcutsrc
+│   │   └── plasmashellrc
 │   ├── pulse/            # Audio config
 │   └── wallpaper.JPG     # Desktop wallpaper
 ├── gnupg/

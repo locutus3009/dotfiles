@@ -33,6 +33,13 @@ ln -sf "$CURRENT_DIR/config/kitty" "$HOME/.config/kitty"
 rm -rf "$HOME/.config/pulse"
 ln -sf "$CURRENT_DIR/config/pulse" "$HOME/.config/pulse"
 
+# KDE Plasma configs (selective - key configs only)
+ln -sf "$CURRENT_DIR/config/plasma/kdeglobals" "$HOME/.config/kdeglobals"
+ln -sf "$CURRENT_DIR/config/plasma/kwinrc" "$HOME/.config/kwinrc"
+ln -sf "$CURRENT_DIR/config/plasma/kwinrulesrc" "$HOME/.config/kwinrulesrc"
+ln -sf "$CURRENT_DIR/config/plasma/kglobalshortcutsrc" "$HOME/.config/kglobalshortcutsrc"
+ln -sf "$CURRENT_DIR/config/plasma/plasmashellrc" "$HOME/.config/plasmashellrc"
+
 # Archived configs (no longer in use)
 # rm -rf "$HOME/.config/awesome"
 # ln -sf "$CURRENT_DIR/legacy/config/awesome" "$HOME/.config/awesome"
