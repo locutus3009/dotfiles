@@ -192,6 +192,23 @@ ruled.client.connect_signal('request::rules', function()
         }
     }
 
+    -- Games (Steam and The Long Dark)
+    ruled.client.append_rule {
+        id = 'games',
+        rule_any = {
+            class = { "Steam", "TheLongDark" }, -- WM_CLASS окна
+            name = { "The Long Dark" }         -- WM_NAME окна
+        },
+        properties = {
+            fullscreen = true,        -- Запуск в полноэкранном режиме
+            border_width = 0,         -- Убрать рамки окна
+            ontop = true,             -- Всегда поверх других окон
+            focus = true,             -- Фокус автоматически
+            sticky = true,            -- Прикрепить окно
+            titlebars_enabled = false -- Отключить заголовок окна
+        }
+    }
+    
     -- Telegram Media Viewer
     ruled.client.append_rule {
         id = 'telegram_media_viewer',

@@ -1,0 +1,24 @@
+[playlist]
+NumberOfEntries=7
+File1=http://prem2.di.fm:80/progressivepsy_hi?128bda1fc8390bfbbfafa3db
+Title1=DI.FM - Progressive Psy
+Length1=0
+File2=http://prem2.di.fm:80/synthwave_hi?128bda1fc8390bfbbfafa3db
+Title2=DI.FM - Synthwave
+Length2=0
+File3=http://prem2.di.fm:80/drumandbass_hi?128bda1fc8390bfbbfafa3db
+Title3=DI.FM - Drum and Bass
+Length3=0
+File4=http://prem2.di.fm:80/psydub_hi?128bda1fc8390bfbbfafa3db
+Title4=DI.FM - PsyDub
+Length4=0
+File5=http://prem2.di.fm:80/darkpsytrance_hi?128bda1fc8390bfbbfafa3db
+Title5=DI.FM - Dark PsyTrance
+Length5=0
+File6=http://prem2.di.fm:80/goapsy_hi?128bda1fc8390bfbbfafa3db
+Title6=DI.FM - Goa-Psy Trance
+Length6=0
+File7=http://prem2.di.fm:80/deephouse_hi?128bda1fc8390bfbbfafa3db
+Title7=DI.FM - Deep House
+Length7=0
+Version=2

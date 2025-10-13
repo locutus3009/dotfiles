@@ -1,6 +1,4 @@
-(use-package
- org-habit-stats
- :ensure t)
+;; (use-package org-habit-stats :ensure t)
 
 (use-package
  org
@@ -114,7 +112,14 @@
     "Next Task"
     entry
     (file+headline org-default-notes-file "Tasks")
-    "** NEXT %? \nDEADLINE: %t")))
+    "** NEXT %? \nDEADLINE: %t")
+   ("d"
+ "Daily Journal"
+ entry
+ (file+datetree "~/ORG/journal.org")
+ "* Daily Journal :JOURNAL:\n%U\n\n** What did I learn about myself today?\n- %?\n\n** My leisure activities:\n- \n\n** Successes of the day:\n- \n\n** What did I do for myself?\n- \n\n** What did I do for my family?\n- "
+ :clock-in t
+ :clock-resume t)))
 
 (setq
  org-clock-clocktable-default-properties
@@ -155,7 +160,9 @@
 ;; Set to <your Dropbox root directory>/MobileOrg.
 (setq org-directory "~/ORG")
 
-(setq org-agenda-files (append (file-expand-wildcards "~/ORG/*.org") (file-expand-wildcards "~/mnt/ORG/*.org")))
+(setq org-agenda-files
+      (append
+       (file-expand-wildcards "~/ORG/*.org")))
 (setq org-agenda-start-with-log-mode t)
 ;; Log creation time of TODO also
 (setq org-treat-insert-todo-heading-as-state-change t)

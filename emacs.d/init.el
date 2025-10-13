@@ -38,7 +38,7 @@
 (load-file "~/.config/emacs/dired.el")
 
 ;; Gitlab integration
-(load-file "~/.config/emacs/gitlab.el")
+;; (load-file "~/.config/emacs/gitlab.el")
 
 ;; ranger-like directory browser integration
 ;; (load-file "~/.config/emacs/ranger.el")

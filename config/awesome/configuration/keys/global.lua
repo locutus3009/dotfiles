@@ -281,6 +281,15 @@ local global_keys = awful.util.table.join( -- Hotkeys
     end, {
         description = 'Select input method Russian (Русский язык)',
         group = 'language'
+    }),
+                        awful.key({'Ctrl'}, '2', function()
+        awful.spawn("ibus engine xkb:de::deu", false)
+        language_text_widget.text = "DE"
+        popup.visible = true
+        gears.timer.start_new(1, function() popup.visible = false end)
+    end, {
+        description = 'Select input method German (Deutsch)',
+        group = 'language'
     }))
 
 -- Bind all key numbers to tags.
