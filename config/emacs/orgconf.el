@@ -562,6 +562,12 @@ as the default task."
 (add-hook 'org-clock-out-hook 'bh/clock-out-maybe 'append)
 
 (require 'org-id)
+
+;; Org-ID performance settings
+(setq org-id-track-globally t)
+(setq org-id-locations-file "~/.emacs.d/.org-id-locations")
+(setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id)
+
 (defun bh/clock-in-task-by-id (id)
   "Clock in a task by id"
   (org-with-point-at (org-id-find id 'marker) (org-clock-in nil)))

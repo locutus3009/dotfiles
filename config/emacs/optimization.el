@@ -1,30 +1,36 @@
 ;;;;; Startup optimizations
 
-;;;;;; Set garbage collection threshold
+;;;;;; Better garbage collection strategy
 
-;; From https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_steps_to_speed_up_emacs_start/
+;; High GC threshold during startup for faster loading
+(setq gc-cons-threshold (* 100 1024 1024)) ; 100MB
+(setq gc-cons-percentage 0.6)
+(setq read-process-output-max (* 1024 1024)) ; 1MB for LSP/async processes
 
-(setq gc-cons-threshold-original gc-cons-threshold)
-(setq gc-cons-threshold (* 1024 1024 100))
-(setq read-process-output-max (* 1024 1024))
+;;;;;; File name handler optimization
 
-;;;;;; Set file-name-handler-alist
-
-;; Also from https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_steps_to_speed_up_emacs_start/
-
-(setq file-name-handler-alist-original file-name-handler-alist)
+(defvar file-name-handler-alist-original file-name-handler-alist)
 (setq file-name-handler-alist nil)
 
-;;;;;; Set deferred timer to reset them
+;;;;;; Reset optimizations after startup
 
-(run-with-idle-timer
- 5 nil
- (lambda ()
-   (setq gc-cons-threshold gc-cons-threshold-original)
-   (setq file-name-handler-alist file-name-handler-alist-original)
-   (makunbound 'gc-cons-threshold-original)
-   (makunbound 'file-name-handler-alist-original)
-   (message
-    "gc-cons-threshold and file-name-handler-alist restored")))
+(add-hook 'emacs-startup-hook
+  (lambda ()
+    ;; Restore file-name-handler-alist
+    (setq file-name-handler-alist file-name-handler-alist-original)
+
+    ;; Lower GC threshold for normal operation (16MB)
+    (setq gc-cons-threshold (* 16 1024 1024))
+    (setq gc-cons-percentage 0.1)
+
+    (message "Startup optimizations reset: GC threshold lowered to 16MB")))
+
+;;;;;; Garbage collect on idle and when losing focus
+
+;; Run GC when idle for 5 seconds
+(run-with-idle-timer 5 t #'garbage-collect)
+
+;; Run GC when Emacs loses focus
+(add-hook 'focus-out-hook #'garbage-collect)
 
 (provide 'optimization)

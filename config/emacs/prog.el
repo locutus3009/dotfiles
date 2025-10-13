@@ -140,7 +140,15 @@
 
  (lsp-auto-guess-root t)
  (lsp-prefer-capf t)
- (lsp-keep-workspace-alive nil))
+ (lsp-keep-workspace-alive nil)
+
+ ;; Performance improvements
+ (lsp-completion-provider :none) ; Use company instead
+ (lsp-headerline-breadcrumb-enable nil)
+ (lsp-enable-file-watchers nil) ; Big performance gain
+ (lsp-enable-folding nil)
+ (lsp-enable-snippet nil)
+ (lsp-log-io nil))
 
 ;; Support of LUA programming language
 (use-package lua-mode :ensure t :defer t)

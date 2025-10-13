@@ -83,3 +83,37 @@
 ;; (use-package
 ;;  goto-last-change
 ;;  :ensure t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Quality of Life Packages
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Avy - Jump anywhere quickly
+(use-package
+ avy
+ :ensure t
+ :bind (("C-'" . avy-goto-char-2)
+        ("C-:" . avy-goto-line))
+ :config
+ (setq avy-background t)
+ (setq avy-style 'at-full))
+
+;; Helpful - Better help buffers
+(use-package
+ helpful
+ :ensure t
+ :bind (("C-h f" . helpful-callable)
+        ("C-h v" . helpful-variable)
+        ("C-h k" . helpful-key)
+        ("C-h x" . helpful-command)))
+
+;; Undo-tree - Visual undo/redo
+(use-package
+ undo-tree
+ :ensure t
+ :init (global-undo-tree-mode)
+ :config
+ (setq undo-tree-auto-save-history t)
+ (setq undo-tree-history-directory-alist
+       '(("." . "~/.emacs.d/undo-tree-history/")))
+ :diminish undo-tree-mode)

@@ -4,6 +4,12 @@
 
 ;;; Code:
 
+;; Native compilation settings (Emacs 28+)
+(when (fboundp 'native-compile-async)
+  (setq native-comp-async-report-warnings-errors nil)
+  (setq native-comp-deferred-compilation t)
+  (setq native-comp-speed 2))
+
 ;; Disable startup message
 (setq inhibit-startup-message t)
 ;; Disable toolbar
@@ -56,9 +62,7 @@
 (setq package-archives
       '(("gnu" . "https://elpa.gnu.org/packages/")
         ("melpa" . "https://melpa.org/packages/")
-        ("marmalade" . "https://marmalade-repo.org/packages/")
-        ("org" . "https://orgmode.org/elpa/") ; Org-mode's repository
-        ("SC" . "https://joseito.republika.pl/sunrise-commander/")))
+        ("org" . "https://orgmode.org/elpa/"))) ; Org-mode's repository
 (package-initialize)
 
 ;; install use-package
