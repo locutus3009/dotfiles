@@ -67,5 +67,15 @@ ln -sf "$CURRENT_DIR/sort_pictures/systemd/sort_pictures.service" "$HOME/.config
 mkdir -p "$HOME/.config/sort_pictures"
 ln -sf "$CURRENT_DIR/sort_pictures/systemd/config.toml" "$HOME/.config/sort_pictures/config.toml"
 
-echo "Note: To build and install sort_pictures binary, run:"
-echo "  cd $CURRENT_DIR/sort_pictures && ./install.sh"
+# Plasma widgets
+mkdir -p "$HOME/.local/share/plasma/plasmoids"
+rm -rf "$HOME/.local/share/plasma/plasmoids/com.github.victorballester7.titlebingwallpaper"
+ln -sf "$CURRENT_DIR/local/share/plasma/plasmoids/com.github.victorballester7.titlebingwallpaper" "$HOME/.local/share/plasma/plasmoids/com.github.victorballester7.titlebingwallpaper"
+
+echo ""
+echo "Installation complete!"
+echo ""
+echo "Notes:"
+echo "  - To build and install sort_pictures binary: cd $CURRENT_DIR/sort_pictures && ./install.sh"
+echo "  - To install SDDM configuration (requires sudo): cd $CURRENT_DIR/sddm && ./install_sddm.sh"
+echo "  - Plasma widgets installed. Restart plasmashell if needed: killall plasmashell && plasmashell &"

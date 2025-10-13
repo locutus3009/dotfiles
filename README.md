@@ -51,6 +51,8 @@ This will:
 - **asound.conf.dot** - ALSA audio configuration
 
 ### KDE Plasma Configuration
+
+#### Core Plasma Configs
 Selective tracking of key Plasma configs (portable, stable settings only):
 
 - **config/plasma/kdeglobals** - Global KDE settings, theme (Breeze Dark), colors, fonts
@@ -73,6 +75,24 @@ Selective tracking of key Plasma configs (portable, stable settings only):
 - Panel widget layout (`plasma-org.kde.plasma.desktop-appletsrc`) - reconfigure manually
 - Monitor configuration (`kwinoutputconfig.json`) - hardware-specific
 - Notifications, locale (using defaults)
+
+#### Plasma Widgets
+- **local/share/plasma/plasmoids/com.github.victorballester7.titlebingwallpaper/** - Git submodule
+  - Bing Picture of the Day widget
+  - Shows daily wallpaper title and information
+  - Repository: https://github.com/victorballester7/title-bing-wallpaper
+  - Automatically symlinked by setup script
+
+#### SDDM Display Manager
+- **sddm/kde_settings.conf** - SDDM configuration (Breeze theme, fonts)
+- **sddm/install_sddm.sh** - Installation script (requires sudo)
+- **sddm/README.md** - Documentation
+
+**To install SDDM config:**
+```bash
+cd ~/dev/dotfiles/sddm
+./install_sddm.sh
+```
 
 ### Utilities
 - **apps/bin/** - Custom scripts and utilities
@@ -183,6 +203,13 @@ dotfiles/
 │   │   └── config.toml
 │   ├── src/              # Rust source code
 │   └── install.sh        # Build & install script
+├── local/share/           # Local user data
+│   └── plasma/plasmoids/
+│       └── com.github.victorballester7.titlebingwallpaper/  # Git submodule
+├── sddm/                  # SDDM display manager config
+│   ├── kde_settings.conf
+│   ├── install_sddm.sh
+│   └── README.md
 └── legacy/               # Archived configurations
     ├── config/           # Old app configs
     ├── xprofile.dot      # X11 session
