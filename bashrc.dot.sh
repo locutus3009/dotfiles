@@ -134,12 +134,10 @@ fi
 export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye >> /dev/null
 
-export DE='gnome'
-export DM='awesome'
-export XDG_CURRENT_DESKTOP=GNOME
+export DE='kde'
+export XDG_CURRENT_DESKTOP=KDE
 export EDITOR='emacsclient -c -nw -a emacs'
 export VISUAL='emacsclient -c -a emacs'
-export RANGER_LOAD_DEFAULT_RC=FALSE
 #export ALTERNATE_EDITOR=""
 #export EDITOR="cemacscli"        # $EDITOR opens in terminal
 #export VISUAL="emacscli"         # $VISUAL opens in GUI mode
