@@ -8,6 +8,7 @@ Personal configuration files for Arch Linux with KDE Plasma (Wayland) and SDDM.
 - **Desktop Environment**: KDE Plasma 6
 - **Display Server**: Wayland
 - **Display Manager**: SDDM
+- **Audio**: PipeWire (with PulseAudio compatibility)
 - **Terminal**: Kitty
 - **Shell**: Bash with Starship prompt
 - **Editor**: Emacs (daemon mode with emacsclient)
@@ -46,7 +47,7 @@ This will:
 
 ### Applications
 - **config/kitty/** - Kitty terminal emulator configuration
-- **config/pulse/** - PulseAudio configuration
+- **config/pulse/** - Audio configuration (PipeWire uses PulseAudio config for compatibility)
 - **gnupg/** - GPG and GPG-agent configuration (including SSH agent support)
 - **asound.conf.dot** - ALSA audio configuration
 
@@ -94,6 +95,11 @@ cd ~/dev/dotfiles/sddm
 ./install_sddm.sh
 ```
 
+#### System Configuration References
+- **system/** - Reference copies of system-level configs (require sudo)
+  - **modprobe.d/nvidia.conf** - NVIDIA kernel module configuration for Wayland
+  - Not automatically installed - see `system/README.md` for manual installation
+
 ### Utilities
 - **apps/bin/** - Custom scripts and utilities
 
@@ -140,6 +146,23 @@ cagenda     # Terminal Org agenda
 emacscli    # GUI emacsclient
 magit       # GUI Magit
 ```
+
+## Audio System
+
+Using **PipeWire** as the modern audio server with PulseAudio compatibility:
+- Lower latency than PulseAudio
+- Better Bluetooth support (aptX, LDAC, AAC codecs)
+- JACK compatibility for pro audio
+- Excellent Wayland integration
+- WirePlumber session manager handles Bluetooth automatically
+
+**Packages:**
+- `pipewire` - Core multimedia server
+- `pipewire-pulse` - PulseAudio compatibility layer
+- `pipewire-alsa` - ALSA support
+- `pipewire-jack` - JACK support
+- `wireplumber` - Session manager (includes Bluetooth)
+- `bluez` + `bluez-utils` - Bluetooth stack
 
 ## Input Method
 
@@ -209,6 +232,10 @@ dotfiles/
 ├── sddm/                  # SDDM display manager config
 │   ├── kde_settings.conf
 │   ├── install_sddm.sh
+│   └── README.md
+├── system/                # System config references (require sudo)
+│   ├── modprobe.d/
+│   │   └── nvidia.conf   # NVIDIA Wayland support
 │   └── README.md
 └── legacy/               # Archived configurations
     ├── config/           # Old app configs
