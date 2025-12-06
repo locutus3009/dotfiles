@@ -84,10 +84,10 @@ The repository uses GNU Stow with packages in the `stow/` directory:
 | `gnupg` | `.gnupg/gpg-agent.conf`, `.gnupg/gpg.conf` | `$HOME` |
 | `kitty` | `.config/kitty/` | `$HOME` |
 | `pulse` | `.config/pulse/` | `$HOME` |
-| `plasma` | `.config/{kdeglobals,kwinrc,kwinrulesrc,...}` | `$HOME` |
-| `apps` | `apps/bin/` scripts | `$HOME` |
-| `sort-pictures` | systemd service + config | `$HOME` |
-| `plasma-widgets` | Bing wallpaper plasmoid | `$HOME` |
+| `plasma` | `.config/{kdeglobals,kwinrc,kwinrulesrc,kglobalshortcutsrc,plasmashellrc}` | `$HOME` |
+| `apps` | `apps/bin/` (sort_pictures binary + build_linux.sh) | `$HOME` |
+| `sort-pictures` | systemd service + config.toml | `$HOME` |
+| `plasma-widgets` | Window Title + Bing Wallpaper plasmoids | `$HOME` |
 | `kde-material-you-colors` | color generation config + hook | `$HOME` |
 | `matugen` | template config for Emacs/GTK | `$HOME` |
 
@@ -108,8 +108,11 @@ The repository uses GNU Stow with packages in the `stow/` directory:
    - Config symlinked via `sort-pictures` stow package
 
 2. **title-bing-wallpaper** (`https://github.com/victorballester7/title-bing-wallpaper.git`)
-   - Path: `stow/plasma-widgets/.local/share/plasma/plasmoids/...`
+   - Path: `stow/plasma-widgets/.local/share/plasma/plasmoids/com.github.victorballester7.titlebingwallpaper`
    - KDE Plasma widget for Bing Picture of the Day
+
+**Additional Plasma Widgets (not submodules):**
+- `org.kde.windowtitle` - Window title plasmoid (in `stow/plasma-widgets/`)
 
 ## Material You Theming
 
