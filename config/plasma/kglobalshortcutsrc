@@ -160,7 +160,7 @@ Window One Screen Down=none,,Move Window One Screen Down
 Window One Screen Up=none,,Move Window One Screen Up
 Window One Screen to the Left=none,,Move Window One Screen to the Left
 Window One Screen to the Right=none,,Move Window One Screen to the Right
-Window Operations Menu=Alt+F3,Alt+F3,Window Operations Menu
+Window Operations Menu=Alt+F3,Alt+F3,Window Menu
 Window Pack Down=none,,Move Window Down
 Window Pack Left=none,,Move Window Left
 Window Pack Right=none,,Move Window Right
@@ -175,7 +175,7 @@ Window Quick Tile Top Left=none,,Quick Tile Window to the Top Left
 Window Quick Tile Top Right=none,,Quick Tile Window to the Top Right
 Window Raise=none,,Raise Window
 Window Resize=none,,Resize Window
-Window Shade=none,,Shade Window
+Window Shade=none,none,Shade Window
 Window Shrink Horizontal=none,,Shrink Window Horizontally
 Window Shrink Vertical=none,,Shrink Window Vertically
 Window to Desktop 1=none,,Window to Desktop 1
@@ -269,13 +269,15 @@ repeat_action=none,,Manually Invoke Action on Current Clipboard
 show dashboard=Ctrl+F12,Ctrl+F12,Show Desktop
 show-barcode=none,,Show Barcode…
 show-on-mouse-pos=Meta+V,Meta+V,Show Clipboard Items at Mouse Position
-stop current activity=Meta+S,Meta+S,Stop Current Activity
 switch to next activity=none,,Switch to Next Activity
 switch to previous activity=none,,Switch to Previous Activity
 toggle do not disturb=none,,Toggle do not disturb
 
 [services][kitty.desktop]
 _launch=Meta+O\tMeta+Return
+
+[services][org.kde.dolphin.desktop]
+_launch=none
 
 [services][org.kde.krunner.desktop]
 _launch=Alt+F2\tAlt+Space\tSearch\tMeta+E

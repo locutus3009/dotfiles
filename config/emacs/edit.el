@@ -34,8 +34,8 @@
  :ensure t
  :config
  ;; Multiple cursors
- (global-set-key (kbd "C-M->") 'mc/mark-next-like-this)
- (global-set-key (kbd "C-M-<") 'mc/mark-previous-like-this)
+ (global-set-key (kbd "C-M-n") 'mc/mark-next-like-this)
+ (global-set-key (kbd "C-M-p") 'mc/mark-previous-like-this)
  ;; (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
  )
 

@@ -145,6 +145,7 @@ XftSubPixel=none
 
 [KDE]
 LookAndFeelPackage=org.kde.breezedark.desktop
+widgetStyle=Darkly
 
 [KFileDialog Settings]
 Allow Expansion=false

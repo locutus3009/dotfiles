@@ -1,6 +1,3 @@
-[Activities][LastVirtualDesktop]
-16c7b9c7-cc67-4dee-9fad-1393487b0a77=d720ac0b-ce9d-477a-9529-1e192b6e382d
-
 [Desktops]
 Id_1=d720ac0b-ce9d-477a-9529-1e192b6e382d
 Id_2=a02f9f15-cc2c-4d67-ad35-a4a44d8eb593
@@ -19,8 +16,6 @@ Rows=1
 
 [NightColor]
 Active=true
-LatitudeAuto=51.02
-LongitudeAuto=13.76
 
 [Plugins]
 poloniumEnabled=false

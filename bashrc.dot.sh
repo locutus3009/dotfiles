@@ -134,8 +134,8 @@ fi
 export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye >> /dev/null
 
-export DE='kde'
-export XDG_CURRENT_DESKTOP=KDE
+#export DE='kde'
+#export XDG_CURRENT_DESKTOP=KDE
 export EDITOR='emacsclient -c -nw -a emacs'
 export VISUAL='emacsclient -c -a emacs'
 #export ALTERNATE_EDITOR=""
@@ -147,6 +147,7 @@ export PATH="$PATH:$HOME/apps"
 export PATH="$PATH:$HOME/apps/bin"
 export PATH="$PATH:$HOME/Foundation_Platform/models/Linux64_GCC-6.4"
 export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:/opt/shader-slang-bin/bin"
 
 # Setup Fcitx5
 export GLFW_IM_MODULE=fcitx
@@ -154,7 +155,11 @@ export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+
 #export MPD_HOST=$HOME/.config/mpd/socket
 
 source "$HOME/bash-preexec.sh"
 eval "$(starship init bash)"
+
+alias claude="/home/locutus/.claude/local/claude"
