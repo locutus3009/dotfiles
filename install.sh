@@ -55,7 +55,15 @@ yay -S --needed syncthing
 
 # Development Tools
 echo "==> Installing development tools..."
-yay -S --needed git base-devel rust cargo gpg
+yay -S --needed git base-devel rust cargo gpg jq
+
+# Symlink Management
+echo "==> Installing GNU Stow..."
+yay -S --needed stow
+
+# Material You Theming
+echo "==> Installing Material You theming tools..."
+yay -S --needed kde-material-you-colors matugen-bin
 
 # Optional: Photo management
 echo "==> Installing optional packages..."
@@ -78,11 +86,19 @@ echo ""
 echo "✓ Package installation complete!"
 echo ""
 echo "Next steps:"
-echo "  1. Run ./setup_symlinks.sh to set up dotfiles"
-echo "  2. Build sort_pictures: cd sort_pictures && ./install.sh"
-echo "  3. Install SDDM config: cd sddm && ./install_sddm.sh"
-echo "  4. Enable SDDM: sudo systemctl enable sddm"
-echo "  5. Enable user services:"
+echo "  1. Remove existing configs that conflict with stow:"
+echo "     rm ~/.bashrc ~/.gdbinit ~/.asound.conf ~/bash-preexec.sh"
+echo "     rm -rf ~/.config/emacs ~/.config/kitty ~/.config/pulse"
+echo "     rm -rf ~/.config/matugen ~/.config/kde-material-you-colors"
+echo "  2. Run ./stow.sh to set up dotfiles"
+echo "  3. Build sort_pictures:"
+echo "     cd sort_pictures && cargo build --release"
+echo "     mkdir -p ~/apps/bin && cp target/release/sort_pictures ~/apps/bin/"
+echo "  4. Install SDDM config: cd sddm && ./install_sddm.sh"
+echo "  5. Enable SDDM: sudo systemctl enable sddm"
+echo "  6. Enable kde-material-you-colors autostart:"
+echo "     kde-material-you-colors --autostart"
+echo "  7. Enable user services:"
 echo "     systemctl --user enable --now syncthing.service"
 echo "     systemctl --user enable --now sort_pictures.service"
-echo "  6. Reboot to start using KDE Plasma"
+echo "  8. Reboot to start using KDE Plasma"

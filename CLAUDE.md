@@ -4,15 +4,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is a **personal dotfiles repository** for Arch Linux with a **hybrid desktop setup**: Hyprland as the primary compositor with KDE Plasma 6 as fallback. The repository uses a symlink-based approach where configuration files remain in the repo and are symlinked to their expected locations in `$HOME`.
+This is a **personal dotfiles repository** for Arch Linux with **KDE Plasma 6** as the primary desktop. The repository uses **GNU Stow** for symlink management, organizing configs into modular packages.
 
 **Target System:**
 - Arch Linux (rolling release)
-- **Hyprland** (primary compositor) — via separate `dots-hyprland` repository
-- **KDE Plasma 6** (fallback compositor) — configs in this repo
+- **KDE Plasma 6** (primary desktop)
 - PipeWire audio (not PulseAudio)
 - Fcitx5 input method
-- SDDM display manager (supports both Hyprland and Plasma sessions)
+- SDDM display manager
+- Material You dynamic theming via `kde-material-you-colors` + `matugen`
 
 ## Key Commands
 
@@ -27,15 +27,26 @@ git submodule update --init --recursive
 # Install packages (requires yay AUR helper)
 ./install.sh
 
-# Create symlinks
-./setup_symlinks.sh
+# Remove existing config files that would conflict with stow
+rm ~/.bashrc ~/.gdbinit ~/.asound.conf ~/bash-preexec.sh
+rm -rf ~/.config/emacs ~/.config/kitty ~/.config/pulse
+rm -rf ~/.config/matugen ~/.config/kde-material-you-colors
 
-# Build and enable sort_pictures service
-cd sort_pictures && ./install.sh
+# Create symlinks with GNU Stow
+./stow.sh
+
+# Build sort_pictures binary (see sort_pictures section below)
+cd sort_pictures && cargo build --release
+mkdir -p ~/apps/bin
+cp target/release/sort_pictures ~/apps/bin/
+systemctl --user daemon-reload
 systemctl --user enable --now sort_pictures.service
 
 # Install SDDM configuration (requires sudo)
 cd sddm && ./install_sddm.sh
+
+# Enable kde-material-you-colors autostart
+kde-material-you-colors --autostart
 
 # Enable system services
 sudo systemctl enable sddm bluetooth
@@ -44,172 +55,137 @@ systemctl --user enable --now syncthing.service
 
 ### Updating Configurations
 ```bash
-# Edit config files in dotfiles repo - changes are live via symlinks
+# Edit config files in stow packages - changes are live via symlinks
 # Commit when ready
 git add .
 git commit -m "Description"
 git push
 
+# Re-stow after adding new files to packages
+./stow.sh
+
 # Update submodules
 git submodule update --remote
-cd sort_pictures && ./install.sh  # Rebuild if needed
 ```
 
-### Plasma Shell Management (Fallback Desktop)
+### Plasma Shell Management
 ```bash
 # Restart plasmashell to reload widget changes
 killall plasmashell && plasmashell &
 
 # Reload KWin configuration
-kwin_wayland --replace &
-```
-
-### Hyprland Management (Primary Desktop)
-```bash
-# Reload Hyprland configuration
-hyprctl reload
-
-# Check Hyprland logs
-journalctl --user -u hyprland.service -f
-
-# Hyprland configs are at ~/.config/hypr/ (managed by dots-hyprland)
+qdbus6 org.kde.KWin /KWin reconfigure
 ```
 
 ## Architecture
 
-### Symlink Strategy
-The repository does NOT modify files in place. Instead:
-1. Configuration files live in the dotfiles repository
-2. `setup_symlinks.sh` creates symlinks from `$HOME` to the repo
-3. Changes to tracked configs immediately affect the system AND git status
+### GNU Stow Package Structure
 
-**Critical:** Symlinks use **absolute paths** based on `$(pwd)`, so the script must be run from the repo root.
+The repository uses GNU Stow with packages in the `stow/` directory:
+
+| Package | Contents | Target |
+|---------|----------|--------|
+| `bash` | `.bashrc`, `.gdbinit`, `.asound.conf`, `bash-preexec.sh` | `$HOME` |
+| `emacs` | `.emacs.d/`, `.config/emacs/` | `$HOME` |
+| `gnupg` | `.gnupg/gpg-agent.conf`, `.gnupg/gpg.conf` | `$HOME` |
+| `kitty` | `.config/kitty/` | `$HOME` |
+| `pulse` | `.config/pulse/` | `$HOME` |
+| `plasma` | `.config/{kdeglobals,kwinrc,kwinrulesrc,...}` | `$HOME` |
+| `apps` | `apps/bin/` scripts | `$HOME` |
+| `sort-pictures` | systemd service + config | `$HOME` |
+| `plasma-widgets` | Bing wallpaper plasmoid | `$HOME` |
+| `kde-material-you-colors` | color generation config + hook | `$HOME` |
+| `matugen` | template config for Emacs/GTK | `$HOME` |
+
+**Stow commands:**
+```bash
+./stow.sh                    # Stow all packages
+./stow.sh bash emacs         # Stow specific packages
+./stow.sh --unstow plasma    # Remove symlinks for a package
+./stow.sh --simulate         # Preview changes without applying
+./stow.sh --adopt            # Adopt existing files into stow
+```
 
 ### Git Submodules
-Two active submodules plus one orphaned entry:
 
 1. **sort_pictures** (`git@github.com:locutus3009/sort_pictures.git`)
    - Rust-based photo organizer with GPS support
    - Runs as systemd user service
-   - Config at `sort_pictures/systemd/config.toml` (symlinked to `~/.config/sort_pictures/`)
-   - Service file symlinked to `~/.config/systemd/user/`
+   - Config symlinked via `sort-pictures` stow package
 
 2. **title-bing-wallpaper** (`https://github.com/victorballester7/title-bing-wallpaper.git`)
-   - Path: `local/share/plasma/plasmoids/com.github.victorballester7.titlebingwallpaper/`
+   - Path: `stow/plasma-widgets/.local/share/plasma/plasmoids/...`
    - KDE Plasma widget for Bing Picture of the Day
-   - Symlinked to `~/.local/share/plasma/plasmoids/`
 
-3. **ranger_devicons** ⚠️ ORPHANED
-   - Listed in `.gitmodules` at `config/ranger/plugins/ranger_devicons`
-   - Directory does not exist (path never created or was removed)
-   - Causes `git submodule status` to fail
-   - Kept for potential future use; ignore the warning
+## Material You Theming
 
-### Selective Plasma Configuration Tracking
+The system automatically generates Material You colors from the desktop wallpaper:
 
-**Tracked configs in repo** (stable, portable):
-- `config/plasma/kdeglobals` - Theme, colors, fonts (Breeze Dark reference)
-- `config/plasma/kwinrc` - Window manager settings (6 named desktops, tiling, effects)
-- `config/plasma/kwinrulesrc` - Window rules (app→desktop assignments)
-- `config/plasma/kglobalshortcutsrc` - Keyboard shortcuts
-- `config/plasma/plasmashellrc` - Panel appearance
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                   MATERIAL YOU COLOR FLOW                        │
+├─────────────────────────────────────────────────────────────────┤
+│ Plasma Wallpaper Change (Bing POTD, manual, etc.)               │
+│         │                                                        │
+│         ▼                                                        │
+│ kde-material-you-colors (daemon, monitors via D-Bus)            │
+│         │                                                        │
+│         ├──► Updates KDE color schemes (Plasma/Qt apps)         │
+│         │                                                        │
+│         ▼                                                        │
+│ on_change_hook → matugen-hook.sh                                │
+│         │                                                        │
+│         ▼                                                        │
+│ matugen color hex <seed>                                        │
+│         │                                                        │
+│         ▼                                                        │
+│ Generates templates:                                             │
+│ - ~/.config/emacs/generated.el (Emacs theme)                    │
+│ - ~/.config/gtk-3.0/gtk.css                                     │
+│ - ~/.config/gtk-4.0/gtk.css                                     │
+└─────────────────────────────────────────────────────────────────┘
+```
 
-**Currently symlinked** (active on system):
-- `kwinrc`, `kwinrulesrc`, `kglobalshortcutsrc`, `plasmashellrc` → symlinked to repo
+### Configuration Files
 
-**NOT symlinked** (managed separately):
-- `kdeglobals` — Currently using **dots-hyprland's Material You theme** instead of repo version
-  - `~/.config/kdeglobals` is a regular file, not a symlink
-  - To restore: `ln -sf /hdd/locutus/dev/dotfiles/config/plasma/kdeglobals ~/.config/kdeglobals`
+- `stow/kde-material-you-colors/.config/kde-material-you-colors/config.conf`
+- `stow/kde-material-you-colors/.config/kde-material-you-colors/matugen-hook.sh`
+- `stow/matugen/.config/matugen/config.toml`
+- `stow/matugen/.config/matugen/templates/`
 
-**NOT tracked** (dynamic or machine-specific):
-- `plasma-org.kde.plasma.desktop-appletsrc` - Panel widget layout (changes often)
-- `kwinoutputconfig.json` - Monitor configuration (hardware-specific)
+### Manual Color Update
 
-**Rationale:** Panel widgets change frequently with every UI tweak. Monitor configs contain hardware-specific IDs. Users must reconfigure these manually on new systems.
+```bash
+# Extract seed color and run matugen manually
+color=$(jq -r '.seed.color' /tmp/kde-material-you-colors-$(whoami).json)
+matugen color hex "$color" --mode dark
 
-### System-Level Configurations
-
-**system/** directory contains reference copies (NOT symlinked):
-- `system/modprobe.d/nvidia.conf` - NVIDIA DRM modeset for Wayland
-- Requires manual `sudo cp` to `/etc/` - see `system/README.md`
-
-**sddm/** directory has install script:
-- `sddm/kde_settings.conf` - SDDM display manager config
-- `sddm/install_sddm.sh` - Automated sudo install script
-
-### Legacy Configurations
-
-**legacy/** contains archived AwesomeWM and X11 configs:
-- Entire AwesomeWM setup (Lua configs, themes, widgets)
-- X11-specific files (xprofile, xinitrc, Xdefaults, xbindkeysrc)
-- Old application configs (ranger, picom, mpd, terminator)
-
-These are preserved for reference but not installed by `setup_symlinks.sh`.
-
-### Hyprland Integration (Primary Desktop)
-
-The primary desktop environment is **Hyprland**, managed by a separate repository:
-
-**Repository:** `/home/locutus/dev/dots-hyprland`
-- Fork of `end-4/dots-hyprland` ("illogical-impulse")
-- Independent installation via `./setup install`
-- NOT a submodule of this dotfiles repo
-
-**What dots-hyprland provides:**
-- Hyprland compositor configuration (`~/.config/hypr/`)
-- Quickshell bar and widgets
-- Fuzzel application launcher
-- Foot terminal (alternative to Kitty)
-- Hyprlock screen locker
-- Material You dynamic theming (kde-material-you-colors, matugen)
-- Custom kdeglobals with Material You theme
-
-**Relationship to this repo:**
-- This dotfiles repo provides: shell (bashrc), Emacs, GPG, sort_pictures, Plasma fallback configs
-- dots-hyprland provides: Hyprland configs, Material You theming, quickshell widgets
-- **Shared/conflicting configs:**
-  - `kitty` — This repo's config enhanced with dots-hyprland scripts (scroll_mark.py, search.py)
-  - `kdeglobals` — dots-hyprland's Material You theme active (not symlinked from this repo)
-  - `starship.toml` — Both repos have versions; dots-hyprland's is active
-
-**Setup order for new system:**
-1. Clone and set up this dotfiles repo first (shell, Emacs, base configs)
-2. Clone and run dots-hyprland `./setup install` second (overwrites some configs)
-3. Re-run `setup_symlinks.sh` to restore specific symlinks if needed
-
-**Switching between Hyprland and Plasma:**
-- SDDM login screen offers both sessions
-- Hyprland: Primary daily use
-- Plasma: Fallback for KDE-specific tasks or troubleshooting
+# Or restart kde-material-you-colors to re-detect wallpaper
+pkill kde-material-you-colors
+kde-material-you-colors &
+```
 
 ## Important Configuration Details
 
 ### Audio: PipeWire (Not PulseAudio)
 The system uses PipeWire with PulseAudio compatibility layer:
 - `pipewire-pulse` provides `/run/user/$UID/pulse/native` socket
-- `pactl info` shows: "Server Name: PulseAudio (on PipeWire 1.4.8)"
+- `pactl info` shows: "Server Name: PulseAudio (on PipeWire)"
 - WirePlumber manages Bluetooth audio automatically
-- `config/pulse/` directory still exists for compatibility configs
-
-**When editing audio configs:** PipeWire reads PulseAudio configs but don't assume PulseAudio is running.
 
 ### GPG Agent as SSH Agent
-`bashrc.dot.sh` configures GPG agent to handle SSH:
+`.bashrc` configures GPG agent to handle SSH:
 ```bash
 export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
 ```
-SSH keys are managed through GPG, not ssh-agent.
 
 ### Emacs Daemon Mode
-Emacs runs as a daemon with wrapper aliases (defined in `bashrc.dot.sh`):
+Emacs runs as a daemon with wrapper aliases (defined in `.bashrc`):
 - `cemacscli` - Terminal emacsclient
 - `emacscli` - GUI emacsclient
 - `cmagit` / `magit` - Magit in terminal/GUI
 
-The daemon was previously auto-launched by the archived `legacy/xprofile.dot`. Modern setup relies on user starting daemon manually or through desktop autostart.
-
-### Desktop Layout (Plasma Fallback)
+### Desktop Layout
 KWin is configured with 6 named virtual desktops and window rules:
 - Desktop 1 (Main) - Kitty
 - Desktop 2 (Firefox) - Firefox (maximized)
@@ -218,54 +194,57 @@ KWin is configured with 6 named virtual desktops and window rules:
 - Desktop 5 (Telegram) - Telegram (maximized)
 - Desktop 6 (Digikam) - Digikam
 
-Window rules auto-assign and maximize applications. Defined in `config/plasma/kwinrulesrc`.
+## sort_pictures Installation
 
-**Note:** Hyprland has its own workspace configuration in `~/.config/hypr/` managed by dots-hyprland.
+The `sort_pictures` submodule's `install.sh` copies config/service files which conflicts with stow. Use this workaround:
+
+```bash
+# Build the binary
+cd sort_pictures
+cargo build --release
+mkdir -p ~/apps/bin
+cp target/release/sort_pictures ~/apps/bin/
+
+# Config and service are managed by stow (already done via ./stow.sh)
+
+# Reload and enable service
+systemctl --user daemon-reload
+systemctl --user enable --now sort_pictures.service
+```
+
+**Do NOT run** `sort_pictures/install.sh` — it conflicts with stow symlinks.
 
 ## Working with This Repository
 
 ### Adding New Configurations
-1. Add the config file to appropriate directory (e.g., `config/appname/`)
-2. Add symlink command to `setup_symlinks.sh`
-3. Document in README.md under "Active Configurations"
-4. Test by running `setup_symlinks.sh`
+
+1. Create a new stow package directory: `mkdir -p stow/appname/.config/appname/`
+2. Add config files to the package
+3. Add the package name to `stow.sh` ALL_PACKAGES array
+4. Run `./stow.sh appname`
+5. Document in this file
 
 ### Modifying Plasma Configs
 **Caution:** Plasma configs are symlinked. Editing them changes both:
-- The file in the repo (tracked by git)
+- The file in the stow package (tracked by git)
 - The active system configuration
 
 Plasma may also write to these files when settings change via GUI. Check `git status` frequently.
 
 ### Package Management
-`install.sh` uses `yay` (AUR helper) with `--needed` flag:
-- Only installs missing packages
-- Prompts for NVIDIA drivers (yes/no)
-- Enables bluetooth.service via sudo
-
-When adding packages, maintain categorical organization and comments.
-
-### Submodule Updates
-```bash
-# Update all submodules to latest
-git submodule update --remote --merge
-
-# Update specific submodule
-cd sort_pictures
-git pull origin master
-cd ..
-git add sort_pictures
-git commit -m "Update sort_pictures submodule"
-```
+`install.sh` uses `yay` (AUR helper) with `--needed` flag. Required packages include:
+- `stow` - GNU Stow for symlink management
+- `kde-material-you-colors` - Automatic color generation
+- `matugen-bin` - Template-based theme generator
 
 ## Common Pitfalls
 
-1. **Running setup_symlinks.sh from wrong directory**
-   - Script uses `$(pwd)` for absolute paths
-   - Must run from repo root: `/hdd/locutus/dev/dotfiles`
+1. **Running stow with existing files**
+   - Stow will fail if target files exist
+   - Remove existing files first, or use `./stow.sh --adopt`
 
 2. **Forgetting to rebuild sort_pictures**
-   - After submodule update: `cd sort_pictures && ./install.sh`
+   - After submodule update: rebuild and reinstall binary
    - Service must be restarted: `systemctl --user restart sort_pictures.service`
 
 3. **Editing Plasma configs via GUI**
@@ -275,38 +254,48 @@ git commit -m "Update sort_pictures submodule"
 
 4. **Assuming PulseAudio is active**
    - System uses PipeWire with PA compatibility
-   - Don't install `pulseaudio` package - conflicts with `pipewire-pulse`
+   - Don't install `pulseaudio` package
 
-5. **Tracking machine-specific configs**
-   - Don't track monitor configs or panel widget layouts
-   - These contain UUIDs and screen-specific settings
-   - Document manual reconfiguration steps instead
+5. **kde-material-you-colors not running**
+   - Run `kde-material-you-colors --autostart` to enable autostart
+   - Or start manually: `kde-material-you-colors &`
 
-6. **Running dots-hyprland setup overwrites configs**
-   - `dots-hyprland ./setup install` may replace symlinks with regular files
-   - Specifically: kdeglobals, kitty config, starship.toml
-   - Re-run `setup_symlinks.sh` afterward to restore needed symlinks
-   - Current state: kdeglobals intentionally left as dots-hyprland version
+## Legacy: dots-hyprland Reference
 
-7. **Orphaned ranger_devicons submodule**
-   - `git submodule status` will fail due to orphaned `.gitmodules` entry
-   - This is known and intentional; the submodule path was never created
-   - Use `git submodule update --init sort_pictures` to update only active submodules
+The repository `/home/locutus/dev/dots-hyprland` contains an archived Hyprland setup (fork of end-4/dots-hyprland). It is **not active** but kept for reference:
+- Hyprland compositor configuration
+- Quickshell bar and widgets
+- The original Material You theming scripts
 
-## File Naming Conventions
+The current setup uses a decoupled approach that works with Plasma's native wallpaper handling.
 
-- `.dot` suffix → Target has `.` prefix (e.g., `bashrc.dot.sh` → `~/.bashrc`)
-- `config/` directory → Maps to `~/.config/`
-- No suffix transformation needed for `config/` subdirs
+## File Structure
 
-## Repository Locations
+```
+dotfiles/
+├── stow/                    # GNU Stow packages
+│   ├── bash/
+│   ├── emacs/
+│   ├── gnupg/
+│   ├── kitty/
+│   ├── pulse/
+│   ├── plasma/
+│   ├── apps/
+│   ├── sort-pictures/
+│   ├── plasma-widgets/
+│   ├── kde-material-you-colors/
+│   └── matugen/
+├── sort_pictures/           # Git submodule
+├── legacy/                  # Archived configs (AwesomeWM, X11)
+├── system/                  # System-level configs (not symlinked)
+├── sddm/                    # SDDM display manager config
+├── install.sh               # Package installation script
+├── stow.sh                  # GNU Stow wrapper
+└── CLAUDE.md                # This file
+```
+
+## Repository Location
 
 **This dotfiles repo:** `/hdd/locutus/dev/dotfiles`
 - Symlink at `~/dev/dotfiles`
 - Personal data on `/hdd/locutus/` (separate partition)
-- Provides: shell, Emacs, GPG, sort_pictures, Plasma fallback configs
-
-**Hyprland dotfiles (separate repo):** `/home/locutus/dev/dots-hyprland`
-- Fork of end-4/dots-hyprland
-- Provides: Hyprland, quickshell, Material You theming
-- Independent installation, not a submodule

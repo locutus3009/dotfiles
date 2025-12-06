@@ -1,0 +1,14 @@
+[Unit]
+Description=Sort Pictures Service
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/home/locutus/apps/bin/sort_pictures --daemonize
+Restart=always
+RestartSec=10
+Environment=HOME=%h
+WorkingDirectory=%h
+
+[Install]
+WantedBy=default.target
