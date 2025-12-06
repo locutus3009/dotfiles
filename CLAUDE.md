@@ -4,14 +4,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is a **personal dotfiles repository** for Arch Linux with KDE Plasma 6 (Wayland), SDDM, and PipeWire. The repository uses a symlink-based approach where configuration files remain in the repo and are symlinked to their expected locations in `$HOME`.
+This is a **personal dotfiles repository** for Arch Linux with a **hybrid desktop setup**: Hyprland as the primary compositor with KDE Plasma 6 as fallback. The repository uses a symlink-based approach where configuration files remain in the repo and are symlinked to their expected locations in `$HOME`.
 
 **Target System:**
 - Arch Linux (rolling release)
-- KDE Plasma 6 on Wayland
+- **Hyprland** (primary compositor) — via separate `dots-hyprland` repository
+- **KDE Plasma 6** (fallback compositor) — configs in this repo
 - PipeWire audio (not PulseAudio)
 - Fcitx5 input method
-- SDDM display manager
+- SDDM display manager (supports both Hyprland and Plasma sessions)
 
 ## Key Commands
 
@@ -54,13 +55,24 @@ git submodule update --remote
 cd sort_pictures && ./install.sh  # Rebuild if needed
 ```
 
-### Plasma Shell Management
+### Plasma Shell Management (Fallback Desktop)
 ```bash
 # Restart plasmashell to reload widget changes
 killall plasmashell && plasmashell &
 
 # Reload KWin configuration
 kwin_wayland --replace &
+```
+
+### Hyprland Management (Primary Desktop)
+```bash
+# Reload Hyprland configuration
+hyprctl reload
+
+# Check Hyprland logs
+journalctl --user -u hyprland.service -f
+
+# Hyprland configs are at ~/.config/hypr/ (managed by dots-hyprland)
 ```
 
 ## Architecture
@@ -74,29 +86,41 @@ The repository does NOT modify files in place. Instead:
 **Critical:** Symlinks use **absolute paths** based on `$(pwd)`, so the script must be run from the repo root.
 
 ### Git Submodules
-Three submodules are used:
+Two active submodules plus one orphaned entry:
 
 1. **sort_pictures** (`git@github.com:locutus3009/sort_pictures.git`)
    - Rust-based photo organizer with GPS support
    - Runs as systemd user service
-   - Config at `systemd/config.toml` (symlinked to `~/.config/sort_pictures/`)
+   - Config at `sort_pictures/systemd/config.toml` (symlinked to `~/.config/sort_pictures/`)
    - Service file symlinked to `~/.config/systemd/user/`
 
 2. **title-bing-wallpaper** (`https://github.com/victorballester7/title-bing-wallpaper.git`)
+   - Path: `local/share/plasma/plasmoids/com.github.victorballester7.titlebingwallpaper/`
    - KDE Plasma widget for Bing Picture of the Day
    - Symlinked to `~/.local/share/plasma/plasmoids/`
 
-3. **ranger_devicons** (archived in `legacy/config/ranger/`)
-   - Not actively used (Ranger replaced by Dolphin)
+3. **ranger_devicons** ⚠️ ORPHANED
+   - Listed in `.gitmodules` at `config/ranger/plugins/ranger_devicons`
+   - Directory does not exist (path never created or was removed)
+   - Causes `git submodule status` to fail
+   - Kept for potential future use; ignore the warning
 
 ### Selective Plasma Configuration Tracking
 
-**Tracked configs** (stable, portable):
-- `config/plasma/kdeglobals` - Theme, colors, fonts
+**Tracked configs in repo** (stable, portable):
+- `config/plasma/kdeglobals` - Theme, colors, fonts (Breeze Dark reference)
 - `config/plasma/kwinrc` - Window manager settings (6 named desktops, tiling, effects)
 - `config/plasma/kwinrulesrc` - Window rules (app→desktop assignments)
-- `config/plasma/kglobalshortcutsrc` - Keyboard shortcuts (292 lines)
+- `config/plasma/kglobalshortcutsrc` - Keyboard shortcuts
 - `config/plasma/plasmashellrc` - Panel appearance
+
+**Currently symlinked** (active on system):
+- `kwinrc`, `kwinrulesrc`, `kglobalshortcutsrc`, `plasmashellrc` → symlinked to repo
+
+**NOT symlinked** (managed separately):
+- `kdeglobals` — Currently using **dots-hyprland's Material You theme** instead of repo version
+  - `~/.config/kdeglobals` is a regular file, not a symlink
+  - To restore: `ln -sf /hdd/locutus/dev/dotfiles/config/plasma/kdeglobals ~/.config/kdeglobals`
 
 **NOT tracked** (dynamic or machine-specific):
 - `plasma-org.kde.plasma.desktop-appletsrc` - Panel widget layout (changes often)
@@ -123,6 +147,42 @@ Three submodules are used:
 
 These are preserved for reference but not installed by `setup_symlinks.sh`.
 
+### Hyprland Integration (Primary Desktop)
+
+The primary desktop environment is **Hyprland**, managed by a separate repository:
+
+**Repository:** `/home/locutus/dev/dots-hyprland`
+- Fork of `end-4/dots-hyprland` ("illogical-impulse")
+- Independent installation via `./setup install`
+- NOT a submodule of this dotfiles repo
+
+**What dots-hyprland provides:**
+- Hyprland compositor configuration (`~/.config/hypr/`)
+- Quickshell bar and widgets
+- Fuzzel application launcher
+- Foot terminal (alternative to Kitty)
+- Hyprlock screen locker
+- Material You dynamic theming (kde-material-you-colors, matugen)
+- Custom kdeglobals with Material You theme
+
+**Relationship to this repo:**
+- This dotfiles repo provides: shell (bashrc), Emacs, GPG, sort_pictures, Plasma fallback configs
+- dots-hyprland provides: Hyprland configs, Material You theming, quickshell widgets
+- **Shared/conflicting configs:**
+  - `kitty` — This repo's config enhanced with dots-hyprland scripts (scroll_mark.py, search.py)
+  - `kdeglobals` — dots-hyprland's Material You theme active (not symlinked from this repo)
+  - `starship.toml` — Both repos have versions; dots-hyprland's is active
+
+**Setup order for new system:**
+1. Clone and set up this dotfiles repo first (shell, Emacs, base configs)
+2. Clone and run dots-hyprland `./setup install` second (overwrites some configs)
+3. Re-run `setup_symlinks.sh` to restore specific symlinks if needed
+
+**Switching between Hyprland and Plasma:**
+- SDDM login screen offers both sessions
+- Hyprland: Primary daily use
+- Plasma: Fallback for KDE-specific tasks or troubleshooting
+
 ## Important Configuration Details
 
 ### Audio: PipeWire (Not PulseAudio)
@@ -142,14 +202,14 @@ export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
 SSH keys are managed through GPG, not ssh-agent.
 
 ### Emacs Daemon Mode
-Emacs runs as a daemon with wrapper aliases:
+Emacs runs as a daemon with wrapper aliases (defined in `bashrc.dot.sh`):
 - `cemacscli` - Terminal emacsclient
 - `emacscli` - GUI emacsclient
 - `cmagit` / `magit` - Magit in terminal/GUI
 
-The daemon is launched by `legacy/xprofile.dot:83` but this is archived. Modern setup relies on user starting daemon manually or through autostart.
+The daemon was previously auto-launched by the archived `legacy/xprofile.dot`. Modern setup relies on user starting daemon manually or through desktop autostart.
 
-### Desktop Layout
+### Desktop Layout (Plasma Fallback)
 KWin is configured with 6 named virtual desktops and window rules:
 - Desktop 1 (Main) - Kitty
 - Desktop 2 (Firefox) - Firefox (maximized)
@@ -159,6 +219,8 @@ KWin is configured with 6 named virtual desktops and window rules:
 - Desktop 6 (Digikam) - Digikam
 
 Window rules auto-assign and maximize applications. Defined in `config/plasma/kwinrulesrc`.
+
+**Note:** Hyprland has its own workspace configuration in `~/.config/hypr/` managed by dots-hyprland.
 
 ## Working with This Repository
 
@@ -220,15 +282,31 @@ git commit -m "Update sort_pictures submodule"
    - These contain UUIDs and screen-specific settings
    - Document manual reconfiguration steps instead
 
+6. **Running dots-hyprland setup overwrites configs**
+   - `dots-hyprland ./setup install` may replace symlinks with regular files
+   - Specifically: kdeglobals, kitty config, starship.toml
+   - Re-run `setup_symlinks.sh` afterward to restore needed symlinks
+   - Current state: kdeglobals intentionally left as dots-hyprland version
+
+7. **Orphaned ranger_devicons submodule**
+   - `git submodule status` will fail due to orphaned `.gitmodules` entry
+   - This is known and intentional; the submodule path was never created
+   - Use `git submodule update --init sort_pictures` to update only active submodules
+
 ## File Naming Conventions
 
 - `.dot` suffix → Target has `.` prefix (e.g., `bashrc.dot.sh` → `~/.bashrc`)
 - `config/` directory → Maps to `~/.config/`
 - No suffix transformation needed for `config/` subdirs
 
-## Repository Location
+## Repository Locations
 
-Default expected location: `/hdd/locutus/dev/dotfiles`
+**This dotfiles repo:** `/hdd/locutus/dev/dotfiles`
 - Symlink at `~/dev/dotfiles`
 - Personal data on `/hdd/locutus/` (separate partition)
-- Dotfiles repo specifically for configuration only
+- Provides: shell, Emacs, GPG, sort_pictures, Plasma fallback configs
+
+**Hyprland dotfiles (separate repo):** `/home/locutus/dev/dots-hyprland`
+- Fork of end-4/dots-hyprland
+- Provides: Hyprland, quickshell, Material You theming
+- Independent installation, not a submodule
