@@ -4,8 +4,8 @@
   (with-selected-frame frame
     (if (display-graphic-p frame)
         ;; GUI frame - use matugen colors INCLUDING backgrounds
+        ;; Note: internal-border-width is set in main.el default-frame-alist to avoid tiling issues
         (progn
-          (set-frame-parameter frame 'internal-border-width 22)
           (set-frame-parameter frame 'background-color "{{colors.surface.default.hex}}")
           (set-face-attribute 'default frame
                               :background "{{colors.surface.default.hex}}"

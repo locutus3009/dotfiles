@@ -10,6 +10,11 @@
   (setq native-comp-deferred-compilation t)
   (setq native-comp-speed 2))
 
+;; Frame settings for tiling WM compatibility (must be set early)
+(setq default-frame-alist '((internal-border-width . 22)))
+(setq frame-resize-pixelwise t)  ; Allow non-char-cell sizes
+(setq frame-inhibit-implied-resize t)  ; Prevent auto-resize on font/fringe changes
+
 ;; Disable startup message
 (setq inhibit-startup-message t)
 ;; Disable toolbar

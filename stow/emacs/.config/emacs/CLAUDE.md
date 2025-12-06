@@ -27,6 +27,7 @@ Files are loaded in this specific order from `~/.emacs.d/init.el`:
 
 **main.el** - Foundation layer:
 - Native compilation settings (Emacs 28+)
+- Tiling WM compatibility (frame-resize-pixelwise, frame-inhibit-implied-resize)
 - Package archives: GNU, MELPA, Org
 - use-package bootstrap
 - Pinentry GPG integration
@@ -111,6 +112,26 @@ Then add `(load-file "~/.config/emacs/projects/project-name.el")` to projects.el
 - Use wildcard expansion for `org-agenda-files`
 - Enable package-quickstart (removed per user preference)
 
+## Tiling WM Compatibility (Polonium/KDE)
+
+Emacs uses pgtk (Pure GTK) backend on Wayland. Critical settings in main.el prevent frame resize issues with tiling WMs:
+
+```elisp
+(setq frame-resize-pixelwise t)        ; Accept any pixel size from WM
+(setq frame-inhibit-implied-resize t)  ; Don't auto-resize on font/fringe changes
+(setq default-frame-alist '((internal-border-width . 22)))
+```
+
+**Why these matter:**
+- Without `frame-inhibit-implied-resize`, Emacs requests frame resizes after startup when fonts/fringes load
+- Polonium (KWin tiling script) interprets resize requests as "window wants to float"
+- `internal-border-width` must be in `default-frame-alist` (set at frame creation), NOT via `set-frame-parameter` (which triggers resize)
+
+**Matugen integration:**
+- `generated.el` is created by matugen from template at `~/.config/matugen/templates/emacs/colors.el`
+- Template must NOT set `internal-border-width` dynamically (causes tiling issues)
+- Colors are reapplied after theme load via advice on `load-theme`
+
 ## Critical Dependencies
 
 **External tools required:**
@@ -182,3 +203,4 @@ After modifications:
 - Do not modify load order without understanding dependencies
 - Do not add `custom-set-variables` manually (use `M-x customize`)
 - Do not create tight coupling between modules
+- Do not use `set-frame-parameter` for size-related properties (use `default-frame-alist` instead - see Tiling WM section)

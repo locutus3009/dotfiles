@@ -43,7 +43,7 @@ rules=7bbed072-ac35-412f-9a0a-fb73303e4f0e,ff57b432-d6f7-42e9-a0da-2a3240892023,
 Description=emacs
 desktops=cc82fb98-917f-48a3-9454-608643c57626
 desktopsrule=3
-wmclass=Emacs
+wmclass=emacs
 wmclassmatch=1
 
 [ff57b432-d6f7-42e9-a0da-2a3240892023]
