@@ -6,7 +6,7 @@ Id_4=02672f94-8be3-4b30-8876-1fd76a0aafa7
 Id_5=231ca08e-0a6f-4178-89aa-78fd1c3a6520
 Id_6=c56e9173-983c-4b5b-860f-dbfb8312b102
 Name_1=Main
-Name_2=Firefox
+Name_2=Browser
 Name_3=Emacs
 Name_4=Thunderbird
 Name_5=Telegram
@@ -18,41 +18,69 @@ Rows=1
 Active=true
 
 [Plugins]
-poloniumEnabled=false
+krohnkiteEnabled=false
+poloniumEnabled=true
 translucencyEnabled=true
 wobblywindowsEnabled=true
 zoomEnabled=false
 
+[Round-Corners]
+DisableRoundTile=false
+InactiveCornerRadius=18
+Size=18
+
+[Script-krohnkite]
+dockHHeight=16
+screenGapBetween=16
+screenGapBottom=16
+screenGapLeft=16
+screenGapRight=16
+screenGapTop=16
+
 [Script-polonium]
-EngineType=1
 SaveOnTileEdit=true
 
 [Tiling]
 padding=4
 
 [Tiling][02672f94-8be3-4b30-8876-1fd76a0aafa7][b489ff02-9fa2-40fd-b631-3b440bdc804e]
-tiles={"layoutDirection":"horizontal","tiles":[]}
+tiles={"layoutDirection":"floating","tiles":[]}
+
+[Tiling][02672f94-8be3-4b30-8876-1fd76a0aafa7][e16ccce4-c860-49cc-a8e5-1519dd7d93ac]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][231ca08e-0a6f-4178-89aa-78fd1c3a6520][b489ff02-9fa2-40fd-b631-3b440bdc804e]
-tiles={"layoutDirection":"vertical","tiles":[]}
+tiles={"layoutDirection":"floating","tiles":[]}
+
+[Tiling][231ca08e-0a6f-4178-89aa-78fd1c3a6520][e16ccce4-c860-49cc-a8e5-1519dd7d93ac]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][733181a7-923c-5355-8766-a241fc3226a0]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][a02f9f15-cc2c-4d67-ad35-a4a44d8eb593][b489ff02-9fa2-40fd-b631-3b440bdc804e]
-tiles={"layoutDirection":"vertical","tiles":[]}
+tiles={"layoutDirection":"horizontal","tiles":[]}
+
+[Tiling][a02f9f15-cc2c-4d67-ad35-a4a44d8eb593][e16ccce4-c860-49cc-a8e5-1519dd7d93ac]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][c56e9173-983c-4b5b-860f-dbfb8312b102][b489ff02-9fa2-40fd-b631-3b440bdc804e]
-tiles={"layoutDirection":"horizontal","tiles":[]}
+tiles={"layoutDirection":"floating","tiles":[]}
+
+[Tiling][c56e9173-983c-4b5b-860f-dbfb8312b102][e16ccce4-c860-49cc-a8e5-1519dd7d93ac]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][cc82fb98-917f-48a3-9454-608643c57626][b489ff02-9fa2-40fd-b631-3b440bdc804e]
 tiles={"layoutDirection":"horizontal","tiles":[]}
 
+[Tiling][cc82fb98-917f-48a3-9454-608643c57626][e16ccce4-c860-49cc-a8e5-1519dd7d93ac]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][d720ac0b-ce9d-477a-9529-1e192b6e382d][b489ff02-9fa2-40fd-b631-3b440bdc804e]
 tiles={"layoutDirection":"horizontal","tiles":[]}
 
-[Wayland]
-InputMethod[$e]=/usr/share/applications/org.fcitx.Fcitx5.desktop
+[Tiling][d720ac0b-ce9d-477a-9529-1e192b6e382d][e16ccce4-c860-49cc-a8e5-1519dd7d93ac]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Xwayland]
 Scale=1
