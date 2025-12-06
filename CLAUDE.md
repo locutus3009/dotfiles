@@ -24,34 +24,28 @@ git clone <repo-url> dotfiles
 cd dotfiles
 git submodule update --init --recursive
 
-# Install packages (requires yay AUR helper)
-./install.sh
-
 # Remove existing config files that would conflict with stow
 rm ~/.bashrc ~/.gdbinit ~/.asound.conf ~/bash-preexec.sh
 rm -rf ~/.config/emacs ~/.config/kitty ~/.config/pulse
 rm -rf ~/.config/matugen ~/.config/kde-material-you-colors
 
-# Create symlinks with GNU Stow
-./stow.sh
-
-# Build sort_pictures binary (see sort_pictures section below)
-cd sort_pictures && cargo build --release
-mkdir -p ~/apps/bin
-cp target/release/sort_pictures ~/apps/bin/
-systemctl --user daemon-reload
-systemctl --user enable --now sort_pictures.service
-
-# Install SDDM configuration (requires sudo)
-cd sddm && ./install_sddm.sh
+# Run install script (handles everything)
+./install.sh
 
 # Enable kde-material-you-colors autostart
 kde-material-you-colors --autostart
 
-# Enable system services
-sudo systemctl enable sddm bluetooth
-systemctl --user enable --now syncthing.service
+# Reboot
+reboot
 ```
+
+**install.sh automatically handles:**
+- Package installation (only missing packages)
+- NVIDIA drivers and modprobe config (with prompts)
+- SDDM configuration and service
+- Bluetooth service enablement
+- GNU Stow dotfiles setup
+- sort_pictures build and systemd service (detects source updates)
 
 ### Updating Configurations
 ```bash
@@ -196,18 +190,18 @@ KWin is configured with 6 named virtual desktops and window rules:
 
 ## sort_pictures Installation
 
-The `sort_pictures` submodule's `install.sh` copies config/service files which conflicts with stow. Use this workaround:
+The `sort_pictures` submodule is automatically built and installed by `./install.sh`:
 
+- Checks if binary exists at `~/apps/bin/sort_pictures`
+- Detects source updates by comparing timestamps of `*.rs` and `Cargo.toml` files
+- Prompts to rebuild if source is newer than binary
+- Enables systemd user service after build
+
+**Manual build** (if needed):
 ```bash
-# Build the binary
-cd sort_pictures
-cargo build --release
+cd sort_pictures && cargo build --release
 mkdir -p ~/apps/bin
 cp target/release/sort_pictures ~/apps/bin/
-
-# Config and service are managed by stow (already done via ./stow.sh)
-
-# Reload and enable service
 systemctl --user daemon-reload
 systemctl --user enable --now sort_pictures.service
 ```

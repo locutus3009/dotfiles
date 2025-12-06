@@ -110,13 +110,3 @@ done
 
 echo ""
 echo "Done."
-
-# Post-stow reminders
-if ! $UNSTOW; then
-    echo ""
-    echo "Reminders:"
-    echo "  - sort_pictures binary: cd sort_pictures && cargo build --release && cp target/release/sort_pictures ~/apps/bin/"
-    echo "  - Enable sort_pictures: systemctl --user daemon-reload && systemctl --user enable --now sort_pictures.service"
-    echo "  - SDDM config: cd sddm && ./install_sddm.sh"
-    echo "  - Start kde-material-you-colors: kde-material-you-colors (or log out/in for autostart)"
-fi
