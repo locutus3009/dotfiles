@@ -36,13 +36,13 @@ PACKAGES_BLUETOOTH=(bluez bluez-utils)
 
 
 # Development Tools
-PACKAGES_DEV=(git base-devel rust cargo gnupg jq)
+PACKAGES_DEV=(git base-devel gnupg jq)
 
 # Symlink Management
 PACKAGES_STOW=(stow)
 
 # Material You Theming
-PACKAGES_THEMING=(kde-material-you-colors matugen-bin)
+PACKAGES_THEMING=(kde-material-you-colors matugen-bin kwin-effect-rounded-corners-git)
 
 # Optional packages
 PACKAGES_OPTIONAL=(digikam)
@@ -249,59 +249,6 @@ if [[ ! $REPLY =~ ^[Nn]$ ]]; then
     fi
 else
     echo "Skipping stow. Run ./stow.sh manually when ready."
-fi
-
-# =============================================================================
-# Build sort_pictures
-# =============================================================================
-
-SORT_PICTURES_DIR="$SCRIPT_DIR/sort_pictures"
-SORT_PICTURES_BIN="$HOME/apps/bin/sort_pictures"
-
-# Check if any source file is newer than the binary
-is_source_newer() {
-    local bin="$1"
-    local src_dir="$2"
-    # Check Cargo.toml and all .rs files
-    [[ -n "$(find "$src_dir" \( -name "*.rs" -o -name "Cargo.toml" \) -newer "$bin" 2>/dev/null)" ]]
-}
-
-if [[ -d "$SORT_PICTURES_DIR" ]] && command -v cargo &>/dev/null; then
-    NEEDS_BUILD=false
-
-    if [[ ! -f "$SORT_PICTURES_BIN" ]]; then
-        NEEDS_BUILD=true
-        BUILD_REASON="not installed"
-    elif is_source_newer "$SORT_PICTURES_BIN" "$SORT_PICTURES_DIR"; then
-        NEEDS_BUILD=true
-        BUILD_REASON="source updated"
-    fi
-
-    if $NEEDS_BUILD; then
-        echo ""
-        read -p "Build and install sort_pictures ($BUILD_REASON)? (Y/n): " -n 1 -r
-        echo ""
-        if [[ ! $REPLY =~ ^[Nn]$ ]]; then
-            echo "Building sort_pictures..."
-            (cd "$SORT_PICTURES_DIR" && cargo build --release)
-            mkdir -p "$HOME/apps/bin"
-            cp "$SORT_PICTURES_DIR/target/release/sort_pictures" "$SORT_PICTURES_BIN"
-            echo "✓ sort_pictures installed to ~/apps/bin/"
-
-            # Reload systemd and enable service if stow was run
-            if [[ -f "$HOME/.config/systemd/user/sort_pictures.service" ]]; then
-                echo "Enabling sort_pictures service..."
-                systemctl --user daemon-reload
-                systemctl --user enable --now sort_pictures.service
-                echo "✓ sort_pictures service enabled."
-            fi
-        else
-            echo "Skipping sort_pictures build."
-        fi
-    else
-        echo ""
-        echo "✓ sort_pictures already installed and up to date."
-    fi
 fi
 
 echo ""
