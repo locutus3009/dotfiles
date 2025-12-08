@@ -203,9 +203,8 @@ KWin is configured with 6 named virtual desktops and window rules:
 
 The `sort_pictures` submodule is automatically built and installed by `./install.sh`:
 
-- Checks if binary exists at `~/apps/bin/sort_pictures`
-- Detects source updates by comparing timestamps of `*.rs` and `Cargo.toml` files
-- Prompts to rebuild if source is newer than binary
+- Always prompts to build (uses incremental `cargo build --release`)
+- Stops service before copying binary (avoids "Text file busy" error)
 - Enables systemd user service after build
 
 **Manual build** (if needed):
@@ -223,9 +222,8 @@ systemctl --user enable --now sort_pictures.service
 
 The `sportmodel` submodule is automatically built and installed by `./install.sh`:
 
-- Checks if binary exists at `~/apps/bin/sportmodel`
-- Detects source updates by comparing timestamps of `*.rs` and `Cargo.toml` files
-- Prompts to rebuild if source is newer than binary
+- Always prompts to build (uses incremental `cargo build --release`)
+- Stops service before copying binary (avoids "Text file busy" error)
 - Enables systemd user service after build
 - Web server runs on port 8473, data file at `/hdd/locutus/Documents/Sport/load.xlsx`
 
