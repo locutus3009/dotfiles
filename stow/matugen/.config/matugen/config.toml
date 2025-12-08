@@ -1,0 +1,21 @@
+# Matugen Configuration for KDE Plasma
+# Generates themed configs for Emacs and GTK applications
+# Called by kde-material-you-colors via on_change_hook
+
+[config]
+version_check = false
+
+# Emacs theme - applies Material You colors to Emacs frames
+[templates.emacs]
+input_path = '~/.config/matugen/templates/emacs/colors.el'
+output_path = '~/.config/emacs/generated.el'
+
+# GTK 3.0 theme - colors for GTK3 applications
+[templates.gtk3]
+input_path = '~/.config/matugen/templates/gtk-3.0/gtk.css'
+output_path = '~/.config/gtk-3.0/gtk.css'
+
+# GTK 4.0 theme - colors for GTK4 applications (libadwaita)
+[templates.gtk4]
+input_path = '~/.config/matugen/templates/gtk-4.0/gtk.css'
+output_path = '~/.config/gtk-4.0/gtk.css'

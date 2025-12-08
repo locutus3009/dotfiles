@@ -1,3 +1,6 @@
-[submodule "config/ranger/plugins/ranger_devicons"]
-	path = config/ranger/plugins/ranger_devicons
-	url = https://github.com/alexanderjeurissen/ranger_devicons
+[submodule "sort_pictures"]
+	path = sort_pictures
+	url = git@github.com:locutus3009/sort_pictures.git
+[submodule "local/share/plasma/plasmoids/com.github.victorballester7.titlebingwallpaper"]
+	path = stow/plasma-widgets/.local/share/plasma/plasmoids/plasmoids/com.github.victorballester7.titlebingwallpaper
+	url = https://github.com/victorballester7/title-bing-wallpaper.git

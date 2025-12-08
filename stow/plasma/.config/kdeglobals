@@ -1,0 +1,180 @@
+[ColorEffects:Disabled]
+ChangeSelectionColor=
+Color=#1c1e17
+ColorAmount=0.5
+ColorEffect=3
+ContrastAmount=0
+ContrastEffect=0
+Enable=
+IntensityAmount=0
+IntensityEffect=0
+
+[ColorEffects:Inactive]
+ChangeSelectionColor=true
+Color=#0d0f08
+ColorAmount=0.025
+ColorEffect=0
+ContrastAmount=0.1
+ContrastEffect=0
+Enable=true
+IntensityAmount=0
+IntensityEffect=0
+
+[Colors:Button]
+BackgroundAlternate=#43463a
+BackgroundNormal=#292b23
+DecorationFocus=#b6cd82
+DecorationHover=#b6cd82
+ForegroundActive=#e3e3d7
+ForegroundInactive=#909284
+ForegroundLink=#8fc9fc
+ForegroundNegative=#ffb3b4
+ForegroundNeutral=#fcb38a
+ForegroundNormal=#e3e3d7
+ForegroundPositive=#00e479
+ForegroundVisited=#ebb2ff
+
+[Colors:Complementary]
+BackgroundAlternate=#10120b
+BackgroundNormal=#1c1e17
+DecorationFocus=#b6cd82
+DecorationHover=#b6cd82
+ForegroundActive=#e3e3d7
+ForegroundInactive=#909284
+ForegroundLink=#8fc9fc
+ForegroundNegative=#ffb3b4
+ForegroundNeutral=#fcb38a
+ForegroundNormal=#c6c8b9
+ForegroundPositive=#00e479
+ForegroundVisited=#ebb2ff
+
+[Colors:Header]
+BackgroundAlternate=#1c1e17
+BackgroundNormal=#1c1e17
+DecorationFocus=#b6cd82
+DecorationHover=#b6cd82
+ForegroundActive=#e3e3d7
+ForegroundInactive=#909284
+ForegroundLink=#8fc9fc
+ForegroundNegative=#ffb3b4
+ForegroundNeutral=#fcb38a
+ForegroundNormal=#c6c8b9
+ForegroundPositive=#00e479
+ForegroundVisited=#ebb2ff
+
+[Colors:Header][Inactive]
+BackgroundAlternate=#1c1e17
+BackgroundNormal=#1c1e17
+DecorationFocus=#b6cd82
+DecorationHover=#b6cd82
+ForegroundActive=#e3e3d7
+ForegroundInactive=#909284
+ForegroundLink=#8fc9fc
+ForegroundNegative=#ffb3b4
+ForegroundNeutral=#fcb38a
+ForegroundNormal=#c6c8b9
+ForegroundPositive=#00e479
+ForegroundVisited=#ebb2ff
+
+[Colors:Selection]
+BackgroundAlternate=#b6cd82
+BackgroundNormal=#b6cd82
+DecorationFocus=#b6cd82
+DecorationHover=#bfc7a7
+ForegroundActive=#253500
+ForegroundInactive=#253500
+ForegroundLink=#004b73
+ForegroundNegative=#920023
+ForegroundNeutral=#753400
+ForegroundNormal=#253500
+ForegroundPositive=#005228
+ForegroundVisited=#74009f
+
+[Colors:Tooltip]
+BackgroundAlternate=#43463a
+BackgroundNormal=#1c1e17
+DecorationFocus=#b6cd82
+DecorationHover=#b6cd82
+ForegroundActive=#e3e3d7
+ForegroundInactive=#909284
+ForegroundLink=#8fc9fc
+ForegroundNegative=#ffb3b4
+ForegroundNeutral=#fcb38a
+ForegroundNormal=#e3e3d7
+ForegroundPositive=#00e479
+ForegroundVisited=#ebb2ff
+
+[Colors:View]
+BackgroundAlternate=#1c1e17
+BackgroundNormal=#10120b
+DecorationFocus=#b6cd82
+DecorationHover=#516526
+ForegroundActive=#e3e3d7
+ForegroundInactive=#909284
+ForegroundLink=#8fc9fc
+ForegroundNegative=#ffb3b4
+ForegroundNeutral=#fcb38a
+ForegroundNormal=#e3e3d7
+ForegroundPositive=#00e479
+ForegroundVisited=#ebb2ff
+
+[Colors:Window]
+BackgroundAlternate=#43463a
+BackgroundNormal=#1c1e17
+DecorationFocus=#b6cd82
+DecorationHover=#b6cd82
+ForegroundActive=#8fc9fc
+ForegroundInactive=#909284
+ForegroundLink=#8fc9fc
+ForegroundNegative=#ffb3b4
+ForegroundNeutral=#fcb38a
+ForegroundNormal=#c6c8b9
+ForegroundPositive=#00e479
+ForegroundVisited=#ebb2ff
+
+[DirSelect Dialog]
+DirSelectDialog Size=820,584
+History Items[$e]=file:$HOME/Videos/Screencasts,file:$HOME/Pictures/Screenshots
+Splitter State=\x00\x00\x00\xff\x00\x00\x00\x01\x00\x00\x00\x02\x00\x00\x00\x8c\x00\x00\x02\xa8\x00\xff\xff\xff\xff\x01\x00\x00\x00\x01\x00
+
+[General]
+ColorScheme=MaterialYouDark
+ColorSchemeHash=8f0aebd40d38950335fbc061bbc2fce5d6824f5d
+XftAntialias=true
+XftHintStyle=hintslight
+XftSubPixel=none
+
+[Icons]
+Theme=breeze-plus-dark
+
+[KDE]
+LookAndFeelPackage=org.kde.breezedark.desktop
+widgetStyle=Darkly
+
+[KFileDialog Settings]
+Allow Expansion=false
+Automatically select filename extension=true
+Breadcrumb Navigation=true
+Decoration position=2
+LocationCombo Completionmode=5
+PathCombo Completionmode=5
+Show Full Path=false
+Show Inline Previews=true
+Show Preview=false
+Show Speedbar=true
+Show hidden files=false
+Sort by=Name
+Sort directories first=true
+Sort hidden files last=false
+Sort reversed=false
+Speedbar Width=140
+View Style=DetailTree
+
+[WM]
+activeBackground=52,54,46
+activeBlend=252,252,252
+activeForeground=227,227,215
+inactiveBackground=66,74,49
+inactiveBlend=161,169,177
+inactiveForeground=222,230,197
+

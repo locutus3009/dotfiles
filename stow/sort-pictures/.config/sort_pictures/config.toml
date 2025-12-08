@@ -1,0 +1,70 @@
+[[dirs]]
+source = "/hdd/locutus/Pictures/Screenshots"
+
+[[dirs]]
+source = "/hdd/locutus/Devices/SM-S918U1/DCIM/Screenshots"
+target = "/hdd/locutus/Pictures/Screenshots"
+
+[[dirs]]
+source = "/hdd/locutus/Devices/SM-S918U1/DCIM/Screen recordings"
+target = "/hdd/locutus/Pictures/Screenshots"
+
+[[dirs]]
+source = "/hdd/locutus/Videos/Screencasts"
+target = "/hdd/locutus/Pictures/Screenshots"
+
+[[dirs]]
+source = "/hdd/locutus/Devices/SM-S918U1/DCIM/Camera"
+target = "/hdd/locutus/Pictures/Хроника"
+
+[[dirs]]
+source = "/hdd/locutus/Pictures/Хроника"
+
+#[[dirs]]
+#source = "/hdd/locutus/Pictures/Спорт/Похудение"
+
+[[dirs]]
+source = "/hdd/locutus/Pictures/Фотографии Иры"
+
+[[dirs]]
+source = "/hdd/locutus/Pictures/Спорт/Боулдеринг"
+
+#[[dirs]]
+#source = "/home/locutus/dev/sort_pictures/tmp"
+#target = "/home/locutus/dev/sort_pictures/tmp/sorted"
+## nodecade = true
+## noyear = true
+## nomonth = true
+
+#[[dirs]]
+#source = "/hdd/locutus/Pictures/Походы/ПВД/2015-06-06 Кросс-поход Вестры"
+#nodecade = true
+#noyear = true
+#nomonth = true
+
+#[[dirs]]
+#source = "/hdd/locutus/Pictures/Учеба/Все подряд"
+#nodecade = true
+#noyear = true
+#nomonth = true
+
+[[places]]
+name = "CrossFit DD"
+radius = 0.3
+lon = 13.773699997693468
+lat = 51.027290646617715
+target = "/hdd/locutus/Pictures/Спорт/Кроссфит и ТА"
+
+[[places]]
+name = "XXL Sport"
+radius = 0.3
+lon = 13.80521823683424
+lat = 51.01541069406181
+target = "/hdd/locutus/Pictures/Спорт/Боулдеринг"
+
+[[places]]
+name = "CrossFit October"
+radius = 0.3
+lon = 37.49175831327975
+lat = 55.796361577887374
+target = "/hdd/locutus/Pictures/Спорт/Кроссфит и ТА"

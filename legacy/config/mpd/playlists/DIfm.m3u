@@ -1,0 +1,10 @@
+#EXTM3U
+#EXTINF:0,[playlist]
+NumberOfEntries=2
+#EXTINF:0,File1=http://prem2.di.fm:80/goapsy?128bda1fc8390bfbbfafa3db
+Title1=DI.FM - Goa-Psy Trance
+#EXTINF:0,Length1=0
+File2=http://prem2.di.fm:80/deephouse?128bda1fc8390bfbbfafa3db
+#EXTINF:0,Title2=DI.FM - Deep House
+Length2=0
+#EXTINF:0,Version=2
