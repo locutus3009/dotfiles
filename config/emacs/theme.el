@@ -4,26 +4,23 @@
 
 ;;; Code:
 
+;; Load matugen colors FIRST
+(let ((matugen-colors (expand-file-name "~/.config/emacs/generated.el")))
+ (when (file-exists-p matugen-colors)
+   (load-file matugen-colors)
+   (apply-matugen-colors)))
+
+;; (load-file "material-theme.el")
+
 ;; Use spacemacs theme
-(use-package
- spacemacs-theme
+(use-package spacemacs-theme
  :ensure t
  :config
- ;; Do not use a different background color for comments.
  (setq spacemacs-theme-comment-bg nil)
-
- ;; Comments should appear in italics.
  (setq spacemacs-theme-comment-italic t)
-
  (setq spacemacs-theme-org-agenda-height nil)
  (setq spacemacs-theme-org-height nil)
- ;; (setq-default
- ;;  custom-enabled-themes (quote (spacemacs-dark))
- ;;  custom-safe-themes
- ;;  (quote ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
-
- ;; Use the `spacemacs-dark` theme.
- (load-theme 'spacemacs-dark))
+ (load-theme 'spacemacs-dark t))
 
 ;; Solarized theme
 ;; (use-package

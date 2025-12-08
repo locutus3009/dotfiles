@@ -84,3 +84,23 @@
 ;; (use-package
 ;;  goto-last-change
 ;;  :ensure t)
+
+(use-package ellama
+  :ensure t
+  :bind ("C-c e" . ellama)
+  ;; send last message in chat buffer with C-c C-c
+  :hook (org-ctrl-c-ctrl-c-final . ellama-chat-send-last-message)
+  :init (setopt ellama-auto-scroll t)
+  (require 'llm-ollama)
+  (setopt ellama-provider
+  	  (make-llm-ollama
+  	   ;; this model should be pulled to use it
+  	   ;; value should be the same as you print in terminal during pull
+  	   :chat-model "hf.co/bartowski/Llama-3.2-1B-Instruct-GGUF:latest"
+  	   :embedding-model "hf.co/bartowski/Llama-3.2-1B-Instruct-GGUF:latest"
+  	   :default-chat-non-standard-params '(("num_ctx" . 8192))))
+  :config
+  ;; show ellama context in header line in all buffers
+  (ellama-context-header-line-global-mode +1)
+  ;; show ellama session id in header line in all buffers
+  (ellama-session-header-line-global-mode +1))

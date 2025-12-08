@@ -71,6 +71,9 @@ because by default projectile does not."
 ;; Make compile-command file- and directory-local
 (make-variable-buffer-local 'compile-command)
 
+(setenv "RUSTC_BOOTSTRAP" "1")
+(setenv "HMSDKNATIVESYSROOTPATH" "/home/locutus/dev/hm-grc-scripts/SDK/sysroots/x86_64-eulersdk-linux")
+
 ;; Projects
 (load-file "~/.config/emacs/projects/lotto.el")
 (load-file "~/.config/emacs/projects/hm-uvmm.el")
