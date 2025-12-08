@@ -1,0 +1,23 @@
+[Unit]
+Description=Sportmodel - Strength Training Analytics Web Server
+Documentation=https://github.com/locutus3009/sportmodel
+After=network.target
+
+[Service]
+Type=simple
+
+# Working directory must contain the 'static' subdirectory for web assets
+WorkingDirectory=%h/dev/dotfiles/sportmodel
+
+# Binary installed by install.sh
+ExecStart=%h/apps/bin/sportmodel /hdd/locutus/Documents/Sport/load.xlsx 8473
+
+# Log level
+Environment=RUST_LOG=info
+
+# Restart on failure
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

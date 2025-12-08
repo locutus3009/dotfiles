@@ -46,6 +46,7 @@ reboot
 - Bluetooth service enablement
 - GNU Stow dotfiles setup
 - sort_pictures build and systemd service (detects source updates)
+- sportmodel build and systemd service (detects source updates)
 
 ### Updating Configurations
 ```bash
@@ -87,6 +88,7 @@ The repository uses GNU Stow with packages in the `stow/` directory:
 | `plasma` | `.config/{kdeglobals,kwinrc,kwinrulesrc,kglobalshortcutsrc,plasmashellrc}` | `$HOME` |
 | `apps` | `apps/bin/` (sort_pictures binary + build_linux.sh) | `$HOME` |
 | `sort-pictures` | systemd service + config.toml | `$HOME` |
+| `sportmodel-service` | systemd service for sportmodel web server | `$HOME` |
 | `plasma-widgets` | Window Title + Bing Wallpaper plasmoids | `$HOME` |
 | `kde-material-you-colors` | color generation config + hook | `$HOME` |
 | `matugen` | template config for Emacs/GTK | `$HOME` |
@@ -107,7 +109,13 @@ The repository uses GNU Stow with packages in the `stow/` directory:
    - Runs as systemd user service
    - Config symlinked via `sort-pictures` stow package
 
-2. **title-bing-wallpaper** (`https://github.com/victorballester7/title-bing-wallpaper.git`)
+2. **sportmodel** (`git@github.com:locutus3009/sportmodel.git`)
+   - Strength training analytics with Gaussian Process regression
+   - Web server on port 8473 (http://localhost:8473)
+   - Watches Excel file for live reload
+   - Service config via `sportmodel-service` stow package
+
+3. **title-bing-wallpaper** (`https://github.com/victorballester7/title-bing-wallpaper.git`)
    - Path: `stow/plasma-widgets/.local/share/plasma/plasmoids/com.github.victorballester7.titlebingwallpaper`
    - KDE Plasma widget for Bing Picture of the Day
 
@@ -211,6 +219,27 @@ systemctl --user enable --now sort_pictures.service
 
 **Do NOT run** `sort_pictures/install.sh` — it conflicts with stow symlinks.
 
+## sportmodel Installation
+
+The `sportmodel` submodule is automatically built and installed by `./install.sh`:
+
+- Checks if binary exists at `~/apps/bin/sportmodel`
+- Detects source updates by comparing timestamps of `*.rs` and `Cargo.toml` files
+- Prompts to rebuild if source is newer than binary
+- Enables systemd user service after build
+- Web server runs on port 8473, data file at `/hdd/locutus/Documents/Sport/load.xlsx`
+
+**Manual build** (if needed):
+```bash
+cd sportmodel && cargo build --release
+mkdir -p ~/apps/bin
+cp target/release/sportmodel ~/apps/bin/
+systemctl --user daemon-reload
+systemctl --user enable --now sportmodel.service
+```
+
+**Access:** http://localhost:8473
+
 ## Working with This Repository
 
 ### Adding New Configurations
@@ -279,10 +308,12 @@ dotfiles/
 │   ├── plasma/
 │   ├── apps/
 │   ├── sort-pictures/
+│   ├── sportmodel-service/
 │   ├── plasma-widgets/
 │   ├── kde-material-you-colors/
 │   └── matugen/
 ├── sort_pictures/           # Git submodule
+├── sportmodel/              # Git submodule
 ├── legacy/                  # Archived configs (AwesomeWM, X11)
 ├── system/                  # System-level configs (not symlinked)
 ├── sddm/                    # SDDM display manager config

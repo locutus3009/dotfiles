@@ -304,6 +304,51 @@ if [[ -d "$SORT_PICTURES_DIR" ]] && command -v cargo &>/dev/null; then
     fi
 fi
 
+# =============================================================================
+# Build sportmodel
+# =============================================================================
+
+SPORTMODEL_DIR="$SCRIPT_DIR/sportmodel"
+SPORTMODEL_BIN="$HOME/apps/bin/sportmodel"
+
+if [[ -d "$SPORTMODEL_DIR" ]] && command -v cargo &>/dev/null; then
+    NEEDS_BUILD=false
+
+    if [[ ! -f "$SPORTMODEL_BIN" ]]; then
+        NEEDS_BUILD=true
+        BUILD_REASON="not installed"
+    elif is_source_newer "$SPORTMODEL_BIN" "$SPORTMODEL_DIR"; then
+        NEEDS_BUILD=true
+        BUILD_REASON="source updated"
+    fi
+
+    if $NEEDS_BUILD; then
+        echo ""
+        read -p "Build and install sportmodel ($BUILD_REASON)? (Y/n): " -n 1 -r
+        echo ""
+        if [[ ! $REPLY =~ ^[Nn]$ ]]; then
+            echo "Building sportmodel..."
+            (cd "$SPORTMODEL_DIR" && cargo build --release)
+            mkdir -p "$HOME/apps/bin"
+            cp "$SPORTMODEL_DIR/target/release/sportmodel" "$SPORTMODEL_BIN"
+            echo "✓ sportmodel installed to ~/apps/bin/"
+
+            # Reload systemd and enable service if stow was run
+            if [[ -f "$HOME/.config/systemd/user/sportmodel.service" ]]; then
+                echo "Enabling sportmodel service..."
+                systemctl --user daemon-reload
+                systemctl --user enable --now sportmodel.service
+                echo "✓ sportmodel service enabled."
+            fi
+        else
+            echo "Skipping sportmodel build."
+        fi
+    else
+        echo ""
+        echo "✓ sportmodel already installed and up to date."
+    fi
+fi
+
 echo ""
 echo "===================================================="
 echo "Next steps:"
