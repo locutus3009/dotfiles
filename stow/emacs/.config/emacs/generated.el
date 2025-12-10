@@ -6,44 +6,44 @@
         ;; GUI frame - use matugen colors INCLUDING backgrounds
         ;; Note: internal-border-width is set in main.el default-frame-alist to avoid tiling issues
         (progn
-          (set-frame-parameter frame 'background-color "#12140d")
+          (set-frame-parameter frame 'background-color "#1a110f")
           (set-face-attribute 'default frame
-                              :background "#12140d"
-                              :foreground "#e3e3d7")
+                              :background "#1a110f"
+                              :foreground "#f1dfda")
           (set-face-attribute 'fringe frame
-                              :background "#12140d")
+                              :background "#1a110f")
           (set-face-attribute 'cursor frame
-                              :background "#b8cf84")
+                              :background "#ffb59d")
           (set-face-attribute 'mode-line frame
-                              :background "#292b23"
-                              :foreground "#e3e3d7")
+                              :background "#322825"
+                              :foreground "#f1dfda")
           (set-face-attribute 'mode-line-inactive frame
-                              :background "#292b23"
-                              :foreground "#e3e3d7")
+                              :background "#322825"
+                              :foreground "#f1dfda")
           (set-face-attribute 'region frame
-                              :background "#3a4d10")
+                              :background "#723520")
           (set-face-attribute 'hl-line frame
-                              :background "#34362e")
+                              :background "#3d322f")
           (set-face-attribute 'window-divider frame
-                              :foreground "#909284")
+                              :foreground "#a08d87")
           (set-face-attribute 'vertical-border frame
-                              :foreground "#909284"))
+                              :foreground "#a08d87"))
 
       ;; Terminal frame - CLEAR frame background parameter
       (progn
         (set-frame-parameter frame 'background-color nil)
         (set-face-attribute 'default frame
-                            :foreground "#e3e3d7")
+                            :foreground "#f1dfda")
         (set-face-attribute 'cursor frame
-                            :background "#b8cf84")
+                            :background "#ffb59d")
         (set-face-attribute 'mode-line frame
-                            :foreground "#e3e3d7")
+                            :foreground "#f1dfda")
         (set-face-attribute 'mode-line-inactive frame
-                            :foreground "#e3e3d7")
+                            :foreground "#f1dfda")
         (set-face-attribute 'window-divider frame
-                            :foreground "#909284")
+                            :foreground "#a08d87")
         (set-face-attribute 'vertical-border frame
-                            :foreground "#909284")))))
+                            :foreground "#a08d87")))))
 
 (defun apply-matugen-colors ()
   "Apply material you colors to Emacs"
