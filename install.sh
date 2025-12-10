@@ -251,6 +251,43 @@ else
     echo "Skipping stow. Run ./stow.sh manually when ready."
 fi
 
+# =============================================================================
+# Build sportmodel
+# =============================================================================
+
+SPORTMODEL_DIR="$SCRIPT_DIR/sportmodel"
+SPORTMODEL_BIN="$HOME/apps/bin/sportmodel"
+
+if [[ -d "$SPORTMODEL_DIR" ]] && command -v cargo &>/dev/null; then
+    echo ""
+    read -p "Build and install sportmodel? (Y/n): " -n 1 -r
+    echo ""
+    if [[ ! $REPLY =~ ^[Nn]$ ]]; then
+        echo "Building sportmodel..."
+        (cd "$SPORTMODEL_DIR" && cargo build --release)
+        mkdir -p "$HOME/apps/bin"
+
+        # Stop service if running (binary may be locked)
+        if systemctl --user is-active sportmodel.service &>/dev/null; then
+            echo "Stopping sportmodel service..."
+            systemctl --user stop sportmodel.service
+        fi
+
+        cp "$SPORTMODEL_DIR/target/release/sportmodel" "$SPORTMODEL_BIN"
+        echo "✓ sportmodel installed to ~/apps/bin/"
+
+        # Reload systemd and enable service if stow was run
+        if [[ -f "$HOME/.config/systemd/user/sportmodel.service" ]]; then
+            echo "Enabling sportmodel service..."
+            systemctl --user daemon-reload
+            systemctl --user enable --now sportmodel.service
+            echo "✓ sportmodel service enabled."
+        fi
+    else
+        echo "Skipping sportmodel build."
+    fi
+fi
+
 echo ""
 echo "===================================================="
 echo "Next steps:"

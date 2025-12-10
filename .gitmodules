@@ -4,3 +4,6 @@
 [submodule "local/share/plasma/plasmoids/com.github.victorballester7.titlebingwallpaper"]
 	path = stow/plasma-widgets/.local/share/plasma/plasmoids/plasmoids/com.github.victorballester7.titlebingwallpaper
 	url = https://github.com/victorballester7/title-bing-wallpaper.git
+[submodule "sportmodel"]
+	path = sportmodel
+	url = git@github.com:locutus3009/sportmodel.git
