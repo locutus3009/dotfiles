@@ -10,7 +10,7 @@ Type=simple
 WorkingDirectory=%h/dev/dotfiles/sportmodel
 
 # Binary installed by install.sh
-ExecStart=%h/apps/bin/sportmodel /hdd/locutus/Documents/Sport/load.xlsx 8473
+ExecStart=%h/apps/bin/sportmodel /home/locutus/Documents/Sport/load.xlsx 8473
 
 # Log level
 Environment=RUST_LOG=info
