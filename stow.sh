@@ -97,6 +97,37 @@ if $SIMULATE; then
     echo ""
 fi
 
+# =============================================================================
+# Check for required binaries (must be built before stow)
+# =============================================================================
+
+REQUIRED_BINARIES=(
+    "stow/apps/apps/bin/sort_pictures"
+    "stow/apps/apps/bin/sportmodel"
+)
+
+MISSING_BINARIES=()
+for bin in "${REQUIRED_BINARIES[@]}"; do
+    if [[ ! -f "$DOTFILES_DIR/$bin" ]]; then
+        MISSING_BINARIES+=("$bin")
+    fi
+done
+
+if [[ ${#MISSING_BINARIES[@]} -gt 0 ]]; then
+    echo "ERROR: Required binaries not found:"
+    for bin in "${MISSING_BINARIES[@]}"; do
+        echo "  - $bin"
+    done
+    echo ""
+    echo "You must build these binaries before running stow."
+    echo "Run ./install.sh or build manually:"
+    echo "  cd sort_pictures && cargo build --release"
+    echo "  cp target/release/sort_pictures ../stow/apps/apps/bin/"
+    echo "  cd ../sportmodel && cargo build --release"
+    echo "  cp target/release/sportmodel ../stow/apps/apps/bin/"
+    exit 1
+fi
+
 echo "$ACTION packages to $HOME..."
 echo ""
 

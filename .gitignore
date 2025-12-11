@@ -6,3 +6,7 @@
 **/GRTAGS
 **/GTAGS
 /apps/bin/docker-credential-pass
+
+# Compiled binaries (built locally via install.sh)
+stow/apps/apps/bin/sort_pictures
+stow/apps/apps/bin/sportmodel

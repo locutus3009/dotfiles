@@ -223,6 +223,70 @@ else
 fi
 
 # =============================================================================
+# Build Rust Binaries (BEFORE stow - binaries go into stow/apps/apps/bin/)
+# =============================================================================
+
+echo ""
+echo "===================================================="
+echo "Building Rust binaries..."
+echo ""
+echo "Note: Binaries are built into stow/apps/apps/bin/ and then"
+echo "symlinked to ~/apps/bin/ via stow. You must build before stow."
+echo ""
+
+APPS_BIN_DIR="$SCRIPT_DIR/stow/apps/apps/bin"
+mkdir -p "$APPS_BIN_DIR"
+
+# Build sort_pictures
+SORT_PICTURES_DIR="$SCRIPT_DIR/sort_pictures"
+SORT_PICTURES_BIN="$APPS_BIN_DIR/sort_pictures"
+
+if [[ -d "$SORT_PICTURES_DIR" ]] && command -v cargo &>/dev/null; then
+    read -p "Build sort_pictures? (Y/n): " -n 1 -r
+    echo ""
+    if [[ ! $REPLY =~ ^[Nn]$ ]]; then
+        echo "Building sort_pictures..."
+        (cd "$SORT_PICTURES_DIR" && cargo build --release)
+
+        # Stop service if running (binary may be locked)
+        if systemctl --user is-active sort_pictures.service &>/dev/null; then
+            echo "Stopping sort_pictures service..."
+            systemctl --user stop sort_pictures.service
+        fi
+
+        cp "$SORT_PICTURES_DIR/target/release/sort_pictures" "$SORT_PICTURES_BIN"
+        echo "✓ sort_pictures built to stow/apps/apps/bin/"
+    else
+        echo "Skipping sort_pictures build."
+    fi
+fi
+
+# Build sportmodel
+SPORTMODEL_DIR="$SCRIPT_DIR/sportmodel"
+SPORTMODEL_BIN="$APPS_BIN_DIR/sportmodel"
+
+if [[ -d "$SPORTMODEL_DIR" ]] && command -v cargo &>/dev/null; then
+    echo ""
+    read -p "Build sportmodel? (Y/n): " -n 1 -r
+    echo ""
+    if [[ ! $REPLY =~ ^[Nn]$ ]]; then
+        echo "Building sportmodel..."
+        (cd "$SPORTMODEL_DIR" && cargo build --release)
+
+        # Stop service if running (binary may be locked)
+        if systemctl --user is-active sportmodel.service &>/dev/null; then
+            echo "Stopping sportmodel service..."
+            systemctl --user stop sportmodel.service
+        fi
+
+        cp "$SPORTMODEL_DIR/target/release/sportmodel" "$SPORTMODEL_BIN"
+        echo "✓ sportmodel built to stow/apps/apps/bin/"
+    else
+        echo "Skipping sportmodel build."
+    fi
+fi
+
+# =============================================================================
 # Stow Dotfiles
 # =============================================================================
 
@@ -243,86 +307,28 @@ if [[ ! $REPLY =~ ^[Nn]$ ]]; then
     if "$SCRIPT_DIR/stow.sh"; then
         echo ""
         echo "✓ Dotfiles installed successfully!"
+
+        # Enable systemd services after stow creates the service files
+        echo ""
+        echo "Enabling systemd services..."
+
+        if [[ -f "$HOME/.config/systemd/user/sort_pictures.service" ]]; then
+            systemctl --user daemon-reload
+            systemctl --user enable --now sort_pictures.service
+            echo "✓ sort_pictures service enabled."
+        fi
+
+        if [[ -f "$HOME/.config/systemd/user/sportmodel.service" ]]; then
+            systemctl --user daemon-reload
+            systemctl --user enable --now sportmodel.service
+            echo "✓ sportmodel service enabled."
+        fi
     else
         echo ""
         echo "✗ Stow failed. Remove conflicting files and run ./stow.sh manually."
     fi
 else
     echo "Skipping stow. Run ./stow.sh manually when ready."
-fi
-
-# =============================================================================
-# Build sort_pictures
-# =============================================================================
-
-SORT_PICTURES_DIR="$SCRIPT_DIR/sort_pictures"
-SORT_PICTURES_BIN="$HOME/apps/bin/sort_pictures"
-
-if [[ -d "$SORT_PICTURES_DIR" ]] && command -v cargo &>/dev/null; then
-    echo ""
-    read -p "Build and install sort_pictures? (Y/n): " -n 1 -r
-    echo ""
-    if [[ ! $REPLY =~ ^[Nn]$ ]]; then
-        echo "Building sort_pictures..."
-        (cd "$SORT_PICTURES_DIR" && cargo build --release)
-        mkdir -p "$HOME/apps/bin"
-
-        # Stop service if running (binary may be locked)
-        if systemctl --user is-active sort_pictures.service &>/dev/null; then
-            echo "Stopping sort_pictures service..."
-            systemctl --user stop sort_pictures.service
-        fi
-
-        cp "$SORT_PICTURES_DIR/target/release/sort_pictures" "$SORT_PICTURES_BIN"
-        echo "✓ sort_pictures installed to ~/apps/bin/"
-
-        # Reload systemd and enable service if stow was run
-        if [[ -f "$HOME/.config/systemd/user/sort_pictures.service" ]]; then
-            echo "Enabling sort_pictures service..."
-            systemctl --user daemon-reload
-            systemctl --user enable --now sort_pictures.service
-            echo "✓ sort_pictures service enabled."
-        fi
-    else
-        echo "Skipping sort_pictures build."
-    fi
-fi
-
-# =============================================================================
-# Build sportmodel
-# =============================================================================
-
-SPORTMODEL_DIR="$SCRIPT_DIR/sportmodel"
-SPORTMODEL_BIN="$HOME/apps/bin/sportmodel"
-
-if [[ -d "$SPORTMODEL_DIR" ]] && command -v cargo &>/dev/null; then
-    echo ""
-    read -p "Build and install sportmodel? (Y/n): " -n 1 -r
-    echo ""
-    if [[ ! $REPLY =~ ^[Nn]$ ]]; then
-        echo "Building sportmodel..."
-        (cd "$SPORTMODEL_DIR" && cargo build --release)
-        mkdir -p "$HOME/apps/bin"
-
-        # Stop service if running (binary may be locked)
-        if systemctl --user is-active sportmodel.service &>/dev/null; then
-            echo "Stopping sportmodel service..."
-            systemctl --user stop sportmodel.service
-        fi
-
-        cp "$SPORTMODEL_DIR/target/release/sportmodel" "$SPORTMODEL_BIN"
-        echo "✓ sportmodel installed to ~/apps/bin/"
-
-        # Reload systemd and enable service if stow was run
-        if [[ -f "$HOME/.config/systemd/user/sportmodel.service" ]]; then
-            echo "Enabling sportmodel service..."
-            systemctl --user daemon-reload
-            systemctl --user enable --now sportmodel.service
-            echo "✓ sportmodel service enabled."
-        fi
-    else
-        echo "Skipping sportmodel build."
-    fi
 fi
 
 echo ""
