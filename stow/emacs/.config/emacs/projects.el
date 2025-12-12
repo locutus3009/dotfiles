@@ -75,10 +75,10 @@ because by default projectile does not."
 (setenv "HMSDKNATIVESYSROOTPATH" "/home/locutus/dev/hm-grc-scripts/SDK/sysroots/x86_64-eulersdk-linux")
 
 ;; Projects
-(load-file "~/.config/emacs/projects/lotto.el")
-(load-file "~/.config/emacs/projects/hm-uvmm.el")
-(load-file "~/.config/emacs/projects/hm-verif-kernel.el")
-(load-file "~/.config/emacs/projects/hm-grc-scripts.el")
-(load-file "~/.config/emacs/projects/duck.el")
+;;(load-file "~/.config/emacs/projects/lotto.el")
+;;(load-file "~/.config/emacs/projects/hm-uvmm.el")
+;;(load-file "~/.config/emacs/projects/hm-verif-kernel.el")
+;;(load-file "~/.config/emacs/projects/hm-grc-scripts.el")
+;;(load-file "~/.config/emacs/projects/duck.el")
 (load-file "~/.config/emacs/projects/linux.el")
 (load-file "~/.config/emacs/projects/dummy.el")

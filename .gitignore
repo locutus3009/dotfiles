@@ -10,3 +10,9 @@
 # Compiled binaries (built locally via install.sh)
 stow/apps/apps/bin/sort_pictures
 stow/apps/apps/bin/sportmodel
+
+# Emacs files
+stow/emacs/.emacs.d/custom.el
+stow/emacs/.emacs.d/places
+stow/emacs/.emacs.d/smex-items
+stow/emacs/.emacs.d/org-clock-save.el
