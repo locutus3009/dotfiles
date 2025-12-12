@@ -44,9 +44,9 @@ reboot
 - NVIDIA drivers and modprobe config (with prompts)
 - SDDM configuration and service
 - Bluetooth service enablement
-- GNU Stow dotfiles setup
-- sort_pictures build and systemd service (detects source updates)
-- sportmodel build and systemd service (detects source updates)
+- **Building Rust binaries** (sort_pictures, sportmodel) into `stow/apps/apps/bin/`
+- GNU Stow dotfiles setup (requires binaries to be built first)
+- Systemd service enablement for sort_pictures and sportmodel
 
 ### Updating Configurations
 ```bash
@@ -86,7 +86,7 @@ The repository uses GNU Stow with packages in the `stow/` directory:
 | `kitty` | `.config/kitty/` | `$HOME` |
 | `pulse` | `.config/pulse/` | `$HOME` |
 | `plasma` | `.config/{kdeglobals,kwinrc,kwinrulesrc,kglobalshortcutsrc,plasmashellrc}` | `$HOME` |
-| `apps` | `apps/bin/` (sort_pictures binary + build_linux.sh) | `$HOME` |
+| `apps` | `apps/bin/` (binaries built locally, not in git) | `$HOME` |
 | `sort-pictures` | systemd service + config.toml | `$HOME` |
 | `sportmodel-service` | systemd service for sportmodel web server | `$HOME` |
 | `plasma-widgets` | Window Title + Bing Wallpaper plasmoids | `$HOME` |
@@ -95,12 +95,14 @@ The repository uses GNU Stow with packages in the `stow/` directory:
 
 **Stow commands:**
 ```bash
-./stow.sh                    # Stow all packages
+./stow.sh                    # Stow all packages (requires binaries built first!)
 ./stow.sh bash emacs         # Stow specific packages
 ./stow.sh --unstow plasma    # Remove symlinks for a package
 ./stow.sh --simulate         # Preview changes without applying
 ./stow.sh --adopt            # Adopt existing files into stow
 ```
+
+**Important:** `stow.sh` will fail if binaries are missing from `stow/apps/apps/bin/`. Run `./install.sh` first on a fresh clone.
 
 ### Git Submodules
 
@@ -199,44 +201,46 @@ KWin is configured with 6 named virtual desktops and window rules:
 - Desktop 5 (Telegram) - Telegram (maximized)
 - Desktop 6 (Digikam) - Digikam
 
-## sort_pictures Installation
+## Rust Binaries (sort_pictures & sportmodel)
 
-The `sort_pictures` submodule is automatically built and installed by `./install.sh`:
+**Binaries are NOT stored in git.** They must be built locally before running stow.
 
-- Always prompts to build (uses incremental `cargo build --release`)
-- Stops service before copying binary (avoids "Text file busy" error)
-- Enables systemd user service after build
+The `apps` stow package expects binaries at:
+- `stow/apps/apps/bin/sort_pictures`
+- `stow/apps/apps/bin/sportmodel`
 
-**Manual build** (if needed):
+### Build via install.sh (recommended)
+`./install.sh` prompts to build both binaries before running stow.
+
+### Manual build
 ```bash
+# sort_pictures
 cd sort_pictures && cargo build --release
-mkdir -p ~/apps/bin
-cp target/release/sort_pictures ~/apps/bin/
-systemctl --user daemon-reload
-systemctl --user enable --now sort_pictures.service
+cp target/release/sort_pictures ../stow/apps/apps/bin/
+
+# sportmodel
+cd ../sportmodel && cargo build --release
+cp target/release/sportmodel ../stow/apps/apps/bin/
+
+# Then run stow
+cd .. && ./stow.sh
 ```
+
+### After submodule updates
+```bash
+git submodule update --remote
+# Rebuild binaries
+cd sort_pictures && cargo build --release
+cp target/release/sort_pictures ../stow/apps/apps/bin/
+cd ../sportmodel && cargo build --release
+cp target/release/sportmodel ../stow/apps/apps/bin/
+# Restart services
+systemctl --user restart sort_pictures.service sportmodel.service
+```
+
+**sportmodel web server:** http://localhost:8473
 
 **Do NOT run** `sort_pictures/install.sh` — it conflicts with stow symlinks.
-
-## sportmodel Installation
-
-The `sportmodel` submodule is automatically built and installed by `./install.sh`:
-
-- Always prompts to build (uses incremental `cargo build --release`)
-- Stops service before copying binary (avoids "Text file busy" error)
-- Enables systemd user service after build
-- Web server runs on port 8473, data file at `/hdd/locutus/Documents/Sport/load.xlsx`
-
-**Manual build** (if needed):
-```bash
-cd sportmodel && cargo build --release
-mkdir -p ~/apps/bin
-cp target/release/sportmodel ~/apps/bin/
-systemctl --user daemon-reload
-systemctl --user enable --now sportmodel.service
-```
-
-**Access:** http://localhost:8473
 
 ## Working with This Repository
 
@@ -267,20 +271,24 @@ Plasma may also write to these files when settings change via GUI. Check `git st
    - Stow will fail if target files exist
    - Remove existing files first, or use `./stow.sh --adopt`
 
-2. **Forgetting to rebuild sort_pictures**
-   - After submodule update: rebuild and reinstall binary
-   - Service must be restarted: `systemctl --user restart sort_pictures.service`
+2. **Running stow.sh without building binaries first**
+   - `stow.sh` will fail if `stow/apps/apps/bin/sort_pictures` or `sportmodel` are missing
+   - Run `./install.sh` first, or build manually (see "Rust Binaries" section)
 
-3. **Editing Plasma configs via GUI**
+3. **Forgetting to rebuild after submodule updates**
+   - After `git submodule update --remote`: rebuild binaries and restart services
+   - See "After submodule updates" in "Rust Binaries" section
+
+4. **Editing Plasma configs via GUI**
    - Changes write to symlinked files (shows in `git status`)
    - Review and commit intentional changes
    - Use `git checkout` to revert unintended changes
 
-4. **Assuming PulseAudio is active**
+5. **Assuming PulseAudio is active**
    - System uses PipeWire with PA compatibility
    - Don't install `pulseaudio` package
 
-5. **kde-material-you-colors not running**
+6. **kde-material-you-colors not running**
    - Run `kde-material-you-colors --autostart` to enable autostart
    - Or start manually: `kde-material-you-colors &`
 
