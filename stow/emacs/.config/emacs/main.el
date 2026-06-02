@@ -140,3 +140,12 @@
 
 ;; backup in one place. flat, no tree structure
 (setq backup-directory-alist '(("" . "~/.emacs.d/backup")))
+
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (when (or (memq window-system '(mac ns x pgtk))
+            (daemonp))
+    (dolist (var '("PATH" "MANPATH" "SSH_AUTH_SOCK" "GPG_TTY"))
+      (add-to-list 'exec-path-from-shell-variables var))
+    (exec-path-from-shell-initialize)))

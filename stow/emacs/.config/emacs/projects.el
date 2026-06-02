@@ -82,3 +82,4 @@ because by default projectile does not."
 ;;(load-file "~/.config/emacs/projects/duck.el")
 (load-file "~/.config/emacs/projects/linux.el")
 (load-file "~/.config/emacs/projects/dummy.el")
+(load-file "~/.config/emacs/projects/gpu-verification.el")
