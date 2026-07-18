@@ -365,3 +365,48 @@ otherwise assumed alphabetic."
 ;;(define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
 ;;(define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
 ;;(setq copilot-max-char 1000000)
+
+(use-package minuet
+  :ensure t
+  :bind
+  (("C-c m" . #'minuet-complete-with-minibuffer)   ;; вручную вызвать через минибуфер
+   :map minuet-active-mode-map
+   ("<tab>" . #'minuet-accept-suggestion)           ;; Tab принимает (как было с copilot)
+   ("TAB"   . #'minuet-accept-suggestion)
+   ("C-g"   . #'minuet-dismiss-suggestion))         ;; C-g отменяет
+  :init
+  (add-hook 'prog-mode-hook #'minuet-auto-suggestion-mode)  ;; авто ghost-text в коде
+  :config
+  (setq minuet-provider 'openai-fim-compatible)     ;; Ollama FIM через OpenAI-совместимый путь
+  (setq minuet-n-completions 1)                     ;; одна вариация (экономит ресурсы на локалке)
+  (setq minuet-context-window 2048)                 ;; окно контекста вокруг курсора
+  (setq minuet-request-timeout 5)
+
+  ;; --- подключение к Ollama ---
+  (plist-put minuet-openai-fim-compatible-options :end-point "http://localhost:11434/v1/completions")
+  (plist-put minuet-openai-fim-compatible-options :name "Ollama")
+  (plist-put minuet-openai-fim-compatible-options :api-key "TERM")   ;; Ollama ключ игнорит, но поле должно быть непустым
+  (plist-put minuet-openai-fim-compatible-options :model "qwen2.5-coder:7b")
+
+  ;; --- параметры запроса (через minuet-set-optional-options, не plist-put!) ---
+  (minuet-set-optional-options minuet-openai-fim-compatible-options :stop ["```"])        ;; отрезать markdown-забор
+  (minuet-set-optional-options minuet-openai-fim-compatible-options :max_tokens 256)      ;; не давать "заболтать" простыню
+  (minuet-set-optional-options minuet-openai-fim-compatible-options :top_p 0.9))
+
+;;(setq minuet-debug t)
+
+(use-package ellama
+  :ensure t
+  :bind ("C-c e" . ellama-transient-main-menu)   ;; меню всех команд
+  :init
+  (setopt ellama-language "Russian")             ;; язык ответов (или "English")
+  (require 'llm-ollama)
+  ;; основной провайдер — код-вопросы
+  (setopt ellama-provider
+          (make-llm-ollama
+           :chat-model "qwen3-coder:30b"
+           :embedding-model "nomic-embed-text"))  ;; для контекста/RAG, см. ниже
+  :config
+  ;; лёгкая модель для служебных задач (названия сессий и т.п.) — не грузить 30b ради заголовка
+  (setopt ellama-naming-provider
+          (make-llm-ollama :chat-model "qwen2.5-coder:7b")))

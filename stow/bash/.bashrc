@@ -148,6 +148,8 @@ export PATH="$PATH:$HOME/apps/bin"
 export PATH="$PATH:$HOME/Foundation_Platform/models/Linux64_GCC-6.4"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:/opt/shader-slang-bin/bin"
+export PATH="$PATH:/home/locutus/dev/huawei-drc/install/bin"
+#export PATH="$PATH:/opt/rocm/bin"
 
 # Setup Fcitx5
 export GLFW_IM_MODULE=fcitx
@@ -158,6 +160,9 @@ export XMODIFIERS=@im=fcitx
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 
 #export MPD_HOST=$HOME/.config/mpd/socket
+
+# For OpenCL support
+export RUSTICL_ENABLE=radeonsi
 
 source "$HOME/bash-preexec.sh"
 eval "$(starship init bash)"
