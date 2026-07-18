@@ -37,6 +37,9 @@
 ;; Dired sidebar file browsing
 (load-file "~/.config/emacs/dired.el")
 
+;; MPD control (mpc.el)
+(load-file "~/.config/emacs/music.el")
+
 ;; Gitlab integration
 ;; (load-file "~/.config/emacs/gitlab.el")
 

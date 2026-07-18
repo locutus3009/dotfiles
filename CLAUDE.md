@@ -84,6 +84,9 @@ The repository uses GNU Stow with packages in the `stow/` directory:
 | `sort-pictures` | systemd service + config.toml | `$HOME` |
 | `sportmodel-service` | systemd service for sportmodel web server | `$HOME` |
 | `plasma-widgets` | Window Title + Bing Wallpaper plasmoids | `$HOME` |
+| `mpd` | `.config/mpd/mpd.conf` (local-only MPD, PipeWire output) | `$HOME` |
+| `mpd-mpris` | systemd `--user` drop-in for the MPRIS bridge | `$HOME` |
+| `ncmpcpp` | `.config/ncmpcpp/config` (TUI client) | `$HOME` |
 
 **Stow commands:**
 ```bash
@@ -123,6 +126,41 @@ The system uses PipeWire with PulseAudio compatibility layer:
 - `pipewire-pulse` provides `/run/user/$UID/pulse/native` socket
 - `pactl info` shows: "Server Name: PulseAudio (on PipeWire)"
 - WirePlumber manages Bluetooth audio automatically
+
+### MPD (Music Player Daemon)
+
+MPD runs as a **per-user** systemd service (`systemctl --user`), not the system
+`mpd` unit — so it uses the session's PipeWire and never needs the system `mpd`
+user's permissions on `/hdd`.
+
+- **Config:** `stow/mpd/.config/mpd/mpd.conf` (in git). Local only
+  (`bind_to_address 127.0.0.1`), native `pipewire` output, `m3u`+`pls` playlist
+  plugins enabled for radio streams.
+- **Library:** `/hdd/locutus/Music` (via the `~/Music` symlink), synced by
+  Syncthing. `auto_update "yes"` picks up new tracks via inotify.
+- **Playlists:** `/hdd/locutus/Music/playlists/` — kept **inside** the synced
+  library so saved playlists and radio stations travel between machines.
+- **Runtime state** (`database`, `state`, `sticker.sql`) lives in
+  `~/.local/share/mpd/` — deliberately **outside** git and outside the synced
+  music tree, so no generated files are committed or replicated.
+- **Clients:** `ncmpcpp` (TUI, configured in `stow/ncmpcpp`), `mpc`
+  (CLI/scripting), and Emacs's built-in `mpc.el`
+  (`stow/emacs/.config/emacs/music.el`, `M-x mpc` / `C-c m`). A silent `fifo`
+  output in `mpd.conf` feeds the ncmpcpp visualizer (`/tmp/mpd.fifo`) — it plays
+  alongside PipeWire, inaudibly.
+- **Plasma control:** `mpd-mpris` bridges MPD to MPRIS so the Plasma Media
+  Player widget and `playerctl` can drive playback. Its `--user` unit ships with
+  the package; `stow/mpd-mpris/` adds a drop-in (`After=mpd.service`,
+  `MPD_HOST=127.0.0.1`).
+
+```bash
+# First run / after large library changes: build the database
+mpc update && mpc stats
+
+# Service status / logs
+systemctl --user status mpd mpd-mpris
+journalctl --user -u mpd
+```
 
 ### GPG Agent as SSH Agent
 `.bashrc` configures GPG agent to handle SSH:
@@ -253,7 +291,10 @@ dotfiles/
 │   ├── apps/
 │   ├── sort-pictures/
 │   ├── sportmodel-service/
-│   └── plasma-widgets/
+│   ├── plasma-widgets/
+│   ├── mpd/
+│   ├── mpd-mpris/
+│   └── ncmpcpp/
 ├── sort_pictures/           # Git submodule
 ├── sportmodel/              # Git submodule
 ├── legacy/                  # Archived configs (AwesomeWM, X11)

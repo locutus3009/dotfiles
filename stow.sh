@@ -19,6 +19,9 @@ ALL_PACKAGES=(
     sort-pictures
     sportmodel-service
     plasma-widgets
+    mpd
+    mpd-mpris
+    ncmpcpp
 )
 
 # Parse arguments

@@ -31,6 +31,13 @@ PACKAGES_FONTS=(
 # Audio (PipeWire)
 PACKAGES_AUDIO=(pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber alsa-utils)
 
+# Music Player Daemon
+#   mpd        - the daemon (runs as a --user service)
+#   ncmpcpp    - primary TUI client
+#   mpc        - minimal CLI client (scripting / `mpc update`)
+#   mpd-mpris  - MPRIS bridge so KDE Plasma can control playback
+PACKAGES_MPD=(mpd ncmpcpp mpc mpd-mpris)
+
 # Bluetooth
 PACKAGES_BLUETOOTH=(bluez bluez-utils)
 
@@ -94,6 +101,7 @@ ALL_PACKAGES=(
     "${PACKAGES_INPUT[@]}"
     "${PACKAGES_FONTS[@]}"
     "${PACKAGES_AUDIO[@]}"
+    "${PACKAGES_MPD[@]}"
     "${PACKAGES_BLUETOOTH[@]}"
     "${PACKAGES_DEV[@]}"
     "${PACKAGES_STOW[@]}"
@@ -272,6 +280,18 @@ if [[ ! $REPLY =~ ^[Nn]$ ]]; then
             systemctl --user enable --now sportmodel.service
             echo "✓ sportmodel service enabled."
         fi
+
+        # MPD + MPRIS bridge (units ship with the packages, config via stow)
+        if command -v mpd &>/dev/null; then
+            mkdir -p "$HOME/.local/share/mpd"
+            systemctl --user daemon-reload
+            systemctl --user enable --now mpd.service
+            echo "✓ mpd service enabled."
+            if command -v mpd-mpris &>/dev/null; then
+                systemctl --user enable --now mpd-mpris.service
+                echo "✓ mpd-mpris service enabled."
+            fi
+        fi
     else
         echo ""
         echo "✗ Stow failed. Remove conflicting files and run ./stow.sh manually."
@@ -283,4 +303,5 @@ fi
 echo ""
 echo "===================================================="
 echo "Next steps:"
-echo "  1. Reboot to start using KDE Plasma"
+echo "  1. Build the MPD database on first run: mpc update (then: mpc stats)"
+echo "  2. Reboot to start using KDE Plasma"

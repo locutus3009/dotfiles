@@ -1,0 +1,61 @@
+# Managed by dotfiles (stow package: ncmpcpp).
+# Primary TUI client for the local MPD instance (see stow/mpd).
+
+## --- Connection -----------------------------------------------------------
+mpd_host = 127.0.0.1
+mpd_port = 6600
+mpd_music_dir = /hdd/locutus/Music
+mpd_connection_timeout = 5
+mpd_crossfade_time = 3
+
+## --- Directories ----------------------------------------------------------
+ncmpcpp_directory = ~/.local/share/ncmpcpp
+lyrics_directory  = ~/.local/share/ncmpcpp/lyrics
+
+## --- Playlist / display ---------------------------------------------------
+playlist_display_mode = columns
+# (song_columns_list_format left at ncmpcpp's built-in default — a custom one
+#  is easy to get subtly wrong and crashes with an assertion.)
+song_list_format = {%a - }{%t}|{$8%f$9}$R{$3(%l)$9}
+song_status_format = {{%a{ "%b"}} ― }{%t}
+now_playing_prefix = "$b$5▸ "
+now_playing_suffix = $/b$9
+browser_playlist_prefix = "$2playlist$9 "
+
+## --- Progress bar / header ------------------------------------------------
+progressbar_look = "━╸ "
+progressbar_color = black
+progressbar_elapsed_color = blue
+user_interface = alternative
+header_visibility = yes
+statusbar_visibility = yes
+titles_visibility = yes
+autocenter_mode = yes
+centered_cursor = yes
+display_bitrate = yes
+display_remaining_time = no
+
+## --- Colors ---------------------------------------------------------------
+main_window_color = default
+color1 = white
+color2 = blue
+current_item_prefix = $(blue)$r
+current_item_suffix = $/r$(end)
+current_item_inactive_column_prefix = $(magenta)$r
+current_item_inactive_column_suffix = $/r$(end)
+
+## --- Visualizer (fed by the FIFO output in mpd.conf) ----------------------
+visualizer_data_source = /tmp/mpd.fifo
+visualizer_output_name = Visualizer
+visualizer_in_stereo = yes
+visualizer_type = spectrum
+visualizer_look = "●▮"
+visualizer_spectrum_smooth_look = yes
+
+## --- Behaviour ------------------------------------------------------------
+playlist_disable_highlight_delay = 0
+message_delay_time = 2
+follow_now_playing_lyrics = yes
+ignore_leading_the = yes
+external_editor = emacsclient
+use_console_editor = yes
