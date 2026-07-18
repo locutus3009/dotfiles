@@ -79,7 +79,7 @@ The repository uses GNU Stow with packages in the `stow/` directory:
 | `gnupg` | `.gnupg/gpg-agent.conf`, `.gnupg/gpg.conf` | `$HOME` |
 | `kitty` | `.config/kitty/` | `$HOME` |
 | `pulse` | `.config/pulse/` | `$HOME` |
-| `plasma` | `.config/{kdeglobals,kwinrc,kwinrulesrc,kglobalshortcutsrc,plasmashellrc}` | `$HOME` |
+| `plasma` | `.config/{kwinrc,kwinrulesrc,kglobalshortcutsrc}` | `$HOME` |
 | `apps` | `apps/bin/` (binaries built locally, not in git) | `$HOME` |
 | `sort-pictures` | systemd service + config.toml | `$HOME` |
 | `sportmodel-service` | systemd service for sportmodel web server | `$HOME` |
@@ -241,6 +241,13 @@ systemctl --user restart sort_pictures.service sportmodel.service
 - The active system configuration
 
 Plasma may also write to these files when settings change via GUI. Check `git status` frequently.
+
+Only the genuinely hand-authored, low-churn files are stowed: `kwinrc` (virtual
+desktops, compositing), `kwinrulesrc` (window rules), `kglobalshortcutsrc`
+(shortcuts). `kdeglobals` and `plasmashellrc` are **deliberately not tracked** —
+KConfig interleaves real settings with volatile UI state (file-dialog view,
+panel/plasmoid geometry), so tracking them produced constant git noise for no
+benefit. They live as normal KDE-owned files in `~/.config`.
 
 ### Package Management
 `install.sh` uses `yay` (AUR helper) with `--needed` flag. Required packages include:
