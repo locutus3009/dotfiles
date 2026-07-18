@@ -48,8 +48,8 @@ PACKAGES_DEV=(git base-devel rust cargo gnupg jq)
 # Symlink Management
 PACKAGES_STOW=(stow)
 
-# Optional packages
-PACKAGES_OPTIONAL=(digikam)
+# Optional packages (media management GUIs)
+PACKAGES_OPTIONAL=(digikam picard)
 
 # =============================================================================
 # Functions

@@ -22,6 +22,7 @@ ALL_PACKAGES=(
     mpd
     mpd-mpris
     ncmpcpp
+    picard
 )
 
 # Parse arguments

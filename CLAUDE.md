@@ -87,6 +87,7 @@ The repository uses GNU Stow with packages in the `stow/` directory:
 | `mpd` | `.config/mpd/mpd.conf` (local-only MPD, PipeWire output) | `$HOME` |
 | `mpd-mpris` | systemd `--user` drop-in for the MPRIS bridge | `$HOME` |
 | `ncmpcpp` | `.config/ncmpcpp/config` (TUI client) | `$HOME` |
+| `picard` | `.config/MusicBrainz/Picard.ini` (MusicBrainz Picard tagger) | `$HOME` |
 
 **Stow commands:**
 ```bash
@@ -294,7 +295,8 @@ dotfiles/
 │   ├── plasma-widgets/
 │   ├── mpd/
 │   ├── mpd-mpris/
-│   └── ncmpcpp/
+│   ├── ncmpcpp/
+│   └── picard/
 ├── sort_pictures/           # Git submodule
 ├── sportmodel/              # Git submodule
 ├── legacy/                  # Archived configs (AwesomeWM, X11)
