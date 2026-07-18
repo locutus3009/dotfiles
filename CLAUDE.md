@@ -36,7 +36,6 @@ reboot
 
 **install.sh automatically handles:**
 - Package installation (only missing packages)
-- NVIDIA drivers and modprobe config (with prompts)
 - SDDM configuration and service
 - Bluetooth service enablement
 - **Building Rust binaries** (sort_pictures, sportmodel) into `stow/apps/apps/bin/`

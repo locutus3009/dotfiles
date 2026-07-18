@@ -44,9 +44,6 @@ PACKAGES_STOW=(stow)
 # Optional packages
 PACKAGES_OPTIONAL=(digikam)
 
-# NVIDIA (separate, requires confirmation)
-PACKAGES_NVIDIA=(nvidia-dkms nvidia-utils nvidia-settings nvidia-prime)
-
 # =============================================================================
 # Functions
 # =============================================================================
@@ -129,54 +126,11 @@ if [[ " ${MISSING[*]} " =~ " bluez " ]]; then
     sudo systemctl enable bluetooth.service
 fi
 
-# NVIDIA drivers (separate prompt, only if not already installed)
-MISSING_NVIDIA=($(get_missing_packages "${PACKAGES_NVIDIA[@]}"))
-
-if [[ ${#MISSING_NVIDIA[@]} -eq 0 ]]; then
-    echo ""
-    echo "✓ NVIDIA drivers already installed."
-else
-    echo ""
-    read -p "Do you want to install NVIDIA drivers? (y/N): " -n 1 -r
-    echo ""
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        echo "Installing NVIDIA drivers: ${MISSING_NVIDIA[*]}"
-        install_packages "${MISSING_NVIDIA[@]}"
-    else
-        echo "Skipping NVIDIA drivers."
-    fi
-fi
-
 # =============================================================================
 # System Configuration
 # =============================================================================
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-# NVIDIA modprobe configuration (for Wayland support)
-NVIDIA_MODPROBE_SRC="$SCRIPT_DIR/system/modprobe.d/nvidia.conf"
-NVIDIA_MODPROBE_DST="/etc/modprobe.d/nvidia.conf"
-
-if [[ -f "$NVIDIA_MODPROBE_SRC" ]]; then
-    if [[ -f "$NVIDIA_MODPROBE_DST" ]] && cmp -s "$NVIDIA_MODPROBE_SRC" "$NVIDIA_MODPROBE_DST"; then
-        echo ""
-        echo "✓ NVIDIA modprobe config already installed."
-    else
-        echo ""
-        read -p "Install NVIDIA modprobe config for Wayland? (y/N): " -n 1 -r
-        echo ""
-        if [[ $REPLY =~ ^[Yy]$ ]]; then
-            echo "Installing $NVIDIA_MODPROBE_DST..."
-            sudo cp "$NVIDIA_MODPROBE_SRC" "$NVIDIA_MODPROBE_DST"
-            sudo chmod 644 "$NVIDIA_MODPROBE_DST"
-            echo "Rebuilding initramfs..."
-            sudo mkinitcpio -P
-            echo "✓ NVIDIA modprobe config installed (reboot required)."
-        else
-            echo "Skipping NVIDIA modprobe config."
-        fi
-    fi
-fi
 
 # SDDM configuration
 SDDM_CONF_SRC="$SCRIPT_DIR/sddm/kde_settings.conf"

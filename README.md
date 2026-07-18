@@ -97,8 +97,7 @@ cd ~/dev/dotfiles/sddm
 
 #### System Configuration References
 - **system/** - Reference copies of system-level configs (require sudo)
-  - **modprobe.d/nvidia.conf** - NVIDIA kernel module configuration for Wayland
-  - Not automatically installed - see `system/README.md` for manual installation
+  - Not automatically installed - see `system/README.md` for details
 
 ### Utilities
 - **apps/bin/** - Custom scripts and utilities
@@ -234,8 +233,6 @@ dotfiles/
 │   ├── install_sddm.sh
 │   └── README.md
 ├── system/                # System config references (require sudo)
-│   ├── modprobe.d/
-│   │   └── nvidia.conf   # NVIDIA Wayland support
 │   └── README.md
 └── legacy/               # Archived configurations
     ├── config/           # Old app configs
