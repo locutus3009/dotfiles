@@ -19,8 +19,6 @@ ALL_PACKAGES=(
     sort-pictures
     sportmodel-service
     plasma-widgets
-    kde-material-you-colors
-    matugen
 )
 
 # Parse arguments

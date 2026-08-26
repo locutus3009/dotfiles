@@ -36,13 +36,10 @@ PACKAGES_BLUETOOTH=(bluez bluez-utils)
 
 
 # Development Tools
-PACKAGES_DEV=(git base-devel gnupg jq)
+PACKAGES_DEV=(git base-devel rust cargo gnupg jq)
 
 # Symlink Management
 PACKAGES_STOW=(stow)
-
-# Material You Theming
-PACKAGES_THEMING=(kde-material-you-colors matugen-bin kwin-effect-rounded-corners-git)
 
 # Optional packages
 PACKAGES_OPTIONAL=(digikam)
@@ -103,7 +100,6 @@ ALL_PACKAGES=(
     "${PACKAGES_BLUETOOTH[@]}"
     "${PACKAGES_DEV[@]}"
     "${PACKAGES_STOW[@]}"
-    "${PACKAGES_THEMING[@]}"
     "${PACKAGES_OPTIONAL[@]}"
 )
 
@@ -299,7 +295,6 @@ echo ""
 echo "Note: Stow will fail if these files exist:"
 echo "  ~/.bashrc ~/.gdbinit ~/.asound.conf ~/bash-preexec.sh"
 echo "  ~/.config/emacs ~/.config/kitty ~/.config/pulse"
-echo "  ~/.config/matugen ~/.config/kde-material-you-colors"
 echo ""
 read -p "Run stow.sh to set up dotfiles? (Y/n): " -n 1 -r
 echo ""
@@ -334,6 +329,4 @@ fi
 echo ""
 echo "===================================================="
 echo "Next steps:"
-echo "  1. Enable kde-material-you-colors autostart:"
-echo "     kde-material-you-colors --autostart"
-echo "  2. Reboot to start using KDE Plasma"
+echo "  1. Reboot to start using KDE Plasma"

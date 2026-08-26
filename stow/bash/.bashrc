@@ -163,9 +163,5 @@ export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 export HMSDKNATIVESYSROOTPATH=/home/locutus/dev/hm-grc-scripts/SDK/sysroots/x86_64-eulersdk-linux
 export RUSTC_BOOTSTRAP=1
 
-#export MPD_HOST=$HOME/.config/mpd/socket
-
 source "$HOME/bash-preexec.sh"
 eval "$(starship init bash)"
-
-#alias claude="/home/locutus/.claude/local/claude"

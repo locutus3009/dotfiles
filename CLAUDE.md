@@ -12,7 +12,6 @@ This is a **personal dotfiles repository** for Arch Linux with **KDE Plasma 6** 
 - PipeWire audio (not PulseAudio)
 - Fcitx5 input method
 - SDDM display manager
-- Material You dynamic theming via `kde-material-you-colors` + `matugen`
 
 ## Key Commands
 
@@ -27,13 +26,9 @@ git submodule update --init --recursive
 # Remove existing config files that would conflict with stow
 rm ~/.bashrc ~/.gdbinit ~/.asound.conf ~/bash-preexec.sh
 rm -rf ~/.config/emacs ~/.config/kitty ~/.config/pulse
-rm -rf ~/.config/matugen ~/.config/kde-material-you-colors
 
 # Run install script (handles everything)
 ./install.sh
-
-# Enable kde-material-you-colors autostart
-kde-material-you-colors --autostart
 
 # Reboot
 reboot
@@ -90,8 +85,6 @@ The repository uses GNU Stow with packages in the `stow/` directory:
 | `sort-pictures` | systemd service + config.toml | `$HOME` |
 | `sportmodel-service` | systemd service for sportmodel web server | `$HOME` |
 | `plasma-widgets` | Window Title + Bing Wallpaper plasmoids | `$HOME` |
-| `kde-material-you-colors` | color generation config + hook | `$HOME` |
-| `matugen` | template config for Emacs/GTK | `$HOME` |
 
 **Stow commands:**
 ```bash
@@ -123,54 +116,6 @@ The repository uses GNU Stow with packages in the `stow/` directory:
 
 **Additional Plasma Widgets (not submodules):**
 - `org.kde.windowtitle` - Window title plasmoid (in `stow/plasma-widgets/`)
-
-## Material You Theming
-
-The system automatically generates Material You colors from the desktop wallpaper:
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                   MATERIAL YOU COLOR FLOW                        │
-├─────────────────────────────────────────────────────────────────┤
-│ Plasma Wallpaper Change (Bing POTD, manual, etc.)               │
-│         │                                                        │
-│         ▼                                                        │
-│ kde-material-you-colors (daemon, monitors via D-Bus)            │
-│         │                                                        │
-│         ├──► Updates KDE color schemes (Plasma/Qt apps)         │
-│         │                                                        │
-│         ▼                                                        │
-│ on_change_hook → matugen-hook.sh                                │
-│         │                                                        │
-│         ▼                                                        │
-│ matugen color hex <seed>                                        │
-│         │                                                        │
-│         ▼                                                        │
-│ Generates templates:                                             │
-│ - ~/.config/emacs/generated.el (Emacs theme)                    │
-│ - ~/.config/gtk-3.0/gtk.css                                     │
-│ - ~/.config/gtk-4.0/gtk.css                                     │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-### Configuration Files
-
-- `stow/kde-material-you-colors/.config/kde-material-you-colors/config.conf`
-- `stow/kde-material-you-colors/.config/kde-material-you-colors/matugen-hook.sh`
-- `stow/matugen/.config/matugen/config.toml`
-- `stow/matugen/.config/matugen/templates/`
-
-### Manual Color Update
-
-```bash
-# Extract seed color and run matugen manually
-color=$(jq -r '.seed.color' /tmp/kde-material-you-colors-$(whoami).json)
-matugen color hex "$color" --mode dark
-
-# Or restart kde-material-you-colors to re-detect wallpaper
-pkill kde-material-you-colors
-kde-material-you-colors &
-```
 
 ## Important Configuration Details
 
@@ -262,8 +207,6 @@ Plasma may also write to these files when settings change via GUI. Check `git st
 ### Package Management
 `install.sh` uses `yay` (AUR helper) with `--needed` flag. Required packages include:
 - `stow` - GNU Stow for symlink management
-- `kde-material-you-colors` - Automatic color generation
-- `matugen-bin` - Template-based theme generator
 
 ## Common Pitfalls
 
@@ -288,10 +231,6 @@ Plasma may also write to these files when settings change via GUI. Check `git st
    - System uses PipeWire with PA compatibility
    - Don't install `pulseaudio` package
 
-6. **kde-material-you-colors not running**
-   - Run `kde-material-you-colors --autostart` to enable autostart
-   - Or start manually: `kde-material-you-colors &`
-
 ## Legacy: dots-hyprland Reference
 
 The repository `/home/locutus/dev/dots-hyprland` contains an archived Hyprland setup (fork of end-4/dots-hyprland). It is **not active** but kept for reference:
@@ -315,9 +254,7 @@ dotfiles/
 │   ├── apps/
 │   ├── sort-pictures/
 │   ├── sportmodel-service/
-│   ├── plasma-widgets/
-│   ├── kde-material-you-colors/
-│   └── matugen/
+│   └── plasma-widgets/
 ├── sort_pictures/           # Git submodule
 ├── sportmodel/              # Git submodule
 ├── legacy/                  # Archived configs (AwesomeWM, X11)
