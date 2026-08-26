@@ -36,13 +36,13 @@ PACKAGES_BLUETOOTH=(bluez bluez-utils)
 
 
 # Development Tools
-PACKAGES_DEV=(git base-devel rust cargo gnupg jq)
+PACKAGES_DEV=(git base-devel gnupg jq)
 
 # Symlink Management
 PACKAGES_STOW=(stow)
 
 # Optional packages
-PACKAGES_OPTIONAL=(digikam)
+PACKAGES_OPTIONAL=()
 
 # NVIDIA (separate, requires confirmation)
 PACKAGES_NVIDIA=(nvidia-dkms nvidia-utils nvidia-settings nvidia-prime)
