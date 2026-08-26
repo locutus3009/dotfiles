@@ -36,7 +36,6 @@ reboot
 
 **install.sh automatically handles:**
 - Package installation (only missing packages)
-- NVIDIA drivers and modprobe config (with prompts)
 - SDDM configuration and service
 - Bluetooth service enablement
 - **Building Rust binaries** (sort_pictures, sportmodel) into `stow/apps/apps/bin/`
@@ -80,11 +79,15 @@ The repository uses GNU Stow with packages in the `stow/` directory:
 | `gnupg` | `.gnupg/gpg-agent.conf`, `.gnupg/gpg.conf` | `$HOME` |
 | `kitty` | `.config/kitty/` | `$HOME` |
 | `pulse` | `.config/pulse/` | `$HOME` |
-| `plasma` | `.config/{kdeglobals,kwinrc,kwinrulesrc,kglobalshortcutsrc,plasmashellrc}` | `$HOME` |
+| `plasma` | `.config/{kwinrc,kwinrulesrc,kglobalshortcutsrc}` | `$HOME` |
 | `apps` | `apps/bin/` (binaries built locally, not in git) | `$HOME` |
 | `sort-pictures` | systemd service + config.toml | `$HOME` |
 | `sportmodel-service` | systemd service for sportmodel web server | `$HOME` |
 | `plasma-widgets` | Window Title + Bing Wallpaper plasmoids | `$HOME` |
+| `mpd` | `.config/mpd/mpd.conf` (local-only MPD, PipeWire output) | `$HOME` |
+| `mpd-mpris` | systemd `--user` drop-in for the MPRIS bridge | `$HOME` |
+| `ncmpcpp` | `.config/ncmpcpp/config` (TUI client) | `$HOME` |
+| `picard` | `.config/MusicBrainz/Picard.ini` (MusicBrainz Picard tagger) | `$HOME` |
 
 **Stow commands:**
 ```bash
@@ -124,6 +127,41 @@ The system uses PipeWire with PulseAudio compatibility layer:
 - `pipewire-pulse` provides `/run/user/$UID/pulse/native` socket
 - `pactl info` shows: "Server Name: PulseAudio (on PipeWire)"
 - WirePlumber manages Bluetooth audio automatically
+
+### MPD (Music Player Daemon)
+
+MPD runs as a **per-user** systemd service (`systemctl --user`), not the system
+`mpd` unit — so it uses the session's PipeWire and never needs the system `mpd`
+user's permissions on `/hdd`.
+
+- **Config:** `stow/mpd/.config/mpd/mpd.conf` (in git). Local only
+  (`bind_to_address 127.0.0.1`), native `pipewire` output, `m3u`+`pls` playlist
+  plugins enabled for radio streams.
+- **Library:** `/hdd/locutus/Music` (via the `~/Music` symlink), synced by
+  Syncthing. `auto_update "yes"` picks up new tracks via inotify.
+- **Playlists:** `/hdd/locutus/Music/playlists/` — kept **inside** the synced
+  library so saved playlists and radio stations travel between machines.
+- **Runtime state** (`database`, `state`, `sticker.sql`) lives in
+  `~/.local/share/mpd/` — deliberately **outside** git and outside the synced
+  music tree, so no generated files are committed or replicated.
+- **Clients:** `ncmpcpp` (TUI, configured in `stow/ncmpcpp`), `mpc`
+  (CLI/scripting), and Emacs's built-in `mpc.el`
+  (`stow/emacs/.config/emacs/music.el`, `M-x mpc` / `C-c m`). A silent `fifo`
+  output in `mpd.conf` feeds the ncmpcpp visualizer (`/tmp/mpd.fifo`) — it plays
+  alongside PipeWire, inaudibly.
+- **Plasma control:** `mpd-mpris` bridges MPD to MPRIS so the Plasma Media
+  Player widget and `playerctl` can drive playback. Its `--user` unit ships with
+  the package; `stow/mpd-mpris/` adds a drop-in (`After=mpd.service`,
+  `MPD_HOST=127.0.0.1`).
+
+```bash
+# First run / after large library changes: build the database
+mpc update && mpc stats
+
+# Service status / logs
+systemctl --user status mpd mpd-mpris
+journalctl --user -u mpd
+```
 
 ### GPG Agent as SSH Agent
 `.bashrc` configures GPG agent to handle SSH:
@@ -204,6 +242,13 @@ systemctl --user restart sort_pictures.service sportmodel.service
 
 Plasma may also write to these files when settings change via GUI. Check `git status` frequently.
 
+Only the genuinely hand-authored, low-churn files are stowed: `kwinrc` (virtual
+desktops, compositing), `kwinrulesrc` (window rules), `kglobalshortcutsrc`
+(shortcuts). `kdeglobals` and `plasmashellrc` are **deliberately not tracked** —
+KConfig interleaves real settings with volatile UI state (file-dialog view,
+panel/plasmoid geometry), so tracking them produced constant git noise for no
+benefit. They live as normal KDE-owned files in `~/.config`.
+
 ### Package Management
 `install.sh` uses `yay` (AUR helper) with `--needed` flag. Required packages include:
 - `stow` - GNU Stow for symlink management
@@ -254,7 +299,11 @@ dotfiles/
 │   ├── apps/
 │   ├── sort-pictures/
 │   ├── sportmodel-service/
-│   └── plasma-widgets/
+│   ├── plasma-widgets/
+│   ├── mpd/
+│   ├── mpd-mpris/
+│   ├── ncmpcpp/
+│   └── picard/
 ├── sort_pictures/           # Git submodule
 ├── sportmodel/              # Git submodule
 ├── legacy/                  # Archived configs (AwesomeWM, X11)
