@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;; my-init --- My personal init.el file
 ;;; Commentary:
 ;;; Just checkout and use it

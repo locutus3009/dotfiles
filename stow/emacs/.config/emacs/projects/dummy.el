@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;; my/projects/dummy --- Class for dummy project
 ;;; Commentary:
 ;;; none

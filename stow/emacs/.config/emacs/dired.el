@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package
  dired-sidebar
  :bind (("C-x C-n" . dired-sidebar-toggle-sidebar))

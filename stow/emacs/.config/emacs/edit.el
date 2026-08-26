@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;; Better handling of paranthesis when writing Lisps.
 ;; (use-package
 ;;   paredit

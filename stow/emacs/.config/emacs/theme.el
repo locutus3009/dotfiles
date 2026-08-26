@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;; my-main --- My custom theme setup
 ;;; Commentary:
 ;;; none

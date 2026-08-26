@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;; smex is a replacement for M-x
 (use-package
  smex

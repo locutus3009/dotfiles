@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;; my/projects/linux --- Class for Linux kernel directory style
 ;;; Commentary:
 ;;; none

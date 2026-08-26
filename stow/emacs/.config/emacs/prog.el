@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;; Formatting of elisp
 ;; (use-package
 ;;   elisp-format

@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;; (use-package org-habit-stats :ensure t)
 
 (use-package

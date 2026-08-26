@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;; Spacemacs-like dashboard
 ;; (use-package
 ;;   dashboard
