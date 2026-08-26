@@ -339,10 +339,6 @@ _launch=none
 [services][org.kde.krunner.desktop]
 _launch=Search\tAlt+Space\tAlt+F2\tMeta+E
 
-[services][org.kde.spectacle.desktop]
-CurrentMonitorScreenShot=none
-OpenWithoutScreenshot=none
-
 [services][systemsettings.desktop]
 _launch=\tTools
 

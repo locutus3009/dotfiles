@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;; Git integration for Emacs
 (use-package
  magit

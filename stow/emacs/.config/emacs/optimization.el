@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;;;; Startup optimizations
 
 ;;;;;; Better garbage collection strategy

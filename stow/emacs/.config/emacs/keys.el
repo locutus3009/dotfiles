@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;; Tabulation to stop by default
 (global-set-key (kbd "TAB") `tab-to-tab-stop)
 

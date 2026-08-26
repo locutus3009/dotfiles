@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;; Integration with GitLab
 (use-package ivy-gitlab :ensure t)
 
