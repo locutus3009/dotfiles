@@ -148,6 +148,8 @@ export PATH="$PATH:$HOME/apps/bin"
 export PATH="$PATH:$HOME/Foundation_Platform/models/Linux64_GCC-6.4"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:/opt/shader-slang-bin/bin"
+export PATH="$PATH:$HOME/.npm-packages/bin"
+export PATH="$PATH:$HOME/dev/huawei-drc/work/install/bin"
 
 # Setup Fcitx5
 export GLFW_IM_MODULE=fcitx
@@ -166,4 +168,4 @@ export RUSTC_BOOTSTRAP=1
 source "$HOME/bash-preexec.sh"
 eval "$(starship init bash)"
 
-alias claude="/home/locutus/.claude/local/claude"
+#alias claude="/home/locutus/.claude/local/claude"
