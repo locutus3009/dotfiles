@@ -1,8 +1,6 @@
-;; -*- lexical-binding: t; -*-
-;;; my-init --- My personal init.el file
+;;; init.el --- My personal init file -*- lexical-binding: t; -*-
 ;;; Commentary:
-;;; Just checkout and use it
-
+;;; Just checkout and use it.  Startup tuning lives in early-init.el.
 ;;; Code:
 
 ;; Main setup that must be done before execution of any code
@@ -41,15 +39,6 @@
 ;; MPD control (mpc.el)
 (load-file "~/.config/emacs/music.el")
 
-;; Gitlab integration
-;; (load-file "~/.config/emacs/gitlab.el")
-
-;; ranger-like directory browser integration
-;; (load-file "~/.config/emacs/ranger.el")
-
-;; Optimization
-(load-file "~/.config/emacs/optimization.el")
-
-;; Startup dashboard
-(load-file "~/.config/emacs/dashboard.el")
 (put 'upcase-region 'disabled nil)
+
+;;; init.el ends here

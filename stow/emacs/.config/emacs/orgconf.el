@@ -174,9 +174,6 @@
 ;; Allow refile to create parent tasks with confirmation
 (setq org-refile-allow-creating-parent-nodes (quote confirm))
 
-;; Better completion with counsel (disable ido for org)
-(setq org-completion-use-ido nil)
-
 ;;;; Refile settings
 ; Exclude DONE state tasks from refile targets
 (defun bh/verify-refile-target ()
@@ -236,13 +233,6 @@
 
 (setq org-capture-use-agenda-date t)
 
-(defun org-export-string-hack
-    (string backend &optional body-only ext-plist)
-  (org-export-string-as
-   (concat "#+OPTIONS: tex:dvipng toc:nil" string) 'html t))
-;;  (org-export-string-as (concat "" string) 'html t))
-(defalias 'org-export-string 'org-export-string-hack)
-
 ;;;;;;;
 ;;   Custom agenda
 ;;
@@ -255,7 +245,7 @@
   (interactive)
   (save-excursion
     (org-back-to-heading 'invisible-ok)
-    (hide-other)
+    (outline-hide-other)
     (org-cycle)
     (org-cycle)
     (org-cycle)))
@@ -272,7 +262,7 @@
 (defun bh/make-org-scratch ()
   (interactive)
   (find-file "/tmp/publish/scratch.org")
-  (gnus-make-directory "/tmp/publish"))
+  (make-directory "/tmp/publish" t))
 
 (defun bh/switch-to-scratch ()
   (interactive)
@@ -502,7 +492,7 @@ as the default task."
       ;; We're in the agenda
       ;;
       (let* ((marker (org-get-at-bol 'org-hd-marker))
-             (tags (org-with-point-at marker (org-get-tags-at))))
+             (tags (org-with-point-at marker (org-get-tags))))
         (if (and (eq arg 4) tags)
             (org-agenda-clock-in '(16))
           (bh/clock-in-organization-task-as-default)))
@@ -707,7 +697,7 @@ Callers of this function already widen the buffer view."
                           (re-search-forward "^\\*+ NEXT "
                                              subtree-end
                                              t))
-                (unless (member "WAITING" (org-get-tags-at))
+                (unless (member "WAITING" (org-get-tags))
                   (setq has-next t))))
             (if has-next
                 nil
@@ -731,7 +721,7 @@ Callers of this function already widen the buffer view."
                           (re-search-forward "^\\*+ NEXT "
                                              subtree-end
                                              t))
-                (unless (member "WAITING" (org-get-tags-at))
+                (unless (member "WAITING" (org-get-tags))
                   (setq has-next t))))
             (if has-next
                 next-headline
@@ -790,7 +780,7 @@ Skip project and sub-project tasks, habits, and project related tasks."
        ((org-is-habit-p)
         next-headline)
        ((and bh/hide-scheduled-and-waiting-next-tasks
-             (member "WAITING" (org-get-tags-at)))
+             (member "WAITING" (org-get-tags)))
         next-headline)
        ((bh/is-project-p)
         next-headline)
