@@ -74,14 +74,22 @@
   minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
  (setq ivy-count-format "(%d/%d) "))
 
+(defun my/counsel-projectile-rg ()
+  "Run counsel-rg in the current project root."
+  (interactive)
+  (let ((default-directory (projectile-project-root)))
+    (counsel-rg)))
+
+(global-set-key (kbd "C-S-s") #'my/counsel-projectile-rg)
+
 ;; counsel-projectile
-(use-package
- counsel-projectile
- :ensure t
- :after (projectile)
- :config
- ;; Use counsel for search through the project
- (global-set-key (kbd "C-S-s") 'counsel-projectile-grep))
+;;(use-package
+;; counsel-projectile
+;; :ensure t
+;; :after (projectile)
+;; :config
+;; ;; Use counsel for search through the project
+;; (global-set-key (kbd "C-S-s") 'counsel-projectile-grep))
 
 (use-package
  all-the-icons-ivy-rich
