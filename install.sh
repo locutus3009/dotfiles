@@ -45,6 +45,28 @@ PACKAGES_BLUETOOTH=(bluez bluez-utils)
 # Development Tools
 PACKAGES_DEV=(git base-devel rust cargo gnupg jq)
 
+# Command line tools the Emacs config shells out to
+#   ripgrep - xref-search-program, rg.el (C-c s), projectile search, counsel-rg
+#   fd      - projectile's file indexing in non-git projects
+#   clang   - clangd (lsp-mode for C/C++) and clang-format
+PACKAGES_EDITOR_TOOLS=(ripgrep fd clang)
+
+# Tree-sitter grammars for the *-ts-mode major modes (see stow/emacs prog.el).
+# Emacs loads these as libtree-sitter-<lang>.so; each mode is only enabled when
+# its grammar is present, so a partial install degrades gracefully.
+#
+# tree-sitter-markdown is deliberately NOT here: markdown-ts-mode is far
+# thinner than the markdown-mode package the config uses, so the config stays
+# on markdown-mode and the grammar would go unused.
+#
+# tree-sitter-cpp is NOT here either - it is not in the official repos.
+# See the manual step reported after installation.
+PACKAGES_TREESITTER=(
+    tree-sitter
+    tree-sitter-c tree-sitter-rust
+    tree-sitter-python tree-sitter-bash tree-sitter-lua
+)
+
 # Symlink Management
 PACKAGES_STOW=(stow)
 
@@ -66,6 +88,22 @@ get_missing_packages() {
     done
 
     echo "${missing[@]}"
+}
+
+# Can Emacs already find the C++ tree-sitter grammar?  Asking Emacs is
+# authoritative: it covers the package path, treesit-extra-load-path and a
+# self-built grammar under ~/.emacs.d/tree-sitter/ alike.
+have_cpp_grammar() {
+    if command -v emacs &>/dev/null; then
+        emacs -Q --batch --eval \
+            '(kill-emacs (if (and (fboundp (quote treesit-available-p))
+                                  (treesit-available-p)
+                                  (treesit-language-available-p (quote cpp)))
+                             0 1))' &>/dev/null
+    else
+        [[ -f /usr/lib/libtree-sitter-cpp.so ]] ||
+        [[ -f "$HOME/.emacs.d/tree-sitter/libtree-sitter-cpp.so" ]]
+    fi
 }
 
 install_packages() {
@@ -104,6 +142,8 @@ ALL_PACKAGES=(
     "${PACKAGES_MPD[@]}"
     "${PACKAGES_BLUETOOTH[@]}"
     "${PACKAGES_DEV[@]}"
+    "${PACKAGES_EDITOR_TOOLS[@]}"
+    "${PACKAGES_TREESITTER[@]}"
     "${PACKAGES_STOW[@]}"
     "${PACKAGES_OPTIONAL[@]}"
 )
@@ -132,6 +172,40 @@ if [[ " ${MISSING[*]} " =~ " bluez " ]]; then
     echo ""
     echo "Enabling Bluetooth service..."
     sudo systemctl enable bluetooth.service
+fi
+
+# =============================================================================
+# C++ tree-sitter grammar (manual step - not in the official repos)
+# =============================================================================
+
+TREESIT_CPP_MISSING=false
+
+if ! have_cpp_grammar; then
+    TREESIT_CPP_MISSING=true
+    echo ""
+    echo "===================================================="
+    echo "MANUAL STEP: C++ tree-sitter grammar is missing"
+    echo "===================================================="
+    echo ""
+    echo "tree-sitter-cpp is not in the official Arch repositories, so this"
+    echo "script does not install it. Without it C++ files open in the classic"
+    echo "c++-mode rather than c++-ts-mode. Nothing else is affected."
+    echo ""
+    echo "Install it by hand, whichever route is open to you:"
+    echo ""
+    echo "  a) With AUR access:"
+    echo "       yay -S tree-sitter-cpp"
+    echo ""
+    echo "  b) Without AUR (e.g. a locked down work machine). Emacs builds the"
+    echo "     grammar itself into ~/.emacs.d/tree-sitter/, no root needed:"
+    echo "       M-x treesit-install-language-grammar RET cpp RET"
+    echo "       URL: https://github.com/tree-sitter/tree-sitter-cpp"
+    echo "       (accept the defaults for the remaining prompts)"
+    echo "     Needs git and a C compiler, both installed above."
+    echo ""
+else
+    echo ""
+    echo "✓ C++ tree-sitter grammar present."
 fi
 
 # =============================================================================
@@ -305,3 +379,6 @@ echo "===================================================="
 echo "Next steps:"
 echo "  1. Build the MPD database on first run: mpc update (then: mpc stats)"
 echo "  2. Reboot to start using KDE Plasma"
+if [[ "$TREESIT_CPP_MISSING" == true ]]; then
+    echo "  3. Install the C++ tree-sitter grammar by hand (see the note above)"
+fi
