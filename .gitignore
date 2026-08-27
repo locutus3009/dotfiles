@@ -6,6 +6,7 @@
 **/GRTAGS
 **/GTAGS
 /apps/bin/docker-credential-pass
+**/*.eld
 
 # Compiled binaries (built locally via install.sh)
 stow/apps/apps/bin/sort_pictures
