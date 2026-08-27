@@ -2,23 +2,34 @@
 ;;; Code:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;; tree-sitter ;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Grammars come from the system tree-sitter-{c,cpp,rust} packages.
+;; Grammars come from the system tree-sitter-* packages.  Each mode is only
+;; enabled when its grammar is actually installed, so a machine without them
+;; quietly falls back to the classic modes.
 ;;
 ;; `setopt' is required, not `setq': `treesit-enabled-modes' carries a :set
 ;; function that does the actual `major-mode-remap-alist' rewriting.
 ;;
-;; Rust is NOT listed here -- rustic owns "\\.rs\\'" and derives from
-;; rust-ts-mode only when `rust-mode-treesitter-derive' is set before
-;; rust-mode loads (see the rustic block below).
+;; Two languages are deliberately absent:
+;;   Rust -- rustic owns "\\.rs\\'"; it derives from rust-ts-mode when
+;;     `rust-mode-treesitter-derive' is set before rust-mode loads (below).
+;;   Markdown -- `markdown-ts-mode' has no entry in
+;;     `treesit-major-mode-remap-alist' and is a fraction of what the
+;;     markdown-mode package does (no gfm-mode, no editing commands), so the
+;;     markdown grammar stays unused here on purpose.
+(defvar my/treesit-modes
+  '((c-ts-mode . c)
+    (c++-ts-mode . cpp)
+    (python-ts-mode . python)
+    (bash-ts-mode . bash)
+    (lua-ts-mode . lua))
+  "Tree-sitter major modes to enable, each with the grammar it needs.")
+
 (when (and (fboundp 'treesit-available-p) (treesit-available-p))
   (setopt treesit-enabled-modes
-          (seq-filter
-           (lambda (mode)
-             (pcase mode
-               ('c-ts-mode (treesit-language-available-p 'c))
-               ('c++-ts-mode (treesit-language-available-p 'cpp))
-               (_ nil)))
-           '(c-ts-mode c++-ts-mode))))
+          (mapcar #'car
+                  (seq-filter (lambda (entry)
+                                (treesit-language-available-p (cdr entry)))
+                              my/treesit-modes))))
 
 (defvar my/c-mode-hooks
   '(c-mode-common-hook c-ts-mode-hook c++-ts-mode-hook)
@@ -129,8 +140,9 @@ longer be necessary."
   (lsp-enable-snippet nil)
   (lsp-log-io nil))
 
-;; Support of LUA programming language
-(use-package lua-mode :ensure t :defer t)
+;; No lua-mode declaration: Emacs 31 ships its own lua-mode (which registers
+;; "\\.lua\\'" itself), and with the grammar present that is remapped to
+;; lua-ts-mode anyway.  The MELPA package was doing neither job.
 
 (defun format-lua-buffer ()
   "Format the current buffer using luaformatter."
@@ -303,6 +315,7 @@ Emacs 31).  Setting both keeps one code path for either mode."
                   java-mode-hook
                   asm-mode-hook
                   python-mode-hook
+                  python-ts-mode-hook
                   lisp-mode-hook
                   emacs-lisp-mode-hook))
     (add-hook hook 'ggtags-mode)))
