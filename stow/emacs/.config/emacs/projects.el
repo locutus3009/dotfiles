@@ -38,6 +38,9 @@
   (setq projectile-completion-system 'ivy
         projectile-enable-caching t
         projectile-indexing-method 'alien)
+  ;; `C-c C-p s s' (projectile-search) and `s r' (projectile-ripgrep) both go
+  ;; through ripgrep; `s g' stays available if grep is ever wanted.
+  (setq projectile-search-backend 'ripgrep)
   (setq projectile-run-use-comint-mode t)
   (setq projectile-compile-use-comint-mode t)
   (setq projectile-project-search-path

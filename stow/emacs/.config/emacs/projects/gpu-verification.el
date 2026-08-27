@@ -9,6 +9,8 @@
        (projectile-project-configure-cmd
         . "cmake -S ../ -B . -G Ninja -DCMAKE_EXPORT_COMPILE_COMMANDS=ON")))
    (c++-mode
+    . ((c-c++-backend . lsp-clangd)))
+   (c++-ts-mode
     . ((c-c++-backend . lsp-clangd)))))
 (dir-locals-set-directory-class
  "/hdd/locutus/dev/huawei-drc/work/gpu-verification"

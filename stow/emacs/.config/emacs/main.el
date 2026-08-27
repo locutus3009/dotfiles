@@ -32,6 +32,13 @@
 
 (setq tramp-default-method "ssh")
 
+;; Use ripgrep instead of grep wherever Emacs searches inside files itself.
+;; This one variable covers `project-find-regexp', `dired-do-find-regexp'
+;; (and -and-replace), and every other caller of `xref-matches-in-files';
+;; see `xref-search-program-alist' for the command it builds.
+(setq xref-search-program
+      (if (executable-find "rg") 'ripgrep 'grep))
+
 ;; Do not use `init.el' for `custom-*' code - use `custom-file.el'.
 (setq custom-file "~/.emacs.d/custom.el")
 (when (file-exists-p custom-file)

@@ -1,6 +1,32 @@
 ;;; prog.el --- Programming language support -*- lexical-binding: t; -*-
 ;;; Code:
 
+;;;;;;;;;;;;;;;;;;;;;;;;; tree-sitter ;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Grammars come from the system tree-sitter-{c,cpp,rust} packages.
+;;
+;; `setopt' is required, not `setq': `treesit-enabled-modes' carries a :set
+;; function that does the actual `major-mode-remap-alist' rewriting.
+;;
+;; Rust is NOT listed here -- rustic owns "\\.rs\\'" and derives from
+;; rust-ts-mode only when `rust-mode-treesitter-derive' is set before
+;; rust-mode loads (see the rustic block below).
+(when (and (fboundp 'treesit-available-p) (treesit-available-p))
+  (setopt treesit-enabled-modes
+          (seq-filter
+           (lambda (mode)
+             (pcase mode
+               ('c-ts-mode (treesit-language-available-p 'c))
+               ('c++-ts-mode (treesit-language-available-p 'cpp))
+               (_ nil)))
+           '(c-ts-mode c++-ts-mode))))
+
+(defvar my/c-mode-hooks
+  '(c-mode-common-hook c-ts-mode-hook c++-ts-mode-hook)
+  "Every hook that has to fire for C/C++, tree-sitter or not.
+`c-ts-mode' derives from `prog-mode', not from cc-mode, so it never runs
+`c-mode-common-hook' -- anything hung off that alone silently stops
+working once the tree-sitter modes are enabled.")
+
 ;; Formatting of elisp
 (use-package elisp-autofmt
   :ensure t
@@ -36,6 +62,13 @@ longer be necessary."
 
 (use-package rustic
   :ensure t
+  :init
+  ;; Makes rustic derive from rust-ts-mode instead of the regexp-based
+  ;; rust-mode.  rust-mode reads this at load time, so :init is the only
+  ;; place it can go.
+  (setq rust-mode-treesitter-derive
+        (and (fboundp 'treesit-language-available-p)
+             (treesit-language-available-p 'rust)))
   :bind
   (:map rustic-mode-map
         ("M-j" . lsp-ui-imenu)
@@ -64,6 +97,8 @@ longer be necessary."
   :hook
   ((c++-mode . lsp-deferred)
    (c-mode . lsp-deferred)
+   (c++-ts-mode . lsp-deferred)
+   (c-ts-mode . lsp-deferred)
    ;; which-key integration
    (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp
@@ -190,31 +225,42 @@ otherwise assumed alphabetic."
             (car (s-match "[A-Za-z]+$" (car primary-match)))
           ""))))
 
+  (defun my/set-c-indent-offset (n)
+    "Set the indentation step to N for both cc-mode and the ts modes.
+cc-mode reads `c-basic-offset'; `c-ts-mode' explicitly ignores it and
+reads `c-ts-indent-offset' (renamed from `c-ts-mode-indent-offset' in
+Emacs 31).  Setting both keeps one code path for either mode."
+    (setq-local c-basic-offset n)
+    (setq-local c-ts-indent-offset n))
+
   (defun my/apply-clang-format-style ()
-    "Set `c-basic-offset' and `indent-tabs-mode' from the clang-format config."
+    "Set the indent offset and `indent-tabs-mode' from the clang-format config."
     (when-let* ((cfg (my/clang-format-config)))
       (let ((c-offset (get-clang-format-option cfg "IndentWidth" t))
             (tabs-str (get-clang-format-option cfg "UseTab" nil))
             (base-style (get-clang-format-option cfg "BasedOnStyle" nil)))
         (if (> c-offset 0)
-            (setq-local c-basic-offset c-offset)
+            (my/set-c-indent-offset c-offset)
           (unless (equal "" base-style)
             (cond
              ((member base-style '("LLVM" "Google" "Chromium" "Mozilla"))
-              (setq-local c-basic-offset 2))
+              (my/set-c-indent-offset 2))
              ((equal "WebKit" base-style)
-              (setq-local c-basic-offset 4)))))
+              (my/set-c-indent-offset 4)))))
         (if (not (equal "" tabs-str))
             (setq-local indent-tabs-mode (not (string-equal "Never" tabs-str)))
           (when (member base-style
                         '("LLVM" "Google" "Chromium" "Mozilla" "WebKit"))
             (setq-local indent-tabs-mode nil))))))
-  :hook (c-mode-common . my/apply-clang-format-style))
+  :config
+  (dolist (hook my/c-mode-hooks)
+    (add-hook hook #'my/apply-clang-format-style)))
 
 (use-package clang-format+
   :ensure t
   :config
-  (add-hook 'c-mode-common-hook #'clang-format+-mode)
+  (dolist (hook my/c-mode-hooks)
+    (add-hook hook #'clang-format+-mode))
   (setq clang-format+-context #'modification))
 
 (use-package yaml-mode :ensure t :defer t)
@@ -252,12 +298,29 @@ otherwise assumed alphabetic."
   :config
   (dolist (hook '(c-mode-hook
                   c++-mode-hook
+                  c-ts-mode-hook
+                  c++-ts-mode-hook
                   java-mode-hook
                   asm-mode-hook
                   python-mode-hook
                   lisp-mode-hook
                   emacs-lisp-mode-hook))
     (add-hook hook 'ggtags-mode)))
+
+;; ripgrep front end -- the replacement for `rgrep'/`grep-find', which have no
+;; rg backend of their own.  `rg-menu' is a transient with the usual switches;
+;; `rg-dwim' searches the symbol at point in the project without prompting.
+;; It also makes `projectile-ripgrep' (C-c C-p s r) work, which needs this
+;; package to be present.
+(use-package rg
+  :ensure t
+  :defer t
+  :bind
+  (("C-c s" . rg-menu)
+   ("C-c S" . rg-dwim))
+  :config
+  (setq rg-group-result t)
+  (setq rg-hide-command nil))
 
 ;; Shell-format
 (use-package shfmt :ensure t :defer t)
