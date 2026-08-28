@@ -1,6 +1,10 @@
-;; -*- lexical-binding: t; -*-
-;; Tabulation to stop by default
-(global-set-key (kbd "TAB") `tab-to-tab-stop)
+;;; keys.el --- Other custom keys -*- lexical-binding: t; -*-
+;;; Code:
+
+;; NOTE: TAB used to be globally rebound to `tab-to-tab-stop' here.  That
+;; stole the key from company (complete) and yasnippet (expand), both of which
+;; are enabled globally.  If the old behaviour is wanted back, scope it:
+;;   (define-key text-mode-map (kbd "TAB") #'tab-to-tab-stop)
 
 ;; Disable non-natural cursor movement
 (global-unset-key (kbd "<left>"))
@@ -33,3 +37,6 @@
 (global-set-key (kbd "C-x ,") 'windmove-left)
 (global-set-key (kbd "C-x C-.") 'windmove-right)
 (global-set-key (kbd "C-x C-,") 'windmove-left)
+
+(provide 'keys)
+;;; keys.el ends here

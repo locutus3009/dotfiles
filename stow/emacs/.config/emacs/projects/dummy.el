@@ -14,7 +14,9 @@
      (compile-command . "cmd")
      (projectile-project-compilation-cmd . "cmd")))
    ;; Warn about spaces used for indentation:
-   (c-mode . ((c-file-style . "bsd")))))
+   (c-mode . ((c-file-style . "bsd")))
+   ;; c-ts-mode ignores `c-file-style'; see projects/linux.el.
+   (c-ts-mode . ((c-ts-mode-indent-style . bsd)))))
 
 (dir-locals-set-directory-class
  "/home/locutus/dev/dummy" 'dummy-directory)

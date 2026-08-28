@@ -38,6 +38,7 @@ reboot
 - Package installation (only missing packages)
 - SDDM configuration and service
 - Bluetooth service enablement
+- Tree-sitter grammars for the Emacs `*-ts-mode` major modes
 - **Building Rust binaries** (sort_pictures, sportmodel) into `stow/apps/apps/bin/`
 - GNU Stow dotfiles setup (requires binaries to be built first)
 - Systemd service enablement for sort_pictures and sportmodel
@@ -252,6 +253,24 @@ benefit. They live as normal KDE-owned files in `~/.config`.
 ### Package Management
 `install.sh` uses `yay` (AUR helper) with `--needed` flag. Required packages include:
 - `stow` - GNU Stow for symlink management
+- `ripgrep`, `fd`, `clang` - shelled out to by the Emacs config (search,
+  project indexing, clangd/clang-format)
+
+**Tree-sitter grammars.** `PACKAGES_TREESITTER` installs the grammars behind
+the Emacs `*-ts-mode` modes (C, Rust, Python, Bash, Lua) from the official
+repos. Each mode is enabled only when its grammar is present, so a partial
+install just falls back to the classic modes.
+
+Two grammars are handled differently:
+- **C++** is not in the official repos, so `install.sh` never installs it and
+  never calls `yay` for it - it prints a manual step instead, since AUR is not
+  reachable everywhere (a work machine, for one). Either `yay -S
+  tree-sitter-cpp`, or the AUR-free route: `M-x
+  treesit-install-language-grammar RET cpp RET` builds it into
+  `~/.emacs.d/tree-sitter/` without root.
+- **Markdown** is deliberately not installed: `markdown-ts-mode` is much
+  thinner than the `markdown-mode` package the config uses, so the config
+  stays on `markdown-mode` and the grammar would go unused.
 
 ## Common Pitfalls
 

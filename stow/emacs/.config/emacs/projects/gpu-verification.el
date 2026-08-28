@@ -10,8 +10,9 @@
        (projectile-project-configure-cmd
         . "cmake -S ../ -B . -G Ninja -DCMAKE_EXPORT_COMPILE_COMMANDS=ON")))
    (c++-mode
-    . ((c-c++-backend . lsp-clangd)
-       (lsp-clients-clangd-args . ("--compile-commands-dir=../build.native"))))))
+    . ((c-c++-backend . lsp-clangd)))
+   (c++-ts-mode
+    . ((c-c++-backend . lsp-clangd)))))
 (dir-locals-set-directory-class
- "/home/locutus/dev/huawei-drc/work/gpu-verification"
+ "/hdd/locutus/dev/huawei-drc/work/gpu-verification"
  'vulkan-directory)
