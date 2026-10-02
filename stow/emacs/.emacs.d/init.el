@@ -24,6 +24,8 @@
 ;; Fine-tuning org-mode
 (load-file "~/.config/emacs/orgconf.el")
 
+(load-file "~/.config/emacs/blog.el")
+
 ;; Mail
 ;; (load-file "~/.config/emacs/mail.el")
 
