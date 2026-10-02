@@ -293,31 +293,6 @@ if [[ -d "$SORT_PICTURES_DIR" ]] && command -v cargo &>/dev/null; then
     fi
 fi
 
-# Build sportmodel
-SPORTMODEL_DIR="$SCRIPT_DIR/sportmodel"
-SPORTMODEL_BIN="$APPS_BIN_DIR/sportmodel"
-
-if [[ -d "$SPORTMODEL_DIR" ]] && command -v cargo &>/dev/null; then
-    echo ""
-    read -p "Build sportmodel? (Y/n): " -n 1 -r
-    echo ""
-    if [[ ! $REPLY =~ ^[Nn]$ ]]; then
-        echo "Building sportmodel..."
-        (cd "$SPORTMODEL_DIR" && cargo build --release)
-
-        # Stop service if running (binary may be locked)
-        if systemctl --user is-active sportmodel.service &>/dev/null; then
-            echo "Stopping sportmodel service..."
-            systemctl --user stop sportmodel.service
-        fi
-
-        cp "$SPORTMODEL_DIR/target/release/sportmodel" "$SPORTMODEL_BIN"
-        echo "✓ sportmodel built to stow/apps/apps/bin/"
-    else
-        echo "Skipping sportmodel build."
-    fi
-fi
-
 # =============================================================================
 # Stow Dotfiles
 # =============================================================================
@@ -347,12 +322,6 @@ if [[ ! $REPLY =~ ^[Nn]$ ]]; then
             systemctl --user daemon-reload
             systemctl --user enable --now sort_pictures.service
             echo "✓ sort_pictures service enabled."
-        fi
-
-        if [[ -f "$HOME/.config/systemd/user/sportmodel.service" ]]; then
-            systemctl --user daemon-reload
-            systemctl --user enable --now sportmodel.service
-            echo "✓ sportmodel service enabled."
         fi
 
         # MPD + MPRIS bridge (units ship with the packages, config via stow)
