@@ -1,8 +1,8 @@
 ;;; blog.el --- nerovny.org: posts, preview, deploy -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;; The site is plain Hugo with native org content (~/dev/website).
-;;   C-c w n  new post (asks for title and language, creates a draft)
-;;   C-c w p  preview: `hugo server -D' + browser
+;;   C-c w n  new post (asks for title and language)
+;;   C-c w p  preview: `hugo server' + browser
 ;;   C-c w o  open the site directory
 ;;   C-c w u  refresh publications from ORCID (`make publications')
 ;;   C-c w d  deploy (`make deploy')
@@ -30,7 +30,8 @@
     (string-trim s "-+" "-+")))
 
 (defun website-new-post (title lang)
-  "Create a draft post TITLE in language LANG and open it."
+  "Create post TITLE in language LANG and open it.
+There are no drafts: it goes online with the next deploy."
   (interactive
    (list (read-string "Title: ")
          (completing-read "Language: " website-languages nil t nil nil
@@ -42,9 +43,9 @@
     (when (string-empty-p slug) (user-error "Empty slug"))
     (when (file-exists-p file) (user-error "Already exists: %s" file))
     (find-file file)
-    (insert (format "#+title: %s\n#+date: %s\n#+tags[]: \n#+draft: true\n\n"
+    (insert (format "#+title: %s\n#+date: %s\n#+tags[]: \n\n"
                     title (format-time-string "%Y-%m-%d")))
-    (message "Draft post; remove #+draft to publish. Translation: %s.<lang>.org" slug)))
+    (message "Goes online with the next deploy (C-c w d). Translation: %s.<lang>.org" slug)))
 
 (defun website--compile (command buffer)
   "Run COMMAND in `website-dir', output in BUFFER."
@@ -53,12 +54,12 @@
     (compile command)))
 
 (defun website-preview ()
-  "Start `hugo server' with drafts (once) and open the preview."
+  "Start `hugo server' (once) and open the preview."
   (interactive)
   (let ((default-directory website-dir))
     (unless (get-buffer-process "*website-preview*")
       (start-process "website-preview" "*website-preview*"
-                     "hugo" "server" "-D" "--bind" "127.0.0.1"))
+                     "hugo" "server" "--bind" "127.0.0.1"))
     (run-at-time 1.5 nil #'browse-url website-preview-url)))
 
 (defun website-publications ()
