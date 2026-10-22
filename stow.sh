@@ -17,7 +17,6 @@ ALL_PACKAGES=(
     plasma
     apps
     sort-pictures
-    sportmodel-service
     plasma-widgets
     mpd
     mpd-mpris
@@ -105,7 +104,6 @@ fi
 
 REQUIRED_BINARIES=(
     "stow/apps/apps/bin/sort_pictures"
-    "stow/apps/apps/bin/sportmodel"
 )
 
 MISSING_BINARIES=()
@@ -125,8 +123,6 @@ if [[ ${#MISSING_BINARIES[@]} -gt 0 ]]; then
     echo "Run ./install.sh or build manually:"
     echo "  cd sort_pictures && cargo build --release"
     echo "  cp target/release/sort_pictures ../stow/apps/apps/bin/"
-    echo "  cd ../sportmodel && cargo build --release"
-    echo "  cp target/release/sportmodel ../stow/apps/apps/bin/"
     exit 1
 fi
 

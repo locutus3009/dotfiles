@@ -102,3 +102,9 @@ vimish-fold/
 
 amx-items
 tree-sitter/
+
+custom.el
+**.eld
+places
+smex-items
+org-clock-save.el
