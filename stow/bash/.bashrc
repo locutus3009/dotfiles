@@ -157,15 +157,11 @@ export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 
-export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+#export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 
 # UDK-rs setup
 export HMSDKNATIVESYSROOTPATH=/home/locutus/dev/hm-grc-scripts/SDK/sysroots/x86_64-eulersdk-linux
 export RUSTC_BOOTSTRAP=1
-
-source "$HOME/bash-preexec.sh"
-eval "$(starship init bash)"
-export PATH="/home/locutus/OCHOME:$PATH"
 
 # CodeAgent Configuration
 export CODEAGENT_CONFIG_DIR="/home/locutus/.config/opencode"
@@ -174,3 +170,7 @@ export CODEAGENT_CONFIG_DIR="/home/locutus/.config/opencode"
 export CODEAGENT_CONFIG="/home/locutus/.config/opencode/opencode.json"
 
 export NGA_DATA_HOME="/home/locutus/.local/share"
+
+source "$HOME/bash-preexec.sh"
+eval "$(starship init bash)"
+export PATH="/home/locutus/OCHOME:$PATH"
