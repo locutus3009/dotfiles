@@ -16,7 +16,6 @@ ALL_PACKAGES=(
     pulse
     plasma
     apps
-    sort-pictures
     plasma-widgets
     mpd
     mpd-mpris
@@ -103,7 +102,6 @@ fi
 # =============================================================================
 
 REQUIRED_BINARIES=(
-    "stow/apps/apps/bin/sort_pictures"
 )
 
 MISSING_BINARIES=()

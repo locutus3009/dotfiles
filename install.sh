@@ -269,30 +269,6 @@ echo ""
 APPS_BIN_DIR="$SCRIPT_DIR/stow/apps/apps/bin"
 mkdir -p "$APPS_BIN_DIR"
 
-# Build sort_pictures
-SORT_PICTURES_DIR="$SCRIPT_DIR/sort_pictures"
-SORT_PICTURES_BIN="$APPS_BIN_DIR/sort_pictures"
-
-if [[ -d "$SORT_PICTURES_DIR" ]] && command -v cargo &>/dev/null; then
-    read -p "Build sort_pictures? (Y/n): " -n 1 -r
-    echo ""
-    if [[ ! $REPLY =~ ^[Nn]$ ]]; then
-        echo "Building sort_pictures..."
-        (cd "$SORT_PICTURES_DIR" && cargo build --release)
-
-        # Stop service if running (binary may be locked)
-        if systemctl --user is-active sort_pictures.service &>/dev/null; then
-            echo "Stopping sort_pictures service..."
-            systemctl --user stop sort_pictures.service
-        fi
-
-        cp "$SORT_PICTURES_DIR/target/release/sort_pictures" "$SORT_PICTURES_BIN"
-        echo "✓ sort_pictures built to stow/apps/apps/bin/"
-    else
-        echo "Skipping sort_pictures build."
-    fi
-fi
-
 # =============================================================================
 # Stow Dotfiles
 # =============================================================================
@@ -317,12 +293,6 @@ if [[ ! $REPLY =~ ^[Nn]$ ]]; then
         # Enable systemd services after stow creates the service files
         echo ""
         echo "Enabling systemd services..."
-
-        if [[ -f "$HOME/.config/systemd/user/sort_pictures.service" ]]; then
-            systemctl --user daemon-reload
-            systemctl --user enable --now sort_pictures.service
-            echo "✓ sort_pictures service enabled."
-        fi
 
         # MPD + MPRIS bridge (units ship with the packages, config via stow)
         if command -v mpd &>/dev/null; then
