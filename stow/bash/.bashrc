@@ -165,3 +165,12 @@ export RUSTC_BOOTSTRAP=1
 
 source "$HOME/bash-preexec.sh"
 eval "$(starship init bash)"
+export PATH="/home/locutus/OCHOME:$PATH"
+
+# CodeAgent Configuration
+export CODEAGENT_CONFIG_DIR="/home/locutus/.config/opencode"
+
+# CodeAgent Configuration
+export CODEAGENT_CONFIG="/home/locutus/.config/opencode/opencode.json"
+
+export NGA_DATA_HOME="/home/locutus/.local/share"
