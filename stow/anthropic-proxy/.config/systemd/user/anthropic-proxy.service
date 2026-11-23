@@ -1,0 +1,12 @@
+[Unit]
+Description=Anthropic API proxy (translates to an OpenAI-compatible upstream)
+
+[Service]
+Type=simple
+WorkingDirectory=%h/dev/anthropic-proxy-rs
+ExecStart=/usr/local/bin/anthropic-proxy --config %h/dev/anthropic-proxy-rs/.env --bind 127.0.0.1
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

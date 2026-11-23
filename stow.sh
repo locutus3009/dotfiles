@@ -21,6 +21,7 @@ ALL_PACKAGES=(
     mpd-mpris
     ncmpcpp
     picard
+    anthropic-proxy
 )
 
 # Parse arguments
